@@ -1,0 +1,1 @@
+en esta carpeta pondriamos todos los views modularizados 
