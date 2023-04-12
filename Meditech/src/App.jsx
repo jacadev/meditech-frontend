@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Switch } from 'react-router-dom'
+import home from './Views/Home/home'
 
 function App() {
   
 
   return (
-    <div className="App">
+    <div>
       
-     <h1>ESTA ES MI PAGINA</h1>
-     
+     <Switch>
+      <Route exact path= "/" component={home}/>
+     </Switch>
+
     </div>
   )
 }
