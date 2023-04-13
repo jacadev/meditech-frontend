@@ -1,10 +1,12 @@
-
+import { Box } from '@chakra-ui/react'
 
 const home = () =>{
     return(
-        <div>
-            <h1>ESTA ES MI PAGINA</h1>
-        </div>
+        <Box bg="tomato"> 
+        
+            ESTA ES MI PAGINA
+        
+        </Box>
     )
 }
 export default home;
