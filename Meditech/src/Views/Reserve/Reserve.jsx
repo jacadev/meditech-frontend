@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import FormularioReserva from '../../Components/FormularioReserva';
-import ConfirmacionReserva from '../../Components/ConfirmacionReserva';
+import { useState } from 'react';
+import {
+  Box,
+  Heading,
+  Text,
+} from '@chakra-ui/react';
+import FormularioReserva from '../../Components/Reserve/ReservationForm';
+import ConfirmacionReserva from '../../Components/Reserve/ReservationConfirmed';
 
-const reservar = () => {
+const Reservar = () => {
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
   const handleFormularioSubmit = () => {
@@ -10,20 +15,26 @@ const reservar = () => {
   };
 
   return (
-    <div>
+    <Box>
       {
         mostrarConfirmacion ? (
           <ConfirmacionReserva />
         ) : (
-          <div>
-            <h2>Próximas disponibilidades</h2>
-            <p>Elige una fecha y hora disponible para tu consulta.</p>
+          <Box>
+            <div style={{ height: "10vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <Heading as="h2">
+                      Reserva de Cita
+                    </Heading>
+            </div>
+            <div style={{ height: "10vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Text>Elige una fecha y hora disponible para tu consulta.</Text>
+            </div>
             <FormularioReserva onSubmit={handleFormularioSubmit} />
-          </div>
+          </Box>
         )
       }
-    </div>
+    </Box>
   );
 };
 
-export default reservar;
+export default Reservar;
