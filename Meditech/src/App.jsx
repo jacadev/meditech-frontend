@@ -24,5 +24,4 @@ ReactDOM.render(
   </ChakraProvider>,
   document.getElementById("root")
 );
-
 export default App

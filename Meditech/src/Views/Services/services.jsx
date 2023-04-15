@@ -22,5 +22,3 @@ const home = () => {
     </Layout>
   );
 };
-
-export default home;
