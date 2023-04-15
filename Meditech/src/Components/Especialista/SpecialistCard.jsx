@@ -1,9 +1,21 @@
-import { Box, Flex, Image, Spacer, Text } from '@chakra-ui/react';
-
+import { Box, Flex, Image, Spacer, Text, Button } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
 
 const SpecialistCard = ({ specialist }) => {
-  const handleReserveClick = () => {
-    // Redireccionar al usuario a la página "reserve"
+  
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push({
+      pathname: '/reserve',
+      state: {
+        photo: specialist.photo,
+        name: specialist.name,
+        specialty: specialist.specialty,
+        address: specialist.address,
+        consultationFee: specialist.consultationFee
+      }
+    });
   };
 
   return (
@@ -47,12 +59,21 @@ const SpecialistCard = ({ specialist }) => {
         </Box>
         <Spacer />
         <Box>
-          {/* Icono para reservar */}
-          <Image src="/reserve-icon.png" alt="Reservar cita" onClick={handleReserveClick} />
+          <Button
+            bg="#48bb78"
+            color="white"
+            borderRadius="5px"
+            padding="10px"
+            width="100%"
+            _hover={{ bg: '#38a169' }}
+            onClick={handleClick}
+          >
+            Reservar Cita
+          </Button>
         </Box>
       </Flex>
     </Box>
   );
 };
 
-export default SpecialistCard;
+export default SpecialistCard; 

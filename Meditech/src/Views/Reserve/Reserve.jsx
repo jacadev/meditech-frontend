@@ -1,12 +1,25 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import FormularioReserva from '../../Components/Reserve/ReservationForm';
+import ConfirmacionReserva from '../../Components/Reserve/ReservationConfirmed';
 import {
   Box,
   Heading,
   Text,
 } from '@chakra-ui/react';
-import FormularioReserva from '../../Components/Reserve/ReservationForm';
-import ConfirmacionReserva from '../../Components/Reserve/ReservationConfirmed';
 
+
+const Reserve = () => {
+  const location = useLocation();
+
+  const { photo, name, specialty, address, consultationFee } = location.state;
+
+  return (
+    <FormularioReserva
+      specialist={{ photo, name, specialty, address, consultationFee }}
+    />
+  );
+};
 const Reservar = () => {
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
@@ -36,5 +49,6 @@ const Reservar = () => {
     </Box>
   );
 };
+
 
 export default Reservar;

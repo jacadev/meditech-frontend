@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Box, Flex, Text, Button } from '@chakra-ui/react';
 import SpecialistCard from '../../Components/Especialista/SpecialistCard';
-import SpecialistsData from '../../Data/Data';
+import SpecialistsData from '../../Data/DataSpecialist';
+
+
 
 
 const Specialists = () => {

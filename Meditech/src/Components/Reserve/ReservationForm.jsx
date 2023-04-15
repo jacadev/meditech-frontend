@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
+
 import {
   Box,
   Stack,
@@ -25,6 +28,8 @@ const FormularioReserva = ({ onSubmit }) => {
   const [dni, setDni] = useState('');
   const [consentimiento, setConsentimiento] = useState(false);
   const [recibirComunicaciones, setRecibirComunicaciones] = useState(false);
+  const location = useLocation();
+  const { photo, name, specialty, address, consultationFee } = location.state;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +40,11 @@ const FormularioReserva = ({ onSubmit }) => {
     onSubmit(); // Llamando a la función onSubmit que viene como prop
   };
 
+  
+
+
   return (
+    
     <Stack direction="row" spacing={1} alignItems="flex-start">
       <Box flex="70%">
       <Box
@@ -161,28 +170,24 @@ const FormularioReserva = ({ onSubmit }) => {
           />
 
           <Heading as="h2" size="lg">
-            Dr. John Doe
+            {name}
           </Heading>
 
-          <Text fontSize="md">Médico especialista en Cardiología</Text>
+          <Text fontSize="md">{specialty}     </Text>
 
           <Text fontSize="sm">Fecha de la cita: {fecha}</Text>
+          <Text fontSize="sm">Hora de la cita: {hora}</Text>
 
-          <Text fontSize="sm">Direccion: Calle 123, Lima, Perú.</Text>
-
-          <Box borderBottom="1px" width="100%" />
-
-          <Text fontSize="sm">Recomendaciones:</Text>
-          <Text fontSize="sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique elementum
-            massa sed scelerisque. Aliquam in interdum velit.
-          </Text>
+          <Text fontSize="sm">{address}</Text>
 
           <Box borderBottom="1px" width="100%" />
 
-          <Text fontSize="sm">Tipo de pago:</Text>
-          <Text fontSize="sm">Efectivo</Text>
-          <Text fontSize="sm">Tarjeta de crédito</Text>
+          <Text fontSize="sm">$ {consultationFee} </Text>
+          
+
+          <Box borderBottom="1px" width="100%" />
+
+          
         </VStack>
       </Box>
     </Stack>
@@ -190,3 +195,4 @@ const FormularioReserva = ({ onSubmit }) => {
 };
 
 export default FormularioReserva;
+
