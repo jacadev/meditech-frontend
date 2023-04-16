@@ -1,60 +1,105 @@
-import { useEffect, useState } from 'react';
-import { Box, Flex, Text, Button } from '@chakra-ui/react';
-import SpecialistCard from '../../Components/Especialista/SpecialistCard';
-import SpecialistsData from '../../Data/DataSpecialist';
-
-
-
+import { useState, useEffect } from "react";
+import { Box, Text, Button } from "@chakra-ui/react";
+import SpecialistCard from "../../components/Especialista/SpecialistCard";
+import SpecialistsData from "../../data/DataSpecialist";
 
 const Specialists = () => {
   const [specialists, setSpecialists] = useState([]);
-  const [filter, setFilter] = useState('all'); // Filtro por defecto
-  const [sort, setSort] = useState('asc'); // Orden por defecto
-
-  // Traer lista de especialistas desde Redux u otra fuente de datos (no incluida en este ejemplo)
+  const [filterSpecialty, setFilterSpecialty] = useState("");
+  const [filterCity, setFilterCity] = useState("all");
+  const [sort, setSort] = useState("asc");
+  const [sort2, setSort2] = useState("asc");
 
   useEffect(() => {
-    // Llamada a API o método para obtener datos de especialistas
-    // Actualizar estado con los datos obtenidos
+    // Simulación de llamada a API o método para obtener datos de especialistas y ciudades
     setSpecialists(SpecialistsData);
-    }, []);
+  }, []);
 
-  // Aplicar filtro seleccionado por el usuario
-  const filteredSpecialists = specialists.filter(spec =>
-    filter === 'all' ? true : spec.specialty === filter
-  );
+  const filteredSpecialists = specialists.filter(
+    (spec) =>
+      filterSpecialty === "" ? true : spec.specialty === filterSpecialty
+  ).filter((spec) => (filterCity === "all" ? true : spec.city === filterCity));
 
-  // Aplicar orden seleccionado por el usuario
   const sortedSpecialists = [...filteredSpecialists].sort((a, b) =>
-    sort === 'asc' ? a.consultationFee - b.consultationFee : b.consultationFee - a.consultationFee
+    sort === "asc"
+      ? a.consultationFee - b.consultationFee
+      : b.consultationFee - a.consultationFee
   );
 
-  // Renderizar componentes con la información de los especialistas
+  const sortedRating = [...filteredSpecialists].sort((a, b) =>
+    sort2 === "asc" ? b.rating - a.rating : a.rating - b.rating
+  );
+
+  const handleFilterSpecialtyChange = (e) =>
+    setFilterSpecialty(e.target.value);
+
+  const handleFilterCityChange = (e) => setFilterCity(e.target.value);
+
+  const handleSortClick = () => setSort(sort === "asc" ? "desc" : "asc");
+
+  const handleSortClick2 = () => setSort2(sort2 === "asc" ? "desc" : "asc");
+
   return (
     <Box>
-      {/* Filtros */}
       <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">Filtrar por especialidad:</Text>
-        <select onChange={e => setFilter(e.target.value)}>
-          <option value="all">Todas las especialidades</option>
+        <Text fontSize="lg" fontWeight="bold">
+          Filtrar por especialidad:
+        </Text>
+        <select value={filterSpecialty} onChange={handleFilterSpecialtyChange}>
+          <option value="">Todas las especialidades</option>
+          <option value="Cardiología">Cardiología</option>
+          <option value="Dermatología">Dermatología</option>
+          <option value="Ginecología">Ginecología</option>
+          <option value="Medicina General">Medicina General</option>
+          <option value="Neurología">Neurología</option>
+          <option value="Nutrición">Nutrición</option>
           <option value="Odontología">Odontología</option>
-          <option value="Oftalmología">Oftalmología</option>
-          {/* Otras opciones de filtro... */}
+          <option value="Oftalmología">Oftalmologia</option>
+          <option value="Pediatría">Pediatría</option>
+          <option value="Psicología">Psicología</option>
         </select>
       </Box>
       <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">Ordenar por precio:</Text>
-        <Button onClick={() => setSort(sort === 'asc' ? 'desc' : 'asc')}>
-          {sort === 'asc' ? 'De mayor a menor' : 'De menor a mayor'}
+        <Text fontSize="lg" fontWeight="bold">
+          Filtrar por ciudad:
+        </Text>
+        <select value={filterCity} onChange={handleFilterCityChange}>
+          <option value="all">Todas las ciudades</option>
+          <option value="Barranquilla">Barranquilla</option>
+          <option value="Bogota">Bogotá</option>
+          <option value="Cali">Cali</option>
+          <option value="Cartagena">Cartagena</option>
+          <option value="Medellin">Medellín</option>
+        </select>
+      </Box>
+
+      <Box mb="4">
+        <Text fontSize="lg" fontWeight="bold">
+          Ordenar por precio:
+        </Text>
+        <Button onClick={handleSortClick}>
+          {sort === "asc" ? "De menor a mayor" : "De mayor a menor"}
         </Button>
       </Box>
 
-      {/* Tarjetas de especialistas */}
-      {sortedSpecialists.map(spec => (
-        <SpecialistCard key={spec.id} specialist={spec} />
-      ))}
+      <Box mb="4">
+        <Text fontSize="lg" fontWeight="bold">
+          Ordenar por popularidad:
+        </Text>
+        <Button onClick={handleSortClick2}>
+          {sort2 === "asc" ? "De mayor a menor" : "De menor a mayor"}
+        </Button>
+      </Box>
+
+      {sort2 === "asc"
+        ? sortedSpecialists.map((spec) => (
+            <SpecialistCard key={spec.id} specialist={spec} />
+          ))
+        : sortedRating.map((spec) => (
+            <SpecialistCard key={spec.id} specialist={spec} />
+          ))}
     </Box>
-      );
+  );
 };
 
 export default Specialists;

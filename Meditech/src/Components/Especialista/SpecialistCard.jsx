@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 const SpecialistCard = ({ specialist }) => {
   
   const history = useHistory();
-
   const handleClick = () => {
     history.push({
       pathname: '/reserve',
@@ -13,7 +12,8 @@ const SpecialistCard = ({ specialist }) => {
         name: specialist.name,
         specialty: specialist.specialty,
         address: specialist.address,
-        consultationFee: specialist.consultationFee
+        consultationFee: specialist.consultationFee,
+        city: specialist.city
       }
     });
   };
@@ -53,6 +53,7 @@ const SpecialistCard = ({ specialist }) => {
             ))}
           </Box>
           <Text fontSize="sm">{specialist.address}</Text>
+          <Text fontSize="sm">{specialist.city}</Text>
           <Text fontSize="lg" fontWeight="bold" mt="4">
             Valor de la consulta: ${specialist.consultationFee}
           </Text>
