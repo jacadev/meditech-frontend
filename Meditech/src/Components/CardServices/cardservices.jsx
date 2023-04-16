@@ -1,16 +1,26 @@
-import { Icon, Card, CardHeader, CardBody, Flex, SimpleGrid, Box, Text, Button, Heading } from '@chakra-ui/react'
+import { Card,Icon, CardHeader, CardBody, Flex, SimpleGrid, Box, Text, Button, Heading } from '@chakra-ui/react'
+import { useHistory } from 'react-router-dom';
+
+
+
+
+
+
 
 
 const cardServices = () => {
-  return (<Box borderBottomLeftRadius="100px" borderBottomRightRadius="50px" p={4} mt={20} bg='pallette.color5'>
-    <Heading textAlign="center" color="black" >
-      Services
-    </Heading>
+  const history = useHistory();
+
+  function handleClick() {
+    history.push("/user/about-us");
+  }
+  return (<Box>
+ 
     <Box px={40} my={35} >
       <SimpleGrid columns={5} spacing={4}>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'> Medico y enfermeria en planta</Heading>
+            <Heading textAlign="center" size='md'> Medical and Nursing staff</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="equipo-medico.png" {...props} />} boxSize={16} />
@@ -19,7 +29,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'> Area Protegida</Heading>
+            <Heading textAlign="center" size='md'> Protected Area</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="proteger.png" {...props} />} boxSize={16} />
@@ -28,7 +38,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'> Asesoramiento Medico Legal</Heading>
+            <Heading textAlign="center" size='md'> Legal Medical Advice</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="consulta.png" {...props} />} boxSize={16} />
@@ -37,7 +47,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'>Libreta Sanitaria</Heading>
+            <Heading textAlign="center" size='md'>Health Book</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="libro-de-contactos.png" {...props} />} boxSize={16} />
@@ -46,7 +56,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'>Seguimiento COVID Test</Heading>
+            <Heading textAlign="center" size='md'>COVID-19 Monitoring</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="prueba-pcr.png" {...props} />} boxSize={16} />
@@ -64,16 +74,16 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'> Control de Ausentismo</Heading>
+            <Heading textAlign="center" size='md'> Truant Officer</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="control-de-calidad.png" {...props} />} boxSize={16} />
           </CardBody>
-
+ 
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'> Amplia sala de espera</Heading>
+            <Heading textAlign="center" size='md'> Large Waiting Room</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="sala-de-espera.png" {...props} />} boxSize={16} />
@@ -82,7 +92,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'>Reserva de turnos web</Heading>
+            <Heading textAlign="center" size='md'>Booking of Web Shifts</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="reserva-en-linea.png" {...props} />} boxSize={16} />
@@ -91,7 +101,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'>Wifi de alta velocidad</Heading>
+            <Heading textAlign="center" size='md'>High Speed Wifi</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="wifi.png" {...props} />} boxSize={16} />
@@ -101,8 +111,9 @@ const cardServices = () => {
 
       </SimpleGrid>
       <Flex flexDirection="column" alignItems="center" my={6}>
-    <Text textAlign="center" fontSize="lg" >Para mas informacion</Text>
-    <Button colorScheme='blue' mt={2}>Contactanos</Button>
+    <Text textAlign="center" fontSize="lg" >For more info</Text>
+    <Button colorScheme='blue' mt={2} onClick={handleClick} >Contact us</Button>
+    
   </Flex>
     </Box>
   </Box>

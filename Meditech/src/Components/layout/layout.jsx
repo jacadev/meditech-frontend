@@ -1,4 +1,4 @@
-import { Grid,GridItem } from '@chakra-ui/react'
+/* import { Grid,GridItem } from '@chakra-ui/react'
 import CardServices from '../CardServices/cardservices';
 import { useLocation } from 'react-router-dom';
 
@@ -39,3 +39,4 @@ const layout = () =>{
     )
 }
 export default layout;
+ */
