@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Switch>
             <Route path={`/auth`} component={AuthLayout} />
             <Route path={`/user`} component={AdminLayout} />
-            <Route path={`/AboutUs`} component={AboutUs} />
+            <Route path={`/about-us`} component={AboutUs} />
             <Redirect from='/' to='/user' />
           </Switch>
         </HashRouter>

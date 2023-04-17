@@ -44,12 +44,7 @@ export default function AboutUs() {
           fontFamily="Google Sans, sans-serif"
           mb={4}
         >
-          MEDITECH es una plataforma digital diseñada para mejorar la gestión de
-          citas médicas y facilitar la creación y almacenamiento de historias
-          clínicas electrónicas. Nuestro objetivo es ofrecer una solución
-          práctica y efectiva para optimizar el flujo de trabajo en el ámbito de
-          la atención médica, brindando una experiencia segura y eficiente para
-          pacientes y profesionales de la salud.
+          MEDITECH is a digital platform designed to improve the management of medical appointments and facilitate the creation and storage of electronic medical records. Our goal is to offer a practical and effective solution to optimize the workflow in the healthcare field, providing a safe and efficient experience for patients and healthcare professionals.
         </Text>
         <GridItem borderRadius="5px">
           <Text
@@ -60,14 +55,7 @@ export default function AboutUs() {
             fontFamily="Google Sans, sans-serif"
             mb={4}
           >
-            Nos enorgullece ser una empresa líder en el sector de la tecnología
-            médica, con más de 50 años de experiencia en el desarrollo de
-            soluciones innovadoras y confiables. Nuestro equipo de expertos en
-            tecnología de la salud trabaja incansablemente para ofrecer
-            herramientas de vanguardia que contribuyan al bienestar de la
-            comunidad médica y de los pacientes que atienden. En MEDITECH, nos
-            dedicamos a mejorar la calidad de vida de las personas a través de
-            la tecnología y la atención médica de alta calidad.
+          We are proud to be a leading company in the medical technology sector, with more than 50 years of experience in the development of innovative and reliable solutions. Our team of experts in health technology works tirelessly to offer cutting-edge tools that contribute to the well-being of the medical community and the patients they serve. At MEDITECH, we are dedicated to improving the quality of life of people through technology and high-quality healthcare.
           </Text>
         </GridItem>
         <Text
@@ -78,7 +66,7 @@ export default function AboutUs() {
           fontFamily="Google Sans, sans-serif"
           mb={4}
         >
-          Contáctanos para obtener más información sobre nuestros servicios.
+          Contact us to learn more about our services.
           </Text>
           <>
             <Button
@@ -103,7 +91,7 @@ export default function AboutUs() {
               }}
               onClick={() => setIsOpen(true)}
             >
-              DESARROLLADORES +
+              DEVELOPERS +
             </Button>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
               <ModalOverlay />
