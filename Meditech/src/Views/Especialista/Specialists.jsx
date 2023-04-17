@@ -9,16 +9,33 @@ const Specialists = () => {
   const [filterCity, setFilterCity] = useState("all");
   const [sort, setSort] = useState("asc");
   const [sort2, setSort2] = useState("asc");
+  const [searchTerm, setSearchTerm] = useState('');   // ***********************************************
+
+  
 
   useEffect(() => {
     // Simulación de llamada a API o método para obtener datos de especialistas y ciudades
     setSpecialists(SpecialistsData);
   }, []);
 
-  const filteredSpecialists = specialists.filter(
+
+
+  //  modificar todoeste codigo para que funcione el buscador
+  const filteredSpecialists = specialists
+  .filter(
     (spec) =>
       filterSpecialty === "" ? true : spec.specialty === filterSpecialty
-  ).filter((spec) => (filterCity === "all" ? true : spec.city === filterCity));
+  )
+  .filter((spec) => (filterCity === "all" ? true : spec.city === filterCity))
+  .filter((spec) =>
+    searchTerm === ""
+      ? true
+      : spec.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  //*********************************************** */
+
+
+
 
   const sortedSpecialists = [...filteredSpecialists].sort((a, b) =>
     sort === "asc"
@@ -40,7 +57,7 @@ const Specialists = () => {
   const handleSortClick2 = () => setSort2(sort2 === "asc" ? "desc" : "asc");
 
   return (
-    <Box>
+    <><Box>
       <Box mb="4">
         <Text fontSize="lg" fontWeight="bold">
           Filtrar por especialidad:
@@ -91,14 +108,32 @@ const Specialists = () => {
         </Button>
       </Box>
 
+       { /*agregar este BOX + input} */  }
+
+      <Box mb="4">
+        <Text fontSize="lg" fontWeight="bold">
+          Buscar Especialista:
+        </Text>
+        <input
+          type="text"
+          placeholder="Buscar por nombre de especialista"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} />
+      </Box>
+
+      { /*HASTA AQUI*/  }
+
       {sort2 === "asc"
         ? sortedSpecialists.map((spec) => (
-            <SpecialistCard key={spec.id} specialist={spec} />
-          ))
+          <SpecialistCard key={spec.id} specialist={spec} />
+        ))
         : sortedRating.map((spec) => (
-            <SpecialistCard key={spec.id} specialist={spec} />
-          ))}
+          <SpecialistCard key={spec.id} specialist={spec} />
+        ))}
     </Box>
+    </>
+
+
   );
 };
 
