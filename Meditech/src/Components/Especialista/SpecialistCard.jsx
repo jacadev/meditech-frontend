@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Spacer, Text, Button } from '@chakra-ui/react';
+import { Box, Flex, Image, Spacer, Text, Button} from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 
 const SpecialistCard = ({ specialist }) => {
@@ -19,8 +19,8 @@ const SpecialistCard = ({ specialist }) => {
   };
 
   return (
-    <Box  borderWidth="1px" borderRadius="lg" padding="4" mb="4">
-      <Flex align="flex-start">
+    <Box  borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg">
+      <Flex >
         <Image
           src={specialist.photo}
           alt={`Foto de ${specialist.name}`}
@@ -31,7 +31,7 @@ const SpecialistCard = ({ specialist }) => {
         <Box>
           <Text fontSize="xl" fontWeight="bold">{specialist.name}</Text>
           <Text fontSize="md">{specialist.specialty}</Text>
-          <Box d="inline-flex" mt="2" alignItems="center">
+          <Box mt="2" alignItems="center" >
             {Array.from({ length: Math.round(specialist.rating) }).map((_, i) => (
               <svg key={i} viewBox="0 0 20 20" fill="currentColor" width="1em" height="1em">
                 <path
@@ -55,11 +55,11 @@ const SpecialistCard = ({ specialist }) => {
           <Text fontSize="sm">{specialist.address}</Text>
           <Text fontSize="sm">{specialist.city}</Text>
           <Text fontSize="lg" fontWeight="bold" mt="4">
-            Valor de la consulta: ${specialist.consultationFee}
+          Price of the consultation: ${specialist.consultationFee}
           </Text>
         </Box>
-        <Spacer />
-        <Box>
+     
+        <Box marginTop='280px'>
           <Button
             bg="#48bb78"
             color="white"
@@ -69,11 +69,12 @@ const SpecialistCard = ({ specialist }) => {
             _hover={{ bg: '#38a169' }}
             onClick={handleClick}
           >
-            Reservar Cita
+            Request an appointment
           </Button>
         </Box>
       </Flex>
     </Box>
+ 
   );
 };
 

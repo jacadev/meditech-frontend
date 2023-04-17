@@ -8,7 +8,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+function App() {
+return(
   <ChakraProvider theme={theme}>
     <React.StrictMode>
       <ThemeEditorProvider>
@@ -24,4 +25,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </ChakraProvider>
   
 );
+}
 export default App

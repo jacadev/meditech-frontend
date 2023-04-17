@@ -1,95 +1,165 @@
-import { Box, Grid } from "@chakra-ui/react";
-// Custom components
-// import Banner from "views/admin/profile/components/Banner";
-// import General from "views/admin/profile/components/General";
-// import Notifications from "views/admin/profile/components/Notifications";
-// import Projects from "views/admin/profile/components/Projects";
-// import Storage from "views/admin/profile/components/Storage";
-// import Upload from "views/admin/profile/components/Upload";
+import React from "react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Icon,
+  HStack,
+  Text,
+  Modal,
+  Link,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  Button
+} from "@chakra-ui/react";
+import { FaLinkedin } from "react-icons/fa";
+import { useState } from "react";
 
-// Assets
-// import banner from "assets/img/auth/banner.png";
-// import avatar from "assets/img/avatars/avatar4.png";
-// import React from "react";
 
-export default function Overview() {
+export default function AboutUs() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <h1>Aqui va Conocenos</h1>
-      {/* Main Fields
-      <Grid
-        templateColumns={{
-          base: "1fr",
-          lg: "1.34fr 1fr 1.62fr",
-        }}
-        templateRows={{
-          base: "repeat(3, 1fr)",
-          lg: "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-        <Banner
-          gridArea='1 / 1 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
-        <Storage
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          used={25.6}
-          total={50}
-        />
-        <Upload
-          gridArea={{
-            base: "3 / 1 / 4 / 2",
-            lg: "1 / 3 / 2 / 4",
-          }}
-          minH={{ base: "auto", lg: "420px", "2xl": "365px" }}
-          pe='20px'
-          pb={{ base: "100px", lg: "20px" }}
-        />
-      </Grid>
-      <Grid
-        mb='20px'
-        templateColumns={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1.34fr 1.62fr 1fr",
-        }}
-        templateRows={{
-          base: "1fr",
-          lg: "repeat(2, 1fr)",
-          "2xl": "1fr",
-        }}
-        gap={{ base: "20px", xl: "20px" }}>
-        <Projects
-          gridArea='1 / 2 / 2 / 2'
-          banner={banner}
-          avatar={avatar}
-          name='Adela Parkson'
-          job='Product Designer'
-          posts='17'
-          followers='9.7k'
-          following='274'
-        />
-        <General
-          gridArea={{ base: "2 / 1 / 3 / 2", lg: "1 / 2 / 2 / 3" }}
-          minH='365px'
-          pe='20px'
-        />
-        <Notifications
-          used={25.6}
-          total={50}
-          gridArea={{
-            base: "3 / 1 / 4 / 2",
-            lg: "2 / 1 / 3 / 3",
-            "2xl": "1 / 3 / 2 / 4",
-          }}
-        />
-      </Grid> */}
-    </Box>
+    // <Grid
+    //   backgroundColor={"black"}
+    //   templateAreas={`"nav main"`}
+    //   gridTemplateRows={"50px 1fr 30px"}
+    //   gridTemplateColumns={"150px 1fr"}
+    //   h="100vh"
+    //   w="100vw"
+    //   gap="0"
+    //   borderRadius="5px"
+    //   color="blackAlpha.700"
+    //   fontWeight="bold"
+    // >
+      <GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
+        <Text
+          marginTop="8rem"
+          fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}
+          p="4"
+          borderRadius="lg"
+          lineHeight="tall"
+          fontFamily="Google Sans, sans-serif"
+          mb={4}
+        >
+          MEDITECH is a digital platform designed to improve the management of medical appointments and facilitate the creation and storage of electronic medical records. Our goal is to offer a practical and effective solution to optimize the workflow in the healthcare field, providing a safe and efficient experience for patients and healthcare professionals.
+        </Text>
+        <GridItem borderRadius="5px">
+          <Text
+            fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}
+            p="4"
+            borderRadius="lg"
+            lineHeight="tall"
+            fontFamily="Google Sans, sans-serif"
+            mb={4}
+          >
+          We are proud to be a leading company in the medical technology sector, with more than 50 years of experience in the development of innovative and reliable solutions. Our team of experts in health technology works tirelessly to offer cutting-edge tools that contribute to the well-being of the medical community and the patients they serve. At MEDITECH, we are dedicated to improving the quality of life of people through technology and high-quality healthcare.
+          </Text>
+        </GridItem>
+        <Text
+          fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}
+          p="4"
+          borderRadius="lg"
+          lineHeight="tall"
+          fontFamily="Google Sans, sans-serif"
+          mb={4}
+        >
+          Contact us to learn more about our services.
+          </Text>
+          <>
+            <Button
+              display="flex"
+              flexDirection="row"
+              justifyContent="flex-end"
+              alignItems="center"
+              marginTop="4rem"
+              marginLeft="1em"
+              fontFamily="Google Sans, sans-serif"
+              fontSize={{ base: 'md', lg: 'lg' }}
+              fontWeight="bold"
+              bg="#5C43FF"
+              color="#FFFFFF"
+              borderRadius="lg"
+              boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+              transition="all 0.3s ease-in-out"
+              _hover={{
+                bg: "#5C43FF",
+                transform: "translateY(-2px)",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              }}
+              onClick={() => setIsOpen(true)}
+            >
+              DEVELOPERS +
+            </Button>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Perfiles de LinkedIn</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/in/gastón-garcia-juri-76a3b2212"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      GASTON GARCIA JURI
+                    </Link>
+                  </HStack>
+                  <br />
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/in/franco-gonzalez-273154168/"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      FRANCO GONZALES
+                    </Link>
+                  </HStack>
+                  <br />
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/in/danilo-herrera-717665266"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      DANILO HERRERA
+                    </Link>
+                  </HStack>
+                  <br />
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/mwlite/in/filleral-yefreyner-mahecha-cantor-46ba451b6"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      FILLERAL YEFREYNER MAHECHA CANTOR
+                    </Link>
+                  </HStack>
+                  <br />
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/in/carlosnr9"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      CARLOS FERNEY NARVAEZ RUALES
+                    </Link>
+                  </HStack>
+                  <br />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+          </>
+      </GridItem>
+    // </Grid>
   );
 }

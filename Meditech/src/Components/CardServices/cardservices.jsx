@@ -14,7 +14,7 @@ const cardServices = () => {
   function handleClick() {
     history.push("/user/about-us");
   }
-  return (<Box>
+  return (
  
     <Box px={40} my={35} >
       <SimpleGrid columns={5} spacing={4}>
@@ -112,11 +112,11 @@ const cardServices = () => {
       </SimpleGrid>
       <Flex flexDirection="column" alignItems="center" my={6}>
     <Text textAlign="center" fontSize="lg" >For more info</Text>
-    <Button colorScheme='blue' mt={2} onClick={handleClick} >Contact us</Button>
+    <Button bg='#5C43FF' color="white" mt={2} onClick={handleClick} >Contact us</Button>
     
   </Flex>
     </Box>
-  </Box>
+  
   )
 }
 
