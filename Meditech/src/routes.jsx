@@ -1,60 +1,60 @@
 import React from "react";
 
+
 import { Icon } from "@chakra-ui/react";
 import {
-  MdBarChart,
   MdPerson,
   MdHome,
-  MdLock,
-  MdOutlineShoppingCart,
+  MdMedicalServices,
+  MdMedicalInformation
 } from "react-icons/md";
 import AboutUs from "./Views/AboutUs/AboutUs";
 
 // Admin Imports
 import MainDashboard from "./views/admin/default";
-import NFTMarketplace from "./views/admin/marketplace";
+import Marketplace from "./Views/admin/marketplace/index";
 import Profile from "./views/admin/profile";
 import DataTables from "./views/admin/dataTables";
 
 // Auth Imports
-import SignInCentered from "./views/auth/signIn";
+//import SignInCentered from "./views/auth/signIn";
 
 const routes = [
   {
     name: "Home",
-    layout: "/admin",
-    path: "/default",
+    layout: "/user",
+    path: "/home",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
   {
-    name: "Servicios",
-    layout: "/admin",
-    path: "/nft-marketplace",
+    name: "Services",
+    layout: "/user",
+    path: "/services",
     icon: (
       <Icon
-        as={MdOutlineShoppingCart}
+        as={MdMedicalServices}
         width='20px'
         height='20px'
         color='inherit'
       />
     ),
-    component: NFTMarketplace,
+    component: Marketplace,
     secondary: true,
   },
   {
     name: "Staff",
-    layout: "/admin",
-    icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
-    path: "/data-tables",
+    layout: "/user",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    path: "/staff",
     component: DataTables,
   },
   {
-    name: "About Us",
-    layout: "/admin",
-    path: "/profile",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
-    component: AboutUs,
+    name: "About us",
+    layout: "/user",
+    path: "/about-us",
+    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    component: Profile,
   },
   // {
   //   name: "Sign In",

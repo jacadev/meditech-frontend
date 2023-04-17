@@ -47,7 +47,7 @@ export function SidebarLinks(props) {
           </>
         );
       } else if (
-        route.layout === "/admin" ||
+        route.layout === "/user" ||  //modicar depues de la demo
         route.layout === "/auth" ||
         route.layout === "/rtl"
       ) {

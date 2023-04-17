@@ -53,7 +53,7 @@ export default function SidebarDocs() {
           textAlign='center'
           px='10px'
           mb='14px'>
-          Bienvenidos a Meditech
+        Welcome to Meditech
         </Text>
         <Text
           fontSize='14px'
@@ -61,7 +61,7 @@ export default function SidebarDocs() {
           px='10px'
           mb='14px'
           textAlign='center'>
-          Agenda tu cita ahora mismo
+         Schedule your appointment right now
         </Text>
       </Flex>
       <Link>
@@ -75,7 +75,7 @@ export default function SidebarDocs() {
           fontSize='sm'
           minW='185px'
           mx='auto'>
-          Agendar
+          Schedule
         </Button>
       </Link>
     </Flex>

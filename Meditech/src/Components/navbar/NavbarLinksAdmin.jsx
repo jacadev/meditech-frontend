@@ -71,7 +71,7 @@ export default function HeaderLinks(props) {
 					</Text>
 				</Text>
 			</Flex> */}
-			<SidebarResponsive routes={routes} />
+			{/* <SidebarResponsive routes={routes} />
 			<Menu>
 				<MenuButton p="0px">
 					<Icon mt="6px" as={MdNotificationsNone} color={navbarIcon} w="18px" h="18px" me="10px" />
@@ -103,7 +103,7 @@ export default function HeaderLinks(props) {
 						</MenuItem>
 					</Flex>
 				</MenuList>
-			</Menu>
+			</Menu> ACA TENEMOS EL ICONO CON LA NOTIFICACIONES POR SI QUEREMOS IMPLEMENTARLO */}
 
 			{/* <Menu>
 				<MenuButton p="0px">
@@ -146,7 +146,7 @@ export default function HeaderLinks(props) {
 				</MenuList>
 			</Menu> */}
 
-			<ThemeEditor navbarIcon={navbarIcon} />
+			 <ThemeEditor navbarIcon={navbarIcon} /> 
 
 			<Menu>
 				<MenuButton p="0px">

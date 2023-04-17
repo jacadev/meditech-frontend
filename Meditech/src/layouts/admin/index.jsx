@@ -3,7 +3,7 @@ import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import Footer from "./../../components/footer/FooterAdmin.jsx";
 // Layout components
 import Navbar from "./../../Components/navbar/NavbarAdmin.jsx";
-import Sidebar from "./../../components/sidebar/Sidebar.jsx";
+import Sidebar from "./../../Components/sidebar/Sidebar.jsx";
 import { SidebarContext } from "./../../contexts/SidebarContext";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -17,7 +17,7 @@ export default function Dashboard(props) {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
+    return window.location.pathname !== "/user/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -90,7 +90,7 @@ export default function Dashboard(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/user") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -155,7 +155,7 @@ export default function Dashboard(props) {
               pt='50px'>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from='/' to='/admin/default' />
+                <Redirect from='/' to='/user/home' />
               </Switch>
             </Box>
           ) : null}
