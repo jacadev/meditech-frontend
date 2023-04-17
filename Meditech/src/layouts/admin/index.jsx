@@ -17,7 +17,7 @@ export default function Dashboard(props) {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/user/full-screen-maps";
+    return window.location.pathname !== "/user/home";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";

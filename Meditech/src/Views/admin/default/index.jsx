@@ -27,16 +27,15 @@ export default function SplitScreen() {
                 bg: 'blue.400',
                 zIndex: -1,
               }}>
-              Freelance
+             Welcome
             </Text>
             <br />{' '}
             <Text color={'blue.400'} as={'span'}>
-              Design Projects
+             to Meditech
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-            The project board is an exclusive resource for contract work. It's
-            perfect for freelancers, agencies, and moonlighters.
+           We are an institution that stands out for the excellence it grants in all its benefits.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
@@ -46,9 +45,9 @@ export default function SplitScreen() {
               _hover={{
                 bg: 'blue.500',
               }}>
-              Create Project
+             More about us
             </Button>
-            <Button rounded={'full'}>How It Works</Button>
+         {/*    <Button rounded={'full'}>How It Works</Button> */}
           </Stack>
         </Stack>
       </Flex>

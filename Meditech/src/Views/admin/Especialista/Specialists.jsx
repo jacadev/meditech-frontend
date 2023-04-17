@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Box, Text, Button } from "@chakra-ui/react";
-import SpecialistCard from "../../../Components/Especialista/SpecialistCard"
-import SpecialistsData from "../../../Data/DataSpecialist";
+import SpecialistCard from "../../components/Especialista/SpecialistCard";
+import SpecialistsData from "../../data/DataSpecialist";
 
 const Specialists = () => {
   const [specialists, setSpecialists] = useState([]);
@@ -40,7 +40,7 @@ const Specialists = () => {
   const handleSortClick2 = () => setSort2(sort2 === "asc" ? "desc" : "asc");
 
   return (
-    <Box  marginTop="100px">
+    <Box>
       <Box mb="4">
         <Text fontSize="lg" fontWeight="bold">
           Filtrar por especialidad:
