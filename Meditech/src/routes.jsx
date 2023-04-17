@@ -13,8 +13,9 @@ import AboutUs from "./Views/AboutUs/AboutUs";
 // Admin Imports
 import MainDashboard from "./views/admin/default";
 import Marketplace from "./Views/admin/marketplace/index";
-import Profile from "./views/admin/profile";
-import DataTables from "./views/admin/dataTables";
+import Profile from "./Views/admin/profile";
+import DataTables from "./Views/admin/dataTables";
+import Reserve from "./Views/admin/Reserve/Reserve"
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -55,6 +56,13 @@ const routes = [
     path: "/about-us",
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
     component: Profile,
+  },
+  {
+  
+    layout: "/user",
+    path: "/reserve",
+    
+    component: Reserve,
   },
   // {
   //   name: "Sign In",
