@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { postReserve } from '../../Redux/Actions/actions';
 
 
 import {
@@ -18,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 
 const FormularioReserva = ({ onSubmit }) => {
+  const dispatch = useDispatch();
   const [nombres, setNombres] = useState('');
   const [apellidos, setApellidos] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -33,11 +36,26 @@ const FormularioReserva = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario de reserva
-    // a través de una API o servicio externo.
-    // Por ahora, solo imprimiremos los datos en la consola:
+    const formData = {
+      nombres,
+      apellidos,
+      telefono,
+      email,
+      comentario,
+      fecha,
+      hora,
+      dni,
+      consentimiento,
+      recibirComunicaciones,
+      photo,
+      name,
+      specialty,
+      address,
+      consultationFee,
+    };
+    dispatch(postReserve(formData)); // Enviamos la acción con los datos del formulario
     console.log(`${nombres} ha reservado una consulta para el ${fecha} a las ${hora}.`);
-    onSubmit(); // Llamando a la función onSubmit que viene como prop
+    onSubmit();
   };
 
   
@@ -48,7 +66,6 @@ const FormularioReserva = ({ onSubmit }) => {
     <Stack direction="row" spacing={1} alignItems="flex-start">
       <Box flex="70%">
       <Box
-     
       >
         <form onSubmit={handleSubmit}>
         <FormControl id="nombres">
