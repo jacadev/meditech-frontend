@@ -22,27 +22,21 @@ export default function AboutUs() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Grid
-      backgroundColor={"black"}
-      templateAreas={`"header header" "nav main" "nav footer"`}
-      gridTemplateRows={"50px 1fr 30px"}
-      gridTemplateColumns={"150px 1fr"}
-      h="100vh"
-      w="100vw"
-      gap="0"
-      borderRadius="5px"
-      color="blackAlpha.700"
-      fontWeight="bold"
-    >
-      <GridItem pl="2" borderRadius="5px" bg="#3a3132" area={"header"}>
-        Header
-      </GridItem>
-      <GridItem pl="2" borderRadius="5px" bg="#386dbd" area={"nav"}>
-        Nav
-      </GridItem>
-      <GridItem pl="2" borderRadius="5px" bg="#0f4571" area={"main"}>
-        
+    // <Grid
+    //   backgroundColor={"black"}
+    //   templateAreas={`"nav main"`}
+    //   gridTemplateRows={"50px 1fr 30px"}
+    //   gridTemplateColumns={"150px 1fr"}
+    //   h="100vh"
+    //   w="100vw"
+    //   gap="0"
+    //   borderRadius="5px"
+    //   color="blackAlpha.700"
+    //   fontWeight="bold"
+    // >
+      <GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
         <Text
+          marginTop="8rem"
           fontSize="m"
           p="4"
           borderRadius="lg"
@@ -83,8 +77,6 @@ export default function AboutUs() {
           lineHeight="tall"
           fontFamily="Google Sans, sans-serif"
           mb={4}
-          
-
         >
           Contáctanos para obtener más información sobre nuestros servicios.
           </Text>
@@ -95,23 +87,23 @@ export default function AboutUs() {
               justifyContent="flex-end"
               alignItems="center"
               marginTop="4rem"
-              marginLeft="10em"
+              marginLeft="1em"
               fontFamily="Google Sans, sans-serif"
               fontSize="m"
               fontWeight="bold"
-              bg="#000011"
-              color="#333333"
+              bg="#5C43FF"
+              color="#FFFFFF"
               borderRadius="lg"
               boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
               transition="all 0.3s ease-in-out"
               _hover={{
-                bg: "#CCCCCC",
+                bg: "#5C43FF",
                 transform: "translateY(-2px)",
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
               }}
               onClick={() => setIsOpen(true)}
             >
-              DESARROLLADORES
+              DESARROLLADORES +
             </Button>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
               <ModalOverlay />
@@ -152,14 +144,33 @@ export default function AboutUs() {
                     </Link>
                   </HStack>
                   <br />
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/mwlite/in/filleral-yefreyner-mahecha-cantor-46ba451b6"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      FILLERAL YEFREYNER MAHECHA CANTOR
+                    </Link>
+                  </HStack>
+                  <br />
+                  <HStack>
+                    <Icon as={FaLinkedin} boxSize={6} />
+                    <Link
+                      href="https://www.linkedin.com/in/carlosnr9"
+                      colorScheme="linkedin"
+                      fontWeight="bold"
+                    >
+                      CARLOS FERNEY NARVAEZ RUALES
+                    </Link>
+                  </HStack>
+                  <br />
                 </ModalBody>
               </ModalContent>
             </Modal>
           </>
       </GridItem>
-      <GridItem pl="2" borderRadius="5px" bg="#009ddd" area={"footer"}>
-        Footer
-      </GridItem>
-    </Grid>
+    // </Grid>
   );
 }

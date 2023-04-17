@@ -8,6 +8,7 @@ import {
   MdLock,
   MdOutlineShoppingCart,
 } from "react-icons/md";
+import AboutUs from "./Views/AboutUs/AboutUs";
 
 // Admin Imports
 import MainDashboard from "./views/admin/default";
@@ -49,11 +50,11 @@ const routes = [
     component: DataTables,
   },
   {
-    name: "Conocenos",
+    name: "About Us",
     layout: "/admin",
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
-    component: Profile,
+    component: AboutUs,
   },
   // {
   //   name: "Sign In",
