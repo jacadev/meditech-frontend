@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  Box,
-  Grid,
   GridItem,
   Icon,
   HStack,
@@ -13,10 +11,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  Button
 } from "@chakra-ui/react";
 import { FaLinkedin } from "react-icons/fa";
 import { useState } from "react";
-import { Button } from "@chakra-ui/button";
+
 
 export default function AboutUs() {
   const [isOpen, setIsOpen] = useState(false);

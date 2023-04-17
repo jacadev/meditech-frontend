@@ -1,8 +1,19 @@
 import axios from "axios";
-
 //conexion entre front y back
+import { POST_RESERVE, POST_RESERVE_ERROR } from "./actions-types";
 
-export const postReserve = (formData) => ({
-  type: 'POST_RESERVE',
-  payload: formData,
-});
+export const postReserve = (formData) => {
+  return (dispatch) => {
+    axios
+      .post("/reserve", formData)
+      .then((response) => {
+        dispatch({ type: POST_RESERVE, payload: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: POST_RESERVE_ERROR, payload: error });
+      });
+  };
+};
+
+
+

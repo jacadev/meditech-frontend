@@ -12,7 +12,7 @@ import AboutUs from "./Views/AboutUs/AboutUs";
 
 // Admin Imports
 import MainDashboard from "./views/admin/default";
-import Marketplace from "./Views/admin/marketplace/index";
+//import Marketplace from "./Views/admin/marketplace/index";
 import Profile from "./Views/admin/profile";
 import DataTables from "./Views/admin/dataTables";
 import Reserve from "./Views/admin/Reserve/Reserve"
@@ -28,21 +28,21 @@ const routes = [
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
-  {
-    name: "Services",
-    layout: "/user",
-    path: "/services",
-    icon: (
-      <Icon
-        as={MdMedicalServices}
-        width='20px'
-        height='20px'
-        color='inherit'
-      />
-    ),
-    component: Marketplace,
-    secondary: true,
-  },
+  // {
+  //   name: "Services",
+  //   layout: "/user",
+  //   path: "/services",
+  //   icon: (
+  //     <Icon
+  //       as={MdMedicalServices}
+  //       width='20px'
+  //       height='20px'
+  //       color='inherit'
+  //     />
+  //   ),
+  //   component: Marketplace,
+  //   secondary: true,
+  // },
   {
     name: "Staff",
     layout: "/user",

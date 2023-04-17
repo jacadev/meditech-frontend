@@ -18,8 +18,8 @@ import {
   Textarea,
   Button,
 } from '@chakra-ui/react';
-
-const FormularioReserva = ({ onSubmit }) => {
+import { POST_RESERVE, POST_RESERVE_ERROR } from '../../Redux/Actions/actions-types';
+const FormularioReserva = ( {onSubmit} ) => {
   const dispatch = useDispatch();
   const [nombres, setNombres] = useState('');
   const [apellidos, setApellidos] = useState('');
