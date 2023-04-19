@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -9,6 +10,11 @@ import {
 } from '@chakra-ui/react';
 
 export default function SplitScreen() {
+  const history = useHistory();
+
+  function handleClick() {
+    history.push("/user/about-us");
+  }
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
@@ -24,13 +30,13 @@ export default function SplitScreen() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg:'#5C43FF',
                 zIndex: -1,
               }}>
              Welcome
             </Text>
             <br />{' '}
-            <Text color={'blue.400'} as={'span'}>
+            <Text color='#5C43FF' as={'span'}>
              to Meditech
             </Text>{' '}
           </Heading>
@@ -38,12 +44,13 @@ export default function SplitScreen() {
            We are an institution that stands out for the excellence it grants in all its benefits.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            <Button
+            <Button 
+              onClick={handleClick}
               rounded={'full'}
-              bg={'blue.400'}
+              bg='#5C43FF'
               color={'white'}
               _hover={{
-                bg: 'blue.500',
+                bg: '#5C43FF',
               }}>
              More about us
             </Button>

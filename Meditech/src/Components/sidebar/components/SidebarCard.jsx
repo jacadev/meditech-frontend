@@ -7,6 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import logoWhite from "./../../../assets/img/layout/logoWhite.png";
+import citaIcono from "./../../../assets/img/layout/cita.png"
 import React from "react";
 
 export default function SidebarDocs() {
@@ -24,8 +25,8 @@ export default function SidebarDocs() {
       position='relative'>
       <Flex
         border='5px solid'
-        borderColor={borderColor}
-        bg='linear-gradient(135deg, #868CFF 0%, #4318FF 100%)'
+        borderColor="white"
+        bg='white'
         borderRadius='50%'
         w='94px'
         h='94px'
@@ -36,7 +37,7 @@ export default function SidebarDocs() {
         left='50%'
         top='-47px'
         transform='translate(-50%, 0%)'>
-        <Image src={logoWhite} w='40px' h='40px' />
+        <Image src={citaIcono} w='80px' h='80px' />
       </Flex>
       <Flex
         direction='column'
@@ -61,7 +62,7 @@ export default function SidebarDocs() {
           px='10px'
           mb='14px'
           textAlign='center'>
-         Schedule your appointment right now
+        Request an appointment right now
         </Text>
       </Flex>
       <Link>
@@ -75,7 +76,7 @@ export default function SidebarDocs() {
           fontSize='sm'
           minW='185px'
           mx='auto'>
-          Schedule
+          Request an appointment
         </Button>
       </Link>
     </Flex>

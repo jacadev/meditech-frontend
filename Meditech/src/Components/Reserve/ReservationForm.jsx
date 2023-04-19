@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import {postReserve} from "./../../Redux/Actions/actions"
+import {useDispatch} from 'react-redux'
 
 
 import {
@@ -17,33 +19,58 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-const FormularioReserva = ({ onSubmit }) => {
-  const [nombres, setNombres] = useState('');
-  const [apellidos, setApellidos] = useState('');
-  const [telefono, setTelefono] = useState('');
+const FormularioReserva = () => {
+  const [firstName, setNombres] = useState('');
+  const [lastName, setApellidos] = useState('');
+  const [phone, setTelefono] = useState('');
   const [email, setEmail] = useState('');
-  const [comentario, setComentario] = useState('');
-  const [fecha, setFecha] = useState('');
-  const [hora, setHora] = useState('');
+  const [comment, setComentario] = useState('');
+  const [date, setFecha] = useState('');
+  const [hour, setHora] = useState('');
   const [dni, setDni] = useState('');
-  const [consentimiento, setConsentimiento] = useState(false);
-  const [recibirComunicaciones, setRecibirComunicaciones] = useState(false);
+  const [dataTreatment, setConsentimiento] = useState(false);
+  const [receiveCommunication, setRecibirComunicaciones] = useState(false);
   const location = useLocation();
   const { photo, name, specialty, address, consultationFee } = location.state;
-
+const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario de reserva
-    // a través de una API o servicio externo.
-    // Por ahora, solo imprimiremos los datos en la consola:
-    console.log(`${nombres} ha reservado una consulta para el ${fecha} a las ${hora}.`);
-    onSubmit(); // Llamando a la función onSubmit que viene como prop
+    const formData = {
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      comment,
+      date,
+      hour,
+      dataTreatment,
+      receiveCommunication
+      
+    };
+    dispatch(postReserve(formData)); // Enviamos la acción con los datos del formulario
+   setNombres("")
+   setApellidos("")
+   setTelefono("")
+   setComentario("")
+   setEmail("")
+   setFecha("")
+   setHora("")
+   setDni("")
+   setConsentimiento(false)
+   setRecibirComunicaciones(false)
   };
-
   
+   function formatDate(date) {
+     const year = date.getFullYear();
+     const month = ("0" + (date.getMonth() + 1)).slice(-2);
+     const day = ("0" + date.getDate()).slice(-2);
+     return `${year}-${month}-${day}`;
+ }
 
 
   return (
+    
     <Box marginTop="100px">
     <Stack direction="row" spacing={1} alignItems="flex-start">
       <Box flex="70%">
@@ -51,14 +78,14 @@ const FormularioReserva = ({ onSubmit }) => {
      
       >
         <form onSubmit={handleSubmit}>
-        <FormControl id="nombres">
+        <FormControl id="firstName">
   <FormLabel>Name:</FormLabel>
-  <Input type="text" value={nombres} onChange={(e) => setNombres(e.target.value)} title="Ingrese sus nombres" required />
+  <Input type="text" value={firstName} onChange={(e) => setNombres(e.target.value)} title="Ingrese sus nombres" required />
 </FormControl>
 
-<FormControl id="apellidos">
+<FormControl id="lastName">
   <FormLabel>last name:</FormLabel>
-  <Input type="text" value={apellidos} onChange={(e) => setApellidos(e.target.value)} title="Ingrese sus apellidos" required />
+  <Input type="text" value={lastName} onChange={(e) => setApellidos(e.target.value)} title="Ingrese sus apellidos" required />
 </FormControl>
 
 <FormControl id="dni">
@@ -76,11 +103,11 @@ const FormularioReserva = ({ onSubmit }) => {
   />
 </FormControl>
 
-<FormControl id="telefono">
+<FormControl id="phone">
   <FormLabel>Phone:</FormLabel>
   <Input 
     type="tel" 
-    value={telefono} 
+    value={phone} 
     maxLength={10}
     onChange={(e) => setTelefono(e.target.value)}
     onKeyPress={(event) => {
@@ -99,35 +126,40 @@ const FormularioReserva = ({ onSubmit }) => {
   <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 </FormControl>
 
-<FormControl id="comentario">
+<FormControl id="comment">
   <FormLabel>Comment for the specialist (optional):</FormLabel>
-  <Textarea value={comentario} onChange={(e) => setComentario(e.target.value)} />
+  <Textarea value={comment} onChange={(e) => setComentario(e.target.value)} />
 </FormControl>
 
-<FormControl id="fecha">
+{/* <div>
+    <label>Fecha de lanzamiento</label>
+    <input type='date' value={form.release_date ? formatDate(new Date(form.release_date)) : ''} onChange={changeHandler} name='release_date' />
+  </div>
+ */}
+ <FormControl id="date">
   <FormLabel>Date:</FormLabel>
-  <Input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} required />
-</FormControl>
+  <Input type="date" value={date ? formatDate(new Date(date)) : ''}  onChange={(e) => setFecha(e.target.value)} required />
+</FormControl> 
 
-<FormControl id="hora">
+<FormControl id="hour">
   <FormLabel>Hour:</FormLabel>
-  <Input type="time" value={hora} onChange={(e) => setHora(e.target.value)} required />
+  <Input type="time" value={hour} onChange={(e) => setHora(e.target.value)} required />
 </FormControl>
 
 
           
 
 <Checkbox
-  isChecked={consentimiento}
-  onChange={() => setConsentimiento(!consentimiento)}
+  isChecked={dataTreatment}
+  onChange={() => setConsentimiento(!dataTreatment)}
   required={true} 
 >
 I give my consent to the processing of my personal data related to health and its transfer to the specialist to make the appointment
 </Checkbox>
 
 <Checkbox
-  isChecked={recibirComunicaciones}
-  onChange={() => setRecibirComunicaciones(!recibirComunicaciones)}
+  isChecked={receiveCommunication}
+  onChange={() => setRecibirComunicaciones(!receiveCommunication)}
   
 >
   Yes, I would like to receive communications from Meditech.
@@ -144,7 +176,7 @@ I give my consent to the processing of my personal data related to health and it
         width="100%"
         _hover={{ bg: '#38a169' }}
       >
-       Schedule Appointment
+       Request an Appointment
       </Button>
           </div>
           
@@ -165,8 +197,8 @@ I give my consent to the processing of my personal data related to health and it
 
           <Text fontSize="md">{specialty}     </Text>
 
-          <Text fontSize="sm">Appointment date: {fecha}</Text>
-          <Text fontSize="sm">Appointment time: {hora}</Text>
+          <Text fontSize="sm">Appointment date: {date}</Text>
+          <Text fontSize="sm">Appointment time: {hour}</Text>
 
           <Text fontSize="sm">{address}</Text>
 
