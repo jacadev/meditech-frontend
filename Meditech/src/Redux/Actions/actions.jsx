@@ -18,11 +18,3 @@ export const postReserve = (formData) => {
 
 
 
-/* 
-
-export const postGame = (payload) => {
-    return async function (dispatch){
-      const response = await axios.post('http://localhost:3001/videogames/',payload)
-      return response;
-    }
-  } */

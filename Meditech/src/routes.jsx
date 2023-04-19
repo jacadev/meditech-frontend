@@ -10,10 +10,10 @@ import {
 } from "react-icons/md";
 
 // Admin Imports
-import MainDashboard from "./views/admin/default";
-import Marketplace from "./Views/admin/marketplace/index";
-import Profile from "./Views/admin/profile";
-import DataTables from "./Views/admin/dataTables";
+import Home from "./Views/admin/home/index";
+import Services from "./Views/admin/services/index";
+import About from "./Views/admin/about us/index";
+import Staff from "./Views/admin/Staff/index";
 import Reserve from "./Views/admin/Reserve/Reserve"
 
 // Auth Imports
@@ -25,7 +25,7 @@ const routes = [
     layout: "/user",
     path: "/home",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: MainDashboard,
+    component: Home,
   },
   {
     name: "Services",
@@ -39,7 +39,7 @@ const routes = [
         color='inherit'
       />
     ),
-    component: Marketplace,
+    component: Services,
     secondary: true,
   },
   {
@@ -47,29 +47,21 @@ const routes = [
     layout: "/user",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     path: "/staff",
-    component: DataTables,
+    component: Staff,
   },
   {
     name: "About us",
     layout: "/user",
     path: "/about-us",
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
-    component: Profile,
+    component: About,
   },
   {
   
-    layout: "/user",
-    path: "/reserve",
-    
+    layout: "/user/reserve",
     component: Reserve,
+
   },
-  // {
-  //   name: "Sign In",
-  //   layout: "/auth",
-  //   path: "/sign-in",
-  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //   component: SignInCentered,
-  // },
 ];
 
 export default routes;

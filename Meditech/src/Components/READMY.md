@@ -1,1 +1,0 @@
-en esta carpeta pondriamos todos nuestros componentes modularizados
