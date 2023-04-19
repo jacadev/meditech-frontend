@@ -10,11 +10,12 @@ import {
 } from "react-icons/md";
 
 // Admin Imports
-import Home from "./Views/admin/home/index";
-import Services from "./Views/admin/services/index";
-import About from "./Views/admin/about us/index";
-import Staff from "./Views/admin/Staff/index";
-import Reserve from "./Views/admin/Reserve/Reserve"
+import Home from "./Views/user/home/index";
+import Services from "./Views/user/services/index";
+import About from "./Views/user/about us/index";
+import Staff from "./Views/user/Staff/index";
+import Reserve from "./Views/user/Reserve/Reserve"
+import singIn from "./Views/user/Sing in";
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -62,6 +63,18 @@ const routes = [
     component: Reserve,
 
   },
+  {
+    name: "Sing in",
+    layout: "/user",
+    path: "/sing-in",
+    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    component: singIn,
+  },
+ /*  {
+    layout: "/user/sing-in",
+    component: singIn,
+  } */
+
 ];
 
 export default routes;
