@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import {postReserve} from "./../../Redux/Actions/actions"
 import {useDispatch} from 'react-redux'
@@ -76,6 +75,7 @@ const dispatch = useDispatch()
     <Stack direction="row" spacing={1} alignItems="flex-start">
       <Box flex="70%">
       <Box
+     
       >
         <form onSubmit={handleSubmit}>
         <FormControl id="firstName">
@@ -218,4 +218,3 @@ I give my consent to the processing of my personal data related to health and it
 };
 
 export default FormularioReserva;
-

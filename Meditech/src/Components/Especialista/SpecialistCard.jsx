@@ -1,6 +1,7 @@
 import { Box, Flex, Image, Spacer, Text, Button} from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-
+import ReviewForm from '../Review/ReviewForm';
+import ReviewList from '../Review/ReviewList';
 const SpecialistCard = ({ specialist }) => {
   
   const history = useHistory();
@@ -16,6 +17,9 @@ const SpecialistCard = ({ specialist }) => {
         city: specialist.city
       }
     });
+  };
+  const handleClick2 = () => {
+ history.push("/reviews")
   };
 
   return (
@@ -58,7 +62,24 @@ const SpecialistCard = ({ specialist }) => {
           Price of the consultation: ${specialist.consultationFee}
           </Text>
         </Box>
-     
+        <Box>
+          Review List 
+          <ReviewList />
+          <Box marginTop='20px'>
+            <Button
+              bg="#48bb78"
+              color="white"
+              borderRadius="5px"
+              padding="10px"
+              width="100%"
+              _hover={{ bg: '#38a169' }}
+              onClick={handleClick2}
+            > 
+              Add a review
+            </Button>
+          </Box>
+        </Box>
+
         <Box marginTop='280px'>
           <Button
             bg="#48bb78"

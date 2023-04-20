@@ -7,7 +7,7 @@ import UserLayout from "./layouts/user";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
-import AboutUs from "./Views/AboutUs/AboutUs";
+import ReviewForm from "./Components/Review/ReviewForm";
 
 function App() {
 return(
@@ -18,7 +18,7 @@ return(
           <Switch>
             <Route path={`/auth`} component={AdminLayout} />
             <Route path={`/user`} component={UserLayout} />
-            <Route path={`/about-us`} component={AboutUs} />
+            <Route path={`/reviews`} component={ReviewForm} />
             <Redirect from='/' to='/user' />
           </Switch>
         </HashRouter>

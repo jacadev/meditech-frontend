@@ -1,7 +1,8 @@
-import { POST_RESERVE, POST_RESERVE_ERROR } from "../Actions/actions-types";
+import { POST_RESERVE, POST_RESERVE_ERROR, ADD_REVIEW, GET_DOCTOR_REVIEWS } from "../Actions/actions-types";
 
 const initialState = {
     reserva: [],
+    reviews: [],
     loading: false,
     error: null,
   };
@@ -24,6 +25,16 @@ const initialState = {
           loading: false,
           error: action.payload,
         }
+        case ADD_REVIEW:
+          return {
+            ...state,
+            reviews: [...state.reviews, action.payload]
+          };
+        case GET_DOCTOR_REVIEWS:
+          return {
+            ...state,
+            reviews: action.payload
+          };
       default:
         return state;
     }
