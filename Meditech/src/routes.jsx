@@ -11,11 +11,12 @@ import {
 import AboutUs from "./Views/AboutUs/AboutUs";
 
 // Admin Imports
-import MainDashboard from "./views/admin/default";
-//import Marketplace from "./Views/admin/marketplace/index";
-import Profile from "./Views/admin/profile";
-import DataTables from "./Views/admin/dataTables";
-import Reserve from "./Views/admin/Reserve/Reserve"
+import Home from "./Views/user/home/index";
+//import Services from "./Views/user/services/index";
+import About from "./Views/user/about us/index";
+import Staff from "./Views/user/Staff/index";
+import Reserve from "./Views/user/Reserve/Reserve"
+import singIn from "./Views/user/Sing in";
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -26,51 +27,55 @@ const routes = [
     layout: "/user",
     path: "/home",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: MainDashboard,
+    component: Home,
   },
-  // {
-  //   name: "Services",
-  //   layout: "/user",
-  //   path: "/services",
-  //   icon: (
-  //     <Icon
-  //       as={MdMedicalServices}
-  //       width='20px'
-  //       height='20px'
-  //       color='inherit'
-  //     />
-  //   ),
-  //   component: Marketplace,
-  //   secondary: true,
-  // },
+  {
+    name: "Services",
+    layout: "/user",
+    path: "/services",
+    icon: (
+      <Icon
+        as={MdMedicalServices}
+        width='20px'
+        height='20px'
+        color='inherit'
+      />
+    ),
+    component: Services,
+    secondary: true,
+  },
   {
     name: "Staff",
     layout: "/user",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     path: "/staff",
-    component: DataTables,
+    component: Staff,
   },
   {
     name: "About us",
     layout: "/user",
     path: "/about-us",
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
-    component: Profile,
+    component: About,
   },
   {
   
-    layout: "/user",
-    path: "/reserve",
-    
+    layout: "/user/reserve",
     component: Reserve,
+
   },
-  // {
-  //   name: "Sign In",
-  //   layout: "/auth",
-  //   path: "/sign-in",
-  //   icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-  //   component: SignInCentered,
-  // },
+  {
+    name: "Sing in",
+    layout: "/user",
+    path: "/sing-in",
+    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    component: singIn,
+  },
+ /*  {
+    layout: "/user/sing-in",
+    component: singIn,
+  } */
+
 ];
 
 export default routes;

@@ -5,7 +5,7 @@ import { POST_RESERVE, POST_RESERVE_ERROR } from "./actions-types";
 export const postReserve = (formData) => {
   return (dispatch) => {
     axios
-      .post("/reserve", formData)
+      .post("http://localhost:3001/citas", formData)
       .then((response) => {
         dispatch({ type: POST_RESERVE, payload: response.data });
       })
@@ -14,6 +14,7 @@ export const postReserve = (formData) => {
       });
   };
 };
+
 
 
 

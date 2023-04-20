@@ -120,7 +120,7 @@ export default function AdminNavbar(props) {
             bg='inherit'
             borderRadius='inherit'
             fontWeight='bold'
-            fontSize='34px'
+            fontSize='40px'
             _hover={{ color: { mainText } }}
             _active={{
               bg: "inherit",
@@ -133,7 +133,7 @@ export default function AdminNavbar(props) {
             {brandText}
           </Link>
         </Box>
-        <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
+     {/*    <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
             onOpen={props.onOpen}
             logoText={props.logoText}
@@ -141,7 +141,8 @@ export default function AdminNavbar(props) {
             fixed={props.fixed}
             scrolled={scrolled}
           />
-        </Box>
+          ---------------ESTE ES EL SEARH BAR PAR AIMPLEMENTRLO DESPUES-------------------
+        </Box> */}
       </Flex>
       {secondary ? <Text color='white'>{message}</Text> : null}
     </Box>
