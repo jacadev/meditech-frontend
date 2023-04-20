@@ -1,9 +1,6 @@
 // Chakra Imports
 import {
   Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Flex,
   Link,
   Text,
@@ -11,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
-import AdminNavbarLinks from "./NavbarLinksAdmin";
+//import AdminNavbarLinks from "./NavbarLinksAdmin";
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
@@ -120,16 +117,7 @@ export default function AdminNavbar(props) {
             bg='inherit'
             borderRadius='inherit'
             fontWeight='bold'
-            fontSize='40px'
-            _hover={{ color: { mainText } }}
-            _active={{
-              bg: "inherit",
-              transform: "none",
-              borderColor: "transparent",
-            }}
-            _focus={{
-              boxShadow: "none",
-            }}>
+            fontSize='40px'>
             {brandText}
           </Link>
         </Box>

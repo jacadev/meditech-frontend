@@ -51,7 +51,7 @@ export default function User(props) {
         />
         )
       }
-    /*   if(prop.layout === "/user/sing-in"){
+      if(prop.layout === "/user/payment"){
         return(
           <Route
           path={prop.layout}
@@ -59,7 +59,7 @@ export default function User(props) {
           key={key}
         />
         )
-      } */
+      } 
     });
   };
  

@@ -1,11 +1,13 @@
 import { Box } from "@chakra-ui/react"
+import ToggleButton from "../../../theme/botonmode";
 
-const singIn =()=>{
-    return(
-        <Box textAlign="center"marginTop="100px">
-        <h1>este es mi componente de inicio de sesion</h1>
-        </Box>
-    )
-}
 
-export default singIn
+//import theme from "../../../theme/themes"
+function modeColors() {
+    return (
+        <Box textAlign="center" marginTop="100px">
+    <ToggleButton/>
+    </Box>
+    );
+  }
+export default modeColors
