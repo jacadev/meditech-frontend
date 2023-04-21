@@ -8,7 +8,7 @@ function PayPalCheckout() {
       purchase_units: [
         {
           amount: {
-            value: '0.99',
+            value: '0.01',
           },
         },
       ],
@@ -23,7 +23,7 @@ function PayPalCheckout() {
 
   return (<Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
   <Box borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg" bg="#F3f3f3">
-    <PayPalScriptProvider options={{ "client-id": "AfaDtjBiApMUSmEH4Avl-hvKfAt4vJViSm4nROgKFrWyXU_bI5QXBpMWs884z3YZ_y8mkkS5ddvwJDdq" }}>
+    <PayPalScriptProvider options={{ "client-id": "AfaDtjBiApMUSmEH4Avl-hvKfAt4vJViSm4nROgKFrWyXU_bI5QXBpMWs884z3YZ_y8mkkS5ddvwJDdq",locale: 'en_US'}}>
       <Text textAlign="center">ingrese su metodo de pago</Text>
       <PayPalButtons 
         createOrder={createOrder} 
@@ -35,6 +35,7 @@ function PayPalCheckout() {
           label: 'paypal',
           height: 40,
         }}
+    
         renderLoading={() => (
           <Button isDisabled>
             <Spinner mr={3} size="sm" />Cargando PayPal

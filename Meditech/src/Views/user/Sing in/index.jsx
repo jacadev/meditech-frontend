@@ -1,13 +1,13 @@
 import { Box } from "@chakra-ui/react"
-import ToggleButton from "../../../theme/botonmode";
+
 
 
 //import theme from "../../../theme/themes"
-function modeColors() {
+function singIn() {
     return (
         <Box textAlign="center" marginTop="100px">
-    <ToggleButton/>
+hola
     </Box>
     );
   }
-export default modeColors
+export default singIn
