@@ -13,6 +13,7 @@ import {
 
 export default function SplitScreen() {
   const history = useHistory();
+  const userName = localStorage.getItem("userName");
 
   function handleClick() {
     history.push("/user/about-us");
@@ -40,7 +41,7 @@ export default function SplitScreen() {
             </Text>
             <br />{' '}
             <Text color='#5C43FF' as={'span'}>
-             to Meditech
+             to Meditech {userName}
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>

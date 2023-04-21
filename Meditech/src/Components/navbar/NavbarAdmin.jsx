@@ -1,6 +1,9 @@
 // Chakra Imports
 import {
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Flex,
   Link,
   Text,
@@ -8,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
-//import AdminNavbarLinks from "./NavbarLinksAdmin";
+import AdminNavbarLinks from "./NavbarLinksAdmin";
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
@@ -97,19 +100,19 @@ export default function AdminNavbar(props) {
         alignItems={{ xl: "center" }}
         mb={gap}>
         <Box mb={{ sm: "8px", md: "0px" }}>
-         {/*  <Breadcrumb>
+          <Breadcrumb>
             <BreadcrumbItem color={secondaryText} fontSize='sm' mb='5px'>
               <BreadcrumbLink href='#' color={secondaryText}>
-                
+                Pages
               </BreadcrumbLink>
             </BreadcrumbItem>
 
             <BreadcrumbItem color={secondaryText} fontSize='sm'>
               <BreadcrumbLink href='#' color={secondaryText}>
-          ESTO ES PARA RENDERIZAR LAS RUTAS EN LA QUE ESTA PARADO EL ADMIN
+                {brandText}
               </BreadcrumbLink>
             </BreadcrumbItem>
-          </Breadcrumb> */}
+          </Breadcrumb>
           {/* Here we create navbar brand, based on route name */}
           <Link
             color={mainText}
@@ -117,11 +120,20 @@ export default function AdminNavbar(props) {
             bg='inherit'
             borderRadius='inherit'
             fontWeight='bold'
-            fontSize='40px'>
+            fontSize='34px'
+            _hover={{ color: { mainText } }}
+            _active={{
+              bg: "inherit",
+              transform: "none",
+              borderColor: "transparent",
+            }}
+            _focus={{
+              boxShadow: "none",
+            }}>
             {brandText}
           </Link>
         </Box>
-     {/*    <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
+        <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
             onOpen={props.onOpen}
             logoText={props.logoText}
@@ -129,8 +141,7 @@ export default function AdminNavbar(props) {
             fixed={props.fixed}
             scrolled={scrolled}
           />
-          ---------------ESTE ES EL SEARH BAR PAR AIMPLEMENTRLO DESPUES-------------------
-        </Box> */}
+        </Box>
       </Flex>
       {secondary ? <Text color='white'>{message}</Text> : null}
     </Box>

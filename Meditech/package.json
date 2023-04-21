@@ -45,7 +45,9 @@
     "redux-thunk": "^2.3.0",
     "stylis": "^4.1.1",
     "stylis-plugin-rtl": "2.0.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "@leecheuk/react-google-login": "^5.4.1",
+    "gapi-script": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
