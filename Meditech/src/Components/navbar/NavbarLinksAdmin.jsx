@@ -226,7 +226,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, {userName}
+              👋&nbsp; Hey {userName}
             </Text>
           </Flex>
           <Flex flexDirection="column" p="10px">
