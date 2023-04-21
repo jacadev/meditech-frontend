@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@leecheuk/react-google-login";
 import { useHistory } from "react-router-dom";
 // Chakra imports
 import {
@@ -26,7 +26,8 @@ import illustration from "../../../../public/Meditech.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
-
+import { gapi } from 'gapi-script';
+import { useEffect } from "react";
 function SignIn() {
   const history = useHistory();
   // Chakra color mode
@@ -49,14 +50,25 @@ function SignIn() {
   const handleClick = () => setShow(!show);
   const responseGoogle = (response) => {
     const userName = response.profileObj.name;
-    // Redirecciona al usuario a la ruta deseada
+    const userImage = response.profileObj.imageUrl;
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('userImage', userImage);
     history.push("/admin/default");
-    // Muestra el nombre del usuario en algún lugar de la interfaz de usuario
   };
   const onFailure = (error) => {
     console.log(error);
     // Aquí puedes manejar el error del inicio de sesión de Google
   };
+  useEffect(() => {
+    function start() {
+    gapi.client.init({
+    clientId : "486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com",
+    scope : ''
+    })
+    };
+    gapi.load('client:auth2',start);
+    });
+
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
@@ -103,6 +115,7 @@ function SignIn() {
             onSuccess={responseGoogle}
             onFailure={onFailure}
             cookiePolicy={"single_host_origin"}
+            scope="profile"
           >
             
           </GoogleLogin>
