@@ -4,4 +4,4 @@ export const POST_RESERVE_ERROR = "POST_RESERVE_ERROR";
 
 //review
 export const ADD_REVIEW = "ADD_REVIEW";
-export const GET_DOCTOR_REVIEWS = "GET_DOCTOR_REVIEWS";
+export const GET_REVIEWS = "GET_REVIEWS";

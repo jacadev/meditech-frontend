@@ -1,9 +1,9 @@
-import { Box, Flex, Image, Spacer, Text, Button} from '@chakra-ui/react';
+import { Box, Flex, Image, Text, Button, Heading, Stack} from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import ReviewForm from '../Review/ReviewForm';
 import ReviewList from '../Review/ReviewList';
+
 const SpecialistCard = ({ specialist }) => {
-  
+  console.log(specialist)
   const history = useHistory();
   const handleClick = () => {
     history.push({
@@ -14,14 +14,26 @@ const SpecialistCard = ({ specialist }) => {
         specialty: specialist.specialty,
         address: specialist.address,
         consultationFee: specialist.consultationFee,
-        city: specialist.city
+        city: specialist.city,
       }
     });
   };
-  const handleClick2 = () => {
- history.push("/reviews")
+  const generateStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <Icon
+          key={i}
+          as={StarIcon}
+          w={4}
+          h={4}
+          color={i <= rating ? "yellow.500" : "gray.300"}
+        />
+      );
+    }
+    return stars;
   };
-
+  
   return (
     <Box  borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg">
       <Flex >
@@ -61,8 +73,11 @@ const SpecialistCard = ({ specialist }) => {
           <Text fontSize="lg" fontWeight="bold" mt="4">
           Price of the consultation: ${specialist.consultationFee}
           </Text>
+          <Box mt={4}>
+          <Heading size="md">Reviews:</Heading>
+          <ReviewList specialistId={specialist.id} />
         </Box>
-        <Box>
+        {/* <Box>
           Review List 
           <ReviewList />
           <Box marginTop='20px'>
@@ -78,8 +93,9 @@ const SpecialistCard = ({ specialist }) => {
               Add a review
             </Button>
           </Box>
-        </Box>
+        </Box> */}
 
+  </Box>
         <Box marginTop='280px'>
           <Button
             bg="#48bb78"

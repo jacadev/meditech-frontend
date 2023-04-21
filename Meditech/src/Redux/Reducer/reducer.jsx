@@ -1,4 +1,4 @@
-import { POST_RESERVE, POST_RESERVE_ERROR, ADD_REVIEW, GET_DOCTOR_REVIEWS } from "../Actions/actions-types";
+import { POST_RESERVE, POST_RESERVE_ERROR, ADD_REVIEW, GET_REVIEWS } from "../Actions/actions-types";
 
 const initialState = {
     reserva: [],
@@ -30,10 +30,10 @@ const initialState = {
             ...state,
             reviews: [...state.reviews, action.payload]
           };
-        case GET_DOCTOR_REVIEWS:
+        case GET_REVIEWS:
           return {
             ...state,
-            reviews: action.payload
+            reviews: [...state.reviews, action.payload]
           };
       default:
         return state;
