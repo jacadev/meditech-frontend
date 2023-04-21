@@ -1,5 +1,7 @@
 import { useHistory } from 'react-router-dom';
+import WithSpeechBubbles from '../../../Components/testimonials/index'
 import {
+  Box,
   Button,
   Flex,
   Heading,
@@ -16,6 +18,7 @@ export default function SplitScreen() {
     history.push("/user/about-us");
   }
   return (
+    <Box>
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex p={8} flex={1} align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'lg'}>
@@ -59,7 +62,8 @@ export default function SplitScreen() {
         </Stack>
       </Flex>
       <Flex flex={1}>
-        <Image
+        <Image 
+        borderRadius='10px'
           alt={'Login Image'}
           objectFit={'cover'}
           src={
@@ -67,6 +71,9 @@ export default function SplitScreen() {
           }
         />
       </Flex>
-    </Stack>
+  
+   </Stack>
+      <WithSpeechBubbles/>
+      </Box>
   );
 }

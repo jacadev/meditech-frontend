@@ -16,6 +16,7 @@ import About from "./Views/user/about us/index";
 import Staff from "./Views/user/Staff/index";
 import Reserve from "./Views/user/Reserve/Reserve"
 import singIn from "./Views/user/Sing in";
+import payment from "./Views/user/payment";
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -70,10 +71,10 @@ const routes = [
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
     component: singIn,
   },
- /*  {
-    layout: "/user/sing-in",
-    component: singIn,
-  } */
+   {
+    layout: "/user/payment",
+    component: payment,
+  } 
 
 ];
 

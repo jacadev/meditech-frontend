@@ -1,6 +1,6 @@
 // Chakra imports
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
-import Footer from "../../components/footer/FooterAdmin.jsx";
+import Footer from "../../Components/footer/FooterUser"
 // Layout components
 import Navbar from "../../Components/navbar/NavbarAdmin.jsx";
 import Sidebar from "../../Components/sidebar/Sidebar.jsx";
@@ -51,7 +51,7 @@ export default function User(props) {
         />
         )
       }
-    /*   if(prop.layout === "/user/sing-in"){
+      if(prop.layout === "/user/payment"){
         return(
           <Route
           path={prop.layout}
@@ -59,7 +59,7 @@ export default function User(props) {
           key={key}
         />
         )
-      } */
+      } 
     });
   };
  
