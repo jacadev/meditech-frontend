@@ -17,6 +17,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@hypertheme-editor/chakra-ui": "^0.1.5",
+    "@paypal/react-paypal-js": "^7.8.3",
     "@popperjs/core": "^2.11.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -44,7 +45,9 @@
     "redux-thunk": "^2.3.0",
     "stylis": "^4.1.1",
     "stylis-plugin-rtl": "2.0.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "@leecheuk/react-google-login": "^5.4.1",
+    "gapi-script": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

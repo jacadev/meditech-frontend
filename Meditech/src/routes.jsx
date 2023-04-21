@@ -16,6 +16,7 @@ import About from "./Views/user/about us/index";
 import Staff from "./Views/user/Staff/index";
 import Reserve from "./Views/user/Reserve/Reserve"
 import singIn from "./Views/user/Sing in";
+import payment from "./Views/user/payment";
 import ReviewForm from "./Components/Review/ReviewForm";
 import ReviewList from "./Components/Review/ReviewList";
 
@@ -72,10 +73,11 @@ const routes = [
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
     component: singIn,
   },
- /*  {
-    layout: "/user/sing-in",
-    component: singIn,
-  } */
+   {
+    layout: "/user/payment",
+    component: payment,
+  } 
+
 ];
 
 export default routes;

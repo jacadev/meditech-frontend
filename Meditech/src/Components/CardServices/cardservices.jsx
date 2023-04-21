@@ -1,6 +1,5 @@
-import { Card,Icon, CardHeader, CardBody, Flex, SimpleGrid, Box, Text, Button, Heading } from '@chakra-ui/react'
+import { Image,Card,Icon, CardHeader, CardBody, Flex, SimpleGrid, Box, Text, Button, Heading } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom';
-
 
 
 
@@ -15,7 +14,7 @@ const cardServices = () => {
     history.push("/user/about-us");
   }
   return (
- 
+
     <Box px={40} my={35} >
       <SimpleGrid columns={5} spacing={4}>
         <Card boxShadow="dark-lg">
@@ -65,7 +64,7 @@ const cardServices = () => {
         </Card>
         <Card boxShadow="dark-lg">
           <CardHeader>
-            <Heading textAlign="center" size='md'> ART</Heading>
+            <Heading textAlign="center" size='md'>Health insurance</Heading>
           </CardHeader>
           <CardBody display="flex" justifyContent="center" alignItems="center" >
             <Icon as={props => <img src="sitio-web.png" {...props} />} boxSize={16} />
