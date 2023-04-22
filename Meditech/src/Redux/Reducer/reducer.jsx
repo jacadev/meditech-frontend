@@ -1,5 +1,9 @@
 import { POST_RESERVE, POST_RESERVE_ERROR } from '../Actions/actions-types';
-import { SIGNIN_USER, SIGNUP_USER } from '../Actions/Actionslogin';
+import {
+  SIGNIN_USER,
+  SIGNUP_USER,
+  CLEAN_DETAIL,
+} from '../Actions/Actionslogin';
 
 const initialState = {
   reserva: [],
@@ -33,6 +37,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: action.payload,
+      };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        userInfo: {},
       };
     default:
       return state;

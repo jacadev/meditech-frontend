@@ -72,11 +72,12 @@ function SignIn() {
   const handleClick = () => setShow(!show);
   const responseGoogle = (response) => {
     const userName = response.profileObj.name;
-    console.log(response.profileObj);
     const userImage = response.profileObj.imageUrl;
+    localStorage.setItem('userInfo', JSON.stringify(response.profileObj));
     localStorage.setItem('userName', userName);
     localStorage.setItem('userImage', userImage);
     history.push('/admin/default');
+    console.log(localStorage);
   };
   const onFailure = (error) => {
     console.log(error);
@@ -84,16 +85,18 @@ function SignIn() {
   };
 
   const submitHandler = (e) => {
+    if(userInfo1){
     e.preventDefault();
     if (input.email && input.password) {
       dispatch(userInfo(input));
-      localStorage.setItem('userName', userInfo1.user_name);
+      // localStorage.setItem('userName', userInfo1.user_name);
       setInput({ email: '', password: '' });
       history.push('/admin/default');
     } else {
       alert('!!Required Data');
       console.log('Aca pase');
     }
+  }
   };
 
   useEffect(() => {
