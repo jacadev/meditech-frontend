@@ -11,10 +11,11 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 
+
 export default function SplitScreen() {
   const history = useHistory();
   const userName = localStorage.getItem("userName");
-
+  
   function handleClick() {
     history.push("/user/about-us");
   }
@@ -75,6 +76,7 @@ export default function SplitScreen() {
   
    </Stack>
       <WithSpeechBubbles/>
+    
       </Box>
   );
 }

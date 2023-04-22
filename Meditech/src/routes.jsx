@@ -18,6 +18,8 @@ import Reserve from "./Views/user/Reserve/Reserve"
 import singIn from "./Views/user/Sing in";
 import payment from "./Views/user/payment";
 
+
+
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
 
@@ -74,7 +76,8 @@ const routes = [
    {
     layout: "/user/payment",
     component: payment,
-  } 
+  },
+
 
 ];
 
