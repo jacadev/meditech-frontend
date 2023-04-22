@@ -270,4 +270,3 @@ import {
 	secondary: PropTypes.bool,
 	onOpen: PropTypes.func,
   };
-  
