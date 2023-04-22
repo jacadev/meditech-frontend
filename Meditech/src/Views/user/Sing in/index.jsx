@@ -19,8 +19,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 // Custom components
-import { HSeparator } from "./../../../Components/separator/Separator";
-import DefaultAuth from "./../../../layouts/user/Default";
+import { HSeparator } from './../../../Components/separator/Separator';
+import DefaultAuth from './../../../layouts/user/Default';
 // Assets
 import illustration from '../../../../public/Meditech.png';
 import { FcGoogle } from 'react-icons/fc';
@@ -28,11 +28,13 @@ import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userInfo } from './../../../Redux/Actions/Actionslogin';
+
 
 function SignIn() {
   const history = useHistory();
+  const userInfo1 = useSelector((state) => state.userInfo);
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
@@ -55,10 +57,14 @@ function SignIn() {
     email: '',
     password: '',
   });
+  function handleClick1() {
+    history.push("/user/signup");
+  }
 
   const handleChange = (e) => {
     const value = e.target.value;
     const property = e.target.name;
+    
 
     setInput({ ...input, [property]: value });
   };
@@ -81,7 +87,7 @@ function SignIn() {
     e.preventDefault();
     if (input.email && input.password) {
       dispatch(userInfo(input));
-      localStorage.setItem('user_name', user_name);
+      localStorage.setItem('userName', userInfo1.user_name);
       setInput({ email: '', password: '' });
       history.push('/admin/default');
     } else {
@@ -264,7 +270,7 @@ function SignIn() {
           >
             <Text color={textColorDetails} fontWeight="400" fontSize="14px">
               Not registered yet?
-              <NavLink to="/auth/sign-up">
+              <Button onClick={handleClick1}>
                 <Text
                   color={textColorBrand}
                   as="span"
@@ -273,7 +279,7 @@ function SignIn() {
                 >
                   Create an Account
                 </Text>
-              </NavLink>
+              </Button>
             </Text>
           </Flex>
         </Flex>

@@ -1,5 +1,5 @@
-import { POST_RESERVE, POST_RESERVE_ERROR } from "../Actions/actions-types";
-import { SIGNIN_USER } from "../Actions/Actionslogin";
+import { POST_RESERVE, POST_RESERVE_ERROR } from '../Actions/actions-types';
+import { SIGNIN_USER, SIGNUP_USER } from '../Actions/Actionslogin';
 
 const initialState = {
   reserva: [],
@@ -25,6 +25,11 @@ const rootReducer = (state = initialState, action) => {
         error: action.payload,
       };
     case SIGNIN_USER:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+    case SIGNUP_USER:
       return {
         ...state,
         userInfo: action.payload,
