@@ -17,6 +17,7 @@ import Staff from "./Views/user/Staff/index";
 import Reserve from "./Views/user/Reserve/Reserve"
 import singIn from "./Views/user/Sing in";
 import payment from "./Views/user/payment";
+import signup from "./Views/user/Sing up/Index"
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -74,6 +75,10 @@ const routes = [
    {
     layout: "/user/payment",
     component: payment,
+  },
+  {
+    layout: "/user/signup",
+    component: signup,
   } 
 
 ];

@@ -6,9 +6,10 @@ import AdminLayout from "./layouts/admin";
 import UserLayout from "./layouts/user";
 import { ChakraProvider,ColorModeScript  } from "@chakra-ui/react";
 import theme from "./theme/themes";
-
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+  const userInfo1 = useSelector((state) => state.userInfo);
 return(
   <ChakraProvider theme={theme}>
      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
