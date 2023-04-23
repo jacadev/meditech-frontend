@@ -85,18 +85,15 @@ function SignIn() {
   };
 
   const submitHandler = (e) => {
-    if(userInfo1){
     e.preventDefault();
-    if (input.email && input.password) {
+    if (input.email && input.password && !userInfo) {
       dispatch(userInfo(input));
-      // localStorage.setItem('userName', userInfo1.user_name);
       setInput({ email: '', password: '' });
       history.push('/admin/default');
     } else {
-      alert('!!Required Data');
+      alert('Usuario o contraseña incorrectos');
       console.log('Aca pase');
     }
-  }
   };
 
   useEffect(() => {
