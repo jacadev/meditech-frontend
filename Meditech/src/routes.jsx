@@ -83,6 +83,10 @@ const routes = [
    {
     layout: "/user/payment",
     component: payment,
+  },
+  {
+    layout: "/user/signup",
+    component: signup,
   } 
 
 ];

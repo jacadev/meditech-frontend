@@ -12,6 +12,7 @@ import ReviewList from "./Components/Review/ReviewList";
 import DoctorDetail from "./Components/DoctorDetail/DoctorDetail";
 
 function App() {
+  const userInfo1 = useSelector((state) => state.userInfo);
 return(
   <ChakraProvider theme={theme}>
      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
