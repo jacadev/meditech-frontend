@@ -9,8 +9,15 @@ import {
   Stack,
   Text,
   useBreakpointValue,
+  Center,
 } from '@chakra-ui/react';
+import Gallery from "../../../Components/GaleriaImg/GaleriaImg"
 
+const images = [
+    "https://drive.google.com/uc?export=download&id=1oSoNdTsABb0EOOMEgfxCCP55qQFJWE3t",
+    "https://drive.google.com/uc?export=download&id=1HTOKawhzXLyGzGrBpUqglPoBe7i2WMve",
+    "https://drive.google.com/uc?export=download&id=12i_JxcUGGKRf5exPDD7_im7B6mj-leXe",
+  ];
 
 export default function SplitScreen() {
   const history = useHistory();
@@ -75,6 +82,11 @@ export default function SplitScreen() {
       </Flex>
   
    </Stack>
+        <Box width="100%"> 
+   
+        <Gallery images={images}/>
+      
+        </Box>
       <WithSpeechBubbles/>
     
       </Box>

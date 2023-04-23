@@ -17,7 +17,7 @@ import Staff from "./Views/user/Staff/index";
 import Reserve from "./Views/user/Reserve/Reserve"
 import singIn from "./Views/user/Sing in";
 import payment from "./Views/user/payment";
-
+import Gallery from "./Components/GaleriaImg/Gallery"
 
 
 // Auth Imports
@@ -77,6 +77,11 @@ const routes = [
     layout: "/user/payment",
     component: payment,
   },
+     {
+    layout: "/user/galeria",
+    component: Gallery,
+  },
+
 
 
 ];

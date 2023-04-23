@@ -27,7 +27,7 @@ export default function AboutUs() {
   return (
 <GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
   <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
-    <Image src={imagen1} w={800} h={800} mr={{ md: "4rem" }}/>
+    <Image src={imagen1} objectFit="cover" w={800} h={800} mr={{ md: "4rem" }}/>
     <Flex direction="column">
       <Text
         marginTop="8rem"
