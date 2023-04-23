@@ -1,5 +1,6 @@
-import { Box, Flex, Image, Text, Button, Heading, Stack} from '@chakra-ui/react';
+import { Box, Flex, Image, Spacer, Text, Button, Icon, Heading} from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReviewList from '../Review/ReviewList';
 
 const SpecialistCard = ({ specialist }) => {
@@ -18,21 +19,10 @@ const SpecialistCard = ({ specialist }) => {
       }
     });
   };
-  const generateStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <Icon
-          key={i}
-          as={StarIcon}
-          w={4}
-          h={4}
-          color={i <= rating ? "yellow.500" : "gray.300"}
-        />
-      );
-    }
-    return stars;
+  const handleDoctorDetailClick = () => {
+    history.push(`/doctor/${specialist.id}`);
   };
+
   
   return (
     <Box  borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg" bg="#F3f3f3">
@@ -91,23 +81,6 @@ const SpecialistCard = ({ specialist }) => {
           <Heading size="md">Reviews:</Heading>
           <ReviewList specialistId={specialist.id} />
         </Box>
-        {/* <Box>
-          Review List 
-          <ReviewList />
-          <Box marginTop='20px'>
-            <Button
-              bg="#48bb78"
-              color="white"
-              borderRadius="5px"
-              padding="10px"
-              width="100%"
-              _hover={{ bg: '#38a169' }}
-              onClick={handleClick2}
-            > 
-              Add a review
-            </Button>
-          </Box>
-        </Box> */}
 
   </Box>
         <Box marginTop='280px'>
@@ -123,9 +96,23 @@ const SpecialistCard = ({ specialist }) => {
             Request an appointment
           </Button>
         </Box>
+        <Box marginTop="280px">
+          <Button
+            as={Link}
+            to={`/doctor/${specialist.id}`}
+            bg="#48bb78"
+            color="white"
+            borderRadius="5px"
+            padding="10px"
+            width="100%"
+            _hover={{ bg: '#38a169' }}
+            onClick={handleDoctorDetailClick}
+          >
+            DOCTOR DETAIL
+          </Button>
+        </Box>
       </Flex>
     </Box>
- 
   );
 };
 

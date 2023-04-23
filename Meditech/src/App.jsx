@@ -9,6 +9,7 @@ import theme from "./theme/themes";
 
 import ReviewForm from "./Components/Review/ReviewForm";
 import ReviewList from "./Components/Review/ReviewList";
+import DoctorDetail from "./Components/DoctorDetail/DoctorDetail";
 
 function App() {
 return(
@@ -20,6 +21,7 @@ return(
           <Switch>
             <Route path={`/auth`} component={AdminLayout} />
             <Route path={`/user`} component={UserLayout} />
+            <Route path="/doctor/:id" component={DoctorDetail} />
             <Redirect from='/' to='/user' />
           </Switch>
         </HashRouter>

@@ -73,6 +73,13 @@ const routes = [
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
     component: singIn,
   },
+  {
+    name: "Reviews",
+    layout: "/user",
+    path: "/reviews",
+    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    component: ReviewList,
+  },
    {
     layout: "/user/payment",
     component: payment,
