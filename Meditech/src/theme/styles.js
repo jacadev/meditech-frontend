@@ -79,10 +79,10 @@ export const globalStyles = {
     },
   },
   styles: {
-    global: (props) => ({
+    global: () => ({
       body: {
         overflowX: "hidden",
-        bg: mode("secondaryGray.300", "navy.900")(props),
+        bg:"#FAFCFE",
         fontFamily: "DM Sans",
         letterSpacing: "-0.5px",
       },

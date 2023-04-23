@@ -13,6 +13,7 @@ import React from "react";
 export default function SidebarDocs() {
   const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
   const borderColor = useColorModeValue("white", "navy.800");
+  const userName = localStorage.getItem("userName");
 
   return (
     <Flex
@@ -54,7 +55,7 @@ export default function SidebarDocs() {
           textAlign='center'
           px='10px'
           mb='14px'>
-        Welcome to Meditech
+        Welcome to Meditech {userName}
         </Text>
         <Text
           fontSize='14px'
