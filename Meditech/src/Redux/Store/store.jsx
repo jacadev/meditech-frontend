@@ -1,11 +1,21 @@
-import {applyMiddleware, createStore, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 import rootReducer from '../Reducer/reducer';
-import thunkMiddleware from 'redux-thunk'
 
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
-const comoposeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(rootReducer,
-    comoposeEnhancer(applyMiddleware(thunkMiddleware)));
+// Combina applyMiddleware y la configuración de Redux DevTools en una sola función usando compose
+const composeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
-export default store;
+export const store = createStore(
+  persistedReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
+export const persistor = persistStore(store);
