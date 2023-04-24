@@ -1,18 +1,7 @@
 import { Image,Card,Icon, CardHeader, CardBody, Flex, SimpleGrid, Box, Text, Button, Heading } from '@chakra-ui/react'
-import { useHistory } from 'react-router-dom';
-
-
-
-
-
-
 
 const cardServices = () => {
-  const history = useHistory();
-
-  function handleClick() {
-    history.push("/user/about-us");
-  }
+ 
   return (
 
     <Box px={40} my={35} >
@@ -109,11 +98,7 @@ const cardServices = () => {
         </Card>
 
       </SimpleGrid>
-      <Flex flexDirection="column" alignItems="center" my={6}>
-    <Text textAlign="center" fontSize="lg" >For more info</Text>
-    <Button bg='#5C43FF' color="white" mt={2} onClick={handleClick} >Contact us</Button>
-    
-  </Flex>
+ 
     </Box>
   
   )

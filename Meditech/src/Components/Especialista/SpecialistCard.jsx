@@ -1,3 +1,11 @@
+// import { Box, Flex, Image, Icon, Text, Button } from '@chakra-ui/react';
+// import { useHistory } from 'react-router-dom';
+// import { BsStarFill, BsStar } from 'react-icons/bs';
+//import { Box, Flex, Image, Icon, Text, Button} from '@chakra-ui/react';
+//import { useHistory } from 'react-router-dom';
+
+
+
 // const StarIcon = ({ filled }) => (
 //   <svg viewBox="0 0 20 20" fill="currentColor" width="1em" height="1em">
 //     <path
@@ -143,7 +151,7 @@ function SpecialistCard(props) {
       w="100%"
     >
       <Box alignItems="center" justifyContent="center" bg="blue.200" h="150px">
-        <Image src={props.specialist.profile_image} alt={props.specialist.id} borderRadius="full" boxSize="100px" />
+        <Image src={props.specialist.profile_image} alt={props.specialist.id} borderRadius="full" boxSize="100px" objectFit="cover"/>
       </Box>
       <Box p="6">
         <Box d="flex" alignItems="baseline">

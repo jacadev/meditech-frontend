@@ -60,7 +60,17 @@ export default function User(props) {
         />
         )
       } 
+  
       if(prop.layout === "/user/signup"){
+        return(
+          <Route
+          path={prop.layout}
+          component={prop.component}
+          key={key}
+        />
+        )
+      } 
+      if(prop.layout === "/user/galeria"){
         return(
           <Route
           path={prop.layout}

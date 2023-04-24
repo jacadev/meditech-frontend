@@ -17,6 +17,9 @@ import Staff from "./Views/user/Staff/index";
 import Reserve from "./Views/user/Reserve/Reserve"
 import singIn from "./Views/user/Sing in";
 import payment from "./Views/user/payment";
+import signup from "./Views/user/Sing up/Index"
+import Gallery from "./Components/GaleriaImg/Gallery"
+
 import ReviewForm from "./Components/Review/ReviewForm";
 import ReviewList from "./Components/Review/ReviewList";
 import DoctorCard from "./Components/DoctorDetail/DoctorCard";
@@ -99,8 +102,14 @@ const routes = [
   },
   {
     layout: "/user/signup",
-    component: SignUp,
-  } 
+    component: signup,
+  },
+     {
+    layout: "/user/galeria",
+    component: Gallery,
+  },
+
+
 
 ];
 
