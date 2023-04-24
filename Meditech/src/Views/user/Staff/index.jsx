@@ -1,167 +1,144 @@
-import { useState, useEffect } from "react";
-import { Box, Text, Button, Flex,Select,Input,SimpleGrid } from "@chakra-ui/react";
-import SpecialistCard from "../../../Components/Especialista/SpecialistCard"
-import SpecialistsData from "../../../Data/DataSpecialist";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Specialists = () => {
+import SpecialistCard from '../../../Components/Especialista/SpecialistCard.jsx';
+
+import { Box, Grid, Select, Text, Button, Badge, Flex } from "@chakra-ui/react";
+
+function Specialists() {
   const [specialists, setSpecialists] = useState([]);
-  const [filterSpecialty, setFilterSpecialty] = useState("");
-  const [filterCity, setFilterCity] = useState("all");
-  const [sort, setSort] = useState("asc");
-  const [sort2, setSort2] = useState("asc");
-  const [searchTerm, setSearchTerm] = useState('');   // ***********************************************
+  const [specialtyFilter, setSpecialtyFilter] = useState("");
+  const [genderFilter, setGenderFilter] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const [sortOrderRating, setSortOrderRating] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
-  
-  const ELEMENTOS_POR_PAGINA = 10;
-  const startIndex = (currentPage - 1) * ELEMENTOS_POR_PAGINA;
-  const endIndex = startIndex + ELEMENTOS_POR_PAGINA;
+  const [specialistsPerPage] = useState(10);
 
   useEffect(() => {
-    // Simulación de llamada a API o método para obtener datos de especialistas y ciudades
-    setSpecialists(SpecialistsData);
+    async function fetchData() {
+      const result = await axios.get("http://localhost:3001/doctors");
+      const dataWithRatings = result.data.map(specialist => ({
+        ...specialist,
+        rating: Math.floor(Math.random() * 5) + 1, // Genera un número aleatorio entre 1 y 5
+      }));
+      setSpecialists(dataWithRatings);
+    }
+    fetchData();
+  
   }, []);
 
+  const handleSpecialtyChange = event => {
+    setSpecialtyFilter(event.target.value);
+    setCurrentPage(1); // Resetear la página al cambiar el filtro de especialidad
+  };
 
+  const handleGenderChange = event => {
+    setGenderFilter(event.target.value);
+    setCurrentPage(1); // Resetear la página al cambiar el filtro de género
+  };
 
-  //  modificar todoeste codigo para que funcione el buscador
-  const filteredSpecialists = specialists
-  .filter(
-    (spec) =>
-      filterSpecialty === "" ? true : spec.specialty === filterSpecialty
-  )
-  .filter((spec) => (filterCity === "all" ? true : spec.city === filterCity))
-  .filter((spec) =>
-    searchTerm === ""
-      ? true
-      : spec.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  //*********************************************** */
-
-
-
-
-  const sortedSpecialists = [...filteredSpecialists].sort((a, b) =>
-    sort === "asc"
-      ? a.consultationFee - b.consultationFee
-      : b.consultationFee - a.consultationFee
-  );
-
-  const sortedRating = [...filteredSpecialists].sort((a, b) =>
-    sort2 === "asc" ? b.rating - a.rating : a.rating - b.rating
-  );
-
-  const handleFilterSpecialtyChange = (e) =>
-    setFilterSpecialty(e.target.value);
-
-  const handleFilterCityChange = (e) => setFilterCity(e.target.value);
-
-  const handleSortClick = () => {
-    if (sort === "asc") {
-      setSort("desc");
-      const sortedDescSpecialists = filteredSpecialists.sort((a, b) => b.consultationFee - a.consultationFee);
-      setSpecialists(sortedDescSpecialists);
+  const handleSortingChange = () => {
+    if (sortOrder === "asc") {
+      setSortOrder("desc");
     } else {
-      setSort("asc");
-      const sortedAscSpecialists = filteredSpecialists.sort((a, b) => a.consultationFee - b.consultationFee);
-      setSpecialists(sortedAscSpecialists);
+      setSortOrder("asc");
     }
   };
 
-  const handleSortClick2 = () => setSort2(sort2 === "asc" ? "desc" : "asc");
+  const handleSortingRatingChange = () => {
+    if (sortOrderRating === "asc") {
+      setSortOrderRating("desc");
+    } else {
+      setSortOrderRating("asc");
+    }
+  };
+
+  const handlePageChange = pageNumber => {
+    setCurrentPage(pageNumber);
+  };
+
+  let filteredSpecialists = [...specialists];
+
+  if (specialtyFilter !== "") {
+    filteredSpecialists = filteredSpecialists.filter(specialist =>
+      specialist.specialties.some(specialty => specialty.specialty === specialtyFilter)
+    );
+  }
+
+  if (genderFilter !== "") {
+    filteredSpecialists = filteredSpecialists.filter(specialist => specialist.person.gender === genderFilter);
+  }
+
+  if (sortOrder === "asc") {
+    filteredSpecialists.sort((a, b) => a.consultation_cost - b.consultation_cost);
+  } else if (sortOrder === "desc") {
+    filteredSpecialists.sort((a, b) => b.consultation_cost - a.consultation_cost);
+  }
+
+  if (sortOrderRating === "asc") {
+    filteredSpecialists.sort((a, b) => a.rating - b.rating);
+  } else if (sortOrderRating === "desc") {
+    filteredSpecialists.sort((a, b) => b.rating - a.rating);
+  }
+
+  const indexOfLastSpecialist = currentPage * specialistsPerPage;
+  const indexOfFirstSpecialist = indexOfLastSpecialist - specialistsPerPage;
+  const currentSpecialists = filteredSpecialists.slice(indexOfFirstSpecialist, indexOfLastSpecialist);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredSpecialists.length / specialistsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <Box  marginTop="100px">
-      <Flex direction="row" flexWrap="wrap" justify="space-between">
-      <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">
-        Filter by specialty:
-        </Text>
-        <Select   bg="#5C43FF" color="white"value={filterSpecialty} onChange={handleFilterSpecialtyChange}>
-          <option value="">All</option>
-          <option value="Cardiología">Cardiología</option>
-          <option value="Dermatología">Dermatología</option>
-          <option value="Ginecología">Ginecología</option>
-          <option value="Medicina General">General medicine</option>
-          <option value="Neurología">Neurología</option>
-          <option value="Nutrición">Nutrición</option>
-          <option value="Odontología">Odontología</option>
-          <option value="Oftalmología">Oftalmologia</option>
-          <option value="Pediatría">Pediatría</option>
-          <option value="Psicología">Psicología</option>
+    <Box mt="5rem">
+      <Box mb={4}>
+        <Select value={specialtyFilter} onChange={handleSpecialtyChange} mb={4}>
+          <option value="">All Specialties</option>
+          {specialists.map(specialist =>
+            specialist.specialties.map(specialty => (
+              <option key={specialty.id} value={specialty.specialty}>
+                {specialty.specialty}
+              </option>
+            ))
+          )}
         </Select>
-      </Box>
-      
-      <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">
-          Filter by city:
-        </Text>
-        <Select  bg="#5C43FF" color="white" value={filterCity} onChange={handleFilterCityChange}>
-          <option value="all">All</option>
-          <option value="Barranquilla">Barranquilla</option>
-          <option value="Bogota">Bogotá</option>
-          <option value="Cali">Cali</option>
-          <option value="Cartagena">Cartagena</option>
-          <option value="Medellin">Medellín</option>
+        <Select value={genderFilter} onChange={handleGenderChange} mb={4}>
+          <option value="">All Genders</option>
+          <option value="Masculino">Male</option>
+          <option value="Femenino">Female</option>
         </Select>
-      </Box>
-      <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">
-        Search for doctors:
-        </Text>
-        <Input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} />
-      </Box>
-
-     
-      <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">
-        Sort by price:
-        </Text>
-        <Button onClick={handleSortClick} bg="#5C43FF" color="white">
-          {sort === "asc" ? "Low to High" : "High to Low"}
+        <Button onClick={handleSortingChange} mb={4} colorScheme="blue">
+          {sortOrder === "" ? "Sort by Price" : sortOrder === "asc" ? "Price Low to High" : "Price High to Low"}
+        </Button>
+        <Button onClick={handleSortingRatingChange} mb={4} colorScheme="blue">
+          {sortOrderRating === "" ? "Sort by Rating" : sortOrderRating === "asc" ? "Rating Low to High" : "Rating High to Low"}
         </Button>
       </Box>
 
-      <Box mb="4">
-        <Text fontSize="lg" fontWeight="bold">
-        Sort by rating:
-        </Text>
-        <Button onClick={handleSortClick2} bg="#5C43FF" color="white">
-          {sort2 === "asc" ? "High to Low" : "Low to High"}
-        </Button>
-      </Box>
-      </Flex>
-   
+      <Grid templateColumns="repeat(2, 1fr)" gap={6} alignItems="start">
+      {currentSpecialists.map(specialist => (
+  <SpecialistCard key={specialist.id} specialist={specialist} />
+))}
 
-<SimpleGrid columns={2} spacing={2} justifyItems="center">
-          {sortedRating.slice(startIndex, endIndex).map((spec) => (
-            <SpecialistCard key={spec.id} specialist={spec} />
+      </Grid>
+      <Flex justifyContent="center" mt={4}>
+        <Box>
+          {pageNumbers.map(pageNumber => (
+            <Button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              colorScheme={currentPage === pageNumber ? "blue" : null}
+              mx={1}
+            >
+              {pageNumber}
+            </Button>
           ))}
-        </SimpleGrid>
-<Box display="flex" justifyContent="center" alignItems="center" >
-        <Button
-          color="white"
-          bg="#5C43FF"
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage(currentPage - 1)}
-        >
-          ↞ Previous page
-        </Button>
-        <Button 
-          color="white"
-          bg="#5C43FF"
-          disabled={endIndex >= sortedRating.length}
-          onClick={() => setCurrentPage(currentPage + 1)}
-        >
-          Next page ↠
-        </Button>
         </Box>
-
+      </Flex>
     </Box>
   );
-};
+}
 
 export default Specialists;

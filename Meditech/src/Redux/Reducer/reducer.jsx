@@ -1,32 +1,51 @@
-import { POST_RESERVE, POST_RESERVE_ERROR } from "../Actions/actions-types";
+import { POST_RESERVE, POST_RESERVE_ERROR } from '../Actions/actions-types';
+import {
+  SIGNIN_USER,
+  SIGNUP_USER,
+  CLEAN_DETAIL,
+} from '../Actions/Actionslogin';
 
 const initialState = {
-    reserva: [],
-    loading: false,
-    error: null,
-  };
-  
-  const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case POST_RESERVE:
-        // En este caso, la acción simplemente devuelve los datos del formulario
-        // como parte del payload. Así que simplemente los guardamos en el estado.
-        return {
-          ...state,
-          reserva: [...state.reserva, action.payload],
-          loading: false,
-          error: null,
-        };
-      case POST_RESERVE_ERROR:
-        return{
-          ...state,
-          reserva: [...state.reserva, action.payload],
-          loading: false,
-          error: action.payload,
-        }
-      default:
-        return state;
-    }
-  };
-  
-  export default rootReducer;
+  reserva: [],
+  loading: false,
+  error: null,
+  userInfo: {},
+};
+
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case POST_RESERVE:
+      return {
+        ...state,
+        reserva: [...state.reserva, action.payload],
+        loading: false,
+        error: null,
+      };
+    case POST_RESERVE_ERROR:
+      return {
+        ...state,
+        reserva: [...state.reserva, action.payload],
+        loading: false,
+        error: action.payload,
+      };
+    case SIGNIN_USER:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+    case SIGNUP_USER:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        userInfo: {},
+      };
+    default:
+      return state;
+  }
+};
+
+export default rootReducer;

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {postReserve} from "./../../Redux/Actions/actions"
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useParams } from "react-router-dom";
+
 
 
 import {
@@ -17,22 +19,28 @@ import {
   Input,
   Textarea,
   Button,
+  Badge,
 } from '@chakra-ui/react';
 
 const FormularioReserva = () => {
+  const { specialistId } = useParams();
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [firstName, setNombres] = useState('');
   const [lastName, setApellidos] = useState('');
+  const [dni, setDni] = useState('');
   const [phone, setTelefono] = useState('');
   const [email, setEmail] = useState('');
   const [comment, setComentario] = useState('');
-  const [date, setFecha] = useState('');
+  const [date, setFecha] = useState(new Date().toISOString().substr(0, 10));
   const [hour, setHora] = useState('');
-  const [dni, setDni] = useState('');
   const [dataTreatment, setConsentimiento] = useState(false);
   const [receiveCommunication, setRecibirComunicaciones] = useState(false);
   const location = useLocation();
-  const { photo, name, specialty, address, consultationFee } = location.state;
-const dispatch = useDispatch()
+  const { id, name, specialties, consultationCost, location: address, profileImage } =
+    location.state;
+  
+  const dispatch = useDispatch()
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -46,27 +54,31 @@ const dispatch = useDispatch()
       hour,
       dataTreatment,
       receiveCommunication
-      
     };
-    dispatch(postReserve(formData)); // Enviamos la acción con los datos del formulario
-   setNombres("")
-   setApellidos("")
-   setTelefono("")
-   setComentario("")
-   setEmail("")
-   setFecha("")
-   setHora("")
-   setDni("")
-   setConsentimiento(false)
-   setRecibirComunicaciones(false)
+  
+    dispatch(postReserve(formData));
+  
+    // Mostrar mensaje de confirmación
+    setShowConfirmation(true);
+    console.log("Información del formulario:", formData);
+    setNombres("");
+    setApellidos("");
+    setTelefono("");
+    setComentario("");
+    setEmail("");
+    setFecha("");
+    setHora("");
+    setDni("");
+    setConsentimiento(false);
+    setRecibirComunicaciones(false); 
   };
   
-   function formatDate(date) {
-     const year = date.getFullYear();
-     const month = ("0" + (date.getMonth() + 1)).slice(-2);
-     const day = ("0" + date.getDate()).slice(-2);
-     return `${year}-${month}-${day}`;
- }
+ //function formatDate(date) {
+  //   const year = date.getFullYear();
+  //   const month = ("0" + (date.getMonth() + 1)).slice(-2);
+  //   const day = ("0" + date.getDate()).slice(-2);
+  //   return `${year}-${month}-${day}`;
+  // }
 
 
   return (
@@ -80,7 +92,7 @@ const dispatch = useDispatch()
         <form onSubmit={handleSubmit}>
         <FormControl id="firstName">
   <FormLabel>Name:</FormLabel>
-  <Input type="text" value={firstName} onChange={(e) => setNombres(e.target.value)} title="Ingrese sus nombres" required />
+  <Input type="text" value={firstName} onChange={(e) => setNombres(e.target.value)} title="Ingrese sus nombres" onFocus={() => setShowConfirmation(false)} required />
 </FormControl>
 
 <FormControl id="lastName">
@@ -131,15 +143,12 @@ const dispatch = useDispatch()
   <Textarea value={comment} onChange={(e) => setComentario(e.target.value)} />
 </FormControl>
 
-{/* <div>
-    <label>Fecha de lanzamiento</label>
-    <input type='date' value={form.release_date ? formatDate(new Date(form.release_date)) : ''} onChange={changeHandler} name='release_date' />
-  </div>
- */}
- <FormControl id="date">
+
+<FormControl id="date">
   <FormLabel>Date:</FormLabel>
-  <Input type="date" value={date ? formatDate(new Date(date)) : ''}  onChange={(e) => setFecha(e.target.value)} required />
-</FormControl> 
+  <Input type="date" value={date} onChange={(e) => setFecha(e.target.value)} required />
+</FormControl>
+
 
 <FormControl id="hour">
   <FormLabel>Hour:</FormLabel>
@@ -186,36 +195,70 @@ I give my consent to the processing of my personal data related to health and it
 
       <Box flex="30%">
         <VStack spacing={6} alignItems="flex-start">
-          <Image
-            src={photo}
-            alt="Foto del especialista"
-          />
+        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+  <Image src={profileImage} alt={name} />
 
-          <Heading as="h2" size="lg">
-            {name}
-          </Heading>
+  <Box p="6">
+    <Box d="flex" alignItems="baseline">
+      <Badge rounded="full" px="2" colorScheme="teal">
+        New
+      </Badge>
+      <Box
+        ml="2"
+        fontSize="2xl"
+        fontWeight="bold"   
+        textAlign="center"
+      >
+        Reserving an appointment with {name}
+      </Box>
+    </Box>
 
-          <Text fontSize="md">{specialty}     </Text>
+    <Box mt="2" lineHeight="tight">
+      <Text fontSize="xl">{specialties.join(", ")}</Text>
+    </Box>
 
-          <Text fontSize="sm">Appointment date: {date}</Text>
-          <Text fontSize="sm">Appointment time: {hour}</Text>
+    <Box d="flex" mt="2" alignItems="center">
+      <Box
+        as="span"
+        color="gray.600"
+        fontSize="md"
+        fontWeight="semibold"
+        mr="2"
+      >
+        Consultation Cost:
+      </Box>
+      <Text fontSize="lg">${consultationCost.toFixed(2)}</Text>
+    </Box>
 
-          <Text fontSize="sm">{address}</Text>
+    <Box d="flex" mt="2" alignItems="center">
+      <Box
+        as="span"
+        color="gray.600"
+        fontSize="md"
+        fontWeight="semibold"
+        mr="2"
+      >
+     
+      </Box>
+      
+    </Box>
+  </Box>
+</Box>
 
-          <Box borderBottom="1px" width="100%" />
-
-          <Text fontSize="sm">$ {consultationFee} </Text>
-          
-
-          <Box borderBottom="1px" width="100%" />
-
-          
+                 
         </VStack>
       </Box>
     </Stack>
+
+    {showConfirmation && (
+      <Box backgroundColor="blue" color="white" p={4} borderRadius="md" mt={4}>
+        Solicitud de cita enviada correctamente.
+      </Box>
+    )}
     </Box>
   );
 };
 
 export default FormularioReserva;
+
 

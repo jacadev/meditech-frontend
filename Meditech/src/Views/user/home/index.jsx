@@ -12,6 +12,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 import Gallery from "../../../Components/GaleriaImg/GaleriaImg"
+import { useDispatch, useSelector } from 'react-redux';
 
 const images = [
     "https://drive.google.com/uc?export=download&id=1oSoNdTsABb0EOOMEgfxCCP55qQFJWE3t",
@@ -23,6 +24,11 @@ export default function SplitScreen() {
   const history = useHistory();
   const userName = localStorage.getItem("userName");
   
+  const userInfo1 = useSelector((state) => state.userInfo);
+  localStorage.setItem('userInfo', JSON.stringify(userInfo1));
+  const userInfoStored = JSON.parse(localStorage.getItem('userInfo'));
+
+
   function handleClick() {
     history.push("/user/about-us");
   }
@@ -49,7 +55,7 @@ export default function SplitScreen() {
             </Text>
             <br />{' '}
             <Text color='#5C43FF' as={'span'}>
-             to Meditech {userName}
+             to Meditech {userName || userInfo1.user_name}
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
