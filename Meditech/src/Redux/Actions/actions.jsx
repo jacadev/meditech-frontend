@@ -1,6 +1,8 @@
 import axios from "axios";
 //conexion entre front y back
-import { POST_RESERVE, POST_RESERVE_ERROR, FETCH_DOCTOR_FAILURE , FETCH_DOCTOR_REQUEST, FETCH_DOCTOR_SUCCESS  } from "./actions-types";
+
+import { GET_DOCTORS, GET_DETAIL } from "./actions-types";
+import { POST_RESERVE, POST_RESERVE_ERROR } from "./actions-types";
 
 export const postReserve = (formData) => {
   return (dispatch) => {
@@ -42,35 +44,33 @@ export const postReserve = (formData) => {
 //   }
 // };
 
-export const fetchDoctorRequest = () => ({
-  type: FETCH_DOCTOR_REQUEST,
-});
-
-export const fetchDoctorSuccess = (doctor) => ({
-  type: FETCH_DOCTOR_SUCCESS,
-  payload: doctor,
-});
-
-export const fetchDoctorFailure = (error) => ({
-  type: FETCH_DOCTOR_FAILURE,
-  payload: error,
-});
-
-// Thunk Action Creator
-export const fetchDoctorById = (id) => {
+export const fetchDoctors = () => {
   return async (dispatch) => {
+    const response = await axios.get(`http://localhost:3001/doctors`);
+    console.log(response.data)
     try {
-      const response = await fetch(`http://localhost:3001/doctors/${id}`);
-      const data = await response.json();
       dispatch({
-        type: 'FETCH_DOCTOR_SUCCESS',
-        payload: data,
-      });
+        type: GET_DOCTORS,
+        payload: response.data
+      })
     } catch (error) {
-      dispatch({
-        type: 'FETCH_DOCTOR_ERROR',
-        payload: error.message,
-      });
+      console.log({message: error.message})
     }
   };
 };
+export const getDetails = (id) =>{
+  if(id) {
+    return async function  (dispatch){
+      try {
+        const response = await axios.get(`http://localhost:3001/doctors/${id}`);
+        console.log(response.data)
+        dispatch({
+          type: GET_DETAIL,
+          payload: response.data,
+        })
+      } catch (error) {
+        console.log({message: error.message})
+      }
+    }
+  }
+}

@@ -19,6 +19,9 @@ import singIn from "./Views/user/Sing in";
 import payment from "./Views/user/payment";
 import ReviewForm from "./Components/Review/ReviewForm";
 import ReviewList from "./Components/Review/ReviewList";
+import DoctorCard from "./Components/DoctorDetail/DoctorCard";
+import DoctorCards from "./Components/DoctorDetail/DoctorCards";
+import SignUp from "./Views/user/Sing up/Index";
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -74,11 +77,21 @@ const routes = [
     component: singIn,
   },
   {
-    name: "Reviews",
+    name: "Doctor Card",
     layout: "/user",
-    path: "/reviews",
+    path: "/doctors/id",
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
-    component: ReviewList,
+    component: DoctorCard,
+    secondary: true,
+  },
+  // <Route exact path="/" component={DoctorCards} />
+  // <Route path="/doctors/:doctorId" component={DoctorCard} />
+  {
+    name: "Doctores",
+    layout: "/user",
+    path: "/doctors",
+    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    component: DoctorCards,
   },
    {
     layout: "/user/payment",
@@ -86,7 +99,7 @@ const routes = [
   },
   {
     layout: "/user/signup",
-    component: signup,
+    component: SignUp,
   } 
 
 ];

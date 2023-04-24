@@ -114,6 +114,8 @@ import {
   UnorderedList,
   ListItem,
   Button,
+  Flex,
+  Heading
 } from "@chakra-ui/react";
 import {Link} from 'react-router-dom';
 
@@ -129,10 +131,6 @@ function SpecialistCard(props) {
     }
     return stars;
   };
-  const handleDoctorDetailClick = () => {
-    history.push(`/doctor/${specialist.id}`);
-  };
-
   
   return (
     <Box
@@ -144,7 +142,6 @@ function SpecialistCard(props) {
       boxShadow="md"
       w="100%"
     >
-      <Flex>
       <Box alignItems="center" justifyContent="center" bg="blue.200" h="150px">
         <Image src={props.specialist.profile_image} alt={props.specialist.id} borderRadius="full" boxSize="100px" />
       </Box>
@@ -156,9 +153,6 @@ function SpecialistCard(props) {
           <Text ml="2" textTransform="uppercase" fontSize="sm" fontWeight="bold" letterSpacing="wide">
             {props.specialist.specialties.map(specialty => specialty.specialty).join(", ")}
           </Text>
-          <Box mt={4}>
-          <Heading size="md">Reviews:</Heading>
-          <ReviewList specialistId={specialist.id} />
         </Box>
      
         <Box marginTop='280px'>
@@ -204,8 +198,6 @@ function SpecialistCard(props) {
           </Box>
         )}
       </Box>
-    </Box>
-    </Flex>
     </Box>
   );
 }

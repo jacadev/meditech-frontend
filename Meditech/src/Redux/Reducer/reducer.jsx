@@ -1,4 +1,4 @@
-import { POST_RESERVE, POST_RESERVE_ERROR } from '../Actions/actions-types';
+import { POST_RESERVE, POST_RESERVE_ERROR, GET_DOCTORS, GET_DETAIL  } from '../Actions/actions-types';
 import {
   SIGNIN_USER,
   SIGNUP_USER,
@@ -8,9 +8,10 @@ import {
 const initialState = {
   reserva: [],
   reviews: [],
-  doctor: {},
+  detail: [],
+  doctors: [],
   loading: false,
-  error: null,
+  error: '',
   userInfo: {},
 };
 
@@ -45,25 +46,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userInfo: {},
       };
-      case FETCH_DOCTOR_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-      case FETCH_DOCTOR_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          doctor: action.payload,
-          error: "",
-        };
-      case FETCH_DOCTOR_FAILURE:
-        return {
-          ...state,
-          loading: false,
-          doctor: {},
-          error: action.payload,
-        };
+    case GET_DOCTORS:
+    return{
+        ...state,
+        doctors: action.payload
+    }
+    case GET_DETAIL:
+      return {
+        ...state,
+        detail: action.payload,
+      };
     default:
       return state;
   }
