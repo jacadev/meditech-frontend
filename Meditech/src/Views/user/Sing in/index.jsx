@@ -86,7 +86,7 @@ function SignIn() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (input.email && input.password && !userInfo) {
+    if (input.email && input.password && userInfo) {
       dispatch(userInfo(input));
       setInput({ email: '', password: '' });
       history.push('/admin/default');
