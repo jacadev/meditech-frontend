@@ -1,2 +1,3 @@
 export const POST_RESERVE = "POST_RESERVE";
 export const POST_RESERVE_ERROR = "POST_RESERVE_ERROR";
+export const FORM_DATA = "FORM_DATA";

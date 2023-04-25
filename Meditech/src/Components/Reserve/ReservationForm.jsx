@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import {postReserve} from "./../../Redux/Actions/actions"
-import { useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom";
+//import {postReserve} from "./../../Redux/Actions/actions"
+import { useDispatch,useSelector } from 'react-redux'
+//import { useParams } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
-
-
+import { enviarObjetoDeEstado } from "./../../Redux/Actions/actions"
 import {
   Box,
   Stack,
@@ -23,7 +23,7 @@ import {
 } from '@chakra-ui/react';
 
 const FormularioReserva = () => {
-  const { specialistId } = useParams();
+ // const { specialistId } = useParams();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [firstName, setNombres] = useState('');
   const [lastName, setApellidos] = useState('');
@@ -36,31 +36,36 @@ const FormularioReserva = () => {
   const [dataTreatment, setConsentimiento] = useState(false);
   const [receiveCommunication, setRecibirComunicaciones] = useState(false);
   const location = useLocation();
-  const { id, name, specialties, consultationCost, location: address, profileImage } =
+  const { id, name, specialties, consultationCost, location: address, profileImage, disponibilties } =
     location.state;
-  
+  const history = useHistory();
   const dispatch = useDispatch()
+  const userInfo = useSelector(state=>state.userInfo.id)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = {
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      comment,
-      date,
-      hour,
-      dataTreatment,
-      receiveCommunication
+
+
+//console.log(userInfo)
+  const handleSubmit =  (e) => {
+/*     e.preventDefault(); */
+const formData = {
+      patient_id:userInfo,
+      date:disponibilties[0].date,
+      disponibilty_id:disponibilties[0].id,
+      consultationReason:comment,
+      preload:false,
+      consultationCost
+
     };
   
-    dispatch(postReserve(formData));
-  
+    //console.log(formData)
+     dispatch(enviarObjetoDeEstado(formData));
+    history.push("/user/payment");
     // Mostrar mensaje de confirmación
     setShowConfirmation(true);
-    console.log("Información del formulario:", formData);
+    /* console.log("Información del formulario:", formData); */
+    
+    
+    
     setNombres("");
     setApellidos("");
     setTelefono("");
@@ -73,12 +78,6 @@ const FormularioReserva = () => {
     setRecibirComunicaciones(false); 
   };
   
- //function formatDate(date) {
-  //   const year = date.getFullYear();
-  //   const month = ("0" + (date.getMonth() + 1)).slice(-2);
-  //   const day = ("0" + date.getDate()).slice(-2);
-  //   return `${year}-${month}-${day}`;
-  // }
 
 
   return (
@@ -90,7 +89,7 @@ const FormularioReserva = () => {
      
       >
         <form onSubmit={handleSubmit}>
-        <FormControl id="firstName">
+     {/*    <FormControl id="firstName">
   <FormLabel>Name:</FormLabel>
   <Input type="text" value={firstName} onChange={(e) => setNombres(e.target.value)} title="Ingrese sus nombres" onFocus={() => setShowConfirmation(false)} required />
 </FormControl>
@@ -136,7 +135,7 @@ const FormularioReserva = () => {
 <FormControl id="email">
   <FormLabel>Email:</FormLabel>
   <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-</FormControl>
+</FormControl> */}
 
 <FormControl id="comment">
   <FormLabel>Comment for the specialist (optional):</FormLabel>
@@ -144,15 +143,17 @@ const FormularioReserva = () => {
 </FormControl>
 
 
-<FormControl id="date">
+
   <FormLabel>Date:</FormLabel>
-  <Input type="date" value={date} onChange={(e) => setFecha(e.target.value)} required />
-</FormControl>
+  {disponibilties[0].date}
+
 
 
 <FormControl id="hour">
   <FormLabel>Hour:</FormLabel>
-  <Input type="time" value={hour} onChange={(e) => setHora(e.target.value)} required />
+    {disponibilties[0].timetable.startTime}
+    <hr/>
+    <br />
 </FormControl>
 
 
@@ -211,12 +212,15 @@ I give my consent to the processing of my personal data related to health and it
       >
         Reserving an appointment with {name}
       </Box>
+       <Box>
+  {/*  <Text>{disponibilties[0].date} aacacaca</Text>   */}
+    </Box> 
     </Box>
 
     <Box mt="2" lineHeight="tight">
       <Text fontSize="xl">{specialties.join(", ")}</Text>
     </Box>
-
+  
     <Box d="flex" mt="2" alignItems="center">
       <Box
         as="span"
