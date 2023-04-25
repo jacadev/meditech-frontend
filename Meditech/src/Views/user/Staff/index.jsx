@@ -13,7 +13,7 @@ function Specialists() {
   const [sortOrderRating, setSortOrderRating] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [specialistsPerPage] = useState(10);
+  const [specialistsPerPage] = useState(4);
 
   useEffect(() => {
     async function fetchData() {
@@ -23,9 +23,9 @@ function Specialists() {
         rating: Math.floor(Math.random() * 5) + 1, // Genera un número aleatorio entre 1 y 5
       }));
       setSpecialists(dataWithRatings);
+    
     }
     fetchData();
-  
   }, []);
 
   const handleSpecialtyChange = event => {

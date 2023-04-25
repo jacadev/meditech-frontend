@@ -12,11 +12,11 @@ import {
 const Reserve = () => {
   const location = useLocation();
 
-  const { photo, name, specialty, address, consultationFee } = location.state;
+  const { photo, name, specialty, address, consultationFee,disponibilties} = location.state;
 
   return (
     <FormularioReserva
-      specialist={{ photo, name, specialty, address, consultationFee }}
+      specialist={{ photo, name, specialty, address, consultationFee, disponibilties}}
     />
   );
 };
