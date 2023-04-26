@@ -13,7 +13,7 @@ function Specialists() {
   const [sortOrderRating, setSortOrderRating] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [specialistsPerPage] = useState(4);
+  const [specialistsPerPage] = useState(6);
 
   useEffect(() => {
     async function fetchData() {
@@ -95,7 +95,7 @@ function Specialists() {
     <Box mt="5rem">
       <Box mb={4}>
         <Select value={specialtyFilter} onChange={handleSpecialtyChange} mb={4}>
-          <option value="">All Specialties</option>
+          <option value="">Todas las Especialidades</option>
           {specialists.map(specialist =>
             specialist.specialties.map(specialty => (
               <option key={specialty.id} value={specialty.specialty}>
@@ -105,9 +105,9 @@ function Specialists() {
           )}
         </Select>
         <Select value={genderFilter} onChange={handleGenderChange} mb={4}>
-          <option value="">All Genders</option>
-          <option value="Masculino">Male</option>
-          <option value="Femenino">Female</option>
+          <option value="">Todos los Generos</option>
+          <option value="Masculino">Hombre</option>
+          <option value="Femenino">Mujer</option>
         </Select>
         <Button onClick={handleSortingChange} mb={4} colorScheme="blue">
           {sortOrder === "" ? "Sort by Price" : sortOrder === "asc" ? "Price Low to High" : "Price High to Low"}

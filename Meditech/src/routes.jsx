@@ -19,6 +19,8 @@ import singIn from "./Views/user/Sing in";
 import payment from "./Views/user/payment";
 import signup from "./Views/user/Sing up/Index"
 import Gallery from "./Components/GaleriaImg/Gallery"
+import paymentProcess from "./Components/PaymentProcess/paymentProcess";
+import Detail from "./Views/user/Deatails/detail";
 
 
 // Auth Imports
@@ -26,14 +28,14 @@ import Gallery from "./Components/GaleriaImg/Gallery"
 
 const routes = [
   {
-    name: "Home",
+    name: "Inicio",
     layout: "/user",
     path: "/home",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: Home,
   },
   {
-    name: "Services",
+    name: "Servicios",
     layout: "/user",
     path: "/services",
     icon: (
@@ -48,14 +50,14 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Staff",
+    name: "Personal Medico",
     layout: "/user",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     path: "/staff",
     component: Staff,
   },
   {
-    name: "About us",
+    name: "Quienes Somos",
     layout: "/user",
     path: "/about-us",
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
@@ -68,7 +70,7 @@ const routes = [
 
   },
   {
-    name: "Sing in",
+    name: "Iniciar Sesión",
     layout: "/user",
     path: "/sing-in",
     icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
@@ -83,8 +85,13 @@ const routes = [
     component: signup,
   },
      {
-    layout: "/user/galeria",
-    component: Gallery,
+    layout: "/user/paymentprocess",
+    component: paymentProcess,
+  },
+  {
+    name: 'Detalles del Medico',
+    layout: "/user/detail/:id",
+    component: Detail,
   },
 
 

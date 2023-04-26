@@ -34,9 +34,11 @@ function SpecialistCard(props) {
       boxShadow="md"
       w="100%"
     >
+      <Link to={{pathname: `/user/detail/${props.specialist.id}`}}>
       <Box alignItems="center" justifyContent="center" bg="blue.200" h="150px">
         <Image src={props.specialist.profile_image} alt={props.specialist.id} borderRadius="full" boxSize="100px" objectFit="cover"/>
       </Box>
+      </Link>
       <Box p="6">
         <Box d="flex" alignItems="baseline">
           <Badge borderRadius="full" px="2" colorScheme="teal">

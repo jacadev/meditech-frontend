@@ -26,8 +26,8 @@ export default function Marketplace() {
       >
         <Flex alignItems="center" justifyContent="space-between">
          
-          <Text color="white" fontWeight="bold" fontSize="lg">Are you ready for a consultation?</Text>
-          <Text color="white" fontSize="lg">Your treatment will be performed by licensed doctors. Schedule your appointment now!</Text>
+          <Text color="white" fontWeight="bold" fontSize="lg">Estás listo para una consulta?</Text>
+          <Text color="white" fontSize="lg">Su tratamiento será realizado por médicos autorizados. ¡Agenda tu cita ahora!</Text>
         </Flex>
       </Box>
       
@@ -35,8 +35,8 @@ export default function Marketplace() {
 
         <Contador/>
         <Flex flexDirection="column" alignItems="center" my={6}>
-    <Text textAlign="center" fontSize="lg" >For more info</Text>
-    <Button bg='#5C43FF' color="white" mt={2} onClick={handleClick} >Contact us</Button>
+    <Text textAlign="center" fontSize="lg" >Para mas Informacion</Text>
+    <Button bg='#5C43FF' color="white" mt={2} onClick={handleClick} >Contacta con nosotros</Button>
     
   </Flex>
         

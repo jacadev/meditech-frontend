@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux'
 //import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
-
+import PayPalCheckout from '../../Views/user/payment/index'
 import { enviarObjetoDeEstado } from "./../../Redux/Actions/actions"
 import {
   Box,
@@ -54,16 +54,13 @@ const formData = {
       consultationReason:comment,
       preload:false,
       consultationCost
-
     };
-  
-    //console.log(formData)
      dispatch(enviarObjetoDeEstado(formData));
     history.push("/user/payment");
     // Mostrar mensaje de confirmación
-    setShowConfirmation(true);
-    /* console.log("Información del formulario:", formData); */
-    
+ /*    setShowConfirmation(true);
+    console.log("Información del formulario:", formData); 
+
     
     
     setNombres("");
@@ -75,7 +72,7 @@ const formData = {
     setHora("");
     setDni("");
     setConsentimiento(false);
-    setRecibirComunicaciones(false); 
+    setRecibirComunicaciones(false);  */
   };
   
 
@@ -85,57 +82,9 @@ const formData = {
     <Box marginTop="100px">
     <Stack direction="row" spacing={1} alignItems="flex-start">
       <Box flex="70%">
-      <Box
-     
-      >
+      <Box>
         <form onSubmit={handleSubmit}>
-     {/*    <FormControl id="firstName">
-  <FormLabel>Name:</FormLabel>
-  <Input type="text" value={firstName} onChange={(e) => setNombres(e.target.value)} title="Ingrese sus nombres" onFocus={() => setShowConfirmation(false)} required />
-</FormControl>
 
-<FormControl id="lastName">
-  <FormLabel>last name:</FormLabel>
-  <Input type="text" value={lastName} onChange={(e) => setApellidos(e.target.value)} title="Ingrese sus apellidos" required />
-</FormControl>
-
-<FormControl id="dni">
-  <FormLabel>DNI:</FormLabel>
-  <Input 
-    type="number" 
-    value={dni} 
-    onChange={(e) => setDni(e.target.value)} 
-    onKeyDown={(evt) =>
-      ['e', 'E', '+', '-', '.'].includes(evt.key) && evt.preventDefault()
-    }
-    max={99999999}
-    title="Ingrese su Identificacion"
-    required
-  />
-</FormControl>
-
-<FormControl id="phone">
-  <FormLabel>Phone:</FormLabel>
-  <Input 
-    type="tel" 
-    value={phone} 
-    maxLength={10}
-    onChange={(e) => setTelefono(e.target.value)}
-    onKeyPress={(event) => {
-      if (!/[0-9]/.test(event.key)) {
-        event.preventDefault();
-      }
-    }}
-    pattern="[0-9]*"
-    title="Ingrese solo números."
-    required
-  />
-</FormControl>
-
-<FormControl id="email">
-  <FormLabel>Email:</FormLabel>
-  <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-</FormControl> */}
 
 <FormControl id="comment">
   <FormLabel>Comment for the specialist (optional):</FormLabel>
@@ -189,6 +138,7 @@ I give my consent to the processing of my personal data related to health and it
        Request an Appointment
       </Button>
           </div>
+
           
         </form>
         </Box>
@@ -212,9 +162,7 @@ I give my consent to the processing of my personal data related to health and it
       >
         Reserving an appointment with {name}
       </Box>
-       <Box>
-  {/*  <Text>{disponibilties[0].date} aacacaca</Text>   */}
-    </Box> 
+
     </Box>
 
     <Box mt="2" lineHeight="tight">
