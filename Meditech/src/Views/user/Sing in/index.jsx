@@ -124,7 +124,7 @@ function SignIn() {
       >
         <Box me="auto">
           <Heading color={textColor} fontSize="36px" mb="10px">
-            Sign In
+            Sing In
           </Heading>
           <Text
             mb="36px"
@@ -133,7 +133,7 @@ function SignIn() {
             fontWeight="400"
             fontSize="md"
           >
-            Enter your email and password to sign in!
+            Enter your email and password to sing in!
           </Text>
         </Box>
         <Flex
@@ -257,7 +257,7 @@ function SignIn() {
               h="50"
               mb="24px"
             >
-              Sign In
+              Sing In
             </Button>
           </form>
 
