@@ -26,22 +26,22 @@ function Contador2() {
       <Box display="flex" flexDirection="column" alignItems="center" margin='40px'>
         <Icon as={MdPerson} width='50px' height='50px' color='white' />
         <Contador limite={100} />
-        <Text style={contadorStyles}>PATIENTS TREATED</Text>
+        <Text style={contadorStyles}>PACIENTES TRATADOS</Text>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center"margin='40px'>
         <Icon as={MdPeople} width='50px' height='50px' color='white' />
         <Contador limite={30} />
-        <Text style={contadorStyles}>PARAMEDIC TEAMS</Text>
+        <Text style={contadorStyles}>EQUIPOS PARAMÉDICOS</Text>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center"margin='40px'>
         <Icon as={MdLocalHospital} width='50px' height='50px' color='white' />
         <Contador limite={40} />
-        <Text style={contadorStyles}>DOCTORS</Text>
+        <Text style={contadorStyles}>DOCTORES</Text>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center"margin='40px'>
         <Icon as={MdStar} width='50px' height='50px' color='white' />
         <Contador limite={150} />
-        <Text style={contadorStyles}>MEDICAL AWARDS</Text>
+        <Text style={contadorStyles}>PREMIOS MÉDICOS</Text>
       </Box>
     </Grid>
       </Box>

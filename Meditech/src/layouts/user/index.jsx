@@ -1,5 +1,5 @@
 // Chakra imports
-import { Portal, Box, useDisclosure } from "@chakra-ui/react";
+import { Portal, Box} from "@chakra-ui/react";
 import Footer from "../../Components/footer/FooterUser"
 // Layout components
 import Navbar from "../../Components/navbar/NavbarAdmin.jsx";
@@ -31,56 +31,35 @@ export default function User(props) {
     }
     
   
-  const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/user") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
-      }
-      if(prop.layout === "/user/reserve"){
-        return(
-          <Route
-          path={prop.layout}
-          component={prop.component}
-          key={key}
-        />
-        )
-      }
-      if(prop.layout === "/user/payment"){
-        return(
-          <Route
-          path={prop.layout}
-          component={prop.component}
-          key={key}
-        />
-        )
-      } 
-  
-      if(prop.layout === "/user/signup"){
-        return(
-          <Route
-          path={prop.layout}
-          component={prop.component}
-          key={key}
-        />
-        )
-      } 
-      if(prop.layout === "/user/galeria"){
-        return(
-          <Route
-          path={prop.layout}
-          component={prop.component}
-          key={key}
-        />
-        )
-      } 
-    });
-  };
+    const getRoutes = (routes) => {
+      return routes.map((prop, key) => {
+        const { layout, path, component } = prop;
+        switch (layout) {
+          case "/user":
+            return (
+              <Route
+              path={layout + path}
+              component={component}
+              key={key}
+              />
+              );
+          case "/user/detail/:id":
+          case "/user/reserve":
+          case "/user/payment":
+          case "/user/signup":
+          case "/user/paymentprocess":
+            return (
+              <Route
+                path={layout}
+                component={component}
+                key={key}
+              />
+            );
+          default:
+            return null;
+        }
+      });
+    };
  
  
   return (

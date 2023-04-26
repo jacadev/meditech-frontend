@@ -1,4 +1,4 @@
-import { POST_RESERVE, POST_RESERVE_ERROR,FORM_DATA } from '../Actions/actions-types';
+import { POST_RESERVE, POST_RESERVE_ERROR,FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID } from '../Actions/actions-types';
 import {
   SIGNIN_USER,
   SIGNUP_USER,
@@ -10,7 +10,8 @@ const initialState = {
   loading: false,
   error: null,
   userInfo: {},
-  objeto:{}
+  objeto:{},
+  doctorDetail: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -49,6 +50,16 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           objeto: action.payload,
         };
+        case GET_DOCTOR: 
+        return {
+          ...state,
+          doctorDetail: action.payload
+        };
+      case CLEAN_DATAIL_ID:
+        return {
+          ...state,
+          doctorDetail: {}
+        }
     default:
       return state;
   }

@@ -15,9 +15,9 @@ import Gallery from "../../../Components/GaleriaImg/GaleriaImg"
 import { useDispatch, useSelector } from 'react-redux';
 
 const images = [
-    "https://drive.google.com/uc?export=download&id=1oSoNdTsABb0EOOMEgfxCCP55qQFJWE3t",
-    "https://drive.google.com/uc?export=download&id=1HTOKawhzXLyGzGrBpUqglPoBe7i2WMve",
-    "https://drive.google.com/uc?export=download&id=12i_JxcUGGKRf5exPDD7_im7B6mj-leXe",
+    "https://i.imgur.com/C94Q3A5.jpg",
+    "https://i.imgur.com/fZWvzc3.jpg",
+    "https://i.imgur.com/tF4fOjj.jpg",
   ];
 
 export default function SplitScreen() {
@@ -51,15 +51,15 @@ export default function SplitScreen() {
                 bg:'#5C43FF',
                 zIndex: -1,
               }}>
-             Welcome
+             Bienvenido
             </Text>
             <br />{' '}
             <Text color='#5C43FF' as={'span'}>
-             to Meditech {userName || userInfo1.user_name}
+             a Meditech {userName || userInfo1.user_name}
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-           We are an institution that stands out for the excellence it grants in all its benefits.
+          Somos una institución que se destaca por la excelencia que otorga en todos sus beneficios.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button 
@@ -70,7 +70,7 @@ export default function SplitScreen() {
               _hover={{
                 bg: '#5C43FF',
               }}>
-             More about us
+             Más acerca de nosotros
             </Button>
          {/*    <Button rounded={'full'}>How It Works</Button> */}
           </Stack>
