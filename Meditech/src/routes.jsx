@@ -20,10 +20,8 @@ import payment from "./Views/user/payment";
 import signup from "./Views/user/Sing up/Index"
 import Gallery from "./Components/GaleriaImg/Gallery"
 
-import ReviewForm from "./Components/Review/ReviewForm";
-import ReviewList from "./Components/Review/ReviewList";
-import DoctorCard from "./Components/DoctorDetail/DoctorCard";
-import DoctorCards from "./Components/DoctorDetail/DoctorCards";
+import DoctorCard from "./Components/DoctorDetail/DoctorCard"
+
 import SignUp from "./Views/user/Sing up/Index";
 
 // Auth Imports
@@ -80,21 +78,8 @@ const routes = [
     component: singIn,
   },
   {
-    name: "Doctor Card",
-    layout: "/user",
-    path: "/doctors/id",
-    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    layout: "/user/doctors/:doctorId",
     component: DoctorCard,
-    secondary: true,
-  },
-  // <Route exact path="/" component={DoctorCards} />
-  // <Route path="/doctors/:doctorId" component={DoctorCard} />
-  {
-    name: "Doctores",
-    layout: "/user",
-    path: "/doctors",
-    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
-    component: DoctorCards,
   },
    {
     layout: "/user/payment",

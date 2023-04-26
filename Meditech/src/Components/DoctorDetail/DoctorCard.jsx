@@ -1,25 +1,24 @@
 import { Box, Image, Text, Badge, SimpleGrid, Stack, Divider, VStack, HStack } from '@chakra-ui/react';
-import { useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { fetchDoctors, getDetails } from '../../Redux/Actions/actions';
 
 const DoctorCard = () => {
-  const doctors = useSelector(state => state.doctors);
-  console.log(doctors)
+  // const doctors = useSelector(state => state.doctors);
   const { id } = useParams();
-
-  useEffect(() => {
-    axios.get(`http://localhost:3001/doctors/${id}`)
-      .then((response) => {
-        console.log(response.data)
-      })
-  }, [id]);
+  // useEffect(async () =>   {
+  //   // doctors = await axios.get(`http://localhost:3001/doctors/${id}`)
+  //   //   .then((response) => {
+  //   //     console.log(response.data)
+  //   //   })
+  //   }, []);
+    console.log(id)
 
 return(
-  <div>
-      
-        <Box maxW="80%" borderWidth="1px" borderRadius="lg" overflow="hidden">
+  <div> <Box>HOLA</Box>
+        {/* <Box maxW="80%" borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Image maxW="20em" src={doctors.profile_image}  />
             <Box p="6">
               <Stack spacing="4">
@@ -91,7 +90,7 @@ return(
                 </VStack>
               </Stack>
             </Box>
-          </Box>
+          </Box> */}
   </div>
   );
 }

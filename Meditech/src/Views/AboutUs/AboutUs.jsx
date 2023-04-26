@@ -158,6 +158,6 @@ export default function AboutUs() {
             </Modal>
           </>
       </GridItem>
-    // </Grid>
+  //  </Grid>
   );
 }
