@@ -6,11 +6,11 @@ import { POST_RESERVE, POST_RESERVE_ERROR, FORM_DATA } from "./actions-types";
 
 export const enviarObjetoDeEstado = (objeto) => {
 // actions.js
-
   return {
     type:FORM_DATA,
     payload: objeto
   }
+}
 
 
 // export const addReview = (comment, rating, patient_id, doctor_id) => {
@@ -39,21 +39,6 @@ export const enviarObjetoDeEstado = (objeto) => {
     
 //   }
 // };
-
-export const fetchDoctors = () => {
-  return async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/doctors`);
-    console.log(response.data)
-    try {
-      dispatch({
-        type: GET_DOCTORS,
-        payload: response.data
-      })
-    } catch (error) {
-      console.log({message: error.message})
-    }
-  };
-};
 
 // export const addReview = (comment, rating, patient_id, doctor_id) => {
 //   return async (dispatch) => {
