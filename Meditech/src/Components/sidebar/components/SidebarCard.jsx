@@ -9,12 +9,19 @@ import {
 import logoWhite from "./../../../assets/img/layout/logoWhite.png";
 import citaIcono from "./../../../assets/img/layout/cita.png"
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function SidebarDocs() {
+  const userInfo = useSelector((state) => state.userInfo);
   const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
   const borderColor = useColorModeValue("white", "navy.800");
   const userName = localStorage.getItem("userName");
+  const history = useHistory();
 
+  function handleClick() {
+    history.push('/user/signin');
+  }
   return (
     <Flex
       justify='center'
@@ -55,7 +62,7 @@ export default function SidebarDocs() {
           textAlign='center'
           px='10px'
           mb='14px'>
-        Welcome to Meditech {userName}
+        Welcome to Meditech {userInfo.user_name}
         </Text>
         <Text
           fontSize='14px'
@@ -79,6 +86,24 @@ export default function SidebarDocs() {
           mx='auto'>
           Request an appointment
         </Button>
+      </Link>
+      <Link>
+      {!userInfo.id && (
+        <Button
+          bg="whiteAlpha.300"
+          _hover={{ bg: "whiteAlpha.200" }}
+          _active={{ bg: "whiteAlpha.100" }}
+          mb={{ sm: "16px", xl: "24px" }}
+          color={"white"}
+          fontWeight="regular"
+          fontSize="sm"
+          minW="185px"
+          mx="auto"
+          onClick={handleClick}
+        >
+          Inicio de sesión
+        </Button>
+      )}
       </Link>
     </Flex>
   );

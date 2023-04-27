@@ -21,9 +21,7 @@ const images = [
   ];
 
 export default function SplitScreen() {
-  const history = useHistory();
-  const userName = localStorage.getItem("userName");
-  
+  const history = useHistory(); 
   const userInfo1 = useSelector((state) => state.userInfo);
   localStorage.setItem('userInfo', JSON.stringify(userInfo1));
   const userInfoStored = JSON.parse(localStorage.getItem('userInfo'));
@@ -55,7 +53,7 @@ export default function SplitScreen() {
             </Text>
             <br />{' '}
             <Text color='#5C43FF' as={'span'}>
-             a Meditech {userName || userInfo1.user_name}
+             a Meditech {userInfo1.user_name}
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
