@@ -69,6 +69,7 @@ const routes = [
     component: Reserve,
   },
   {
+
     layout: '/user/signin',
     component: singIn,
   },

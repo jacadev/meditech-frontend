@@ -6,7 +6,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import logoWhite from "./../../../assets/img/layout/logoWhite.png";
 import citaIcono from "./../../../assets/img/layout/cita.png"
 import React from "react";
 import { useHistory } from "react-router-dom";
@@ -16,12 +15,14 @@ export default function SidebarDocs() {
   const userInfo = useSelector((state) => state.userInfo);
   const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
   const borderColor = useColorModeValue("white", "navy.800");
+
   const userName = localStorage.getItem("userName");
   const history = useHistory();
 
   function handleClick() {
     history.push('/user/signin');
   }
+
   return (
     <Flex
       justify='center'
@@ -62,16 +63,20 @@ export default function SidebarDocs() {
           textAlign='center'
           px='10px'
           mb='14px'>
+
         Welcome to Meditech {userInfo.user_name}
+
+       Solicita una cita ahora mismo
+
         </Text>
-        <Text
+       {/*  <Text
           fontSize='14px'
           color={"white"}
           px='10px'
           mb='14px'
           textAlign='center'>
-        Request an appointment right now
-        </Text>
+       Solicita una cita ahora mismo
+        </Text> */}
       </Flex>
       <Link>
         <Button
@@ -84,7 +89,7 @@ export default function SidebarDocs() {
           fontSize='sm'
           minW='185px'
           mx='auto'>
-          Request an appointment
+         Pedir una cita
         </Button>
       </Link>
       <Link>
