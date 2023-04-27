@@ -91,10 +91,13 @@ const formData = {
   <Textarea value={comment} onChange={(e) => setComentario(e.target.value)} />
 </FormControl>
 
-
+ 
+ 
 
   <FormLabel>Date:</FormLabel>
   {disponibilties[0].date}
+
+
 
 
 

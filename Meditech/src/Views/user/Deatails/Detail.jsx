@@ -1,11 +1,24 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import { cleanDetail, getDoctor } from "../../../Redux/Actions/actions";
+import { BsStarFill, BsStar } from 'react-icons/bs';
 import Review from "../../../Components/reviews/Review";
+import {
+    Box,
+    Heading,
+    Image,
+    Text,
+    VStack,
+    Divider,
+    Badge,
+    Wrap,
+    WrapItem,
+    HStack
+} from "@chakra-ui/react";
 
 const Detail = () => {
-    const {id} = useParams();
+    const { id } = useParams();
 
     const dispatch = useDispatch();
 
@@ -15,53 +28,110 @@ const Detail = () => {
     useEffect(() => {
         dispatch(getDoctor(id))
         return () => dispatch(cleanDetail())
-    },[id])
-    console.log('estoy en detail', id);
+    }, [id])
+    console.log('estoy en detail', doctor);
+    const renderStars = rating => {
+        const stars = [];
+        for (let i = 0; i < 5; i++) {
+          if (i < rating) {
+            stars.push(<BsStarFill key={i} color="yellow" />);
+          } else {
+            stars.push(<BsStar key={i} color="yellow" />);
+          }
+        }
+        return stars;
+      };
     return (
-        <div >
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+        <Box marginTop="100px" marginLeft='250px' marginRight='250px'>
+            <HStack>
+                <Image
+                    borderRadius='10px'
+                    src={doctor.profile_image}
+                    alt={doctor.person?.firstName}
+                    maxW="30%"// Tamaño de la imagen
+                    mr={4} // Margen a la derecha para separar la imagen del texto
+                />
+                <VStack align="stretch">
+                    <Box >
+                        <Heading>
+                            {doctor.person?.firstName} {doctor.person?.lastName}
+                        </Heading>
+                        <Divider />
+                    </Box>
 
-            <h1>Name: {doctor.person?.firstName} {doctor.person?.lastName}</h1><hr/>
-            
-            
-            <div>
-                <img src={doctor.profile_image} alt={doctor.person?.firstName}/>
-            </div>
-            
-            <div>
-                <h3>about_me:</h3>
-                <p>{doctor?.about_me}</p><hr/>
-                
-                <h3>consultation_cost:</h3>
-                <p>{doctor?.consultation_cost}</p><hr/>
-                
-                <h3>diseases_treated:</h3>
-                <p>{doctor?.diseases_treated && doctor.diseases_treated.map(diseases => <>{diseases} </>)}</p><hr/>
-                
-                <h3>tuition_code:</h3>
-                <p>{doctor?.tuition_code}</p><hr/>
+                    <Box>
+                        <Text>{doctor?.about_me}</Text>
+                    </Box>
+                    <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>{renderStars(doctor.rating)}</span>
+                    <Box>
+                        <Text fontSize="lg" fontWeight="bold">
+                            Precio de la consulta:
+                        </Text>
+                        <Text>{doctor?.consultation_cost}</Text>
+                    </Box>
 
-                <h3>specialties:</h3>
-                <p>{doctor.specialties?.map(specialty => <>{specialty.specialty} </>)}</p><hr/>
+                    <Box>
+                        <Text fontSize="lg" fontWeight="bold">
+                            Enfermedades Tratadas:
+                        </Text>
+                        <Wrap>
+                            {doctor?.diseases_treated &&
+                                doctor.diseases_treated.map((disease) => (
+                                    <WrapItem key={disease}>
+                                        <Badge>{disease}</Badge>
+                                    </WrapItem>
+                                ))}
+                        </Wrap>
+                    </Box>
 
-                <h3>reviews:</h3>
-                <div>{doctor.reviews?.map(obj => <div>usuario: {obj.patient.person.first_name} {obj.patient.person.last_name} comment: {obj.comment} rating: {obj.rating}<br></br></div>)}</div><hr/>
+                    <Box>
+                        <Text fontSize="lg" fontWeight="bold">
+                            Código de matrícula:
+                        </Text>
+                        <Text>{doctor?.tuition_code}</Text>
+                    </Box>
 
-            </div>
-            {/* render post review */}
-            <Review
-                doctor_id={Number(id)}
-                patient_id={patient.id}
-            />
-        </div>
+                    <Box>
+                        <Text fontSize="lg" fontWeight="bold">
+                            Especialidades:
+                        </Text>
+                        <Wrap>
+                            {doctor.specialties?.map((specialty, index) => (
+                                <WrapItem key={`${index}2`}>
+                                    <Badge>{specialty.specialty}</Badge>
+                                </WrapItem>
+                            ))}
+                        </Wrap>
+                    </Box>
+                </VStack>
+            </HStack>
+            <Box   borderRadius='10px' borderColor="#3a0ca3" borderWidth="1px" bg='white'  maxWidth="100%">
+                <Box marginLeft="20px" marginTop='10px' marginBottom='10px'>
+                <Text fontSize="lg" fontWeight="bold">
+                    Comentarios:
+                </Text>
+                <Divider borderColor="#3a0ca3"/>
+                <VStack align="stretch" spacing={8}>
+                    {doctor.reviews?.map((review, index) => (
+                        <Box key={`${index}1`} w='30%' >
+                            <Text fontSize="sm" fontWeight="bold" color='#3a0ca3'>
+                                {review.patient.person.first_name}{" "}
+                                {review.patient.person.last_name}
+                            </Text>
+                            <Text>{review.comment}</Text>
+                            <Text>Calificacion: {review.rating}</Text>
+                            <Divider borderColor="#3a0ca3"/>
+                        </Box>
+                        
+                    ))}
+                    
+                </VStack>
+                <Review doctor_id={Number(id)} patient_id={patient.id} />
+                </Box>
+            </Box>
+        </Box>
+
+
     )
 }
 
