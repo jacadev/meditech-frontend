@@ -25,138 +25,49 @@ export default function AboutUs() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-<GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
-  <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
-    <Image src={imagen1} objectFit="cover" w={800} h={800} mr={{ md: "4rem" }}/>
-    <Flex direction="column">
-      <Text
-        marginTop="8rem"
-        fontSize={{ base: 'md', lg: 'lg' }}
-        color={'gray.500'}
-        p="4"
-        borderRadius="lg"
-        lineHeight="tall"
-        fontFamily="Google Sans, sans-serif"
-        mb={4}
-      >
-        MEDITECH is a digital platform designed to improve the management of medical appointments and facilitate the creation and storage of electronic medical records. Our goal is to offer a practical and effective solution to optimize the workflow in the healthcare field, providing a safe and efficient experience for patients and healthcare professionals.
-      </Text>
-      <Text
-        fontSize={{ base: 'md', lg: 'lg' }}
-        color={'gray.500'}
-        p="4"
-        borderRadius="lg"
-        lineHeight="tall"
-        fontFamily="Google Sans, sans-serif"
-        mb={4}
-      >
-        We are proud to be a leading company in the medical technology sector, with more than 50 years of experience in the development of innovative and reliable solutions. Our team of experts in health technology works tirelessly to offer cutting-edge tools that contribute to the well-being of the medical community and the patients they serve. At MEDITECH, we are dedicated to improving the quality of life of people through technology and high-quality healthcare.
-      </Text>
-  <Text
-    fontSize={{ base: 'md', lg: 'lg' }}
-    color={'gray.500'}
-    p="4"
-    borderRadius="lg"
-    lineHeight="tall"
-    fontFamily="Google Sans, sans-serif"
-    mb={4}
-    >
-    Contact us to learn more about our services.
-  </Text>
-  <Button
-  display="flex"
-  flexDirection="row"
-  justifyContent="flex-end"
-  alignItems="center"
-  marginTop="4rem"
-  marginLeft="1em"
-  fontFamily="Google Sans, sans-serif"
-  fontSize={{ base: 'md', lg: 'lg' }}
-  fontWeight="bold"
-  bg="#5C43FF"
-  color="#FFFFFF"
-  borderRadius="lg"
-  boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
-  transition="all 0.3s ease-in-out"
-  _hover={{
-    bg: "#5C43FF",
-    transform: "translateY(-2px)",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  }}
-  onClick={() => setIsOpen(true)}
-  width="190px" // establece un valor menor al ancho actual
->
-  DEVELOPERS +
-</Button>
+    <GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
+      <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
+        <Image src={imagen1} objectFit="cover" w={800} h={800} mr={{ md: "4rem" }} />
+        <Flex direction="column">
+          <Text
+            marginTop="8rem"
+            fontSize={{ base: 'md', lg: 'lg' }}
+            color={'gray.500'}
+            p="4"
+            borderRadius="lg"
+            lineHeight="tall"
+            fontFamily="Google Sans, sans-serif"
+            mb={4}
+          >
+           MEDITECH es una plataforma digital diseñada para mejorar la gestión de citas médicas y facilitar la creación y almacenamiento de historias clínicas electrónicas. Nuestro objetivo es ofrecer una solución práctica y efectiva para optimizar el flujo de trabajo en el campo de la salud, brindando una experiencia segura y eficiente para pacientes y profesionales de la salud.
+          </Text>
+          <Text
+            fontSize={{ base: 'md', lg: 'lg' }}
+            color={'gray.500'}
+            p="4"
+            borderRadius="lg"
+            lineHeight="tall"
+            fontFamily="Google Sans, sans-serif"
+            mb={4}
+          >
+            Estamos orgullosos de ser una empresa líder en el sector de la tecnología médica, con más de 50 años de experiencia en el desarrollo de soluciones innovadoras y fiables. Nuestro equipo de expertos en tecnología de la salud trabaja incansablemente para ofrecer herramientas de vanguardia que contribuyan al bienestar de la comunidad médica y de los pacientes a los que atiende. En MEDITECH nos dedicamos a mejorar la calidad de vida de las personas a través de la tecnología y la atención médica de alta calidad.
+          </Text>
+          <Text
+            fontSize={{ base: 'md', lg: 'lg' }}
+            color={'gray.500'}
+            p="4"
+            borderRadius="lg"
+            lineHeight="tall"
+            fontFamily="Google Sans, sans-serif"
+            mb={4}
+          >
+            Puede contactarnos para conocer más sobre nuestros servicios en nuestras redes sociales o por via correo a "Meditech@gmail.com".
+        
+          </Text>
 
-            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader>Perfiles de LinkedIn</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <HStack>
-                    <Icon as={FaLinkedin} boxSize={6} />
-                    <Link
-                      href="https://www.linkedin.com/in/gastón-garcia-juri-76a3b2212"
-                      colorScheme="linkedin"
-                      fontWeight="bold"
-                      >
-                      GASTON GARCIA JURI
-                    </Link>
-                  </HStack>
-                  <br />
-                  <HStack>
-                    <Icon as={FaLinkedin} boxSize={6} />
-                    <Link
-                      href="https://www.linkedin.com/in/franco-gonzalez-273154168/"
-                      colorScheme="linkedin"
-                      fontWeight="bold"
-                    >
-                      FRANCO GONZALEZ
-                    </Link>
-                  </HStack>
-                  <br />
-                  <HStack>
-                    <Icon as={FaLinkedin} boxSize={6} />
-                    <Link
-                      href="https://www.linkedin.com/in/danilo-herrera-717665266"
-                      colorScheme="linkedin"
-                      fontWeight="bold"
-                      >
-                      DANILO HERRERA
-                    </Link>
-                  </HStack>
-                  <br />
-                  <HStack>
-                    <Icon as={FaLinkedin} boxSize={6} />
-                    <Link
-                      href="https://www.linkedin.com/mwlite/in/filleral-yefreyner-mahecha-cantor-46ba451b6"
-                      colorScheme="linkedin"
-                      fontWeight="bold"
-                    >
-                      FILLERAL YEFREYNER MAHECHA CANTOR
-                    </Link>
-                  </HStack>
-                  <br />
-                  <HStack>
-                    <Icon as={FaLinkedin} boxSize={6} />
-                    <Link
-                      href="https://www.linkedin.com/in/carlosnr9"
-                      colorScheme="linkedin"
-                      fontWeight="bold"
-                    >
-                      CARLOS FERNEY NARVAEZ RUALES
-                    </Link>
-                  </HStack>
-                  <br />
-                </ModalBody>
-              </ModalContent>
-            </Modal>
-          
-                      </Flex>
-                    </Flex>
-      </GridItem>
-   
+        </Flex>
+      </Flex>
+    </GridItem>
+
   );
 }

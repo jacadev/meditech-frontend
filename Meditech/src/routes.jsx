@@ -70,10 +70,7 @@ const routes = [
 
   },
   {
-    name: "Iniciar Sesión",
-    layout: "/user",
-    path: "/sing-in",
-    icon: <Icon as={MdMedicalInformation} width='20px' height='20px' color='inherit' />,
+    layout: "/user/singin",
     component: singIn,
   },
    {
