@@ -109,11 +109,13 @@ function Specialists() {
           <option value="Masculino">Hombre</option>
           <option value="Femenino">Mujer</option>
         </Select>
+        <Text>Ordenar por Precio</Text>
         <Button onClick={handleSortingChange} mb={4} colorScheme="blue">
-          {sortOrder === "" ? "Sort by Price" : sortOrder === "asc" ? "Price Low to High" : "Price High to Low"}
+          {sortOrder === "asc" ? "Menor a Mayor" : "Mayor a Menor"}
         </Button>
+        <Text>Ordenar por Calificación</Text>
         <Button onClick={handleSortingRatingChange} mb={4} colorScheme="blue">
-          {sortOrderRating === "" ? "Sort by Rating" : sortOrderRating === "asc" ? "Rating Low to High" : "Rating High to Low"}
+          {sortOrderRating === "asc" ? "Menor a Mayor" : "Mayor a Menor"}
         </Button>
       </Box>
 
