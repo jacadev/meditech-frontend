@@ -30,11 +30,12 @@ import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userInfo } from './../../../Redux/Actions/Actionslogin';
-
+import { userSigninGoogle } from './../../../Redux/Actions/Actionslogin';
 
 function SignIn() {
   const history = useHistory();
   const userInfo1 = useSelector((state) => state.userInfo);
+  console.log(userInfo1)
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
@@ -71,13 +72,34 @@ function SignIn() {
 
   const handleClick = () => setShow(!show);
   const responseGoogle = (response) => {
-    const userName = response.profileObj.name;
+    const user_name = response.profileObj.name;
     const userImage = response.profileObj.imageUrl;
-    localStorage.setItem('userInfo', JSON.stringify(response.profileObj));
-    localStorage.setItem('userName', userName);
+    const email = response.profileObj.email;
+    localStorage.setItem('userInfo', userInfo);
+    localStorage.setItem('user_name', user_name);
     localStorage.setItem('userImage', userImage);
-    history.push('/admin/default');
-    console.log(localStorage);
+    localStorage.setItem('email', email);
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_name,
+        email,
+        rol: [2]
+      }),
+    };
+
+    fetch('http://localhost:3001/patients/signinGoogle', requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(userSigninGoogle(data))
+        console.log(data);
+        history.push('/admin/default');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
   const onFailure = (error) => {
     console.log(error);
@@ -124,7 +146,7 @@ function SignIn() {
       >
         <Box me="auto">
           <Heading color={textColor} fontSize="36px" mb="10px">
-            Sing In
+            Inicio de Sesion
           </Heading>
           <Text
             mb="36px"
@@ -133,7 +155,7 @@ function SignIn() {
             fontWeight="400"
             fontSize="md"
           >
-            Enter your email and password to sing in!
+            Ingrese su correo electrónico y contraseña para iniciar sesión!
           </Text>
         </Box>
         <Flex
@@ -149,7 +171,7 @@ function SignIn() {
         >
           <GoogleLogin
             clientId="486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com"
-            buttonText="Sign in with Google"
+            buttonText="Inicio de sesion con Google"
             onSuccess={responseGoogle}
             onFailure={onFailure}
             cookiePolicy={'single_host_origin'}
@@ -158,7 +180,7 @@ function SignIn() {
           <Flex align="center" mb="25px">
             <HSeparator />
             <Text color="gray.400" mx="14px">
-              or
+              o
             </Text>
             <HSeparator />
           </Flex>
@@ -172,7 +194,7 @@ function SignIn() {
               color={textColor}
               mb="8px"
             >
-              Email<Text color={brandStars}>*</Text>
+              Correo Electrónico<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
               isRequired={true}
@@ -195,13 +217,13 @@ function SignIn() {
               color={textColor}
               display="flex"
             >
-              Password<Text color={brandStars}>*</Text>
+              Contraseña<Text color={brandStars}>*</Text>
             </FormLabel>
             <InputGroup size="md">
               <Input
                 isRequired={true}
                 fontSize="sm"
-                placeholder="Min. 8 characters"
+                placeholder="Min. 8 caracteres"
                 mb="24px"
                 size="lg"
                 type={show ? 'text' : 'password'}
@@ -233,7 +255,7 @@ function SignIn() {
                   color={textColor}
                   fontSize="sm"
                 >
-                  Keep me logged in
+                  Mantenme Conectado
                 </FormLabel>
               </FormControl>
 
@@ -244,7 +266,7 @@ function SignIn() {
                   w="124px"
                   fontWeight="500"
                 >
-                  Forgot password?
+                  Has olvidado tu contraseña?
                 </Text>
               </NavLink>
             </Flex>
@@ -257,7 +279,7 @@ function SignIn() {
               h="50"
               mb="24px"
             >
-              Sing In
+              Iniciar sesion
             </Button>
           </form>
 
@@ -269,7 +291,7 @@ function SignIn() {
             mt="0px"
           >
             <Text color={textColorDetails} fontWeight="400" fontSize="14px">
-              Not registered yet?
+              Todavía no estas registrado?
               <Button onClick={handleClick1}>
                 <Text
                   color={textColorBrand}
@@ -277,7 +299,7 @@ function SignIn() {
                   ms="5px"
                   fontWeight="500"
                 >
-                  Create an Account
+                  Crear una cuenta
                 </Text>
               </Button>
             </Text>

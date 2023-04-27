@@ -3,6 +3,7 @@ import {
   SIGNIN_USER,
   SIGNUP_USER,
   CLEAN_DETAIL,
+  USERGOOGLE_DATA,
 } from '../Actions/Actionslogin';
 
 const initialState = {
@@ -59,6 +60,11 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           doctorDetail: {}
+        }
+      case USERGOOGLE_DATA:
+        return {
+          ...state,
+          userInfo: action.payload,
         }
     default:
       return state;

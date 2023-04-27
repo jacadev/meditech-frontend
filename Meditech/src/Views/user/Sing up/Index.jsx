@@ -114,7 +114,7 @@ const SignUp = () => {
         gender: "",
         rol: [2],
       });
-      history.push("/user/sing-in");
+      history.push('/admin/default');
     } else {
       alert("!!Required Data");
     }

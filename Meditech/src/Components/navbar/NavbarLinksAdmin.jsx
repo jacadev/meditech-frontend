@@ -34,6 +34,10 @@ export default function HeaderLinks(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  function handleClick() {
+    history.push("/user/profilesettings");
+  }
+
   const handleLogout = () => {
     localStorage.removeItem("userName");
     localStorage.removeItem("userImage");
@@ -201,12 +205,12 @@ export default function HeaderLinks(props) {
 			  </Menu> */}
 
       {/* <ThemeEditor navbarIcon={navbarIcon} /> */}
-
+      {userInfo1.id && (
       <Menu>
         <MenuButton p="0px">
           <Avatar
             _hover={{ cursor: "pointer" }}
-            name={userName || userInfo1.user_name}
+            name={userInfo1.user_name}
             src={userImage}
             bg="#11047A"
             size="sm"
@@ -234,7 +238,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey {userName}
+              👋&nbsp; Hola {userInfo1.user_name}
             </Text>
           </Flex>
           <Flex flexDirection="column" p="10px">
@@ -243,17 +247,11 @@ export default function HeaderLinks(props) {
               _focus={{ bg: "none" }}
               borderRadius="8px"
               px="14px"
+              onClick={handleClick}
             >
-              <Text fontSize="sm">Profile Settings</Text>
+              <Text fontSize="sm">Configuracion de Perfil</Text>
             </MenuItem>
-            <MenuItem
-              _hover={{ bg: "none" }}
-              _focus={{ bg: "none" }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Newsletter Settings</Text>
-            </MenuItem>
+            
             <MenuItem
               _hover={{ bg: "none" }}
               _focus={{ bg: "none" }}
@@ -262,11 +260,12 @@ export default function HeaderLinks(props) {
               px="14px"
               onClick={handleLogout}
             >
-              <Text fontSize="sm">Log out</Text>
+              <Text fontSize="sm">Cerrar sesión</Text>
             </MenuItem>
           </Flex>
         </MenuList>
       </Menu>
+      )}
     </Flex>
   );
 }
