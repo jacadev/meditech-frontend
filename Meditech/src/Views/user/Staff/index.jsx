@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import { useDispatch, useSelector} from "react-redux";
 import SpecialistCard from '../../../Components/Especialista/SpecialistCard.jsx';
 
-import { Box, Grid, Select, Text, Button, Badge, Flex } from "@chakra-ui/react";
+import { Box, Grid, Select, Button, Flex } from "@chakra-ui/react";
+import { getDoctors } from "../../../Redux/Actions/actions.jsx";
+import SearchBar from "../../../Components/SearchBar/SearchBar.jsx";
 
 function Specialists() {
-  const [specialists, setSpecialists] = useState([]);
+
+  const dispatch = useDispatch();
+  
   const [specialtyFilter, setSpecialtyFilter] = useState("");
   const [genderFilter, setGenderFilter] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [sortOrderRating, setSortOrderRating] = useState(null);
-
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [specialistsPerPage] = useState(6);
 
+  const specialists = useSelector(state => state.doctors);
+  
   useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get("http://localhost:3001/doctors");
-      const dataWithRatings = result.data.map(specialist => ({
-        ...specialist,
-        rating: Math.floor(Math.random() * 5) + 1, // Genera un número aleatorio entre 1 y 5
-      }));
-      setSpecialists(dataWithRatings);
     
-    }
-    fetchData();
-  }, []);
+    dispatch(getDoctors())
+    
+  },[]);
+
+  const allDoctors = () => {
+    dispatch(getDoctors())
+  }
 
   const handleSpecialtyChange = event => {
     setSpecialtyFilter(event.target.value);
@@ -58,7 +60,7 @@ function Specialists() {
     setCurrentPage(pageNumber);
   };
 
-  let filteredSpecialists = [...specialists];
+  let filteredSpecialists = specialists;
 
   if (specialtyFilter !== "") {
     filteredSpecialists = filteredSpecialists.filter(specialist =>
@@ -109,20 +111,23 @@ function Specialists() {
           <option value="Masculino">Hombre</option>
           <option value="Femenino">Mujer</option>
         </Select>
-        <Text>Ordenar por Precio</Text>
         <Button onClick={handleSortingChange} mb={4} colorScheme="blue">
-          {sortOrder === "asc" ? "Menor a Mayor" : "Mayor a Menor"}
+          {sortOrder === "" ? "Sort by Price" : sortOrder === "asc" ? "Price Low to High" : "Price High to Low"}
         </Button>
-        <Text>Ordenar por Calificación</Text>
         <Button onClick={handleSortingRatingChange} mb={4} colorScheme="blue">
-          {sortOrderRating === "asc" ? "Menor a Mayor" : "Mayor a Menor"}
+          {sortOrderRating === "" ? "Sort by Rating" : sortOrderRating === "asc" ? "Rating Low to High" : "Rating High to Low"}
         </Button>
+        <div>
+            <button onClick={() => allDoctors()}>Todos los doctores</button>
+        </div>
       </Box>
+
+      <SearchBar/>
 
       <Grid templateColumns="repeat(2, 1fr)" gap={6} alignItems="start">
       {currentSpecialists.map(specialist => (
-  <SpecialistCard key={specialist.id} specialist={specialist} />
-))}
+        <SpecialistCard key={specialist.id} specialist={specialist} />
+      ))}
 
       </Grid>
       <Flex justifyContent="center" mt={4}>
