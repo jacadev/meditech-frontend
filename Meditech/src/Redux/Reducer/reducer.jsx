@@ -4,12 +4,18 @@ import {
   SIGNUP_USER,
   CLEAN_DETAIL,
   USERGOOGLE_DATA,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_FAILURE,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAILURE
 } from '../Actions/Actionslogin';
 
 const initialState = {
   reserva: [],
   loading: false,
   error: null,
+  success: false,
   userInfo: {},
   objeto:{},
   doctorDetail: []
@@ -66,6 +72,35 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           userInfo: action.payload,
         }
+        case FORGOT_PASSWORD_REQUEST:
+          return {
+            ...state,
+            loading: true,
+          };
+        case FORGOT_PASSWORD_SUCCESS:
+          return {
+            ...state,
+            loading: false,
+            success: true,
+          };
+        case FORGOT_PASSWORD_FAILURE:
+          return {
+            ...state,
+            loading: false,
+            error: action.payload,
+          };
+          case PASSWORD_RESET_SUCCESS:
+            return {
+              ...state,
+              loading: false,
+              success: true,
+            };
+          case PASSWORD_RESET_FAILURE:
+            return {
+              ...state,
+              loading: false,
+              error: action.payload,
+            };
     default:
       return state;
   }

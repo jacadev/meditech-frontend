@@ -21,6 +21,7 @@ import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Detail from './Views/user/Deatails/detail';
 import ProfileSettings from './Views/user/ProfileSettings/index';
+import ForgotPassword from './Views/user/ForgotPassword';
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -92,6 +93,10 @@ const routes = [
   {
     layout: '/user/profilesettings',
     component: ProfileSettings,
+  },
+  {
+    layout: '/user/forgotpassword',
+    component: ForgotPassword,
   },
 ];
 
