@@ -48,9 +48,16 @@ export default function User(props) {
           case "/user/payment":
           case "/user/signup":
           case "/user/paymentprocess":
+
           case "/user/profilesettings":
           case "/user/signin":
+
           case "/user/forgotpassword":
+
+
+          case "/user/singin" :
+
+
             return (
               <Route
                 path={layout}
