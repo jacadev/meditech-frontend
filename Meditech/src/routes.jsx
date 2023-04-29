@@ -19,7 +19,7 @@ import payment from './Views/user/payment';
 import signup from './Views/user/Sing up/Index';
 import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
-import Detail from './Views/user/Deatails/detail';
+import Details from './Views/user/Deatails/detail';
 import homeadmin from "./Views/admin/Home/Index"
 import createdoctor from "./Views/admin/Postdoctor/Create"
 import indexdoctor from "./Views/admin/Postdoctor/Index"
