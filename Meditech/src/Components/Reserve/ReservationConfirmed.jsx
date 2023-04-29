@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import {
   Box,
   Heading,
@@ -17,3 +17,4 @@ const ConfirmacionReserva = () => {
 };
 
 export default ConfirmacionReserva;
+ */

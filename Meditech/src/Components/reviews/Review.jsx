@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDoctor, postReview } from "../../Redux/Actions/actions";
+import { BsStarFill, BsStar } from 'react-icons/bs';
+import {
+    Box,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    Textarea,
+    
+  } from '@chakra-ui/react';
 
 const Review = ({doctor_id, patient_id}) => {
 
@@ -13,15 +23,15 @@ const Review = ({doctor_id, patient_id}) => {
         patient_id
     })
 
-    const changeHandler = (event) => {
+   /*  const changeHandler = (event) => {
         const {name, value} = event.target;
 
         if (name === 'comment') setForm({...form, [name]: value})
         if (name === 'rating') setForm({...form, [name]: value})
 
-    }
+    } */
 
-    const submitHandler = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
         dispatch(postReview(form))
@@ -29,28 +39,66 @@ const Review = ({doctor_id, patient_id}) => {
         setForm({
             ...form,
             comment: '',
-            rating: ''
+            rating: []
         })
 
         setTimeout(() => {
             dispatch(getDoctor(doctor_id))
         },1000) 
 }
-
+const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < rating) {
+        stars.push(
+          <BsStarFill
+            key={i}
+            color="#fcba03"
+            onClick={() => setForm({ ...form, rating: i + 1 })}
+            style={{ cursor: "pointer" }}
+          />
+        );
+      } else {
+        stars.push(
+          <BsStar
+            key={i}
+            color="#fcba03"
+            onClick={() => setForm({ ...form, rating: i + 1 })}
+            style={{ cursor: "pointer" }}
+          />
+        );
+      }
+    }
+    return stars;
+  };
+  
     return (
-        <form onSubmit={submitHandler}>
-            <div>
-                <label>comment</label>
-                <input type="text" value={form.comment} onChange={changeHandler} name="comment"/>
-            </div><br></br>
+        <Box as="form" onSubmit={handleSubmit}>
+        <FormControl>
+            <br/>
+          <FormLabel>Comentanos tu experiecia con nuestros doctores:</FormLabel>
+          <Textarea   value={form.comment} onChange={(e) => setForm({ ...form, comment: e.target.value })}  />
+       
+        </FormControl>
+  
+        <FormControl>
+  <FormLabel>Califica a tu doctor:</FormLabel>
+  <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>
+    {renderStars(form.rating)}
+  </span>
+  
+</FormControl>
+<br />
 
-            <div>
-                <label>rating</label>
-                <input type="number" value={form.rating} onChange={changeHandler} name="rating"/>
-            </div>
-
-            <button type="submit">submit</button>
-        </form>
+  
+        <Button type="submit"
+         bg='#5C43FF'
+         color={'white'}
+         _hover={{
+           bg: 'green',
+         }}>Enviar</Button>
+      </Box>
+ 
     )
 }
 

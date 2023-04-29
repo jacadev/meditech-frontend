@@ -19,7 +19,9 @@ import payment from './Views/user/payment';
 import signup from './Views/user/Sing up/Index';
 import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
-import Detail from './Views/user/Deatails/Detail';
+
+import Details from './Views/user/Deatails/detail';
+
 import ProfileSettings from './Views/user/ProfileSettings/index';
 
 // Auth Imports
@@ -88,7 +90,7 @@ const routes = [
   {
     name: 'Detalles del Medico',
     layout: '/user/detail/:id',
-    component: Detail,
+    component: Details,
   },
   {
     layout: '/user/profilesettings',

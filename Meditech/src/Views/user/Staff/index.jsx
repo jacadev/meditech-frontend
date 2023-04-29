@@ -100,7 +100,7 @@ function Specialists() {
           <option value="">Todas las Especialidades</option>
           {specialists.map(specialist =>
             specialist.specialties.map(specialty => (
-              <option key={specialty.id} value={specialty.specialty}>
+              <option key={`${specialty.id}-${specialty.specialty}`} value={specialty.specialty}>
                 {specialty.specialty}
               </option>
             ))

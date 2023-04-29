@@ -22,7 +22,7 @@ import {
 import { HSeparator } from './../../../Components/separator/Separator';
 import DefaultAuth from './../../../layouts/user/Default';
 // Assets
-import illustration from '../../../../public/Meditech.png';
+import illustration from '../../../assets/img/fondos/Meditech.png';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
@@ -86,7 +86,8 @@ function SignIn() {
       body: JSON.stringify({
         user_name,
         email,
-        rol: [2]
+        rol: [2],
+        preload: false
       }),
     };
 
