@@ -1,6 +1,6 @@
 import axios from "axios";
 //conexion entre front y back
-import { FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME} from "./actions-types";
+import { FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME, GET_PATIENT} from "./actions-types";
 
 export const enviarObjetoDeEstado = (objeto) => {
 // actions.js
@@ -46,7 +46,6 @@ export const getDoctors = () => {
           }
         },0)
       })));
-      console.log('soy el resultado de doctores', result);
       dispatch({type:GET_DOCTORS, payload: result});
   } 
 }
@@ -64,9 +63,18 @@ export const getName = (name) => {
           return accumulator;
         }
       },0)
-    })));;
+    })));
 
-    console.log('soy el resultado de name', result);
     dispatch({type:GET_DOCTORS_NAME, payload: result});
+  }
+}
+
+export const getPatienById = (id) => {
+  return async (dispatch) => {
+    const result = await axios.get(`http://localhost:3001/patients/appointments/${id}`)
+    .then(res => res.data);
+
+    console.log('soy el resultado del get id de paciente', result);
+    dispatch({type:GET_PATIENT, payload: result});
   }
 }
