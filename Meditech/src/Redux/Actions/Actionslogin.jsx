@@ -47,23 +47,23 @@ export const userProfileSettings = (id, input) => async (dispatch) => {
 };
 
 export const forgotPassword = (email) => async (dispatch) => {
-  dispatch(forgotPasswordRequest());
+  // dispatch(forgotPasswordRequest());
 
-  try {
+  // try {
     const response = await axios.post(
-      'http://localhost:3001/patients/........',
+      'http://localhost:3001/patients/forgotpassword',
       { email }
     );
     const data = response.data;
 
-    if (data.success) {
-      dispatch(forgotPasswordSuccess());
-    } else {
-      dispatch(forgotPasswordFailure(data.message));
-    }
-  } catch (error) {
-    dispatch(forgotPasswordFailure(error.message));
-  }
+  //   if (data.success) {
+  //     dispatch(forgotPasswordSuccess());
+  //   } else {
+  //     dispatch(forgotPasswordFailure(data.message));
+  //   }
+  // } catch (error) {
+  //   dispatch(forgotPasswordFailure(error.message));
+  // }
 };
 
 export const resetPassword =
@@ -128,7 +128,7 @@ const forgotPasswordFailure = (error) => {
 
 const resetPasswordSuccess = () => {
   alert(
-    'Se ha enviado un correo electrónico con instrucciones para restablecer tu contraseña.'
+    '"¡Bienvenido nuevamente a Meditech! Tu contraseña ha sido actualizada correctamente. Por favor, inicia sesión con tu nueva contraseña.".'
   );
   return {
     type: PASSWORD_RESET_SUCCESS,
@@ -136,9 +136,8 @@ const resetPasswordSuccess = () => {
 };
 
 const resetPasswordFailure = (error) => {
-  alert(
-    `Ocurrió un error al enviar la solicitud de restablecimiento de contraseña. Por favor intenta de nuevo más tarde. Error: ${error}`
-  );
+  alert("Ha ocurrido un error al restablecer la contraseña. Por favor, intenta de nuevo más tarde.");
+
   return {
     type: PASSWORD_RESET_FAILURE,
     payload: error,

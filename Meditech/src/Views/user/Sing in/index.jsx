@@ -124,11 +124,11 @@ function SignIn() {
     try {
       await dispatch(forgotPassword(email));
       setInput({ email: '' });
-      if (success === true) {
+      // if (success === true) {
         history.push('/user/forgotpassword');
-      }
+      // }
     } catch (error) {}
-    setInput({ email });
+    
   };
 
   const submitHandler = (e) => {

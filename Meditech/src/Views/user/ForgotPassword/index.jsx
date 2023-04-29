@@ -11,10 +11,15 @@ import {
   Heading,
   Input,
   Text,
+  InputGroup,
+  InputRightElement,
+  Icon,
   useColorModeValue,
 } from '@chakra-ui/react';
 import DefaultAuth from './../../../layouts/user/Default';
 import illustration from '../../../../public/Meditech.png';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { RiEyeCloseLine } from 'react-icons/ri';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -24,8 +29,11 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [token, setToken] = useState('');
+  const [recoveryCode, setRecoveryCode] = useState('');
+  const [show, setShow] = React.useState(false);
+  const [show1, setShow1] = React.useState(false);
   const textColor = useColorModeValue('navy.700', 'white');
+  const textColorSecondary = 'gray.400';
   const brandStars = useColorModeValue('brand.500', 'brand.400');
 
   const handleSubmit = (e) => {
@@ -37,9 +45,10 @@ const ForgotPassword = () => {
       );
       return;
     }
-    dispatch(resetPassword(token, newPassword, email));
+    dispatch(resetPassword(recoveryCode, newPassword, email));
   };
-
+  const handleClick = () => setShow(!show);
+  const handleClick1 = () => setShow1(!show1);
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
@@ -108,19 +117,33 @@ const ForgotPassword = () => {
                       >
                         Nueva contraseña:<Text color={brandStars}>*</Text>
                       </FormLabel>
-                      <Input
-                        isRequired={true}
-                        variant="auth"
-                        fontSize="sm"
-                        ms={{ base: '0px', md: '0px' }}
-                        type="password"
-                        value={newPassword}
-                        name="new-password"
-                        mb="24px"
-                        fontWeight="500"
-                        size="lg"
-                        onChange={(e) => setNewPassword(e.target.value)}
-                      />
+                      <InputGroup size="md">
+                        <Input
+                          isRequired={true}
+                          variant="auth"
+                          fontSize="sm"
+                          ms={{ base: '0px', md: '0px' }}
+                          type={show ? 'text' : 'password'}
+                          value={newPassword}
+                          name="newPassword"
+                          mb="24px"
+                          fontWeight="500"
+                          size="lg"
+                          onChange={(e) => setNewPassword(e.target.value)}
+                        />
+                        <InputRightElement
+                          display="flex"
+                          alignItems="center"
+                          mt="4px"
+                        >
+                          <Icon
+                            color={textColorSecondary}
+                            _hover={{ cursor: 'pointer' }}
+                            as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                            onClick={handleClick}
+                          />
+                        </InputRightElement>
+                      </InputGroup>
                     </div>
 
                     <div>
@@ -134,19 +157,33 @@ const ForgotPassword = () => {
                       >
                         Confirmar contraseña:<Text color={brandStars}>*</Text>
                       </FormLabel>
-                      <Input
-                        isRequired={true}
-                        variant="auth"
-                        fontSize="sm"
-                        ms={{ base: '0px', md: '0px' }}
-                        type="password"
-                        value={confirmPassword}
-                        name="confirm-password"
-                        mb="24px"
-                        fontWeight="500"
-                        size="lg"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                      />
+                      <InputGroup size="md">
+                        <Input
+                          isRequired={true}
+                          variant="auth"
+                          fontSize="sm"
+                          ms={{ base: '0px', md: '0px' }}
+                          type={show ? 'text' : 'password'}
+                          value={confirmPassword}
+                          name="confirm-password"
+                          mb="24px"
+                          fontWeight="500"
+                          size="lg"
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <InputRightElement
+                          display="flex"
+                          alignItems="center"
+                          mt="4px"
+                        >
+                          <Icon
+                            color={textColorSecondary}
+                            _hover={{ cursor: 'pointer' }}
+                            as={show1 ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                            onClick={handleClick1}
+                          />
+                        </InputRightElement>
+                      </InputGroup>
                     </div>
                   </Flex>
                 </div>
@@ -160,26 +197,26 @@ const ForgotPassword = () => {
                     color={textColor}
                     mb="8px"
                   >
-                    Token:<Text color={brandStars}>*</Text>
+                  Codigo:<Text color={brandStars}>*</Text>
                   </FormLabel>
                   <Input
                     isRequired={true}
                     variant="auth"
                     fontSize="sm"
                     ms={{ base: '0px', md: '0px' }}
-                    type="text"
-                    value={token}
-                    placeholder="Ingrese el token que recibió en su correo electrónico."
-                    name="token"
+                    type="number"
+                    value={recoveryCode}
+                    placeholder="Ingrese el codigo que recibió en su correo electrónico."
+                    name="recoveryCode"
                     mb="24px"
                     fontWeight="500"
                     size="lg"
-                    onChange={(e) => setToken(e.target.value)}
+                    onChange={(e) => setRecoveryCode(e.target.value)}
                   />
 
                   <br />
                 </div>
-                {error && <div>{error}</div>}
+               
                 <div>
                   <Button
                     fontSize="sm"
