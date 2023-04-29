@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-//import {postReserve} from "./../../Redux/Actions/actions"
+import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-//import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
-import PayPalCheckout from '../../Views/user/payment/index'
 import { enviarObjetoDeEstado } from "./../../Redux/Actions/actions"
+/* import React, { useState, useEffect } from 'react';
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { utcToZonedTime } from 'date-fns-tz'; */
 import {
   Box,
   Stack,
-  Heading,
   Text,
   Image,
   Checkbox,
   VStack,
   FormControl,
   FormLabel,
-  Input,
   Textarea,
   Button,
   Badge,
@@ -24,15 +26,7 @@ import {
 
 const FormularioReserva = () => {
   // const { specialistId } = useParams();
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [firstName, setNombres] = useState('');
-  const [lastName, setApellidos] = useState('');
-  const [dni, setDni] = useState('');
-  const [phone, setTelefono] = useState('');
-  const [email, setEmail] = useState('');
   const [comment, setComentario] = useState('');
-  const [date, setFecha] = useState(new Date().toISOString().substr(0, 10));
-  const [hour, setHora] = useState('');
   const [dataTreatment, setConsentimiento] = useState(false);
   const [receiveCommunication, setRecibirComunicaciones] = useState(false);
   const location = useLocation();
@@ -57,22 +51,7 @@ const FormularioReserva = () => {
     };
     dispatch(enviarObjetoDeEstado(formData));
     history.push("/user/payment");
-    // Mostrar mensaje de confirmación
-    /*    setShowConfirmation(true);
-       console.log("Información del formulario:", formData); 
-   
-       
-       
-       setNombres("");
-       setApellidos("");
-       setTelefono("");
-       setComentario("");
-       setEmail("");
-       setFecha("");
-       setHora("");
-       setDni("");
-       setConsentimiento(false);
-       setRecibirComunicaciones(false);  */
+
   };
 
 
