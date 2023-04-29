@@ -86,7 +86,8 @@ function SignIn() {
       body: JSON.stringify({
         user_name,
         email,
-        rol: [2]
+        rol: [2],
+        preload: false
       }),
     };
 

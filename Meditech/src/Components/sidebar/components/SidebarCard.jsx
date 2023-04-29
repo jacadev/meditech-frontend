@@ -64,35 +64,18 @@ export default function SidebarDocs() {
           px='10px'
           mb='14px'>
 
-        Welcome to Meditech {userInfo.user_name}
-
-       Solicita una cita ahora mismo
-
+        Bienvenido a Meditech{' '} {userInfo.user_name}
         </Text>
-       {/*  <Text
+         <Text
           fontSize='14px'
           color={"white"}
           px='10px'
           mb='14px'
           textAlign='center'>
        Solicita una cita ahora mismo
-        </Text> */}
+        </Text> 
       </Flex>
-      <Link>
-        <Button
-          bg='whiteAlpha.300'
-          _hover={{ bg: "whiteAlpha.200" }}
-          _active={{ bg: "whiteAlpha.100" }}
-          mb={{ sm: "16px", xl: "24px" }}
-          color={"white"}
-          fontWeight='regular'
-          fontSize='sm'
-          minW='185px'
-          mx='auto'>
-         Pedir una cita
-        </Button>
-      </Link>
-      <Link>
+   <Link>
       {!userInfo.id && (
         <Button
           bg="whiteAlpha.300"
@@ -106,7 +89,7 @@ export default function SidebarDocs() {
           mx="auto"
           onClick={handleClick}
         >
-          Inicio de sesión
+          Iniciar sesión
         </Button>
       )}
       </Link>

@@ -61,6 +61,7 @@ const SignUp = () => {
     age: "",
     gender: "",
     rol: [2],
+    preload:false
   });
 
   const [error, setError] = useState({
@@ -113,6 +114,7 @@ const SignUp = () => {
         age: "",
         gender: "",
         rol: [2],
+        preload:false
       });
       history.push('/admin/default');
     } else {
