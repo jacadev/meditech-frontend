@@ -18,7 +18,7 @@ import {
 import { Link } from 'react-router-dom';
 
 function SpecialistCard(props) {
-  const renderStars = rating => {
+  const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < Math.floor(rating)) {

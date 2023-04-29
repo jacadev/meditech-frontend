@@ -14,9 +14,29 @@ export const enviarObjetoDeEstado = (objeto) => {
 export const getDoctor = (id) => {
   return async function(dispatch) {
       const doctor = await axios.get(`http://localhost:3001/doctors/${id}`)
-      .then(res => res.data);
+      .then(res => res.data)
 
-      dispatch({type: GET_DOCTOR, payload: doctor})
+      const result = {...doctor, rating: doctor.reviews.reduce((accumulator, currentValue, index, array) => {
+        accumulator += currentValue.rating;
+        if (index === array.length - 1) {
+          return accumulator / array.length;
+        } else {
+          return accumulator;
+        }
+      },0)}
+      // .then(res => res.data.map(specialist => ({
+      //   ...specialist,
+      //   rating: specialist.reviews.reduce((accumulator, currentValue, index, array) => {
+      //     accumulator += currentValue.rating;
+      //     if (index === array.length - 1) {
+      //       return accumulator / array.length;
+      //     } else {
+      //       return accumulator;
+      //     }
+      //   },0)
+      // })));
+
+      dispatch({type: GET_DOCTOR, payload: result})
   }
 };
 

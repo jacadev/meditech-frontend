@@ -31,11 +31,13 @@ const Detail = () => {
         dispatch(getDoctor(id))
         return () => dispatch(cleanDetail())
     }, [id])
+
     console.log('estoy en detail', doctor);
-    const renderStars = rating => {
+    
+    const renderStars = (rating) => {
         const stars = [];
         for (let i = 0; i < 5; i++) {
-          if (i < rating) {
+          if (i < Math.floor(rating)) {
             stars.push(<BsStarFill key={i} color="yellow" />);
           } else {
             stars.push(<BsStar key={i} color="yellow" />);
