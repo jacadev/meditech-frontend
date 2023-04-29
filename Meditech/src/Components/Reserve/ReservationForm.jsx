@@ -25,12 +25,10 @@ import {
 
 const FormularioReserva = () => {
   // const { specialistId } = useParams();
-  const [comment, setComentario] = useState('');
   const [dataTreatment, setConsentimiento] = useState(false);
   const [receiveCommunication, setRecibirComunicaciones] = useState(false);
   const location = useLocation();
   const { id, name, specialties, consultationCost, location: clinicLocation, profileImage, disponibilties } = location.state;
-    location.state;
   const history = useHistory();
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.userInfo.id)
@@ -42,9 +40,10 @@ const FormularioReserva = () => {
     patient_id: userInfo,
     date: "",
     disponibilty_id: "",
-    consultationReason: comment,
+    consultationReason: '',
     preload: false,
-    consultationCost})
+    consultationCost
+  })
 
   function handleDateSelect(info) {
     console.log("Fecha seleccionada:", info.dateStr);
@@ -73,9 +72,14 @@ const FormularioReserva = () => {
   function changeHandler (date, disponibilty_id) {
     //console.log('Hora seleccionada:', date, disponibilty_id);
     setFormdata({...formData, date, disponibilty_id })
-
-
     // Aquí puedes guardar la hora seleccionada en el estado o enviarla al servidor como parte de la reserva
+  }
+
+  const changeHandlerComment = (event) => {
+    const {value, name} = event.target;
+
+    setFormdata({...formData, [name]: value})
+
   }
 
   const fechaLocal = utcToZonedTime(new Date(fecha), 'Europe/Madrid'); // Cambiamos a la zona horaria de Bogotá
@@ -83,31 +87,31 @@ const FormularioReserva = () => {
   console.log("fechaLocal col: " + fechaLocal); */
   //console.log(userInfo)
   const handleSubmit = (e) => {
-   
+
     dispatch(enviarObjetoDeEstado(formData));
     history.push("/user/payment");
 
   };
 
-const statusTrue = () =>{
+  const statusTrue = () =>{
 
-  const result = disponibilties.filter(disponibility => disponibility.status === true) // Filtrar solo aquellos con status true
-  .map(disponibility => ({
-    title: 'Disponible',
-    id:disponibility.id,
-    date: disponibility.date,
-    day:disponibility.day,
-    timetable:disponibility.timetable,
-    color: '#6B46C1'
-  }))
+    const result = disponibilties.filter(disponibility => disponibility.status === true) // Filtrar solo aquellos con status true
+    .map(disponibility => ({
+      title: 'Disponible',
+      id:disponibility.id,
+      date: disponibility.date,
+      day:disponibility.day,
+      timetable:disponibility.timetable,
+      color: '#6B46C1'
+    }))
 
-  setHora(result)
-}
- useEffect (()=>{
+    setHora(result)
+  }
 
-  statusTrue()
- },[])
-//console.log(hora ,"ASASASASAASA")
+  useEffect (()=>{
+    statusTrue()
+  },[])
+
   return (
 
     <Box marginTop="100px">
@@ -116,23 +120,17 @@ const statusTrue = () =>{
           <Box>
             <form onSubmit={handleSubmit}>
 
-
               <FormControl id="comment">
                 <FormLabel>Comentario para el especialista (opcional):</FormLabel>
-                <Textarea value={comment} onChange={(e) => setComentario(e.target.value)} />
+                <Textarea value={formData.consultationReason} onChange={changeHandlerComment} name='consultationReason'/>
               </FormControl>
-
-
 
               <FormLabel>Fecha:</FormLabel>
     
-
               <FullCalendar
                   plugins={[ dayGridPlugin, interactionPlugin ]}
                   initialView="dayGridMonth"
                   events={hora} 
-                 
-
                   eventContent={({ event }) => (
                     <Box bg="purple.600" height="20px" borderRadius="8px" px={0.5} py={0.5} textAlign="center">
                       <Text color="white"  fontSize="xs">Disponible</Text>
