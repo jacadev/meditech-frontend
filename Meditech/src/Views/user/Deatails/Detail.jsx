@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import { cleanDetail, getDoctor } from "../../../Redux/Actions/actions";
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import Review from "../../../Components/reviews/Review";
+import {Link} from 'react-router-dom';
 import {
     Box,
     Heading,
@@ -14,7 +15,8 @@ import {
     Badge,
     Wrap,
     WrapItem,
-    HStack
+    HStack,
+    Button
 } from "@chakra-ui/react";
 
 const Detail = () => {
@@ -126,6 +128,42 @@ const Detail = () => {
                     ))}
                     
                 </VStack>
+                
+            <Link
+              to={{
+                pathname: "/user/reserve",
+                state: {
+                  id: doctor.id,
+                  name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,
+                  specialties: doctor.specialties?.map(s => s.specialty),
+                  consultationCost: doctor.consultation_cost,
+                  
+                  profileImage: doctor.profile_image,
+                  disponibilties:doctor.disponibilties,
+                },
+              }}
+            >
+               
+              <Button
+                mt={4}
+                flex={1}
+                fontSize={'sm'}
+                rounded={'full'}
+                bg={'blue.400'}
+                color={'white'}
+                boxShadow={
+                  '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                }
+                _hover={{
+                  bg: 'blue.500',
+                }}
+                _focus={{
+                  bg: 'blue.500',
+                }}>
+                Agenda tu cita
+              </Button>
+            
+            </Link>
                 <Review doctor_id={Number(id)} patient_id={patient.id} />
                 </Box>
             </Box>
