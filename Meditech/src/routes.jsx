@@ -19,7 +19,9 @@ import payment from './Views/user/payment';
 import signup from './Views/user/Sing up/Index';
 import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
+
 import Details from './Views/user/Deatails/detail';
+
 import ProfileSettings from './Views/user/ProfileSettings/index';
 
 // Auth Imports
