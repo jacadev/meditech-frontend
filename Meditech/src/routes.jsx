@@ -91,7 +91,7 @@ const routes = [
   {
     name: 'Detalles del Medico',
     layout: '/user/detail/:id',
-    component: Detail,
+    component: Details,
   },
   {
     layout: '/user/profilesettings',

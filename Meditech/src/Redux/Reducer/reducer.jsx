@@ -5,6 +5,8 @@ import {
   GET_DOCTOR,
   CLEAN_DATAIL_ID,
   GET_ESPECIALIDADES,
+  GET_DOCTORS,
+  GET_DOCTORS_NAME,
 } from "../Actions/actions-types";
 import {
   SIGNIN_USER,
@@ -21,6 +23,7 @@ const initialState = {
   objeto: {},
   doctorDetail: [],
   especialidades: [],
+  doctors: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -69,15 +72,25 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         doctorDetail: {},
       };
+    case GET_ESPECIALIDADES:
+      return {
+        ...state,
+        especialidades: action.payload,
+      };
     case USERGOOGLE_DATA:
       return {
         ...state,
         userInfo: action.payload,
       };
-    case GET_ESPECIALIDADES:
+    case GET_DOCTORS:
       return {
         ...state,
-        especialidades: action.payload,
+        doctors: action.payload,
+      };
+    case GET_DOCTORS_NAME:
+      return {
+        ...state,
+        doctors: action.payload,
       };
     default:
       return state;

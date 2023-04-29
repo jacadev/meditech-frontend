@@ -22,7 +22,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import DefaultAuth from "./../../../layouts/user/Default";
-import illustration from "../../../../public/Meditech.png";
+import illustration from "../../../assets/img/fondos/Meditech.png";
 
 const validate = (input) => {
   let error = {};
@@ -61,6 +61,7 @@ const SignUp = () => {
     age: "",
     gender: "",
     rol: [2],
+    preload:false
   });
 
   const [error, setError] = useState({
@@ -113,6 +114,7 @@ const SignUp = () => {
         age: "",
         gender: "",
         rol: [2],
+        preload:false
       });
       history.push('/admin/default');
     } else {
