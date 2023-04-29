@@ -38,6 +38,10 @@ export default function HeaderLinks(props) {
     history.push("/user/profilesettings");
   }
 
+  function handleClickAppointment() {
+    history.push("/user/appointment");
+  }
+
   const handleLogout = () => {
     localStorage.removeItem("userName");
     localStorage.removeItem("userImage");
@@ -250,6 +254,16 @@ export default function HeaderLinks(props) {
               onClick={handleClick}
             >
               <Text fontSize="sm">Configuracion de Perfil</Text>
+            </MenuItem>
+
+            <MenuItem
+              _hover={{ bg: "none" }}
+              _focus={{ bg: "none" }}
+              borderRadius="8px"
+              px="14px"
+              onClick={handleClickAppointment}
+            >
+              <Text fontSize="sm">Ver citas</Text>
             </MenuItem>
             
             <MenuItem
