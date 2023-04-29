@@ -21,6 +21,7 @@ import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Detail from './Views/user/Deatails/detail';
 import ProfileSettings from './Views/user/ProfileSettings/index';
+import DarkMode from './Components/DarkMode/DarkMode';
 
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
@@ -95,5 +96,6 @@ const routes = [
     component: ProfileSettings,
   },
 ];
+
 
 export default routes;

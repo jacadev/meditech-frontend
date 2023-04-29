@@ -1,28 +1,13 @@
 import React from "react";
 import {
-  Box,
-  Grid,
   GridItem,
-  Icon,
-  HStack,
   Text,
-  Modal,
-  Link,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
   Image,
   Flex,
-  Button
 } from "@chakra-ui/react";
-import { FaLinkedin } from "react-icons/fa";
-import { useState } from "react";
 import imagen1 from '../../../assets/img/fondos/medicos-masculinos-femeninos-papeles.jpg'
 
 export default function AboutUs() {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
