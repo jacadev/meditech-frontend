@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
 import { getName } from "../../Redux/Actions/actions";
+import { InputGroup, Input, InputRightElement, Button ,Box,Icon} from "@chakra-ui/react";
+import {AiOutlineSearch } from 'react-icons/ai';
+
+
+
 
 const SearchBar = () => {
 
@@ -27,10 +32,21 @@ const SearchBar = () => {
 
     return (
         
-        <div>
-            <input type="text" placeholder="doctor o especialidad" onChange={changeHandler} value={name}/>
-            <button onClick={() => searchName()}>buscar</button>
-        </div>
+        <Box display="inline-flex"  width="400px" >
+  <InputGroup>
+    <Input placeholder="Doctor o Especialidad" value={name} onChange={changeHandler} width="auto" />
+   
+      <Button  onClick={() => searchName()}  width="100px"  colorScheme="blue" leftIcon={<Icon as={AiOutlineSearch} width="20px" height="20px" color="white" />} >
+        Buscar
+      </Button>
+   
+  </InputGroup>
+</Box>
+
+      
+      
+      
+      
         
     )
 }

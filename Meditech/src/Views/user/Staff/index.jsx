@@ -94,9 +94,9 @@ function Specialists() {
   }
 
   return (
-    <Box mt="5rem">
-      <Box mb={4}>
-        <Select value={specialtyFilter} onChange={handleSpecialtyChange} mb={4}>
+    <Box mt="5rem" >
+      <Box display="inline-flex" alignItems="center">
+        <Select value={specialtyFilter} onChange={handleSpecialtyChange} mb={4}  width="400px">
           <option value="">Todas las Especialidades</option>
           {specialists.map(specialist =>
             specialist.specialties.map(specialty => (
@@ -106,7 +106,7 @@ function Specialists() {
             ))
           )}
         </Select>
-        <Select value={genderFilter} onChange={handleGenderChange} mb={4}>
+        <Select value={genderFilter} onChange={handleGenderChange} mb={4} width="400px">
           <option value="">Todos los Generos</option>
           <option value="Masculino">Hombre</option>
           <option value="Femenino">Mujer</option>
@@ -117,14 +117,20 @@ function Specialists() {
         <Button onClick={handleSortingRatingChange} mb={4} colorScheme="blue">
           {sortOrderRating === "" ? "Sort by Rating" : sortOrderRating === "asc" ? "Rating Low to High" : "Rating High to Low"}
         </Button>
-        <div>
-            <button onClick={() => allDoctors()}>Todos los doctores</button>
-        </div>
-      </Box>
-
+        <Button onClick={() => allDoctors()} colorScheme="blue"  mb={4}>Todos los doctores</Button>
+            
+        
+      </Box >
+      <Flex justifyContent="center" alignItems="center">
+      <Box>
       <SearchBar/>
-
-      <Grid templateColumns="repeat(2, 1fr)" gap={6} alignItems="start">
+      </Box>
+      </Flex>
+      <Grid
+  templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
+  gap={6}
+  mt={6}
+>
       {currentSpecialists.map(specialist => (
         <SpecialistCard key={specialist.id} specialist={specialist} />
       ))}
