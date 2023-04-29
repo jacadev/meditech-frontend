@@ -20,6 +20,9 @@ import signup from './Views/user/Sing up/Index';
 import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Detail from './Views/user/Deatails/detail';
+import homeadmin from "./Views/admin/Home/Index"
+import createdoctor from "./Views/admin/Postdoctor/Create"
+import indexdoctor from "./Views/admin/Postdoctor/Index"
 import ProfileSettings from './Views/user/ProfileSettings/index';
 
 // Auth Imports
@@ -93,6 +96,19 @@ const routes = [
   {
     layout: '/user/profilesettings',
     component: ProfileSettings,
+  },
+  {
+    layout: '/user/home2',
+    component: homeadmin,
+  },
+  {
+    layout: '/user/createdoctor',
+    component: createdoctor,
+  },
+
+  {
+    layout: '/user/indexdoctor',
+    component: indexdoctor,
   },
 ];
 

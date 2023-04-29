@@ -1,18 +1,26 @@
-import { POST_RESERVE, POST_RESERVE_ERROR,FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID } from '../Actions/actions-types';
+import {
+  POST_RESERVE,
+  POST_RESERVE_ERROR,
+  FORM_DATA,
+  GET_DOCTOR,
+  CLEAN_DATAIL_ID,
+  GET_ESPECIALIDADES,
+} from "../Actions/actions-types";
 import {
   SIGNIN_USER,
   SIGNUP_USER,
   CLEAN_DETAIL,
   USERGOOGLE_DATA,
-} from '../Actions/Actionslogin';
+} from "../Actions/Actionslogin";
 
 const initialState = {
   reserva: [],
   loading: false,
   error: null,
   userInfo: {},
-  objeto:{},
-  doctorDetail: []
+  objeto: {},
+  doctorDetail: [],
+  especialidades: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -46,26 +54,31 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userInfo: {},
       };
-      case FORM_DATA:
-        return {
-          ...state,
-          objeto: action.payload,
-        };
-        case GET_DOCTOR: 
-        return {
-          ...state,
-          doctorDetail: action.payload
-        };
-      case CLEAN_DATAIL_ID:
-        return {
-          ...state,
-          doctorDetail: {}
-        }
-      case USERGOOGLE_DATA:
-        return {
-          ...state,
-          userInfo: action.payload,
-        }
+    case FORM_DATA:
+      return {
+        ...state,
+        objeto: action.payload,
+      };
+    case GET_DOCTOR:
+      return {
+        ...state,
+        doctorDetail: action.payload,
+      };
+    case CLEAN_DATAIL_ID:
+      return {
+        ...state,
+        doctorDetail: {},
+      };
+    case USERGOOGLE_DATA:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+    case GET_ESPECIALIDADES:
+      return {
+        ...state,
+        especialidades: action.payload,
+      };
     default:
       return state;
   }
