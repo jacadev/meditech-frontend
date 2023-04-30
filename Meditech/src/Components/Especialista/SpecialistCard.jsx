@@ -32,6 +32,7 @@ function SpecialistCard(props) {
 
   return (
 
+    <Link to={{ pathname: `/user/detail/${props.specialist.id}` }}>
     <Box
       cursor='pointer'
       _hover={{ boxShadow: "lg", transform: "scale(1.02)" }}
@@ -43,7 +44,6 @@ function SpecialistCard(props) {
       rounded={'lg'}
       p={6}
       textAlign={'center'}>
-      <Link to={{ pathname: `/user/detail/${props.specialist.id}` }}>
         <Avatar
 
           size={'xl'}
@@ -53,7 +53,6 @@ function SpecialistCard(props) {
           mb={4}
           pos={'relative'}
         />
-      </Link>
       <Heading fontSize={'2xl'} fontFamily={'body'}>
         {props.specialist.person.first_name} {props.specialist.person.last_name}
       </Heading>
@@ -77,7 +76,7 @@ function SpecialistCard(props) {
             {props.specialist.specialties.map((specialty, index) => (
 
               <Badge
-                key={index}
+              key={index}
                 px={2}
                 py={1}
                 bg={useColorModeValue('gray.50', 'gray.800')}
@@ -89,71 +88,8 @@ function SpecialistCard(props) {
           </Box>
         )}
       </Stack>
-
-
-
-
-
-      {/* <Link to={{pathname: `/user/detail/${props.specialist.id}`}}>
-      <Box alignItems="center" justifyContent="center" bg="blue.200" h="150px">
-        <Image src={props.specialist.profile_image} alt={props.specialist.id} borderRadius="full" boxSize="100px" objectFit="cover"/>
-      </Box>
+        </Box>
       </Link>
-      <Box p="6">
-        <Box d="flex" alignItems="baseline">
-          <Badge borderRadius="full" px="2" colorScheme="teal">
-            {props.specialist.person.gender}
-          </Badge>
-          <Text ml="2" textTransform="uppercase" fontSize="sm" fontWeight="bold" letterSpacing="wide">
-            {props.specialist.specialties.map(specialty => specialty.specialty).join(", ")}
-          </Text>
-        </Box>
-
-        <Box my="2">
-          <Text fontSize="xl" fontWeight="bold">
-            {props.specialist.person.first_name} {props.specialist.person.last_name}
-          </Text>
-          
-          <Text mb={2} fontStyle="italic">
-            " {props.specialist.about_me}
-          </Text>
-          <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>{renderStars(props.specialist.rating)}</span>
-        </Box>
-        <Box>
-          <Text mb="2">
-            <strong>Consultation Cost:</strong> ${props.specialist.consultation_cost.toFixed(2)}
-          </Text>
-          
-        </Box>
-        {props.specialist.specialties && (
-          <Box mt={4}>
-            <Text>
-              <strong>Specialties:</strong>
-            </Text>
-            <UnorderedList>
-              {props.specialist.specialties.map((specialty, index) => (
-                <ListItem key={index}>{specialty.specialty}</ListItem>
-              ))}
-            </UnorderedList>
-            <Link
-              to={{
-                pathname: "/user/reserve",
-                state: {
-                  id: props.specialist.id,
-                  name: `${props.specialist.person.first_name} ${props.specialist.person.last_name}`,
-                  specialties: props.specialist.specialties.map(s => s.specialty),
-                  consultationCost: props.specialist.consultation_cost,
-                  location: props.specialist.location.address,
-                  profileImage: props.specialist.profile_image,
-                  disponibilties:props.specialist.disponibilties,
-                },
-              }}
-            >
-            </Link>
-          </Box>
-        )}
-      </Box> */}
-    </Box>
   );
 }
 
