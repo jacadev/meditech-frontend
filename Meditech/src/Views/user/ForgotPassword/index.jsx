@@ -17,7 +17,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import DefaultAuth from './../../../layouts/user/Default';
-import illustration from '../../../../public/Meditech.png';
+import illustration from '../../../assets/img/fondos/Meditech.png';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 

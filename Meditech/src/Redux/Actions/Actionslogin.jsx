@@ -69,7 +69,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 export const resetPassword =
   (token, newPassword, email) => async (dispatch) => {
     try {
-      const response = await axios.post('http://localhost:3001/patients/....', {
+      const response = await axios.post('http://localhost:3001/patients/resetpassword', {
         token,
         newPassword,
         email,
