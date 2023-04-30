@@ -52,7 +52,6 @@ export default function User(props) {
           case "/user/signin":
           case "/user/forgotpassword":
           case "/user/appointment":
-
             return (
               <Route
                 path={layout}

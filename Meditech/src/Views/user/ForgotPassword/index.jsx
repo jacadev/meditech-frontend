@@ -2,7 +2,10 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword } from './../../../Redux/Actions/Actionslogin';
+import {
+  cleanSuccess,
+  resetPassword,
+} from './../../../Redux/Actions/Actionslogin';
 import {
   Box,
   Button,
@@ -26,29 +29,57 @@ const ForgotPassword = () => {
   const history = useHistory();
   const success = useSelector((state) => state.success);
   const error = useSelector((state) => state.error);
-  const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [recoveryCode, setRecoveryCode] = useState('');
   const [show, setShow] = React.useState(false);
   const [show1, setShow1] = React.useState(false);
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
   const brandStars = useColorModeValue('brand.500', 'brand.400');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [input, setInput] = useState({
+    email: '',
+    newPassword: '',
+    recoveryCode: '',
+    confirmPassword: '',
+  });
 
-    if (newPassword !== confirmPassword) {
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const property = e.target.name;
+
+    setInput({ ...input, [property]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (input.newPassword !== input.confirmPassword) {
       alert(
         'Las contraseñas no coinciden. Por favor, verifica que las contraseñas ingresadas sean iguales.'
       );
       return;
     }
-    dispatch(resetPassword(recoveryCode, newPassword, email));
+    dispatch(cleanSuccess());
+    try {
+      await dispatch(resetPassword(input));
+  
+      if (success) {
+        setInput({
+          email: '',
+          newPassword: '',
+          recoveryCode: '',
+          confirmPassword: '',
+        });
+        history.push('/user/signin');
+      } else {
+        history.push('user/forgotpassword');
+      }
+    } catch (error) {}
   };
+  
+
   const handleClick = () => setShow(!show);
   const handleClick1 = () => setShow1(!show1);
+
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
@@ -65,9 +96,7 @@ const ForgotPassword = () => {
         flexDirection="column"
       >
         <div>
-          {success === true ? (
-            <div>La contraseña se restableció correctamente</div>
-          ) : (
+          {success ? (
             <div>
               <Box me="auto">
                 <Heading color={textColor} fontSize="36px" mb="10px">
@@ -92,13 +121,13 @@ const ForgotPassword = () => {
                     fontSize="sm"
                     ms={{ base: '0px', md: '0px' }}
                     type="email"
-                    value={email}
+                    value={input.email}
                     name="email"
                     placeholder="Ingresa el correo electronico asociado a la cuenta "
                     mb="24px"
                     fontWeight="500"
                     size="lg"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
                 <div>
@@ -124,12 +153,12 @@ const ForgotPassword = () => {
                           fontSize="sm"
                           ms={{ base: '0px', md: '0px' }}
                           type={show ? 'text' : 'password'}
-                          value={newPassword}
+                          value={input.newPassword}
                           name="newPassword"
                           mb="24px"
                           fontWeight="500"
                           size="lg"
-                          onChange={(e) => setNewPassword(e.target.value)}
+                          onChange={(e) => handleChange(e)}
                         />
                         <InputRightElement
                           display="flex"
@@ -163,13 +192,13 @@ const ForgotPassword = () => {
                           variant="auth"
                           fontSize="sm"
                           ms={{ base: '0px', md: '0px' }}
-                          type={show ? 'text' : 'password'}
-                          value={confirmPassword}
-                          name="confirm-password"
+                          type={show1 ? 'text' : 'password'}
+                          value={input.confirmPassword}
+                          name="confirmPassword"
                           mb="24px"
                           fontWeight="500"
                           size="lg"
-                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          onChange={(e) => handleChange(e)}
                         />
                         <InputRightElement
                           display="flex"
@@ -197,7 +226,7 @@ const ForgotPassword = () => {
                     color={textColor}
                     mb="8px"
                   >
-                  Codigo:<Text color={brandStars}>*</Text>
+                    Codigo:<Text color={brandStars}>*</Text>
                   </FormLabel>
                   <Input
                     isRequired={true}
@@ -205,18 +234,18 @@ const ForgotPassword = () => {
                     fontSize="sm"
                     ms={{ base: '0px', md: '0px' }}
                     type="number"
-                    value={recoveryCode}
+                    value={input.recoveryCode}
                     placeholder="Ingrese el codigo que recibió en su correo electrónico."
                     name="recoveryCode"
                     mb="24px"
                     fontWeight="500"
                     size="lg"
-                    onChange={(e) => setRecoveryCode(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                   />
 
                   <br />
                 </div>
-               
+
                 <div>
                   <Button
                     fontSize="sm"
@@ -236,7 +265,9 @@ const ForgotPassword = () => {
                 </div>
               </form>
             </div>
-          )}
+          ) : error ? (
+            <div>{error.message}</div>
+          ) : null}
         </div>
       </Flex>
     </DefaultAuth>
