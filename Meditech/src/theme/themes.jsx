@@ -28,6 +28,14 @@ const theme = extendTheme(
       initialColorMode: "light",
       useSystemColorMode: false,
     },
+    styles: {
+      global: (props) => ({
+        body: {
+          color: props.colorMode === "light" ? "black" : "white",
+          bg: props.colorMode === "light" ? "white" : "black",
+        },
+      }),
+    },
   },
   { breakpoints }, // Breakpoints
   globalStyles
