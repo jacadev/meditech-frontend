@@ -8,11 +8,15 @@ import {
   Th,
   Td,
   TableCaption,
+  Button,
+  Tooltip,
   Image,
   TableContainer,
 } from "@chakra-ui/react";
+import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function doctor() {
   const [specialists, setSpecialists] = useState([]);
@@ -48,48 +52,72 @@ function doctor() {
     indexOfFirstSpecialist,
     indexOfLastSpecialist
   );
-
+  const history = useHistory();
   return (
-    
-    <Card p={5} mx="auto" mt={{ md: "12vh" }}>
-      <TableContainer>
-        <Table size="sm">
-          <Thead>
-            <Tr>
-              <Th>Img</Th>
-              <Th>Nombres</Th>
-              <Th>Genero</Th>
-              <Th>Especialidad</Th>
-              <Th>Costo</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredSpecialists.map((specialist) => (
-              <Tr key={specialist.id}>
-                <Td>
-                  <Image
-                    src={specialist.person.profile_image}
-                    alt={specialist.person.id}
-                    borderRadius="full"
-                    boxSize="40px"
-                  />
-                </Td>
-                <Td>
-                  {specialist.person.first_name} {specialist.person.last_name}
-                </Td>
-                <Td>{specialist.person.gender}</Td>
-                <Td>
-                  {specialist.specialties
-                    .map((specialty) => specialty.specialty)
-                    .join(", ")}
-                </Td>
-                <Td>${specialist.person.consultation_cost}</Td>
+    <>
+      <Button
+        mt={{ md: "12vh" }}
+        leftIcon={<AddIcon />}
+        colorScheme="blue"
+        variant="solid"
+        onClick={() => history.push("/user/createdoctor")}
+      >
+        Crear
+      </Button>
+
+      <Card p={5} mx="auto" mt={{ md: "2vh" }}>
+        <TableContainer>
+          <Table size="sm">
+            <Thead>
+              <Tr>
+                <Th>Img</Th>
+                <Th>Nombres</Th>
+                <Th>Genero</Th>
+                <Th>Especialidad</Th>
+                <Th>Costo</Th>
+                <Th>Acciones</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    </Card>
+            </Thead>
+            <Tbody>
+              {filteredSpecialists.map((specialist) => (
+                <Tr key={specialist.id}>
+                  <Td>
+                    <Image
+                      src={specialist.profile_image}
+                      alt={specialist.id}
+                      borderRadius="full"
+                      boxSize="40px"
+                    />
+                  </Td>
+                  <Td>
+                    {specialist.person.first_name} {specialist.person.last_name}
+                  </Td>
+                  <Td>{specialist.person.gender}</Td>
+                  <Td>
+                    {specialist.specialties
+                      .map((specialty) => specialty.specialty)
+                      .join(", ")}
+                  </Td>
+                  <Td>${specialist.consultation_cost}</Td>
+                  <Td>
+                    <Tooltip hasArrow label="Editar" bg="blue.600">
+                      <Button
+                        onClick={() =>
+                          history.push(`/user/editdoctor/${specialist.id}`)
+                        }
+                        leftIcon={<EditIcon />}
+                        colorScheme="blue"
+                        variant="solid"
+                      ></Button>
+                    </Tooltip>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Card>
+    </>
   );
 }
 export default doctor;

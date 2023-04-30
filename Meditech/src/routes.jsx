@@ -23,6 +23,7 @@ import Details from './Views/user/Deatails/detail';
 import homeadmin from "./Views/admin/Home/Index"
 import createdoctor from "./Views/admin/Postdoctor/Create"
 import indexdoctor from "./Views/admin/Postdoctor/Index"
+import indexuser from "./Views/admin/listuser/index"
 import ProfileSettings from './Views/user/ProfileSettings/index';
 
 // Auth Imports
@@ -109,6 +110,10 @@ const routes = [
   {
     layout: '/user/indexdoctor',
     component: indexdoctor,
+  },
+  {
+    layout: '/user/indexuser',
+    component: indexuser,
   },
 ];
 
