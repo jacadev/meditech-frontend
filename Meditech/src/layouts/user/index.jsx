@@ -44,7 +44,7 @@ export default function User(props) {
               />
               );
           case "/user/detail/:id":
-          case "/user/reserve":
+          // case "/user/reserve":
           case "/user/payment":
           case "/user/signup":
           case "/user/paymentprocess":
@@ -52,7 +52,7 @@ export default function User(props) {
           case "/user/signin":
           case "/user/forgotpassword":
           case "/user/appointment":
-
+          case "/user/appointments":
             return (
               <Route
                 path={layout}
