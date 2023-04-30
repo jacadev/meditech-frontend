@@ -1,4 +1,5 @@
 import React from "react";
+import { useColorMode } from "@chakra-ui/react";
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import {
   Box,
@@ -23,6 +24,7 @@ function SpecialistCard(props) {
     }
     return stars;
   };
+  const { colorMode } = useColorMode();
 
   return (
     <Box
@@ -33,6 +35,7 @@ function SpecialistCard(props) {
       overflow="hidden"
       boxShadow="md"
       w="100%"
+      bg={colorMode === "light" ? "white" : "gray.700"} 
     >
       <Link to={{pathname: `/user/detail/${props.specialist.id}`}}>
       <Box alignItems="center" justifyContent="center" bg="blue.200" h="150px">
