@@ -66,7 +66,7 @@ export default function SplitScreen() {
               bg='#5C43FF'
               color={'white'}
               _hover={{
-                bg: '#5C43FF',
+                bg: 'green',
               }}>
              Más acerca de nosotros
             </Button>

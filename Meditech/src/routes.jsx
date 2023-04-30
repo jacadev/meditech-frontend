@@ -19,8 +19,10 @@ import payment from './Views/user/payment';
 import signup from './Views/user/Sing up/Index';
 import Gallery from './Components/GaleriaImg/Gallery';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
-import Detail from './Views/user/Deatails/detail';
+import Details from './Views/user/Deatails/detail';
 import ProfileSettings from './Views/user/ProfileSettings/index';
+import ForgotPassword from './Views/user/ForgotPassword';
+import infoAppointment from './Components/infoAppointment/infoAppointment';
 import DarkMode from './Components/DarkMode/DarkMode';
 
 // Auth Imports
@@ -89,11 +91,19 @@ const routes = [
   {
     name: 'Detalles del Medico',
     layout: '/user/detail/:id',
-    component: Detail,
+    component: Details,
   },
   {
     layout: '/user/profilesettings',
     component: ProfileSettings,
+  },
+  {
+    layout: '/user/forgotpassword',
+    component: ForgotPassword,
+},
+{
+    layout: '/user/appointment',
+    component: infoAppointment,
   },
 ];
 

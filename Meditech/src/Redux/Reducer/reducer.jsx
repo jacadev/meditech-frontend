@@ -1,18 +1,26 @@
-import { POST_RESERVE, POST_RESERVE_ERROR,FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID } from '../Actions/actions-types';
+import { POST_RESERVE, POST_RESERVE_ERROR,FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME, GET_PATIENT } from '../Actions/actions-types';
 import {
   SIGNIN_USER,
   SIGNUP_USER,
   CLEAN_DETAIL,
   USERGOOGLE_DATA,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_FAILURE,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAILURE
 } from '../Actions/Actionslogin';
 
 const initialState = {
   reserva: [],
   loading: false,
   error: null,
+  success: false,
   userInfo: {},
   objeto:{},
-  doctorDetail: []
+  doctorDetail: [],
+  doctors: [],
+  appointmentOfPatientID:[], // aca se guardan los datos del paciente que se traen de la DB para el componente que se encarga de visualizar las citas del paciente 
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -59,13 +67,61 @@ const rootReducer = (state = initialState, action) => {
       case CLEAN_DATAIL_ID:
         return {
           ...state,
-          doctorDetail: {}
+          doctorDetail: [],
+          appointmentOfPatientID: []
         }
       case USERGOOGLE_DATA:
         return {
           ...state,
           userInfo: action.payload,
         }
+
+        case FORGOT_PASSWORD_REQUEST:
+          return {
+            ...state,
+            loading: true,
+          };
+        case FORGOT_PASSWORD_SUCCESS:
+          return {
+            ...state,
+            loading: false,
+            success: true,
+          };
+        case FORGOT_PASSWORD_FAILURE:
+          return {
+            ...state,
+            loading: false,
+            error: action.payload,
+          };
+          case PASSWORD_RESET_SUCCESS:
+            return {
+              ...state,
+              loading: false,
+              success: true,
+            };
+          case PASSWORD_RESET_FAILURE:
+            return {
+              ...state,
+              loading: false,
+              error: action.payload,
+            };
+
+      case GET_DOCTORS:
+        return {
+          ...state,
+          doctors: action.payload
+        }
+      case GET_DOCTORS_NAME:
+        return {
+          ...state,
+          doctors: action.payload
+        }
+      case GET_PATIENT:
+        return {
+          ...state,
+          appointmentOfPatientID: action.payload
+        }
+
     default:
       return state;
   }

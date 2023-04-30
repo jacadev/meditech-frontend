@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { GoogleLogin } from '@leecheuk/react-google-login';
 import { useHistory } from 'react-router-dom';
@@ -22,20 +23,24 @@ import {
 import { HSeparator } from './../../../Components/separator/Separator';
 import DefaultAuth from './../../../layouts/user/Default';
 // Assets
-import illustration from '../../../../public/Meditech.png';
+import illustration from '../../../assets/img/fondos/Meditech.png';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userInfo } from './../../../Redux/Actions/Actionslogin';
+import {
+  userInfo,
+  forgotPassword,
+} from './../../../Redux/Actions/Actionslogin';
 import { userSigninGoogle } from './../../../Redux/Actions/Actionslogin';
 
 function SignIn() {
   const history = useHistory();
   const userInfo1 = useSelector((state) => state.userInfo);
-  console.log(userInfo1)
+  const success = useSelector((state) => state.success);
+  console.log(userInfo1);
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
@@ -59,13 +64,12 @@ function SignIn() {
     password: '',
   });
   function handleClick1() {
-    history.push("/user/signup");
+    history.push('/user/signup');
   }
 
   const handleChange = (e) => {
     const value = e.target.value;
     const property = e.target.name;
-    
 
     setInput({ ...input, [property]: value });
   };
@@ -86,14 +90,15 @@ function SignIn() {
       body: JSON.stringify({
         user_name,
         email,
-        rol: [2]
+        rol: [2],
+        preload: false
       }),
     };
 
     fetch('http://localhost:3001/patients/signinGoogle', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        dispatch(userSigninGoogle(data))
+        dispatch(userSigninGoogle(data));
         console.log(data);
         history.push('/admin/default');
       })
@@ -104,6 +109,27 @@ function SignIn() {
   const onFailure = (error) => {
     console.log(error);
     // Aquí puedes manejar el error del inicio de sesión de Google
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    if (!input.email || input.email.trim().length === 0) {
+      alert(
+        'Por favor, ingresa el correo electrónico que utilizaste para crear tu cuenta.'
+      );
+      return;
+    }
+
+    const email = input.email;
+
+    try {
+      await dispatch(forgotPassword(email));
+      setInput({ email: '' });
+      // if (success === true) {
+        history.push('/user/forgotpassword');
+      // }
+    } catch (error) {}
+    
   };
 
   const submitHandler = (e) => {
@@ -259,16 +285,20 @@ function SignIn() {
                 </FormLabel>
               </FormControl>
 
-              <NavLink to="/auth/forgot-password">
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={handleForgotPassword}
+              >
                 <Text
                   color={textColorBrand}
                   fontSize="sm"
                   w="124px"
                   fontWeight="500"
+                  onClick={handleForgotPassword}
                 >
                   Has olvidado tu contraseña?
                 </Text>
-              </NavLink>
+              </span>
             </Flex>
             <Button
               fontSize="sm"

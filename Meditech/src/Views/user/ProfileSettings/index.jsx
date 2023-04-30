@@ -11,10 +11,18 @@ import {
   Heading,
   Input,
   Text,
+  InputGroup,
+  InputRightElement,
+  Icon,
   useColorModeValue,
 } from '@chakra-ui/react';
 import DefaultAuth from './../../../layouts/user/Default';
-import illustration from '../../../../public/Meditech.png';
+
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { RiEyeCloseLine } from 'react-icons/ri';
+
+import illustration from '../../../assets/img/fondos/Meditech.png';
+
 
 const validate = (input) => {
   let error = {};
@@ -37,7 +45,7 @@ const ProfileSettings = () => {
   const textColorDetails = useColorModeValue('navy.700', 'secondaryGray.600');
   const textColorBrand = useColorModeValue('brand.500', 'white');
   const brandStars = useColorModeValue('brand.500', 'brand.400');
-
+  const [show, setShow] = React.useState(false);
   const [input, setInput] = useState({
     user_name: '',
     email: '',
@@ -65,6 +73,7 @@ const ProfileSettings = () => {
     }
   };
 
+  const handleClick = () => setShow(!show);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -205,22 +214,36 @@ const ProfileSettings = () => {
                     >
                       Contraseña:<Text color={brandStars}>*</Text>
                     </FormLabel>
-                    <Input
-                      isRequired={false}
-                      variant="auth"
-                      fontSize="sm"
-                      ms={{ base: '0px', md: '0px' }}
-                      type="password"
-                      value={input.password}
-                      name="password"
-                      placeholder="Escribe tu contraseña...."
-                      mb="24px"
-                      fontWeight="500"
-                      size="lg"
-                      onChange={(e) => handleChange(e)}
-                    />
+                    <InputGroup size="md">
+                      <Input
+                        isRequired={false}
+                        variant="auth"
+                        fontSize="sm"
+                        ms={{ base: '0px', md: '0px' }}
+                        type="password"
+                        value={input.password}
+                        name="password"
+                        placeholder="Escribe tu contraseña...."
+                        mb="24px"
+                        fontWeight="500"
+                        size="lg"
+                        onChange={(e) => handleChange(e)}
+                      />
 
-                    <br />
+                      <br />
+                      <InputRightElement
+                        display="flex"
+                        alignItems="center"
+                        mt="4px"
+                      >
+                        <Icon
+                          color={textColorSecondary}
+                          _hover={{ cursor: 'pointer' }}
+                          as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                          onClick={handleClick}
+                        />
+                      </InputRightElement>
+                    </InputGroup>
                   </div>
                 </Flex>
               </div>
