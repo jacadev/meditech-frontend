@@ -1,212 +1,263 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-//import {postReserve} from "./../../Redux/Actions/actions"
-import { useDispatch,useSelector } from 'react-redux'
-//import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useLocation} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import PayPalCheckout from '../../Views/user/payment/index'
 import { enviarObjetoDeEstado } from "./../../Redux/Actions/actions"
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+import { utcToZonedTime } from 'date-fns-tz';
 import {
   Box,
   Stack,
-  Heading,
   Text,
   Image,
   Checkbox,
   VStack,
   FormControl,
   FormLabel,
-  Input,
   Textarea,
   Button,
   Badge,
 } from '@chakra-ui/react';
 
 const FormularioReserva = () => {
- // const { specialistId } = useParams();
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [firstName, setNombres] = useState('');
-  const [lastName, setApellidos] = useState('');
-  const [dni, setDni] = useState('');
-  const [phone, setTelefono] = useState('');
-  const [email, setEmail] = useState('');
-  const [comment, setComentario] = useState('');
-  const [date, setFecha] = useState(new Date().toISOString().substr(0, 10));
-  const [hour, setHora] = useState('');
+  // const { specialistId } = useParams();
   const [dataTreatment, setConsentimiento] = useState(false);
   const [receiveCommunication, setRecibirComunicaciones] = useState(false);
   const location = useLocation();
-  const { id, name, specialties, consultationCost, location: address, profileImage, disponibilties } =
-    location.state;
+  const { id, name, specialties, consultationCost, location: clinicLocation, profileImage, disponibilties } = location.state;
   const history = useHistory();
   const dispatch = useDispatch()
-  const userInfo = useSelector(state=>state.userInfo.id)
-
-
-
-//console.log(userInfo)
-  const handleSubmit =  (e) => {
-/*     e.preventDefault(); */
-const formData = {
-      patient_id:userInfo,
-      date:disponibilties[0].date,
-      disponibilty_id:disponibilties[0].id,
-      consultationReason:comment,
-      preload:false,
-      consultationCost
-    };
-     dispatch(enviarObjetoDeEstado(formData));
-    history.push("/user/payment");
-    // Mostrar mensaje de confirmación
- /*    setShowConfirmation(true);
-    console.log("Información del formulario:", formData); 
-
-    
-    
-    setNombres("");
-    setApellidos("");
-    setTelefono("");
-    setComentario("");
-    setEmail("");
-    setFecha("");
-    setHora("");
-    setDni("");
-    setConsentimiento(false);
-    setRecibirComunicaciones(false);  */
-  };
+  const userInfo = useSelector(state => state.userInfo.id)
   
+  const [fecha, setFecha] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [hora, setHora] = useState([])
+  const [formData, setFormdata] = useState({ 
+    patient_id: userInfo,
+    date: "",
+    disponibilty_id: "",
+    consultationReason: '',
+    preload: false,
+    consultationCost
+  })
 
+  function handleDateSelect(info) {
+    console.log("Fecha seleccionada:", info.dateStr);
+    setSelectedDate(info.dateStr); // Actualizar fecha seleccionada en el estado
+    setFecha(info.dateStr); // Actualizar fecha en el estado
+  }
+  function renderDayCellContent(selectedDate) {
+    return function(info) {
+      const dateStr = info.date.toISOString().slice(0,10);
+  
+      if (dateStr === selectedDate) {
+        return (
+          <Box borderRadius="md" bg="blue.100" p={1} height="100%" width="100%">
+            <Box as="span" fontWeight="bold">{info.dayNumberText}</Box>
+          </Box>
+        )
+      }
+      else {
+        return (
+          <Box as="span" fontWeight="normal">{info.dayNumberText}</Box>
+        )
+      }
+    }
+  }
+
+  function changeHandler (date, disponibilty_id) {
+    //console.log('Hora seleccionada:', date, disponibilty_id);
+    setFormdata({...formData, date, disponibilty_id })
+    // Aquí puedes guardar la hora seleccionada en el estado o enviarla al servidor como parte de la reserva
+  }
+
+  const changeHandlerComment = (event) => {
+    const {value, name} = event.target;
+
+    setFormdata({...formData, [name]: value})
+
+  }
+
+  const fechaLocal = utcToZonedTime(new Date(fecha), 'Europe/Madrid'); // Cambiamos a la zona horaria de Bogotá
+  /* console.log("fecha: " + fecha);
+  console.log("fechaLocal col: " + fechaLocal); */
+  //console.log(userInfo)
+  const handleSubmit = (e) => {
+
+    dispatch(enviarObjetoDeEstado(formData));
+    history.push("/user/payment");
+
+  };
+
+  const statusTrue = () =>{
+
+    const result = disponibilties.filter(disponibility => disponibility.status === true) // Filtrar solo aquellos con status true
+    .map(disponibility => ({
+      title: 'Disponible',
+      id:disponibility.id,
+      date: disponibility.date,
+      day:disponibility.day,
+      timetable:disponibility.timetable,
+      color: '#6B46C1'
+    }))
+
+    setHora(result)
+  }
+
+  useEffect (()=>{
+    statusTrue()
+  },[])
 
   return (
-    
+
     <Box marginTop="100px">
-    <Stack direction="row" spacing={1} alignItems="flex-start">
-      <Box flex="70%">
-      <Box>
-        <form onSubmit={handleSubmit}>
+      <Stack direction="row" spacing={1} alignItems="flex-start">
+        <Box flex="70%">
+          <Box>
+            <form onSubmit={handleSubmit}>
+
+              <FormControl id="comment">
+                <FormLabel>Comentario para el especialista (opcional):</FormLabel>
+                <Textarea value={formData.consultationReason} onChange={changeHandlerComment} name='consultationReason'/>
+              </FormControl>
+
+              <FormLabel>Fecha:</FormLabel>
+    
+              <FullCalendar
+                  plugins={[ dayGridPlugin, interactionPlugin ]}
+                  initialView="dayGridMonth"
+                  events={hora} 
+                  eventContent={({ event }) => (
+                    <Box bg="purple.600" height="20px" borderRadius="8px" px={0.5} py={0.5} textAlign="center">
+                      <Text color="white"  fontSize="xs">Disponible</Text>
+                    </Box>
+                  )}
+
+                  dateClick={handleDateSelect}
+                  dayCellContent={renderDayCellContent(selectedDate)} // Renderizado personalizado para cada día
+            />
+        <Box>
+        {fecha && (
+        <Text fontWeight="bold" mt={2}>
+          Usted está reservando para el: {fecha && format(fechaLocal, 'EEEE, dd \'de\' MMMM \'de\' y', { locale: es })}
+        </Text>
+      )}
+      {fecha && hora.filter((disponibility) => disponibility.date === fecha)
+        .sort((a, b) => a.timetable.startTime.localeCompare(b.timetable.startTime))
+        .map((disponibility, index) => {
+          return (
+            <Button 
+              key={index}
+              onClick={() => changeHandler(disponibility.date,disponibility.id )}
+              colorScheme="blue"
+              variant="solid" 
+              mt={2}
+            >
+              {disponibility.timetable.startTime} - {disponibility.timetable.endTime}
+            </Button>
+          )
+        })
+      }
+             </Box> 
+
+              <Checkbox
+                isChecked={dataTreatment}
+                onChange={() => setConsentimiento(!dataTreatment)}
+                required={true}
+              >
+
+                Doy mi consentimiento para el tratamiento de mis datos personales relacionados con la salud y su transferencia al especialista para concertar la cita
+              </Checkbox>
+
+              <Checkbox
+                isChecked={receiveCommunication}
+                onChange={() => setRecibirComunicaciones(!receiveCommunication)}>
+
+                Sí, me gustaría recibir comunicaciones de Meditech.
+              </Checkbox>
 
 
-<FormControl id="comment">
-  <FormLabel>Comment for the specialist (optional):</FormLabel>
-  <Textarea value={comment} onChange={(e) => setComentario(e.target.value)} />
-</FormControl>
+              <div style={{ marginTop: "50px" }}>
+                <Button
+                  type="submit"
+                  bg="#5C43FF"
+                  color="white"
+                  borderRadius="5px"
+                  padding="10px"
+                  width="100%"
+                  _hover={{ bg: '#38a169' }}
+                >
+                  Pedir una cita
+                </Button>
+              </div>
 
 
-
-  <FormLabel>Date:</FormLabel>
-  {disponibilties[0].date}
-
-
-
-<FormControl id="hour">
-  <FormLabel>Hour:</FormLabel>
-    {disponibilties[0].timetable.startTime}
-    <hr/>
-    <br />
-</FormControl>
-
-
-          
-
-<Checkbox
-  isChecked={dataTreatment}
-  onChange={() => setConsentimiento(!dataTreatment)}
-  required={true} 
->
-I give my consent to the processing of my personal data related to health and its transfer to the specialist to make the appointment
-</Checkbox>
-
-<Checkbox
-  isChecked={receiveCommunication}
-  onChange={() => setRecibirComunicaciones(!receiveCommunication)}
-  
->
-  Yes, I would like to receive communications from Meditech.
-</Checkbox>
-
-
-          <div style={{ marginTop: "50px" }}>
-          <Button
-        type="submit"
-        bg="#5C43FF"
-        color="white"
-        borderRadius="5px"
-        padding="10px"
-        width="100%"
-        _hover={{ bg: '#38a169' }}
-      >
-       Request an Appointment
-      </Button>
-          </div>
-
-          
-        </form>
+            </form>
+          </Box>
         </Box>
-      </Box>
 
-      <Box flex="30%">
-        <VStack spacing={6} alignItems="flex-start">
-        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-  <Image src={profileImage} alt={name} />
+        <Box flex="30%">
+          <VStack spacing={6} alignItems="flex-start">
+            <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+              <Image src={profileImage} alt={name} />
 
-  <Box p="6">
-    <Box d="flex" alignItems="baseline">
-      <Badge rounded="full" px="2" colorScheme="teal">
-        New
-      </Badge>
-      <Box
-        ml="2"
-        fontSize="2xl"
-        fontWeight="bold"   
-        textAlign="center"
-      >
-        Reserving an appointment with {name}
-      </Box>
+              <Box p="6">
+                <Box d="flex" alignItems="baseline">
+                  <Badge rounded="full" px="2" colorScheme="teal">
+                  Nuevo
+                  </Badge>
+                  <Box
+                    ml="2"
+                    fontSize="2xl"
+                    fontWeight="bold"
+                    textAlign="center"
+                  >
+                    
+                  Reservando una cita con {name}
+                  </Box>
 
-    </Box>
+                </Box>
 
-    <Box mt="2" lineHeight="tight">
-      <Text fontSize="xl">{specialties.join(", ")}</Text>
-    </Box>
-  
-    <Box d="flex" mt="2" alignItems="center">
-      <Box
-        as="span"
-        color="gray.600"
-        fontSize="md"
-        fontWeight="semibold"
-        mr="2"
-      >
-        Consultation Cost:
-      </Box>
-      <Text fontSize="lg">${consultationCost.toFixed(2)}</Text>
-    </Box>
+                <Box mt="2" lineHeight="tight">
+                  <Text fontSize="xl">{specialties.join(", ")}</Text>
+                </Box>
 
-    <Box d="flex" mt="2" alignItems="center">
-      <Box
-        as="span"
-        color="gray.600"
-        fontSize="md"
-        fontWeight="semibold"
-        mr="2"
-      >
-     
-      </Box>
-      
-    </Box>
-  </Box>
-</Box>
+                <Box d="flex" mt="2" alignItems="center">
+                  <Box
+                    as="span"
+                    color="gray.600"
+                    fontSize="md"
+                    fontWeight="semibold"
+                    mr="2"
+                  >
+                    Costo de la consulta:
+                  </Box>
+                  <Text fontSize="lg">${consultationCost.toFixed(2)}</Text>
+                </Box>
 
-                 
-        </VStack>
-      </Box>
-    </Stack>
+                <Box d="flex" mt="2" alignItems="center">
+                  <Box
+                    as="span"
+                    color="gray.600"
+                    fontSize="md"
+                    fontWeight="semibold"
+                    mr="2"
+                  >
 
-    {showConfirmation && (
-      <Box backgroundColor="blue" color="white" p={4} borderRadius="md" mt={4}>
-        Solicitud de cita enviada correctamente.
-      </Box>
-    )}
+                  </Box>
+
+                </Box>
+              </Box>
+            </Box>
+
+
+          </VStack>
+        </Box>
+      </Stack>
     </Box>
   );
 };
