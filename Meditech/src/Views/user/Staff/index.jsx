@@ -19,6 +19,10 @@ function Specialists() {
   const [specialistsPerPage] = useState(6);
 
   const specialists = useSelector(state => state.doctors);
+
+  const frontPage = () => {
+    setCurrentPage(1)
+  }
   
   useEffect(() => {
     
@@ -123,7 +127,9 @@ function Specialists() {
       </Box >
       <Flex justifyContent="center" alignItems="center">
       <Box>
-      <SearchBar/>
+      <SearchBar 
+        frontPage={frontPage}
+      />
       </Box>
       </Flex>
       <Grid
