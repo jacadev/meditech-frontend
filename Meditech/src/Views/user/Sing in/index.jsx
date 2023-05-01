@@ -33,6 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   userInfo,
   forgotPassword,
+  cleanSuccess,
 } from './../../../Redux/Actions/Actionslogin';
 import { userSigninGoogle } from './../../../Redux/Actions/Actionslogin';
 
@@ -40,7 +41,6 @@ function SignIn() {
   const history = useHistory();
   const userInfo1 = useSelector((state) => state.userInfo);
   const success = useSelector((state) => state.success);
-  console.log(userInfo1);
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
@@ -91,7 +91,7 @@ function SignIn() {
         user_name,
         email,
         rol: [2],
-        preload: false
+        preload: false,
       }),
     };
 
@@ -125,22 +125,18 @@ function SignIn() {
     try {
       await dispatch(forgotPassword(email));
       setInput({ email: '' });
-      // if (success === true) {
-        history.push('/user/forgotpassword');
-      // }
+      history.push('/user/forgotpassword');
     } catch (error) {}
-    
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (input.email && input.password && userInfo) {
+    if (input.email && input.password && userInfo1) {
       dispatch(userInfo(input));
       setInput({ email: '', password: '' });
       history.push('/admin/default');
     } else {
-      alert('Usuario o contraseña incorrectos');
-      console.log('Aca pase');
+      alert('Usuario o contraseña incorrectos')
     }
   };
 
@@ -153,7 +149,8 @@ function SignIn() {
       });
     }
     gapi.load('client:auth2', start);
-  });
+    dispatch(cleanSuccess())
+  }, []);
 
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>

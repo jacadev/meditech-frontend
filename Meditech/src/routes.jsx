@@ -17,12 +17,13 @@ import Reserve from './Views/user/Reserve/Reserve';
 import singIn from './Views/user/Sing in';
 import payment from './Views/user/payment';
 import signup from './Views/user/Sing up/Index';
-import Gallery from './Components/GaleriaImg/Gallery';
+
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Details from './Views/user/Deatails/detail';
 import ProfileSettings from './Views/user/ProfileSettings/index';
 import ForgotPassword from './Views/user/ForgotPassword';
-import infoAppointment from './Components/infoAppointment/infoAppointment';
+import InfoAppointment from './Components/infoAppointment/infoAppointment';
+
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
 
@@ -101,7 +102,7 @@ const routes = [
 },
 {
     layout: '/user/appointment',
-    component: infoAppointment,
+    component: InfoAppointment,
   },
 ];
 
