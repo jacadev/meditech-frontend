@@ -7,7 +7,7 @@ import {AiOutlineSearch } from 'react-icons/ai';
 
 
 
-const SearchBar = () => {
+const SearchBar = ({frontPage}) => {
 
     const dispatch = useDispatch();
 
@@ -19,6 +19,7 @@ const SearchBar = () => {
 
     const searchName = async () => {
         if (name.trim()) {
+            frontPage()
             dispatch(getName(name))
             setName('');
         } else {
@@ -26,28 +27,18 @@ const SearchBar = () => {
         }
     }
 
-    useEffect(() => {
-        console.log('se renderiza el componente searchBar');
-    },[])
-
     return (
         
         <Box display="inline-flex"  width="400px" >
   <InputGroup>
     <Input placeholder="Doctor o Especialidad" value={name} onChange={changeHandler} width="auto" bg='white' />
    
-      <Button  onClick={() => searchName()}  width="100px"  colorScheme="blue" leftIcon={<Icon as={AiOutlineSearch} width="20px" height="20px" color="white" />} >
-        Buscar
-      </Button>
+                <Button  onClick={() => searchName()}  width="100px"  colorScheme="blue" leftIcon={<Icon as={AiOutlineSearch} width="20px" height="20px" color="white" />} >
+                    Buscar
+                </Button>
    
-  </InputGroup>
-</Box>
-
-      
-      
-      
-      
-        
+            </InputGroup>
+        </Box> 
     )
 }
 

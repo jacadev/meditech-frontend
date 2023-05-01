@@ -6,7 +6,7 @@ import { Box, Grid, Select, Button, Flex, Text, Icon } from "@chakra-ui/react";
 import { getDoctors } from "../../../Redux/Actions/actions.jsx";
 import SearchBar from "../../../Components/SearchBar/SearchBar.jsx";
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-//import { IoMdHeart } from 'react-icons/io';
+
 
 
 function Specialists() {
@@ -22,6 +22,10 @@ function Specialists() {
   const [specialistsPerPage] = useState(6);
 
   const specialists = useSelector(state => state.doctors);
+
+  const frontPage = () => {
+    setCurrentPage(1)
+  }
 
   useEffect(() => {
 
@@ -133,7 +137,9 @@ function Specialists() {
           </Flex>
           <Flex justifyContent="center" alignItems="center" marginTop='40px'> 
         
-        <SearchBar />
+          <SearchBar 
+        frontPage={frontPage}
+      />
       
     </Flex>
     
@@ -178,14 +184,6 @@ function Specialists() {
           </Flex>
         </Flex>
       </Box>
-
-     
-
-      
-
-
-      
-     
       <Grid
         templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
         gap={6}

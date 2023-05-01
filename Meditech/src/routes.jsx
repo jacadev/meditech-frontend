@@ -23,7 +23,7 @@ import Details from './Views/user/Deatails/detail';
 import ProfileSettings from './Views/user/ProfileSettings/index';
 import ForgotPassword from './Views/user/ForgotPassword';
 import InfoAppointment from './Components/infoAppointment/infoAppointment';
-
+import ModifyPatient from './Components/ModifyPatient/ModifyPatient'
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
 
@@ -99,10 +99,14 @@ const routes = [
   {
     layout: '/user/forgotpassword',
     component: ForgotPassword,
-},
-{
+  },
+  {
     layout: '/user/appointment',
     component: InfoAppointment,
+  },
+  {
+    layout: '/user/putPatient',
+    component: ModifyPatient,
   },
 ];
 
