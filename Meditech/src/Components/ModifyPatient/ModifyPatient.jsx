@@ -10,22 +10,22 @@ const ModifyPatient = () => {
     const dispatch = useDispatch();
 
     const infoPatient = useSelector(state => state.infoPatient);
-
+console.log('info', infoPatient);
     const [data, setData] = useState({
-        status: infoPatient.person.status,
-        rol: [infoPatient.person.rol_id],
+        status: infoPatient.person?.status,
+        rol: [infoPatient.person?.rol_id],
     })
 
     useEffect(() => {
-        dispatch(getPatientById(id))
+        dispatch(getPatientById(1))
     },[]);
     
     const submitHandler = (event) => {
         event.preventDefault();
-        dispatch(putPatientAdmin(id, data)) // put paciente
+        dispatch(putPatientAdmin(1, data)) // put paciente
 
         setTimeout(() => {
-            dispatch(getPatientById(id))
+            dispatch(getPatientById(1))
         },100)
     }
     
@@ -38,7 +38,7 @@ const ModifyPatient = () => {
 
         dispatch(putReviewAdmin(review_id, obj)) // put review
         setTimeout(() => {
-            dispatch(getPatientById(id))
+            dispatch(getPatientById(1))
         },100)
     }
 
@@ -68,17 +68,17 @@ const ModifyPatient = () => {
             <br></br>
             <br></br>
             <br></br>
-            <p>nombre del paciente: {infoPatient.person.firstName} {infoPatient.person.lastName}</p>
+            <p>nombre del paciente: {infoPatient.person?.firstName} {infoPatient.person?.lastName}</p>
 
             <div>
-                <p>Estado: {infoPatient.person.status ? 'activo' : 'inactivo'}</p>
+                <p>Estado: {infoPatient.person?.status ? 'activo' : 'inactivo'}</p>
                 <button onClick={() => changeHandlerPatient()}>cambiar status</button>
             </div>
 
             <form onSubmit={submitHandler}>
                 <div>
                     <h4>modificar rol</h4>
-                    <p>rol actual: {infoPatient.person.rol.nameRol}</p>
+                    <p>rol actual: {infoPatient.person?.rol.nameRol}</p>
                     <p>cambiar rol</p>
                     <div>
                     <input
@@ -102,7 +102,7 @@ const ModifyPatient = () => {
             <hr></hr>
             <div>
                 <h4>reviews</h4>
-                {infoPatient.reviews.map((review, index) => 
+                {infoPatient.reviews?.map((review, index) => 
                     <div key={index}>
                         <p>comentario: {review.comment}</p>
                         <p>estado: {review.status ? 'activo' : 'inactivo'}</p>

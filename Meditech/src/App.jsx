@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./assets/css/App.css";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-import AdminLayout from "./layouts/admin";
+//import AdminLayout from "./layouts/admin";
 import UserLayout from "./layouts/user";
 import { ChakraProvider,ColorModeScript  } from "@chakra-ui/react";
 import theme from "./theme/themes";
@@ -17,7 +17,7 @@ return(
     
         <HashRouter>
           <Switch>
-            <Route path={`/auth`} component={AdminLayout} />
+           
             <Route path={`/user`} component={UserLayout} />
             <Redirect from='/' to='/user' />
           </Switch>
