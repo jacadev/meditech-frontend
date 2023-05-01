@@ -23,14 +23,6 @@ const Review = ({doctor_id, patient_id}) => {
         patient_id
     })
 
-   /*  const changeHandler = (event) => {
-        const {name, value} = event.target;
-
-        if (name === 'comment') setForm({...form, [name]: value})
-        if (name === 'rating') setForm({...form, [name]: value})
-
-    } */
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         

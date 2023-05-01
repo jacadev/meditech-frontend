@@ -33,7 +33,7 @@ function App() {
       >
         <HashRouter>
           <Switch>
-            <Route path={`/auth`} component={AdminLayout} />
+           
             <Route path={`/user`} component={UserLayout} />
             <Redirect from="/" to="/user" />
           </Switch>

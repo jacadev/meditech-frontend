@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPatienById, cleanDetail } from "../../Redux/Actions/actions";
+import { getAppointmentPatienById, cleanDetail } from "../../Redux/Actions/actions";
 import { Link } from "react-router-dom";
+import { Box, Button, Flex, Text,Badge,Image } from "@chakra-ui/react";
+
 
 const infoAppointment = () => {
 
@@ -11,44 +13,57 @@ const infoAppointment = () => {
 
     const datePatientDB = useSelector(state => state.appointmentOfPatientID)
 
-    console.log('datos de userInfo', userInfo);
-    console.log('datos de datePatientDB', datePatientDB);
-
     useEffect(() => {
-        dispatch(getPatienById(userInfo.id))
+        dispatch(getAppointmentPatienById(userInfo.id))
         return () => dispatch(cleanDetail())
     },[])
 
     return (
-        <div>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            {datePatientDB.length === 0 ? 
-            <p>no tienes citas reservadas</p>
-            :datePatientDB?.map(cita => 
-            <div>
-                <p>fecha en que se saco la cita: {cita?.date}</p>
-                <p>razon de la consulta: {cita?.consultationReason}</p>
-                <div>
-                    <p>fecha de la cita: {cita.disponibilty?.date}</p>
-                    <p>dia de la cita: {cita.disponibilty.day?.day}</p>
-                    <p>hora de la cita: inicio-{cita.disponibilty.timetable?.startTime} fin-{cita.disponibilty.timetable?.endTime}</p>
-                    <p>imagen doctor: <img src={cita.disponibilty.doctor?.profileImage} /></p>
-                    <p>doctor: {cita.disponibilty.doctor.person?.first_name} {cita.disponibilty.doctor.person?.last_name}</p>
-                    <p>especialidad: {cita.disponibilty.doctor?.specialties.map(specialty => <>{specialty.specialty}</>)}</p>
-                    <br></br>
-                </div>
-            </div>)}
-            <Link to='/user/staff'>
-                <button>atras</button>
-            </Link>
-        </div>
+        <Box marginTop='100px'>
+            
+        {datePatientDB.length === 0 ? (
+          <Text fontSize="lg">No tienes citas reservadas.</Text>
+        ) : (
+          datePatientDB.map((cita, index) => (
+            <Box key={index} mt="8" display="flex" alignItems="center"  borderRadius='10px' borderColor="#3a0ca3" borderWidth="1px" maxWidth="600px" >
+              <Box mr="4" maxWidth="200px">
+                <Image src={cita.disponibilty.doctor?.profileImage}  width="100%" objectFit="cover" />
+              </Box>
+              <Box>
+                <Text fontSize="lg">Fecha en que se sacó la cita: {cita?.date}</Text>
+                <Text fontSize="lg">Razón de la consulta: {cita?.consultationReason}</Text>
+                <Box mt="4">
+                  <Text fontSize="lg">Fecha de la cita: {cita.disponibilty?.date}</Text>
+                  <Text fontSize="lg">Día de la cita: {cita.disponibilty.day?.day}</Text>
+                  <Text fontSize="lg">
+                    Hora de la cita: inicio-{cita.disponibilty.timetable?.startTime} fin-
+                    {cita.disponibilty.timetable?.endTime}
+                  </Text>
+                  <Text fontSize="lg">
+                    Doctor: {cita.disponibilty.doctor.person?.first_name} {' '}
+                    {cita.disponibilty.doctor.person?.last_name}
+                  </Text>
+                  <Text fontSize="lg">
+                    Especialidad:{' '}
+                    {cita.disponibilty.doctor?.specialties.map((specialty) => (
+                      <Badge key={specialty.id} mr="2">
+                        {specialty.specialty}
+                      </Badge>
+                    ))}
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
+          ))
+        )}
+       <Link to="/user/staff">
+        <Button mt="8" colorScheme="blue">
+          Atrás
+        </Button>
+      </Link>
+      </Box >
+      
+
     )
 
 }

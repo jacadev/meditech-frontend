@@ -30,7 +30,7 @@ function PayPalCheckout() {
     date: userInfo.date,
     disponibilty_id: userInfo.disponibilty_id,
     consultationReason: userInfo.consultationReason,
-    preload: "false",
+    preload: false,
   }
   //console.log(postCita, "aca")
   const onApprove = (data, actions) => {
@@ -75,7 +75,7 @@ function PayPalCheckout() {
       <PayPalScriptProvider
         options={{
           locale: "en_US",
-          clientID: "AXsHOQxUux-C65uLkrITyyCgr4soVgmubx_ofLNOs947AXh0p5s54jwrkEpQgTvVN7gcyGqh0DZFJCC8"
+          clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK"
         }}
         onError={(err) => console.log("Error loading PayPal script", err)}
       >

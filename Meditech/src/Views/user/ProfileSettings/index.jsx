@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { userProfileSettings } from './../../../Redux/Actions/Actionslogin';
+import { cleanDetail, userProfileSettings } from './../../../Redux/Actions/Actionslogin';
 import {
   Box,
   Button,
@@ -78,6 +78,7 @@ const ProfileSettings = () => {
     e.preventDefault();
 
     dispatch(userProfileSettings(id, input));
+    dispatch(cleanDetail())
     setInput({
       user_name: '',
       email: '',
