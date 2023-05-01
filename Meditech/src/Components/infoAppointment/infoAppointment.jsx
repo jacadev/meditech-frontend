@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPatienById, cleanDetail } from "../../Redux/Actions/actions";
+import { getAppointmentPatienById, cleanDetail } from "../../Redux/Actions/actions";
 import { Link } from "react-router-dom";
 import { Box, Button, Flex, Text,Badge,Image } from "@chakra-ui/react";
 
@@ -13,11 +13,8 @@ const infoAppointment = () => {
 
     const datePatientDB = useSelector(state => state.appointmentOfPatientID)
 
-    console.log('datos de userInfo', userInfo);
-    console.log('datos de datePatientDB', datePatientDB);
-
     useEffect(() => {
-        dispatch(getPatienById(userInfo.id))
+        dispatch(getAppointmentPatienById(userInfo.id))
         return () => dispatch(cleanDetail())
     },[])
 

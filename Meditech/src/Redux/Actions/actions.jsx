@@ -1,6 +1,6 @@
 import axios from "axios";
 //conexion entre front y back
-import { FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME, GET_PATIENT} from "./actions-types";
+import { FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME, GET_APPOINTMENT_PATIENT, GET_PATIENT} from "./actions-types";
 
 export const enviarObjetoDeEstado = (objeto) => {
 // actions.js
@@ -24,18 +24,7 @@ export const getDoctor = (id) => {
           return accumulator;
         }
       },0)}
-      // .then(res => res.data.map(specialist => ({
-      //   ...specialist,
-      //   rating: specialist.reviews.reduce((accumulator, currentValue, index, array) => {
-      //     accumulator += currentValue.rating;
-      //     if (index === array.length - 1) {
-      //       return accumulator / array.length;
-      //     } else {
-      //       return accumulator;
-      //     }
-      //   },0)
-      // })));
-
+      
       dispatch({type: GET_DOCTOR, payload: result})
   }
 };
@@ -45,13 +34,12 @@ export const cleanDetail = () => {
 }
 
 export const postReview = (form) => {
-  console.log('estoy en el post', form);
+
   return async () => {
     await axios.post('http://localhost:3001/reviews', form);
   }
-    // .then(res => console.log('soy la respuesta del POST',res.data))
-    // .catch(err => console.log(err))
 }
+
 export const getDoctors = () => {
   return async (dispatch) => {
     const result = await axios.get("http://localhost:3001/doctors")
@@ -89,12 +77,32 @@ export const getName = (name) => {
   }
 }
 
-export const getPatienById = (id) => {
+export const getAppointmentPatienById = (id) => {
   return async (dispatch) => {
     const result = await axios.get(`http://localhost:3001/patients/appointments/${id}`)
     .then(res => res.data);
 
-    console.log('soy el resultado del get id de paciente', result);
+    dispatch({type:GET_APPOINTMENT_PATIENT, payload: result});
+  }
+}
+
+export const getPatientById = (id) => {
+  return async (dispatch) => {
+    const result = await axios.get(`http://localhost:3001/patients/dates/${id}`)
+    .then(res => res.data);
+
     dispatch({type:GET_PATIENT, payload: result});
+  }
+}
+
+export const putPatientAdmin = (id, data) => {
+  return async () => {
+    await axios.put(`http://localhost:3001/patients/${id}`, data);
+  }
+}
+
+export const putReviewAdmin = (review_id, obj) => {
+  return async () => {
+    await axios.put(`http://localhost:3001/reviews/${review_id}`, obj);
   }
 }
