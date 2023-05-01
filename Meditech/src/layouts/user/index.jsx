@@ -10,7 +10,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "../../routes.jsx";
 
 // Custom Chakra theme
-export default function User(props) {
+function User(props) {
   const { ...rest } = props;
   // states and functions
 
@@ -116,3 +116,4 @@ export default function User(props) {
         </Box>
   );
 }
+export default User;

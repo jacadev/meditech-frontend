@@ -16,7 +16,8 @@ import {
     Wrap,
     WrapItem,
     HStack,
-    Button
+    Button,
+    Flex
 } from "@chakra-ui/react";
 
 const Detail = () => {
@@ -96,17 +97,55 @@ const Detail = () => {
                     </Box>
 
                     <Box>
-                        <Text fontSize="lg" fontWeight="bold">
-                            Especialidades:
-                        </Text>
-                        <Wrap>
-                            {doctor.specialties?.map((specialty, index) => (
-                                <WrapItem key={`${index}2`}>
-                                    <Badge>{specialty.specialty}</Badge>
-                                </WrapItem>
-                            ))}
-                        </Wrap>
-                    </Box>
+  <Text fontSize="lg" fontWeight="bold">
+    Especialidades:
+  </Text>
+  <Flex alignItems="center" justifyContent="space-between">
+    <Wrap>
+      {doctor.specialties?.map((specialty, index) => (
+        <WrapItem key={`${index}2`}>
+          <Badge>{specialty.specialty}</Badge>
+        </WrapItem>
+      ))}
+    </Wrap>
+    <Link
+      to={{
+        pathname: "/user/reserve",
+        state: {
+          id: doctor.id,
+          name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,
+          specialties: doctor.specialties?.map((s) => s.specialty),
+          consultationCost: doctor.consultation_cost,
+          profileImage: doctor.profile_image,
+          disponibilties: doctor.disponibilties,
+        },
+      }}
+    >
+      <Button
+        mt={4}
+        fontSize={"sm"}
+        rounded={"full"}
+        bg={"blue.400"}
+        color={"white"}
+        boxShadow={
+          "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+        }
+        _hover={{
+          bg: "blue.500",
+        }}
+        _focus={{
+          bg: "blue.500",
+        }}
+      >
+        Agenda tu cita
+      </Button>
+    </Link>
+  </Flex>
+</Box>
+
+
+                    
+                    
                 </VStack>
             </HStack>
             <Box   borderRadius='10px' borderColor="#3a0ca3" borderWidth="1px" bg='white'  maxWidth="100%">
@@ -131,43 +170,11 @@ const Detail = () => {
                     
                 </VStack>
                 
-            <Link
-              to={{
-                pathname: "/user/reserve",
-                state: {
-                  id: doctor.id,
-                  name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,
-                  specialties: doctor.specialties?.map(s => s.specialty),
-                  consultationCost: doctor.consultation_cost,
-                  
-                  profileImage: doctor.profile_image,
-                  disponibilties:doctor.disponibilties,
-                },
-              }}
-            >
-               
-              <Button
-                mt={4}
-                flex={1}
-                fontSize={'sm'}
-                rounded={'full'}
-                bg={'blue.400'}
-                color={'white'}
-                boxShadow={
-                  '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                }
-                _hover={{
-                  bg: 'blue.500',
-                }}
-                _focus={{
-                  bg: 'blue.500',
-                }}>
-                Agenda tu cita
-              </Button>
-            
-            </Link>
+          
                 <Review doctor_id={Number(id)} patient_id={patient.id} />
                 </Box>
+                
+       
             </Box>
         </Box>
 

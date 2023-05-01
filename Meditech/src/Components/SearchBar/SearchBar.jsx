@@ -34,7 +34,7 @@ const SearchBar = () => {
         
         <Box display="inline-flex"  width="400px" >
   <InputGroup>
-    <Input placeholder="Doctor o Especialidad" value={name} onChange={changeHandler} width="auto" />
+    <Input placeholder="Doctor o Especialidad" value={name} onChange={changeHandler} width="auto" bg='white' />
    
       <Button  onClick={() => searchName()}  width="100px"  colorScheme="blue" leftIcon={<Icon as={AiOutlineSearch} width="20px" height="20px" color="white" />} >
         Buscar

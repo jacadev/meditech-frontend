@@ -20,7 +20,7 @@ import routes from './../../routes';
 import { cleanDetail } from '../../Redux/Actions/Actionslogin';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function HeaderLinks(props) {
+ function HeaderLinks(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -147,3 +147,5 @@ HeaderLinks.propTypes = {
   secondary: PropTypes.bool,
   onOpen: PropTypes.func,
 };
+
+export default HeaderLinks;

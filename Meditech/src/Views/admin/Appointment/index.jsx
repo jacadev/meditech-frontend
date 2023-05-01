@@ -1,4 +1,4 @@
-import {
+/* import {
   Table,
   Thead,
   Tbody,
@@ -88,3 +88,4 @@ function Appointment() {
 }
 
 export default Appointment;
+ */
