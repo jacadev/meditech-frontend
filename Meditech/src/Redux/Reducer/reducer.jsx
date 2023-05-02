@@ -7,23 +7,37 @@ import {
   GET_ESPECIALIDADES,
   GET_DOCTORS,
   GET_DOCTORS_NAME,
+  GET_APPOINTMENT_PATIENT, 
+  GET_PATIENT, 
+  GET_SPECIALTIES
 } from "../Actions/actions-types";
 import {
   SIGNIN_USER,
   SIGNUP_USER,
+  USER_SETTINGS,
   CLEAN_DETAIL,
   USERGOOGLE_DATA,
-} from "../Actions/Actionslogin";
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_FAILURE,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAILURE,
+  RESET_SUCCESS,
+} from '../Actions/Actionslogin';
 
 const initialState = {
   reserva: [],
   loading: false,
   error: null,
+  success: false,
   userInfo: {},
   objeto: {},
   doctorDetail: [],
   especialidades: [],
   doctors: [],
+  appointmentOfPatientID:[], // aca se guardan los datos del paciente que se traen de la DB para el componente que se encarga de visualizar las citas del paciente 
+  infoPatient: [],
+  specialties: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -52,6 +66,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userInfo: action.payload,
       };
+    case USER_SETTINGS:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
     case CLEAN_DETAIL:
       return {
         ...state,
@@ -66,11 +85,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         doctorDetail: action.payload,
-      };
-    case CLEAN_DATAIL_ID:
-      return {
-        ...state,
-        doctorDetail: {},
       };
     case GET_ESPECIALIDADES:
       return {
@@ -92,9 +106,80 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         doctors: action.payload,
       };
+      case CLEAN_DATAIL_ID:
+        return {
+          ...state,
+          doctorDetail: [],
+          appointmentOfPatientID: []
+        };
+        case RESET_SUCCESS:
+          return {
+            ...state,
+            success: false,
+          };
+      case USERGOOGLE_DATA:
+        return {
+          ...state,
+          userInfo: action.payload,
+        }
+      case FORGOT_PASSWORD_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case FORGOT_PASSWORD_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          success: true,
+        };
+      case FORGOT_PASSWORD_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      case PASSWORD_RESET_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          success: true,
+        };
+      case PASSWORD_RESET_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      case GET_DOCTORS:
+        return {
+          ...state,
+          doctors: action.payload
+        }
+      case GET_DOCTORS_NAME:
+        return {
+          ...state,
+          doctors: action.payload
+        }
+      case GET_APPOINTMENT_PATIENT:
+        return {
+          ...state,
+          appointmentOfPatientID: action.payload
+        }
+      case GET_PATIENT:
+        return {
+          ...state,
+          infoPatient: action.payload
+        }
+      case GET_SPECIALTIES:
+        return {
+          ...state,
+          specialties: action.payload
+        }
     default:
       return state;
   }
 };
 
 export default rootReducer;
+

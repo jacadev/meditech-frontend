@@ -56,8 +56,8 @@ function Doctor() {
             </Tr>
           </Thead>
           <Tbody>
-            {userlists.map((specialist) => (
-              <Tr key={specialist.id}>
+            {userlists?.map((specialist) => (
+              <Tr key={specialist?.id}>
                 <Td>{specialist.person.userName}</Td>
                 <Td>{specialist.person.email}</Td>
                 <Td>
@@ -66,7 +66,7 @@ function Doctor() {
                 <Td>{specialist.person.age}</Td>
                 <Td>
                   <ul>
-                    {specialist.person.phone.map((phone) => (
+                    {specialist.person.phone?.map((phone) => (
                       <li>{phone}</li>
                     ))}
                   </ul>

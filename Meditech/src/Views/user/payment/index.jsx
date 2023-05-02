@@ -6,6 +6,8 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+const CLIENT_ID = 'AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK'
+
 import axios from 'axios';
 function PayPalCheckout() {
   const history = useHistory();
@@ -30,7 +32,7 @@ function PayPalCheckout() {
     date: userInfo.date,
     disponibilty_id: userInfo.disponibilty_id,
     consultationReason: userInfo.consultationReason,
-    preload: "false",
+    preload: false,
   }
   //console.log(postCita, "aca")
   const onApprove = (data, actions) => {
@@ -67,16 +69,18 @@ function PayPalCheckout() {
         setshowErrorModal(true)
       }
     });
-  };
 
+  };
+   const paypalOption = {  
+    locale: "en_US",
+   clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK",
+
+   }
   return (<Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
     <Box borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg" bg="#F3f3f3">
 
       <PayPalScriptProvider
-        options={{
-          locale: "en_US",
-          clientID: "AfaDtjBiApMUSmEH4Avl-hvKfAt4vJViSm4nROgKFrWyXU_bI5QXBpMWs884z3YZ_y8mkkS5ddvwJDdq"
-        }}
+        options={paypalOption}
         onError={(err) => console.log("Error loading PayPal script", err)}
       >
 

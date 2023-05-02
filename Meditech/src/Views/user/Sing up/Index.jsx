@@ -2,6 +2,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { RiEyeCloseLine } from 'react-icons/ri';
 import { userSignUp } from "./../../../Redux/Actions/Actionslogin";
 import {
   Box,
@@ -49,7 +51,13 @@ const validate = (input) => {
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const [show, setShow] = React.useState(false);
   const history = useHistory();
+  const textColor = useColorModeValue("navy.700", "white");
+  const textColorSecondary = "gray.400";
+  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
+  const textColorBrand = useColorModeValue("brand.500", "white");
+  const brandStars = useColorModeValue("brand.500", "brand.400");
 
   const [input, setInput] = useState({
     user_name: "",
@@ -79,7 +87,10 @@ const SignUp = () => {
     const property = e.target.name;
 
     if (property === "phone") {
-      const phoneArr = value.split(",").map((num) => parseInt(num.trim(), 10));
+      const phoneArr = value.split(',').map((num) => {
+        const trimmedNum = num.trim();
+        return !isNaN(trimmedNum) && trimmedNum !== '' ? parseInt(trimmedNum, 10) : '';
+      });
       setError(validate({ ...input, [property]: phoneArr }));
       setInput({ ...input, [property]: phoneArr });
     } else {
@@ -87,11 +98,7 @@ const SignUp = () => {
       setInput({ ...input, [property]: value });
     }
   };
-  const textColor = useColorModeValue("navy.700", "white");
-  const textColorSecondary = "gray.400";
-  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-  const textColorBrand = useColorModeValue("brand.500", "white");
-  const brandStars = useColorModeValue("brand.500", "brand.400");
+  const handleClick = () => setShow(!show);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -338,12 +345,13 @@ const SignUp = () => {
                 >
                   Password:<Text color={brandStars}>*</Text>
                 </FormLabel>
+                <InputGroup size="md">
                 <Input
                   isRequired={true}
                   variant="auth"
                   fontSize="sm"
                   ms={{ base: "0px", md: "0px" }}
-                  type="password"
+                  type={show ? 'text' : 'password'}
                   value={input.password}
                   name="password"
                   placeholder="write your Password...."
@@ -353,6 +361,15 @@ const SignUp = () => {
                   onChange={(e) => handleChange(e)}
                 />
                 {error.password && <span>{error.password}</span>}
+                <InputRightElement display="flex" alignItems="center" mt="4px">
+                <Icon
+                  color={textColorSecondary}
+                  _hover={{ cursor: 'pointer' }}
+                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                  onClick={handleClick}
+                />
+              </InputRightElement>
+                </InputGroup>
                 <br />
               </div>
               <Box mb="8px">
