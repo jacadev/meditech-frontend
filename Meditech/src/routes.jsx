@@ -28,6 +28,7 @@ import ProfileSettings from './Views/user/ProfileSettings/index';
 import ForgotPassword from './Views/user/ForgotPassword';
 import InfoAppointment from './Components/infoAppointment/infoAppointment';
 import ModifyPatient from './Components/ModifyPatient/ModifyPatient'
+import Pays from './Components/Pays/index';
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
 
@@ -97,27 +98,6 @@ const routes = [
     component: Details,
   },
   {
-    layout: '/user/profilesettings',
-    component: ProfileSettings,
-  },
-  {
-    layout: '/user/home2',
-    component: homeadmin,
-  },
-  {
-    layout: '/user/createdoctor',
-    component: createdoctor,
-  },
-
-  {
-    layout: '/user/indexdoctor',
-    component: indexdoctor,
-  },
-  {
-    layout: '/user/indexuser',
-    component: indexuser,
-  },
-  {
     layout: '/user/forgotpassword',
     component: ForgotPassword,
   },
@@ -126,8 +106,123 @@ const routes = [
     component: InfoAppointment,
   },
   {
+    layout: '/user/profilesettings',
+    component: ProfileSettings,
+  },
+  //----------------------------rutas de admin-------------------------
+  {
+    layout: '/admin/homeadmin',
+    component: homeadmin,
+  },
+  {
+    layout: '/admin/createdoctor',
+    component: createdoctor,
+  },
+  {
+    name: 'Doctores',
+    layout: '/admin',
+    path: '/indexdoctor',
+    component: indexdoctor,
+  },
+  {
+    name: 'Usuarios',
+    layout: '/admin',
+    path: '/indexuser',
+    component: indexuser,
+  },
+  {
     layout: '/admin/putPatient',
     component: ModifyPatient,
+  },
+  {
+    name: 'Inicio',
+    layout: '/admin',
+    path: '/home',
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    component: Home,
+  },
+  {
+    name: 'Servicios',
+    layout: '/admin',
+    path: '/services',
+    icon: (
+      <Icon as={MdMedicalServices} width="20px" height="20px" color="inherit" />
+    ),
+    component: Services,
+    secondary: true,
+  },
+  {
+    name: 'Personal Medico',
+    layout: '/admin',
+    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+    path: '/staff',
+    component: Staff,
+  },
+  {
+    name: 'Quienes Somos',
+    layout: '/admin',
+    path: '/about-us',
+    icon: (
+      <Icon
+        as={MdMedicalInformation}
+        width="20px"
+        height="20px"
+        color="inherit"
+      />
+    ),
+    component: About,
+  },
+  {
+    name: 'info pagos',
+    layout: '/admin',
+    path: '/pays',
+    icon: (
+      <Icon
+        as={MdMedicalInformation}
+        width="20px"
+        height="20px"
+        color="inherit"
+      />
+    ),
+    component: Pays,
+  },
+  {
+    layout: '/admin/reserve',
+    component: Reserve,
+  },
+  {
+
+    layout: '/admin/signin',
+    component: singIn,
+  },
+  {
+    layout: '/admin/payment',
+    component: payment,
+  },
+  {
+    layout: '/admin/signup',
+    component: signup,
+  },
+  {
+    layout: '/admin/paymentprocess',
+    component: paymentProcess,
+  },
+  {
+    name: 'Detalles del Medico',
+    layout: '/admin/detail/:id',
+    component: Details,
+  },
+  {
+    layout: '/admin/forgotpassword',
+    component: ForgotPassword,
+  },
+  {
+    layout: '/admin/appointment',
+    component: InfoAppointment,
+  },
+  {
+    layout: '/admin/profilesettings',
+    component: ProfileSettings,
   },
 ];
 

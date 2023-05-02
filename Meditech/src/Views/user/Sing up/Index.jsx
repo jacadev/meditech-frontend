@@ -87,7 +87,10 @@ const SignUp = () => {
     const property = e.target.name;
 
     if (property === "phone") {
-      const phoneArr = value.split(",").map((num) => parseInt(num.trim(), 10));
+      const phoneArr = value.split(',').map((num) => {
+        const trimmedNum = num.trim();
+        return !isNaN(trimmedNum) && trimmedNum !== '' ? parseInt(trimmedNum, 10) : '';
+      });
       setError(validate({ ...input, [property]: phoneArr }));
       setInput({ ...input, [property]: phoneArr });
     } else {
