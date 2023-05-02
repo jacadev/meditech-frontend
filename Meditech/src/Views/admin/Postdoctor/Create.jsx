@@ -27,6 +27,7 @@ import {
 } from "./../../../Redux/Actions/actions";
 
 function Formulario() {
+  const [image, setImage] = useState([]);
   const [form, setForm] = useState({
     user_name: "",
     email: "",
@@ -37,7 +38,6 @@ function Formulario() {
     last_name: "",
     gender: "",
     about_me: "",
-    profile_image: "",
     tuition_code: "",
     consultation_cost: "",
     location: { city: "", country: "", address: "" },
@@ -75,6 +75,21 @@ function Formulario() {
     }
   };
 
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setFileToBase(file);
+    console.log(file);
+  };
+
+  const setFileToBase = (file) =>{
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () =>{
+        setImage(reader.result);
+    }
+
+}
+
   const dispatch = useDispatch();
 
   const especialidades = useSelector((state) => state.especialidades);
@@ -88,7 +103,10 @@ function Formulario() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(postDoctor(form));
+    let formtosend = form;
+    formtosend.profile_image = image;
+    console.log(formtosend)
+    dispatch(postDoctor(formtosend));
     setForm({
       user_name: "",
       email: "",
@@ -99,7 +117,6 @@ function Formulario() {
       last_name: "",
       gender: "",
       about_me: "",
-      profile_image: "",
       tuition_code: "",
       consultation_cost: "",
       location: { city: "", country: "", address: "" },
@@ -107,6 +124,10 @@ function Formulario() {
       specialties: [],
       rol_id: [1],
     });
+
+    setImage({
+      image: "",
+    })
   };
 
   useEffect(() => {
@@ -283,13 +304,15 @@ function Formulario() {
               </FormLabel>
               <Input
                 isRequired={true}
-                type="url"
+                type="file"
                 placeholder="Inserte el URL de la imagen"
                 value={form.profile_image}
-                onChange={handleChange}
+                onChange={handleImage}
                 name="profile_image"
               />
             </FormControl>
+            <img src={image} alt="" />
+
             <FormControl id="tuition_code" mb={3} mr={3}>
               <FormLabel>
                 Código de matrícula{" "}
