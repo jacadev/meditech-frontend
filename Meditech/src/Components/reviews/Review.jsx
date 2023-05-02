@@ -37,6 +37,7 @@ const Review = ({doctor_id, patient_id}) => {
       setTimeout(() => {
           dispatch(getDoctor(doctor_id))
       },1000) 
+      return;
     }
 
     alert('no estás logueado'); // tarea de franco: ponerle estilos     
