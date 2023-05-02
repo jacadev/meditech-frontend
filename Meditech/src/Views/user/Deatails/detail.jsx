@@ -28,13 +28,13 @@ const Detail = () => {
     const doctor = useSelector(state => state.doctorDetail);
     const patient = useSelector(state => state.userInfo);
 
+    console.log('informacion del paciente', patient);
+
     useEffect(() => {
         dispatch(getDoctor(id))
         return () => dispatch(cleanDetail())
     }, [id])
 
-    console.log('estoy en detail', doctor);
-    
     const renderStars = (rating) => {
         const stars = [];
         for (let i = 0; i < 5; i++) {
@@ -46,6 +46,7 @@ const Detail = () => {
         }
         return stars;
       };
+
     return (
         <Box marginTop="100px" marginLeft='250px' marginRight='250px'>
             <HStack>
@@ -110,7 +111,7 @@ const Detail = () => {
     </Wrap>
     <Link
       to={{
-        pathname: "/user/reserve",
+        pathname: patient.id ? "/user/reserve" : "/user/signin",
         state: {
           id: doctor.id,
           name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,

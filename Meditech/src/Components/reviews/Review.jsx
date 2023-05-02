@@ -14,32 +14,38 @@ import {
 
 const Review = ({doctor_id, patient_id}) => {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [form, setForm] = useState({
-        comment:'',
-        rating: null,
-        doctor_id,
-        patient_id
-    })
+  const [form, setForm] = useState({
+      comment:'',
+      rating: null,
+      doctor_id,
+      patient_id
+  })
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        
-        dispatch(postReview(form))
-            
-        setForm({
-            ...form,
-            comment: '',
-            rating: []
-        })
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (patient_id) {
+      dispatch(postReview(form))
 
-        setTimeout(() => {
-            dispatch(getDoctor(doctor_id))
-        },1000) 
-}
-const renderStars = (rating) => {
+      setForm({
+          ...form,
+          comment: '',
+          rating: []
+      })
+
+      setTimeout(() => {
+          dispatch(getDoctor(doctor_id))
+      },1000) 
+      return;
+    }
+
+    alert('no estás logueado'); // tarea de franco: ponerle estilos     
+  }
+
+  const renderStars = (rating) => {
     const stars = [];
+
     for (let i = 0; i < 5; i++) {
       if (i < rating) {
         stars.push(
@@ -64,34 +70,31 @@ const renderStars = (rating) => {
     return stars;
   };
   
-    return (
-        <Box as="form" onSubmit={handleSubmit}>
-        <FormControl>
-            <br/>
-          <FormLabel>Comentanos tu experiecia con nuestros doctores:</FormLabel>
-          <Textarea   value={form.comment} onChange={(e) => setForm({ ...form, comment: e.target.value })}  />
-       
-        </FormControl>
+  return (
+    <Box as="form" onSubmit={handleSubmit}>
+      <FormControl>
+        <br/>
+        <FormLabel>Comentanos tu experiecia con nuestros doctores:</FormLabel>
+        <Textarea   value={form.comment} onChange={(e) => setForm({ ...form, comment: e.target.value })}  />
+      </FormControl>
   
-        <FormControl>
-  <FormLabel>Califica a tu doctor:</FormLabel>
-  <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>
-    {renderStars(form.rating)}
-  </span>
+      <FormControl>
+        <FormLabel>Califica a tu doctor:</FormLabel>
+        <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>
+          {renderStars(form.rating)}
+        </span>
+      </FormControl>
+      <br/>
   
-</FormControl>
-<br />
-
-  
-        <Button type="submit"
-         bg='#5C43FF'
-         color={'white'}
-         _hover={{
-           bg: 'green',
-         }}>Enviar</Button>
-      </Box>
- 
-    )
+      <Button 
+        type="submit"
+        bg='#5C43FF'
+        color={'white'}
+        _hover={{
+          bg: 'green',
+        }}>Enviar</Button>
+    </Box>
+  )
 }
 
 export default Review;

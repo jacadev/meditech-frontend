@@ -52,8 +52,6 @@ function User(props) {
           case "/user/signin":
           case "/user/forgotpassword":
           case "/user/appointment":
-          case "/user/putPatient":
-
             return (
               <Route
                 path={layout}
@@ -106,7 +104,6 @@ function User(props) {
               pt='50px'>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from='/' to='/user/home' /> 
               </Switch>
             </Box>
           ) : null}

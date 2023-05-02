@@ -105,7 +105,7 @@ const routes = [
     component: InfoAppointment,
   },
   {
-    layout: '/user/putPatient',
+    layout: '/admin/putPatient',
     component: ModifyPatient,
   },
 ];
