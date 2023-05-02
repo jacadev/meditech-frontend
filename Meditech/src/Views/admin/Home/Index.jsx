@@ -36,14 +36,14 @@ export default function WithBackgroundImage() {
               rounded={'full'}
               color={'white'}
               _hover={{ bg: 'blue.500' }}>
-              NOSE XD
+             Lista de Medicos
             </Button>
             <Button
               bg={'whiteAlpha.300'}
               rounded={'full'}
               color={'white'}
               _hover={{ bg: 'whiteAlpha.500' }}>
-              NOSE XD
+              Lista de Pacientes
             </Button>
           </Stack>
         </Stack>
