@@ -6,6 +6,10 @@ import {
   MdHome,
   MdMedicalServices,
   MdMedicalInformation,
+  MdPaid,
+  MdAssignmentAdd,
+  MdGroups2,
+  MdOutlineAddHomeWork
 } from 'react-icons/md';
 
 // Admin Imports
@@ -20,7 +24,7 @@ import signup from './Views/user/Sing up/Index';
 
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Details from './Views/user/Deatails/detail';
-import homeadmin from "./Views/admin/Home/Index"
+import Homeadmin from "./Views/admin/Home/Index"
 import createdoctor from "./Views/admin/Postdoctor/Create"
 import indexdoctor from "./Views/admin/Postdoctor/Index"
 import indexuser from "./Views/admin/listuser/index"
@@ -111,30 +115,6 @@ const routes = [
   },
   //----------------------------rutas de admin-------------------------
   {
-    layout: '/admin/homeadmin',
-    component: homeadmin,
-  },
-  {
-    layout: '/admin/createdoctor',
-    component: createdoctor,
-  },
-  {
-    name: 'Doctores',
-    layout: '/admin',
-    path: '/indexdoctor',
-    component: indexdoctor,
-  },
-  {
-    name: 'Usuarios',
-    layout: '/admin',
-    path: '/indexuser',
-    component: indexuser,
-  },
-  {
-    layout: '/admin/putPatient',
-    component: ModifyPatient,
-  },
-  {
     name: 'Inicio',
     layout: '/admin',
     path: '/home',
@@ -173,18 +153,62 @@ const routes = [
     component: About,
   },
   {
-    name: 'info pagos',
+    name:'Panel de administrado',
+    layout: '/admin',
+    path: '/dashboard',
+    icon: <Icon as={MdOutlineAddHomeWork} width="20px" height="20px" color="inherit" />,
+    component: Homeadmin,
+  },
+  {
+    name: 'Lista de Doctores',
+    layout: '/admin',
+    path: '/indexdoctor',
+    icon: (
+      <Icon
+        as={MdAssignmentAdd}
+        width="20px"
+        height="20px"
+        color="inherit"
+      />
+    ),
+    component: indexdoctor,
+  },
+  {
+    name: 'Lista de Usuarios',
+    layout: '/admin',
+    path: '/indexuser',
+    icon: (
+      <Icon
+        as={MdGroups2}
+        width="20px"
+        height="20px"
+        color="inherit"
+      />
+    ),
+    component: indexuser,
+  },
+  {
+    name: 'Informacion de Pagos',
     layout: '/admin',
     path: '/pays',
     icon: (
       <Icon
-        as={MdMedicalInformation}
+        as={MdPaid}
         width="20px"
         height="20px"
         color="inherit"
       />
     ),
     component: Pays,
+  },
+  {
+    layout: '/admin/createdoctor',
+    component: createdoctor,
+  },
+
+  {
+    layout: '/admin/putPatient',
+    component: ModifyPatient,
   },
   {
     layout: '/admin/reserve',

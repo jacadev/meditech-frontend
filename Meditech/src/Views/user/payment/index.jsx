@@ -6,6 +6,8 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+const CLIENT_ID = 'AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK'
+
 import axios from 'axios';
 function PayPalCheckout() {
   const history = useHistory();
@@ -75,8 +77,7 @@ function PayPalCheckout() {
       <PayPalScriptProvider
         options={{
           locale: "en_US",
-          clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK",
-          clientSecret:"EFg_rLe3O94PSssIO49pbYUdJR2rDKuYZ7w5ZAEosYSex8r7n4in2iejFDm2iJ-lrcPCkFeJju20TP5v"
+          clientID: CLIENT_ID
         }}
         onError={(err) => console.log("Error loading PayPal script", err)}
       >
