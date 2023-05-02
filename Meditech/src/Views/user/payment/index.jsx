@@ -69,16 +69,18 @@ function PayPalCheckout() {
         setshowErrorModal(true)
       }
     });
-  };
 
+  };
+   const paypalOption = {  
+    locale: "en_US",
+   clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK",
+
+   }
   return (<Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
     <Box borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg" bg="#F3f3f3">
 
       <PayPalScriptProvider
-        options={{
-          locale: "en_US",
-          clientID: CLIENT_ID
-        }}
+        options={paypalOption}
         onError={(err) => console.log("Error loading PayPal script", err)}
       >
 

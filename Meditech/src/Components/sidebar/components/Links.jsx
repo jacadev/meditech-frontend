@@ -2,7 +2,7 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 // chakra imports
-import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Divider, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
 export function SidebarLinks(props) {
@@ -58,8 +58,11 @@ export function SidebarLinks(props) {
         
         return (
           <NavLink key={index} to={route.layout + route.path}>
+            
             {route.icon ? (
               <Box>
+                <Divider/>
+                
                 <HStack
                   spacing={
                     activeRoute(route.path.toLowerCase()) ? "22px" : "26px"

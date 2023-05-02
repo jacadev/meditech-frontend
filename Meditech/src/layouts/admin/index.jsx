@@ -61,11 +61,7 @@ function Admin(props) {
         case "/admin/forgotpassword":
         case "/admin/appointment":
         case "/admin/putPatient":
-        case "/admin/homeadmin":
         case "/admin/createdoctor":
-        case "/admin/indexdoctor":
-        case "/admin/indexuser":
-        case "/admin/pays":
           return <Route path={layout} component={component} key={key} />;
         default:
           return null;

@@ -153,7 +153,7 @@ const routes = [
     component: About,
   },
   {
-    name:'Panel de administrado',
+    name:'Panel de Administrador',
     layout: '/admin',
     path: '/dashboard',
     icon: <Icon as={MdOutlineAddHomeWork} width="20px" height="20px" color="inherit" />,
