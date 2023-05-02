@@ -1,47 +1,45 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDoctor, postReview } from "../../Redux/Actions/actions";
-import { BsStarFill, BsStar } from 'react-icons/bs';
+import { BsStarFill, BsStar } from "react-icons/bs";
 import {
-    Box,
-    Button,
-    FormControl,
-    FormLabel,
-    Input,
-    Textarea,
-    
-  } from '@chakra-ui/react';
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+} from "@chakra-ui/react";
 
-const Review = ({doctor_id, patient_id}) => {
-
+const Review = ({ doctor_id, patient_id }) => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({
-      comment:'',
-      rating: null,
-      doctor_id,
-      patient_id
-  })
+    comment: "",
+    rating: null,
+    doctor_id,
+    patient_id,
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (patient_id) {
-      dispatch(postReview(form))
+      dispatch(postReview(form));
 
       setForm({
-          ...form,
-          comment: '',
-          rating: []
-      })
+        ...form,
+        comment: "",
+        rating: [],
+      });
 
       setTimeout(() => {
-          dispatch(getDoctor(doctor_id))
-      },1000) 
+        dispatch(getDoctor(doctor_id));
+      }, 1000);
       return;
     }
 
-    alert('no estás logueado'); // tarea de franco: ponerle estilos     
-  }
+    alert("no estás logueado"); // tarea de franco: ponerle estilos
+  };
 
   const renderStars = (rating) => {
     const stars = [];
@@ -69,32 +67,38 @@ const Review = ({doctor_id, patient_id}) => {
     }
     return stars;
   };
-  
+
   return (
     <Box as="form" onSubmit={handleSubmit}>
       <FormControl>
-        <br/>
+        <br />
         <FormLabel>Comentanos tu experiecia con nuestros doctores:</FormLabel>
-        <Textarea   value={form.comment} onChange={(e) => setForm({ ...form, comment: e.target.value })}  />
+        <Textarea
+          value={form.comment}
+          onChange={(e) => setForm({ ...form, comment: e.target.value })}
+        />
       </FormControl>
-  
+
       <FormControl>
         <FormLabel>Califica a tu doctor:</FormLabel>
         <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>
           {renderStars(form.rating)}
         </span>
       </FormControl>
-      <br/>
-  
-      <Button 
+      <br />
+
+      <Button
         type="submit"
-        bg='#5C43FF'
-        color={'white'}
+        bg="#5C43FF"
+        color={"white"}
         _hover={{
-          bg: 'green',
-        }}>Enviar</Button>
+          bg: "green",
+        }}
+      >
+        Enviar
+      </Button>
     </Box>
-  )
-}
+  );
+};
 
 export default Review;
