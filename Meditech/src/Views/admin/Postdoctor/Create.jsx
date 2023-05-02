@@ -314,7 +314,7 @@ function Formulario() {
                 name="profile_image"
               />
             </FormControl>
-          
+            <img src={image} alt="" />
 
             <FormControl id="tuition_code" mb={3} mr={3}>
               <FormLabel>
@@ -448,8 +448,10 @@ function Formulario() {
             variant="outline"
           >
             <Image
+              objectFit="cover"
               maxW={{ base: "100%", sm: "200px" }}
-              src={image}
+              src="https://i.pinimg.com/originals/d0/eb/aa/d0ebaaaa551c675cfd9ee78d26398a6d.png"
+              alt="Caffe Latte"
             />
             <Stack>
               <CardBody>
