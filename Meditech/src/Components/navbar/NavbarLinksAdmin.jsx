@@ -72,10 +72,11 @@ import { useDispatch, useSelector } from 'react-redux';
               _hover={{ cursor: 'pointer' }}
               name={userInfo1.user_name}
               src={userImage}
-              bg="#11047A"
+              bg="blue"
               size="sm"
               w="40px"
               h="40px"
+              color='white'
             />
           </MenuButton>
           <MenuList
