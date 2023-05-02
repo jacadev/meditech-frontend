@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SpecialistCard from '../../../Components/Especialista/SpecialistCard.jsx';
 import baner from '../../../assets/img/Banner/banner-Plano de fundo.jpg'
 import { Box, Grid, Select, Button, Flex, Text, Icon } from "@chakra-ui/react";
-import { getDoctors } from "../../../Redux/Actions/actions.jsx";
+import { getDoctors, getSpecialties } from "../../../Redux/Actions/actions.jsx";
 import SearchBar from "../../../Components/SearchBar/SearchBar.jsx";
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
@@ -22,15 +22,15 @@ function Specialists() {
   const [specialistsPerPage] = useState(6);
 
   const specialists = useSelector(state => state.doctors);
+  const specialties = useSelector(state => state.specialties);
 
   const frontPage = () => {
     setCurrentPage(1)
   }
 
   useEffect(() => {
-
     dispatch(getDoctors())
-
+    dispatch(getSpecialties())
   }, []);
 
   const allDoctors = () => {
@@ -121,12 +121,10 @@ function Specialists() {
 
             <Select value={specialtyFilter} onChange={handleSpecialtyChange} mb={4} width="400px" color='white' borderColor='white' _focus={{ backgroundColor: 'blue' }}>
               <option value="">Todas las Especialidades</option>
-              {specialists.map(specialist =>
-                specialist.specialties.map(specialty => (
-                  <option key={`${specialty.id}-${specialty.specialty}`} value={specialty.specialty}>
+              {specialties.map(specialty =>
+                  <option key={specialty.id} value={specialty.specialty}>
                     {specialty.specialty}
                   </option>
-                ))
               )}
             </Select>
             <Select value={genderFilter} onChange={handleGenderChange} mb={4} width="400px" color='white' borderColor='white' _focus={{ backgroundColor: 'blue' }}>

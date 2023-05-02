@@ -1,6 +1,6 @@
 import axios from "axios";
 //conexion entre front y back
-import { FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME, GET_APPOINTMENT_PATIENT, GET_PATIENT} from "./actions-types";
+import { FORM_DATA, GET_DOCTOR, CLEAN_DATAIL_ID, GET_DOCTORS, GET_DOCTORS_NAME, GET_APPOINTMENT_PATIENT, GET_PATIENT, GET_SPECIALTIES} from "./actions-types";
 
 export const enviarObjetoDeEstado = (objeto) => {
 // actions.js
@@ -104,5 +104,14 @@ export const putPatientAdmin = (id, data) => {
 export const putReviewAdmin = (review_id, obj) => {
   return async () => {
     await axios.put(`http://localhost:3001/reviews/${review_id}`, obj);
+  }
+}
+
+export const getSpecialties = () => {
+  return async (dispatch) => {
+    const result = await axios.get(`http://localhost:3001/specialties`)
+    .then(res => res.data);
+
+    dispatch({type:GET_SPECIALTIES, payload: result});
   }
 }
