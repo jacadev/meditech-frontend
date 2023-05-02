@@ -20,6 +20,10 @@ import signup from './Views/user/Sing up/Index';
 
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Details from './Views/user/Deatails/detail';
+import homeadmin from "./Views/admin/Home/Index"
+import createdoctor from "./Views/admin/Postdoctor/Create"
+import indexdoctor from "./Views/admin/Postdoctor/Index"
+import indexuser from "./Views/admin/listuser/index"
 import ProfileSettings from './Views/user/ProfileSettings/index';
 import ForgotPassword from './Views/user/ForgotPassword';
 import InfoAppointment from './Components/infoAppointment/infoAppointment';
@@ -95,6 +99,23 @@ const routes = [
   {
     layout: '/user/profilesettings',
     component: ProfileSettings,
+  },
+  {
+    layout: '/user/home2',
+    component: homeadmin,
+  },
+  {
+    layout: '/user/createdoctor',
+    component: createdoctor,
+  },
+
+  {
+    layout: '/user/indexdoctor',
+    component: indexdoctor,
+  },
+  {
+    layout: '/user/indexuser',
+    component: indexuser,
   },
   {
     layout: '/user/forgotpassword',

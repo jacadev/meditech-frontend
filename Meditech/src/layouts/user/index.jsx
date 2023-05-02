@@ -45,6 +45,10 @@ function User(props) {
         case "/user/signin":
         case "/user/forgotpassword":
         case "/user/appointment":
+        case "/user/home2" :
+        case "/user/createdoctor" :
+        case "/user/indexdoctor" :
+        case "/user/indexuser" :
           return <Route path={layout} component={component} key={key} />;
         default:
           return null;
