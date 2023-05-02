@@ -32,7 +32,7 @@ function App() {
               <Route path={`/user`} component={UserLayout} />
             )}
             {isAdmin ? (
-              <Redirect from='/' to='/admin/putPatient' />
+              <Redirect from='/' to='/admin/dashboard' />
             ): (
               <Redirect from='/' to='/user/home' />
             )}

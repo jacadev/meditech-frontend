@@ -2,9 +2,15 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 // chakra imports
-import { Box, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Divider, Flex, HStack, Text, useColorModeValue } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 export function SidebarLinks(props) {
+
+  const userInfo = useSelector((state) => state.userInfo);
+
+  const adminOUser = userInfo?.rol === 3 ? '/admin' : '/user'
+
   //   Chakra color mode
   let location = useLocation();
   let activeColor = useColorModeValue("gray.700", "white");
@@ -47,14 +53,16 @@ export function SidebarLinks(props) {
           </>
         );
       } else if (
-        route.layout === "/user" ||  //modicar depues de la demo
-        route.layout === "/auth" ||
-        route.layout === "/rtl"
+        route.layout === adminOUser
       ) {
+        
         return (
           <NavLink key={index} to={route.layout + route.path}>
+            
             {route.icon ? (
               <Box>
+                <Divider/>
+                
                 <HStack
                   spacing={
                     activeRoute(route.path.toLowerCase()) ? "22px" : "26px"

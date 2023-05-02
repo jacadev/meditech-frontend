@@ -116,7 +116,7 @@ function Specialists() {
   ) {
     pageNumbers.push(i);
   }
-
+console.log(specialists)
   return (
     <Box mt="5rem">
       <Box
