@@ -75,7 +75,8 @@ function PayPalCheckout() {
       <PayPalScriptProvider
         options={{
           locale: "en_US",
-          clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK"
+          clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK",
+          clientSecret:"EFg_rLe3O94PSssIO49pbYUdJR2rDKuYZ7w5ZAEosYSex8r7n4in2iejFDm2iJ-lrcPCkFeJju20TP5v"
         }}
         onError={(err) => console.log("Error loading PayPal script", err)}
       >
