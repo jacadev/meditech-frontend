@@ -2,6 +2,7 @@ export const POST_RESERVE = "POST_RESERVE";
 export const POST_RESERVE_ERROR = "POST_RESERVE_ERROR";
 export const FORM_DATA = "FORM_DATA";
 export const GET_DOCTOR = "GET_DOCTOR";
+export const GET_ESPECIALIDADES = "GET_ESPECIALIDADES"
 export const GET_DOCTORS = "GET_DOCTORS";
 export const GET_DOCTORS_NAME = "GET_DOCTORS_NAME";
 export const CLEAN_DATAIL_ID = "CLEAN_DATAIL_ID";

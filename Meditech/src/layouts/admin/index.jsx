@@ -1,5 +1,5 @@
 // Chakra imports
-import { Portal, Box } from "@chakra-ui/react";
+import { Portal, Box, layout } from "@chakra-ui/react";
 import Footer from "../../Components/footer/FooterUser";
 // Layout components
 import Navbar from "../../Components/navbar/NavbarAdmin.jsx";
@@ -9,6 +9,17 @@ import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "../../routes.jsx";
 
+
+// const cambioLayout = routes.map(ruta => { 
+//   if (ruta.layout === '/user') {
+//     return { ...ruta, layout: '/admin' };
+//   } else {
+//     return ruta
+//   }
+// })
+
+console.log('soy el cambio', routes);
+
 // Custom Chakra theme
 function Admin(props) {
   const { ...rest } = props;
@@ -16,12 +27,15 @@ function Admin(props) {
 
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
-
+  
   const getRoute = () => {
-    return window.location.pathname !== "/admin/home";
+    return window.location.pathname !== "/admin/homeadmin";
   };
 
   const getActiveRoute = (routes) => {
+
+    console.log('como llega routes', routes);
+
     window.scrollTo(0, 0);
 
     for (let i = 0; i < routes.length; i++) {
@@ -39,16 +53,21 @@ function Admin(props) {
       switch (layout) {
         case "/admin":
           return <Route path={layout + path} component={component} key={key} />;
-        // case "/user/detail/:id":
-        // case "/user/reserve":
-        // case "/user/payment":
-        // case "/user/signup":
-        // case "/user/paymentprocess":
-        // case "/user/profilesettings":
-        // case "/user/signin":
-        // case "/user/forgotpassword":
-        // case "/user/appointment":
+        case "/admin/detail/:id":
+        case "/admin/reserve":
+        case "/admin/payment":
+        case "/admin/signup":
+        case "/admin/paymentprocess":
+        case "/admin/profilesettings":
+        case "/admin/signin":
+        case "/admin/forgotpassword":
+        case "/admin/appointment":
         case "/admin/putPatient":
+        case "/admin/homeadmin":
+        case "/admin/createdoctor":
+        case "/admin/indexdoctor":
+        case "/admin/indexuser":
+        case "/admin/pays":
           return <Route path={layout} component={component} key={key} />;
         default:
           return null;
@@ -64,7 +83,7 @@ function Admin(props) {
           setToggleSidebar,
         }}
       >
-        {/* <Sidebar routes={routes} display='none' {...rest} /> */}
+        <Sidebar routes={routes} display='none' {...rest} />
         <Box
           float="right"
           minHeight="100vh"
