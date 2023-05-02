@@ -5,12 +5,20 @@ import { Box, Flex, Image, Text,Button } from "@chakra-ui/react";
 import baner from '../../../assets/img/Banner/banner-Plano de fundo.jpg'
 import Contador from '../../../Components/contador/contador2';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 export default function Marketplace() {
   const history = useHistory();
 
+  const userInfo = useSelector(state => state.userInfo)
+
   function handleClick() {
-    history.push("/user/about-us");
+
+    if (userInfo?.rol === 3) {
+      history.push("/admin/about-us");
+    } else {
+      history.push("/user/about-us");
+    }
   }
  
   return (

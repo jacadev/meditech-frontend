@@ -6,6 +6,8 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+const CLIENT_ID = 'AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK'
+
 import axios from 'axios';
 function PayPalCheckout() {
   const history = useHistory();
