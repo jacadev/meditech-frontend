@@ -163,15 +163,16 @@ const FormularioReserva = () => {
         })
       }
              </Box> 
+             <Box>
+             <Checkbox
+            isChecked={dataTreatment}
+            onChange={() => setConsentimiento(!dataTreatment)}
+            required={true}
+            ml={0} // Agregar esta propiedad para alinear a la izquierda
+          >
+            Doy mi consentimiento para el tratamiento de mis datos personales relacionados con la salud y su transferencia al especialista para concertar la cita. En Meditech, entendemos que a veces surgen imprevistos y no puede asistir a su cita programada. Sin embargo, para asegurarnos de que nuestros médicos y el personal estén disponibles para todos nuestros pacientes, requerimos que nos informe con al menos 24 horas de antelación si no podrá asistir a su cita. En caso de que no se presente a su cita sin previo aviso, se le cobrará una tarifa por ausencia y no se le reembolsará el costo de la cita. Agradecemos su comprensión y cooperación en este asunto.
+          </Checkbox>
 
-              <Checkbox
-                isChecked={dataTreatment}
-                onChange={() => setConsentimiento(!dataTreatment)}
-                required={true}
-              >
-
-                Doy mi consentimiento para el tratamiento de mis datos personales relacionados con la salud y su transferencia al especialista para concertar la cita
-              </Checkbox>
 
               <Checkbox
                 isChecked={receiveCommunication}
@@ -180,7 +181,7 @@ const FormularioReserva = () => {
                 Sí, me gustaría recibir comunicaciones de Meditech.
               </Checkbox>
 
-
+              </Box>
               <div style={{ marginTop: "50px" }}>
                 <Button
                   type="submit"
