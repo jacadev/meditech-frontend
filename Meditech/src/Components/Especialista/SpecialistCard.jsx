@@ -42,7 +42,7 @@ function SpecialistCard(props) {
     maxW={'450px'}
     w={'full'}
     h={'400px'} // definir una altura fija para la tarjeta
-    bg={useColorModeValue('white', 'gray.900')}
+    bg={useColorModeValue('white', 'rgb(41,38,38)')}
     boxShadow={'2xl'}
     rounded={'lg'}
     p={6}
@@ -56,7 +56,7 @@ function SpecialistCard(props) {
       mb={4}
       pos={'relative'}
     />
-    <Heading fontSize={'2xl'} fontFamily={'body'}>
+    <Heading fontSize={'2xl'} fontFamily={'body'} color={useColorModeValue('black', 'grey')}>
       {props.specialist.person.first_name} {props.specialist.person.last_name}
     </Heading>
     <Text fontWeight={600} color={'gray.500'} mb={4}>

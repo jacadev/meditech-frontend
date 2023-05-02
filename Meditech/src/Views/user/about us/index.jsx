@@ -4,20 +4,22 @@ import {
   Text,
   Image,
   Flex,
+  useColorModeValue
 } from "@chakra-ui/react";
 import imagen1 from '../../../assets/img/fondos/medicos-masculinos-femeninos-papeles.jpg'
+import { useColorMode } from "@chakra-ui/react";
 
 export default function AboutUs() {
 
   return (
-    <GridItem pl="5" borderRadius="5px" bg="inherit" area={"main"}>
+    <GridItem pl="5" borderRadius="5px" bg="inherit"  area={"main"}>
       <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
         <Image src={imagen1} objectFit="cover" w={800} h={800} mr={{ md: "4rem" }} />
-        <Flex direction="column">
+        <Flex direction="column" bg={useColorModeValue('white','rgba(11,20,55,0.5)' )}>
           <Text
             marginTop="8rem"
             fontSize={{ base: 'md', lg: 'lg' }}
-            color={'gray.500'}
+            color={useColorModeValue('gray.500', 'gray.100')}
             p="4"
             borderRadius="lg"
             lineHeight="tall"
@@ -28,7 +30,7 @@ export default function AboutUs() {
           </Text>
           <Text
             fontSize={{ base: 'md', lg: 'lg' }}
-            color={'gray.500'}
+            color={useColorModeValue('gray.500', 'gray.100')}
             p="4"
             borderRadius="lg"
             lineHeight="tall"
@@ -39,7 +41,7 @@ export default function AboutUs() {
           </Text>
           <Text
             fontSize={{ base: 'md', lg: 'lg' }}
-            color={'gray.500'}
+            color={useColorModeValue('gray.500', 'gray.100')}
             p="4"
             borderRadius="lg"
             lineHeight="tall"

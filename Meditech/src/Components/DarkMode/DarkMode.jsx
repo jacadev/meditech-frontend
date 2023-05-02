@@ -7,10 +7,14 @@ function DarkModeToggle() {
 
   return (
     <IconButton
+      display="flex"
+      flexDirection="row"
+      position="relative"
       aria-label="Toggle dark mode"
       icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       onClick={toggleColorMode}
       variant="ghost"
+      bg={'grey'}
     />
   );
 }

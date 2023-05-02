@@ -12,7 +12,7 @@ import {
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import AdminNavbarLinks from "./NavbarLinksAdmin";
-
+import DarkModeToggle from "../../Components/DarkMode/DarkMode"
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -133,6 +133,7 @@ export default function AdminNavbar(props) {
             {brandText}
           </Link>
        {/*  </Box> */}
+          <DarkModeToggle />
         <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
             onOpen={props.onOpen}
