@@ -99,7 +99,7 @@ function Specialists() {
   for (let i = 1; i <= Math.ceil(filteredSpecialists.length / specialistsPerPage); i++) {
     pageNumbers.push(i);
   }
-
+console.log(specialists)
   return (
     <Box mt="5rem" >
       <Box
