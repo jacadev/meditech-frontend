@@ -8,6 +8,7 @@ import { sliderStyles } from "./components/slider";
 import { textareaStyles } from "./components/textarea";
 import { switchStyles } from "./components/switch";
 import { linkStyles } from "./components/link"; */
+import { mode } from "@chakra-ui/theme-tools";
 import { breakpoints } from "./foundations/breakpoints";
 import { globalStyles } from "./styles";
 import { extendTheme } from "@chakra-ui/react";
@@ -28,17 +29,12 @@ const theme = extendTheme(
       initialColorMode: "light",
       useSystemColorMode: false,
     },
-    styles: {
-      global: (props) => ({
-        body: {
-          color: props.colorMode === "light" ? "black" : "white",
-          bg: props.colorMode === "light" ? "white" : "black",
-        },
-      }),
-    },
+    stlyes: {
+      global: globalStyles,
+    }
   },
   { breakpoints }, // Breakpoints
-  globalStyles
+
 );
 
 

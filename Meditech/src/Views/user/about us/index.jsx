@@ -10,12 +10,13 @@ import imagen1 from '../../../assets/img/fondos/medicos-masculinos-femeninos-pap
 import { useColorMode } from "@chakra-ui/react";
 
 export default function AboutUs() {
-
+  const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
+  const bgColorDark = "radial-gradient(circle, rgba(0,191,255,1) 0%, rgba(46,100,254,0.605359331232493) 100%)"
   return (
     <GridItem pl="5" borderRadius="5px" bg="inherit"  area={"main"}>
       <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
         <Image src={imagen1} objectFit="cover" w={800} h={800} mr={{ md: "4rem" }} />
-        <Flex direction="column" bg={useColorModeValue('white','rgba(11,20,55,0.5)' )}>
+        <Flex direction="column" bg={useColorModeValue('white',`${bgColorDark}`)}>
           <Text
             marginTop="8rem"
             fontSize={{ base: 'md', lg: 'lg' }}

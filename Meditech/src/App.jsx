@@ -1,13 +1,12 @@
 import React from "react";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import theme from "./theme/themes";
-// import AdminLayout from "./layouts/admin";
+import "./assets/css/App.css";
+import AdminLayout from "./layouts/admin";
 import UserLayout from "./layouts/user";
-import { ChakraProvider,ColorModeScript  } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import theme from "./theme/themes";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function App() {
   const userInfo = useSelector((state) => state.userInfo);
@@ -17,23 +16,31 @@ function App() {
   console.log('info del login', userInfo);
 
   return (
-    <ChakraProvider theme={theme}>
-      <ColorModeProvider
-        options={{
-          initialColorMode: "light",
-          useSystemColorMode: false,
-        }}
-      >
+    <ChakraProvider theme={theme}>  
+    <ColorModeProvider
+    options={{
+      initialColorMode: "light",
+      useSystemColorMode: false,
+    }}
+  >
+      <React.StrictMode>
         <HashRouter>
           <Switch>
-            <Route path={`/user`} component={UserLayout} />
-            <Redirect from="/" to="/user" />
+            {isAdmin ? (
+              <Route path={`/admin`} component={AdminLayout} />
+            ) : (
+              <Route path={`/user`} component={UserLayout} />
+            )}
+            {isAdmin ? (
+              <Redirect from='/' to='/admin/putPatient' />
+            ): (
+              <Redirect from='/' to='/user/home' />
+            )}
           </Switch>
         </HashRouter>
-        <DarkModeToggle />
+      </React.StrictMode>
       </ColorModeProvider>
     </ChakraProvider>
-  );
+  )
 }
-
 export default App;

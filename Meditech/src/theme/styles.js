@@ -77,21 +77,23 @@ export const globalStyles = {
     gray: {
       100: "#FAFCFE",
     },
+    styles: {
+      global: (props) => ({
+        body: {
+          overflowX: "hidden",
+          bg: mode("white", "grey")(props),
+          fontFamily: "DM Sans",
+          letterSpacing: "-0.5px",
+        },
+        // "#FAFCFE",
+        input: {
+          color: "gray.700",
+        },
+        html: {
+          fontFamily: "DM Sans",
+        },
+      }),
+    },
   },
-  styles: {
-    global: () => ({
-      body: {
-        overflowX: "hidden",
-        bg:"#FAFCFE",
-        fontFamily: "DM Sans",
-        letterSpacing: "-0.5px",
-      },
-      input: {
-        color: "gray.700",
-      },
-      html: {
-        fontFamily: "DM Sans",
-      },
-    }),
-  },
+  
 };

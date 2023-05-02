@@ -85,8 +85,9 @@ const TestimonialAvatar = ({
 
 export default function WithSpeechBubbles() {
     const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
+    const bgColorDark = "radial-gradient(circle, rgba(0,191,255,1) 0%, rgba(46,100,254,0.605359331232493) 100%)"
   return (
-    <Box bg={useColorModeValue(bgColor)} borderRadius='10px' marginTop="10px">
+    <Box bg={useColorModeValue(`${bgColor}`, `${bgColorDark}`)} borderRadius='10px' marginTop="10px">
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
           <Heading>Comentarios de Nuestros Pacientes</Heading>
@@ -104,7 +105,7 @@ export default function WithSpeechBubbles() {
             </TestimonialContent>
             <TestimonialAvatar
   src={avatar8}
-  name={<span style={{ color: "black" }}>Santiago García Pérez</span>}
+  name={<span style={{ color: useColorModeValue("black", "white") }}>Santiago García Pérez</span>}
   title={<span style={{ color: "white" }}>Paciente atendido en nuestro consultorio</span>}
 />
 
