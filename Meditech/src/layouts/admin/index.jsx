@@ -34,8 +34,6 @@ function Admin(props) {
 
   const getActiveRoute = (routes) => {
 
-    console.log('como llega routes', routes);
-
     window.scrollTo(0, 0);
 
     for (let i = 0; i < routes.length; i++) {
@@ -62,7 +60,7 @@ function Admin(props) {
         case "/admin/signin":
         case "/admin/forgotpassword":
         case "/admin/appointment":
-        case "/admin/putPatient":
+        case "/admin/putPatient/:id":
         case "/admin/createdoctor":
           return <Route path={layout} component={component} key={key} />;
         default:

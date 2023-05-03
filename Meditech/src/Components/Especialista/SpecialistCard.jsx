@@ -17,15 +17,20 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 function SpecialistCard(props) {
+
+  const userInfo = useSelector(state => state.userInfo)
+  const isAdmin = userInfo?.rol === 3
+
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < Math.floor(rating)) {
-        stars.push(<BsStarFill key={i} color="yellow" />);
+        stars.push(<BsStarFill key={i} color="#F4D03F" />);
       } else {
-        stars.push(<BsStar key={i} color="yellow" />);
+        stars.push(<BsStar key={i} color="#F4D03F" />);
       }
     }
     return stars;
@@ -34,7 +39,7 @@ function SpecialistCard(props) {
 
   return (
 
-    <Link to={{ pathname: `/user/detail/${props.specialist.id}` }}>
+    <Link to={{ pathname: isAdmin ? `/admin/detail/${props.specialist.id}` : `/user/detail/${props.specialist.id}` }}>
   <Box
     cursor='pointer'
     _hover={{ boxShadow: "lg", transform: "scale(1.02)" }}

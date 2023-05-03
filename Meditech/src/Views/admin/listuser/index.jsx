@@ -17,32 +17,45 @@ import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatients } from "../../../Redux/Actions/actions";
+import SearchBarUsers from "../../../Components/SearchBar/SearchBarUsers";
+import SearchBar from "../../../Components/SearchBar/SearchBar";
 
 function Doctor() {
-  const [userlists, setUserlists] = useState([]);
+  // const [userlists, setUserlists] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [userlistsPerPage, setSpecialistsPerPage] = useState(0);
 
+  const patients = useSelector(state => state.patients)
+console.log('los pacientes',patients);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const result = await axios.get("http://localhost:3001/patients");
+  //     setUserlists(result.data);
+  //     setSpecialistsPerPage(result.data.length);
+  //   }
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get("http://localhost:3001/patients");
-      setUserlists(result.data);
-      setSpecialistsPerPage(result.data.length);
-    }
-    fetchData();
-  }, []);
+    dispatch(getAllPatients())
+  },[])
 
   const indexOfLastSpecialist = currentPage * userlistsPerPage;
   const indexOfFirstSpecialist = indexOfLastSpecialist - userlistsPerPage;
-  const currentSpecialists = userlists.slice(
-    indexOfFirstSpecialist,
-    indexOfLastSpecialist
-  );
+  // const currentSpecialists = userlists.slice(
+  //   indexOfFirstSpecialist,
+  //   indexOfLastSpecialist
+  // );
 
   const history = useHistory();
-  console.log(userlists);
+  console.log(patients);
   return (
     <Card p={5} mx="auto" mt={{ md: "12vh" }}>
+    <SearchBarUsers/>
       <TableContainer>
         <Table size="sm">
           <Thead>
@@ -52,11 +65,12 @@ function Doctor() {
               <Th>Nombres completos</Th>
               <Th>Edad</Th>
               <Th>Telefono(s)</Th>
+              <Th>Estado</Th>
               <Th>Acciones</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {userlists?.map((specialist) => (
+            {patients?.map((specialist) => (
               <Tr key={specialist?.id}>
                 <Td>{specialist.person.userName}</Td>
                 <Td>{specialist.person.email}</Td>
@@ -71,6 +85,7 @@ function Doctor() {
                     ))}
                   </ul>
                 </Td>
+                <Td>{specialist.person.status ? 'Activo' : 'Inactivo'}</Td>
                 <Td>
                 <Tooltip hasArrow label="Editar" bg="blue.600">
                   <Button
@@ -78,7 +93,7 @@ function Doctor() {
                     colorScheme="blue"
                     variant="solid"
                     onClick={() =>
-                      history.push(`/user/edituser/${specialist.id}`)
+                      history.push(`/admin/putPatient/${specialist.id}`)
                     }
                   >
                   </Button>

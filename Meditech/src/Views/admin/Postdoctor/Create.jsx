@@ -1,7 +1,7 @@
 import {
   Box,
-  Select,
   Card,
+  Select as Select1,
   Textarea,
   FormControl,
   FormLabel,
@@ -25,19 +25,20 @@ import {
   getEspecialidades,
   postDoctor,
 } from "./../../../Redux/Actions/actions";
+import Select from "react-select";
+import { useHistory } from 'react-router-dom';
+
 
 function Formulario() {
+  const [image, setImage] = useState([]);
   const [form, setForm] = useState({
-    user_name: "",
     email: "",
-    passwword: "",
     phone: [],
     age: "",
     first_name: "",
     last_name: "",
     gender: "",
     about_me: "",
-    profile_image: "",
     tuition_code: "",
     consultation_cost: "",
     location: { city: "", country: "", address: "" },
@@ -75,6 +76,20 @@ function Formulario() {
     }
   };
 
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    setFileToBase(file);
+    console.log(file);
+  };
+
+  const setFileToBase = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+  };
+
   const dispatch = useDispatch();
 
   const especialidades = useSelector((state) => state.especialidades);
@@ -88,18 +103,21 @@ function Formulario() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(postDoctor(form));
+    let formToSend = form;
+    formToSend.profile_image = image;
+    formToSend.preload = false;
+    console.log(formToSend);
+
+    dispatch(postDoctor(formToSend));
+
     setForm({
-      user_name: "",
       email: "",
-      passwword: "",
       phone: [],
       age: "",
       first_name: "",
       last_name: "",
       gender: "",
       about_me: "",
-      profile_image: "",
       tuition_code: "",
       consultation_cost: "",
       location: { city: "", country: "", address: "" },
@@ -107,12 +125,26 @@ function Formulario() {
       specialties: [],
       rol_id: [1],
     });
+
+    setImage({
+      image: "",
+    });
   };
 
   useEffect(() => {
     dispatch(getEspecialidades());
   }, []);
+  console.log(form);
+  const handleChangeEspecialidades = (selectedOptions) => {
+    const options = selectedOptions.map((option) => option.value);
+    setForm((prevState) => ({ ...prevState, specialties: options }));
+  };
+  const history = useHistory();
 
+  const handleClick = (event) => {
+    event.preventDefault();
+    history.push("admin/indexdoctor");
+  };
   return (
     <Card p={5} mx="auto" mt={{ md: "12vh" }}>
       <Heading fontSize="36px" mb="10px">
@@ -121,22 +153,6 @@ function Formulario() {
       <form onSubmit={handleSubmit}>
         <Flex flexWrap="wrap" flexDirection="column">
           <Flex flexGrow={1}>
-            <FormControl id="form.user_name" mb={3} mr={3}>
-              <FormLabel>
-                Nombre de usuario{" "}
-                <Text as="span" color="red.500">
-                  *
-                </Text>
-              </FormLabel>
-              <Input
-                isRequired={true}
-                placeholder="Incerte el nombre de usuario del doctor"
-                type="text"
-                value={form.user_name}
-                onChange={handleChange}
-                name="user_name"
-              />
-            </FormControl>
             <FormControl id="email" mb={3} mr={3}>
               <FormLabel>
                 Email{" "}
@@ -153,21 +169,39 @@ function Formulario() {
                 name="email"
               />
             </FormControl>
-            <FormControl id="password" mb={3} mr={3}>
+            <FormControl id="age" mb={3} mr={3}>
               <FormLabel>
-                Contraseña{" "}
+                Edad{" "}
                 <Text as="span" color="red.500">
                   *
                 </Text>
               </FormLabel>
               <Input
                 isRequired={true}
-                placeholder="Contraseña"
-                type="password"
-                value={form.passwword}
+                type="number"
+                value={form.age}
+                placeholder="Inserte su edad"
                 onChange={handleChange}
-                name="passwword"
+                name="age"
               />
+            </FormControl>
+            <FormControl id="gender" mb={3} mr={3}>
+              <FormLabel>
+                Genero{" "}
+                <Text as="span" color="red.500">
+                  *
+                </Text>
+              </FormLabel>
+              <Select1
+                isRequired={true}
+                value={form.gender}
+                onChange={handleChange}
+                name="gender"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Masculino">Hombre</option>
+                <option value="Femenino">Mujer</option>
+              </Select1>
             </FormControl>
           </Flex>
           <Flex flexGrow={2}>
@@ -221,42 +255,6 @@ function Formulario() {
             </FormControl>
           </Flex>
           <Flex flexGrow={2}>
-            <FormControl id="age" mb={3} mr={3}>
-              <FormLabel>
-                Edad{" "}
-                <Text as="span" color="red.500">
-                  *
-                </Text>
-              </FormLabel>
-              <Input
-                isRequired={true}
-                type="number"
-                value={form.age}
-                placeholder="Inserte su edad"
-                onChange={handleChange}
-                name="age"
-              />
-            </FormControl>
-            <FormControl id="gender" mb={3} mr={3}>
-              <FormLabel>
-                Genero{" "}
-                <Text as="span" color="red.500">
-                  *
-                </Text>
-              </FormLabel>
-              <Select
-                isRequired={true}
-                value={form.gender}
-                onChange={handleChange}
-                name="gender"
-              >
-                <option>Seleccione una opcón</option>
-                <option value="Masculino">Hombre</option>
-                <option value="Femenino">Mujer</option>
-              </Select>
-            </FormControl>
-          </Flex>
-          <Flex flexGrow={2}>
             <FormControl id="about_me" mb={3} mr={3}>
               <FormLabel>
                 Un poco acerca de mi{" "}
@@ -283,13 +281,14 @@ function Formulario() {
               </FormLabel>
               <Input
                 isRequired={true}
-                type="url"
+                type="file"
                 placeholder="Inserte el URL de la imagen"
                 value={form.profile_image}
-                onChange={handleChange}
+                onChange={handleImage}
                 name="profile_image"
               />
             </FormControl>
+
             <FormControl id="tuition_code" mb={3} mr={3}>
               <FormLabel>
                 Código de matrícula{" "}
@@ -399,18 +398,17 @@ function Formulario() {
               </Text>
             </FormLabel>
             <Select
+              closeMenuOnSelect={false}
               defaultValue={form.specialties}
               isRequired={true}
-              onChange={handleChangEspecialits}
+              onChange={handleChangeEspecialidades}
               name="specialties"
-              multiple
-            >
-              {optionsEspecialidades.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Select>
+              isMulti
+              options={optionsEspecialidades.map((option) => ({
+                value: option.value,
+                label: option.label,
+              }))}
+            />
           </FormControl>
         </Flex>
 
@@ -421,12 +419,7 @@ function Formulario() {
             overflow="hidden"
             variant="outline"
           >
-            <Image
-              objectFit="cover"
-              maxW={{ base: "100%", sm: "200px" }}
-              src="https://i.pinimg.com/originals/d0/eb/aa/d0ebaaaa551c675cfd9ee78d26398a6d.png"
-              alt="Caffe Latte"
-            />
+            <Image maxW={{ base: "100%", sm: "200px" }} src={image} />
             <Stack>
               <CardBody>
                 <Heading size="md">¿Termiaste el formulario?</Heading>
@@ -442,7 +435,7 @@ function Formulario() {
 
               <CardFooter>
                 <Tooltip hasArrow label="Enviar formulario" bg="blue.600">
-                  <Button colorScheme="blue" type="submit">
+                  <Button colorScheme="blue" type="submit" onChange={handleClick}>
                     Enviar
                   </Button>
                 </Tooltip>
