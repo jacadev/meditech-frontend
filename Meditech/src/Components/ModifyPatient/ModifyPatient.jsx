@@ -12,6 +12,7 @@ import {
     FormControl,
     FormLabel,
 } from "@chakra-ui/react";
+import { cleanDetail } from "../../Redux/Actions/actions";
 const ModifyPatient = () => {
 
     const { id } = useParams();
@@ -19,24 +20,18 @@ const ModifyPatient = () => {
     const dispatch = useDispatch();
 
     const infoPatient = useSelector(state => state.infoPatient);
-    //console.log('info', infoPatient);
+    // console.log('info', infoPatient);
     const [data, setData] = useState({
         status: infoPatient.person?.status,
         rol: [infoPatient.person?.rol_id],
     })
 
     useEffect(() => {
-        dispatch(getPatientById(1))
+        dispatch(getPatientById(id))
+        // return () => dispatch(cleanDetail())
     }, []);
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        dispatch(putPatientAdmin(1, data)) // put paciente
-
-        setTimeout(() => {
-            dispatch(getPatientById(1))
-        }, 100)
-    }
+    
 
     const changeHandlerReview = (review_id, status) => {
 
@@ -47,14 +42,33 @@ const ModifyPatient = () => {
 
         dispatch(putReviewAdmin(review_id, obj)) // put review
         setTimeout(() => {
-            dispatch(getPatientById(1))
+            dispatch(getPatientById(id))
         }, 100)
     }
 
     const changeHandlerPatient = () => {
+
+        dispatch(putPatientAdmin(id, data)) // put paciente
+
+        setTimeout(() => {
+            dispatch(getPatientById(id))
+        },100)
+    }
+
+    const submitHandlerRol = () => {
+        dispatch(putPatientAdmin(id, data)) // put paciente
+
+        setTimeout(() => {
+            dispatch(getPatientById(id))
+        }, 100)
+    }
+
+    const handleChangeStatus = (event) => {
+        const value = event.target.value;
+
         setData({
             ...data,
-            status: !data.status
+            status: value
         })
     }
 
@@ -82,6 +96,16 @@ const ModifyPatient = () => {
                         <Text fontSize='16px' color={infoPatient.person?.status ? 'green' : 'red'}>
                             Estado: {infoPatient.person?.status ? 'activo' : 'inactivo'}
                         </Text>
+                        <Box display='flex' alignItems='center' marginTop='20px'>
+                            <Box display='flex' alignItems='center' marginTop='10px' marginRight='20px'>
+                                <input type='radio' name='status' value={true} onChange={handleChangeStatus} marginLeft='5px'  />
+                                <Text fontSize='16px'>Activo</Text>
+                            </Box>
+                            <Box display='flex' alignItems='center' marginTop='10px' marginLeft='20px'>
+                                <input type='radio' name='status' value={false} onChange={handleChangeStatus} marginLeft='5px' />
+                                <Text fontSize='16px'>Inactivo</Text>
+                            </Box>
+                        </Box>
                         <Button onClick={() => changeHandlerPatient()} marginTop='10px' bg='blue' color='white'>
                             Cambiar estado
                         </Button>
@@ -102,7 +126,7 @@ const ModifyPatient = () => {
                                 <Text fontSize='16px'>Administrador</Text>
                             </Box>
                         </Box>
-                        <Button type='submit' marginTop='20px' bg='blue' color='white'>
+                        <Button type='submit' marginTop='20px' bg='blue' color='white' onClick={() => submitHandlerRol()}>
                             Modificar rol
                         </Button>
                     </Box>

@@ -9,7 +9,9 @@ import {
   GET_DOCTORS_NAME,
   GET_APPOINTMENT_PATIENT, 
   GET_PATIENT, 
-  GET_SPECIALTIES
+  GET_SPECIALTIES,
+  GET_ALL_PATIENTS,
+  GET_ALL_PATIENTS_BY_NAME
 } from "../Actions/actions-types";
 import {
   SIGNIN_USER,
@@ -37,7 +39,8 @@ const initialState = {
   doctors: [],
   appointmentOfPatientID:[], // aca se guardan los datos del paciente que se traen de la DB para el componente que se encarga de visualizar las citas del paciente 
   infoPatient: [],
-  specialties: []
+  specialties: [],
+  patients: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -176,6 +179,16 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           specialties: action.payload
+        }
+      case GET_ALL_PATIENTS:
+        return {
+          ...state,
+          patients: action.payload
+        }
+      case GET_ALL_PATIENTS_BY_NAME:
+        return {
+          ...state,
+          patients: action.payload
         }
     default:
       return state;

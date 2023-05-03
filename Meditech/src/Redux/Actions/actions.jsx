@@ -11,7 +11,9 @@ import {
   GET_DOCTORS_NAME,
   GET_APPOINTMENT_PATIENT,
   GET_PATIENT,
-  GET_SPECIALTIES
+  GET_SPECIALTIES,
+  GET_ALL_PATIENTS,
+  GET_ALL_PATIENTS_BY_NAME
 } from "./actions-types";
 
 export const enviarObjetoDeEstado = (objeto) => {
@@ -142,5 +144,22 @@ export const getSpecialties = () => {
     .then(res => res.data);
 
     dispatch({type:GET_SPECIALTIES, payload: result});
+  }
+}
+
+export const getAllPatients = () => {
+  return async (dispatch) => {
+    const result = await axios.get(`http://localhost:3001/patients`)
+    .then(res => res.data);
+
+    dispatch({type:GET_ALL_PATIENTS, payload: result});
+  }
+}
+export const getAllPatientByName = (name) => {
+  return async (dispatch) => {
+    const result = await axios.get(`http://localhost:3001/patients/name?name=${name}`)
+    .then(res => res.data);
+
+    dispatch({type:GET_ALL_PATIENTS_BY_NAME, payload: result});
   }
 }
