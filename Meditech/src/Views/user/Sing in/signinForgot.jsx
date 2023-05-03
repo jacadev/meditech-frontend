@@ -14,7 +14,7 @@ import {
 // Custom components
 import DefaultAuth from './../../../layouts/user/Default';
 // Assets
-import illustration from '../../../assets/img/fondos/Meditech.png';
+//import illustration from '../../../assets/img/fondos/Meditech.png';
 import { useDispatch } from 'react-redux';
 import { forgotPassword } from './../../../Redux/Actions/Actionslogin';
 

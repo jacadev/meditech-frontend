@@ -27,9 +27,9 @@ function SpecialistCard(props) {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < Math.floor(rating)) {
-        stars.push(<BsStarFill key={i} color="yellow" />);
+        stars.push(<BsStarFill key={i} color="#F4D03F" />);
       } else {
-        stars.push(<BsStar key={i} color="yellow" />);
+        stars.push(<BsStar key={i} color="#F4D03F" />);
       }
     }
     return stars;
