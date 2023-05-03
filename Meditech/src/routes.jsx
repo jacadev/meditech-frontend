@@ -19,6 +19,7 @@ import About from './Views/user/about us/index';
 import Staff from './Views/user/Staff/index';
 import Reserve from './Views/user/Reserve/Reserve';
 import singIn from './Views/user/Sing in';
+import SignInForgot from "./Views/user/Sing in/signinForgot"
 import payment from './Views/user/payment';
 import signup from './Views/user/Sing up/Index';
 
@@ -112,6 +113,10 @@ const routes = [
   {
     layout: '/user/profilesettings',
     component: ProfileSettings,
+  },
+  {
+    layout: '/user/signinforgot',
+    component: SignInForgot,
   },
   //----------------------------rutas de admin-------------------------
   {
