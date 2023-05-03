@@ -24,6 +24,9 @@ function Specialists() {
   const frontPage = () => {
     setCurrentPage(1);
     setSpecialtyFilter("");
+    setGenderFilter("");
+    setSortOrder("");
+    setSortOrderRating(null);
   };
 
   useEffect(() => {
