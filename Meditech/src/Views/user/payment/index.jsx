@@ -5,8 +5,8 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseBu
 
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+const clientId= `${import.meta.env.VITE_CLIENTID}`
 
-const CLIENT_ID = 'AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK'
 
 import axios from 'axios';
 function PayPalCheckout() {
@@ -71,16 +71,12 @@ function PayPalCheckout() {
     });
 
   };
-   const paypalOption = {  
-    locale: "en_US",
-   clientID: "AU95o7ZiXD0PVYsklR1GZqXxJ1p3jd4xVbOEkBRJr5SxXxD5IX-rLm3rgQwJwcyFslL0JCLxrE9hJvOK",
-
-   }
+ 
   return (<Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
     <Box borderWidth="1px" borderRadius="lg" padding="1" mb="10" width="500px" boxShadow="dark-lg" bg="#F3f3f3">
 
       <PayPalScriptProvider
-        options={paypalOption}
+        options={{"client-id":clientId}}
         onError={(err) => console.log("Error loading PayPal script", err)}
       >
 

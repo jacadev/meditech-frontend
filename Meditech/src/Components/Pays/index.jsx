@@ -13,7 +13,7 @@ import {
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { Bar } from 'react-chartjs-2';
+/* import { Bar } from 'react-chartjs-2'; */
 import Chart from 'chart.js/auto';
 
 function Pays() {
