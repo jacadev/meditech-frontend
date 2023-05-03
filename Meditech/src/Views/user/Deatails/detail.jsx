@@ -28,6 +28,8 @@ const Detail = () => {
   const patient = useSelector((state) => state.userInfo);
   const doctor = useSelector((state) => state.doctorDetail);
 
+  const isAdmin = patient?.rol === 3; // si rol es igual a 3, es admin. sino, es user
+
   useEffect(() => {
     dispatch(getDoctor(id));
     return () => dispatch(cleanDetail());
@@ -109,38 +111,40 @@ const Detail = () => {
                   </WrapItem>
                 ))}
               </Wrap>
-              <Link
-                to={{
-                  pathname: patient.id ? "/user/reserve" : "/user/signin",
-                  state: {
-                    id: doctor.id,
-                    name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,
-                    specialties: doctor.specialties?.map((s) => s.specialty),
-                    consultationCost: doctor.consultation_cost,
-                    profileImage: doctor.profile_image,
-                    disponibilties: doctor.disponibilties,
-                  },
-                }}
-              >
-                <Button
-                  mt={4}
-                  fontSize={"sm"}
-                  rounded={"full"}
-                  bg={"blue.400"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "blue.500",
-                  }}
-                  _focus={{
-                    bg: "blue.500",
+              {isAdmin ? null : (
+                <Link
+                  to={{
+                    pathname: patient.id ? "/user/reserve" : "/user/signin",
+                    state: {
+                      id: doctor.id,
+                      name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,
+                      specialties: doctor.specialties?.map((s) => s.specialty),
+                      consultationCost: doctor.consultation_cost,
+                      profileImage: doctor.profile_image,
+                      disponibilties: doctor.disponibilties,
+                    },
                   }}
                 >
-                  Agenda tu cita
-                </Button>
-              </Link>
+                  <Button
+                    mt={4}
+                    fontSize={"sm"}
+                    rounded={"full"}
+                    bg={"blue.400"}
+                    color={"white"}
+                    boxShadow={
+                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                    }
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                    _focus={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Agenda tu cita
+                  </Button>
+                </Link>
+              )}
             </Flex>
           </Box>
         </VStack>
@@ -170,8 +174,9 @@ const Detail = () => {
               </Box>
             ))}
           </VStack>
-
-          <Review doctor_id={Number(id)} patient_id={patient.id} />
+          {isAdmin ? null : (
+            <Review doctor_id={Number(id)} patient_id={patient.id} />
+          )}
         </Box>
       </Box>
     </Box>

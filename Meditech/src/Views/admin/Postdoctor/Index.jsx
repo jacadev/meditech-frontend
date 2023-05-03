@@ -17,6 +17,9 @@ import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getDoctors } from "../../../Redux/Actions/actions";
+import SearchBarDoctors from "../../../Components/SearchBar/SearchBarDoctors";
 
 function doctor() {
   const [specialists, setSpecialists] = useState([]);
@@ -24,19 +27,30 @@ function doctor() {
   const [currentPage, setCurrentPage] = useState(1);
   const [specialistsPerPage] = useState(specialists.length);
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get("http://localhost:3001/doctors");
-      const dataWithRatings = result.data.map((specialist) => ({
-        ...specialist,
-        rating: Math.floor(Math.random() * 5) + 1, // Genera un número aleatorio entre 1 y 5
-      }));
-      setSpecialists(dataWithRatings);
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const result = await axios.get("http://localhost:3001/doctors");
+  //     const dataWithRatings = result.data.map((specialist) => ({
+  //       ...specialist,
+  //       rating: Math.floor(Math.random() * 5) + 1, // Genera un número aleatorio entre 1 y 5
+  //     }));
+  //     console.log('dataa', dataWithRatings);
+  //     setSpecialists(dataWithRatings);
+  //   }
+  //   fetchData();
+  // }, []);
 
-  let filteredSpecialists = [...specialists];
+  const doctors = useSelector(state => state.doctors)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getDoctors())
+  },[])
+
+  
+
+  let filteredSpecialists = [...doctors];
 
   if (specialtyFilter !== "") {
     filteredSpecialists = filteredSpecialists.filter((specialist) =>
@@ -65,7 +79,10 @@ function doctor() {
         Crear
       </Button>
 
+      
+
       <Card p={5} mx="auto" mt={{ md: "2vh" }}>
+      <SearchBarDoctors/>
         <TableContainer>
           <Table size="sm">
             <Thead>
@@ -75,6 +92,7 @@ function doctor() {
                 <Th>Genero</Th>
                 <Th>Especialidad</Th>
                 <Th>Costo</Th>
+                <Th>Estado</Th>
                 <Th>Acciones</Th>
               </Tr>
             </Thead>
@@ -99,6 +117,7 @@ function doctor() {
                       .join(", ")}
                   </Td>
                   <Td>${specialist.consultation_cost}</Td>
+                  <Td>{specialist.person.status ? 'Activo' : 'Inactivo'}</Td>
                   <Td>
                     <Tooltip hasArrow label="Editar" bg="blue.600">
                       <Button

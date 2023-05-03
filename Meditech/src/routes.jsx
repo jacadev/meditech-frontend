@@ -212,7 +212,7 @@ const routes = [
   },
 
   {
-    layout: '/admin/putPatient',
+    layout: '/admin/putPatient/:id',
     component: ModifyPatient,
   },
   {
