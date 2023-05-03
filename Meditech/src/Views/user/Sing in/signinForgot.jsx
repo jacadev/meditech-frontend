@@ -40,7 +40,12 @@ function SignInForgot() {
     e.preventDefault();
     dispatch(forgotPassword(input.email));
     setInput({ email: '' });
-    history.push('/user/forgotpassword')
+
+    setTimeout(() =>{
+
+      history.push('/user/forgotpassword')
+
+    },1000)
   };
 
   return (

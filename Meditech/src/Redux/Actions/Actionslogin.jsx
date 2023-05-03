@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AiFillWallet } from 'react-icons/ai';
 
 export const SIGNIN_USER = 'SIGNIN_USER';
 export const SIGNUP_USER = 'SIGNUP_USER';
@@ -76,12 +77,13 @@ export const resetPassword = (input) => async (dispatch) => {
     const data = response.data;
    
     if (data) {
-      dispatch(resetPasswordSuccess(data.message));
+      await dispatch(resetPasswordSuccess(data.message));
+     
     } else {
-      dispatch(resetPasswordFailure(data.message));
+      await dispatch(resetPasswordFailure(data.message));
     }
   } catch (error) {
-    dispatch(resetPasswordFailure(error));
+    console.log(error)
   }
 };
 
@@ -130,9 +132,6 @@ export const forgotPasswordFailure = (error) => {
 };
 
 export const resetPasswordSuccess = (data) => {
-  alert(
-    `¡Bienvenido nuevamente a Meditech! ${data.message}. Por favor, inicia sesión con tu nueva contraseña`
-  );
   return {
     type: PASSWORD_RESET_SUCCESS,
   };
