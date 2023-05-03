@@ -23,6 +23,7 @@ import DefaultAuth from './../../../layouts/user/Default';
 import illustration from '../../../assets/img/fondos/Meditech.png';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
+import Loading from '../../../Components/Loading/Loading'
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const ForgotPassword = () => {
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
   const brandStars = useColorModeValue('brand.500', 'brand.400');
+  const [loading, setLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const [input, setInput] = useState({
     email: '',
@@ -58,10 +61,13 @@ const ForgotPassword = () => {
       );
       return;
     }
+  
     dispatch(cleanSuccess());
+    setLoading(true);
     try {
       await dispatch(resetPassword(input));
-  
+      setLoading(false);
+      setShowError(false);
       if (success) {
         setInput({
           email: '',
@@ -73,15 +79,21 @@ const ForgotPassword = () => {
       } else {
         history.push('user/forgotpassword');
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    /*   setShowError(true);
+      console.error(error); */
+    }
   };
-  
+
 
   const handleClick = () => setShow(!show);
   const handleClick1 = () => setShow1(!show1);
 
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
+      {loading && <Loading />}
+    
       <Flex
         maxW={{ base: '100%', md: 'max-content' }}
         w="100%"
