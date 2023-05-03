@@ -7,6 +7,8 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 
+import {Link} from 'react-router-dom'
+
 export default function WithBackgroundImage() {
   return (
     <Flex
@@ -31,6 +33,9 @@ export default function WithBackgroundImage() {
             Bienvenido al Dashboad de ADMIN
           </Text>
           <Stack direction={'row'}>
+          <Link
+          to='/admin/indexdoctor'>
+
             <Button
               bg={'blue.400'}
               rounded={'full'}
@@ -38,6 +43,9 @@ export default function WithBackgroundImage() {
               _hover={{ bg: 'blue.500' }}>
              Lista de Medicos
             </Button>
+          </Link>
+          <Link to='/admin/indexuser'>
+
             <Button
               bg={'whiteAlpha.300'}
               rounded={'full'}
@@ -45,6 +53,7 @@ export default function WithBackgroundImage() {
               _hover={{ bg: 'whiteAlpha.500' }}>
               Lista de Pacientes
             </Button>
+          </Link>
           </Stack>
         </Stack>
       </VStack>
