@@ -50,6 +50,9 @@ export default function AdminNavbar(props) {
   };
 
   return (
+    <Flex alignItems="center" justifyContent="center" h="75px" >
+
+    
     <Box
       position={navbarPosition}
       boxShadow={navbarShadow}
@@ -133,7 +136,9 @@ export default function AdminNavbar(props) {
             {brandText}
           </Link>
        {/*  </Box> */}
+       <Box ml="auto"  w="36px" h="36px" >
           <DarkModeToggle />
+       </Box>
         <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
             onOpen={props.onOpen}
@@ -146,6 +151,7 @@ export default function AdminNavbar(props) {
       </Flex>
       {secondary ? <Text color='white'>{message}</Text> : null}
     </Box>
+    </Flex>
   );
 }
 
