@@ -37,6 +37,7 @@
         "babel-preset-react": "^6.24.1",
         "babel-register": "^6.26.0",
         "chart.js": "^3.5.1",
+        "date-fns": "^2.30.0",
         "date-fns-tz": "^2.0.0",
         "framer-motion": "^4.1.17",
         "gapi-script": "^1.2.0",

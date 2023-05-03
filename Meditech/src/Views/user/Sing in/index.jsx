@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { GoogleLogin } from '@leecheuk/react-google-login';
 import { useHistory } from 'react-router-dom';
@@ -111,24 +110,6 @@ function SignIn() {
     // Aquí puedes manejar el error del inicio de sesión de Google
   };
 
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-    if (!input.email || input.email.trim().length === 0) {
-      alert(
-        'Por favor, ingresa el correo electrónico que utilizaste para crear tu cuenta.'
-      );
-      return;
-    }
-
-    const email = input.email;
-
-    try {
-      await dispatch(forgotPassword(email));
-      setInput({ email: '' });
-      history.push('/user/forgotpassword');
-    } catch (error) {}
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
     if (input.email && input.password && userInfo1) {
@@ -136,7 +117,7 @@ function SignIn() {
       setInput({ email: '', password: '' });
       history.push('/admin/default');
     } else {
-      alert('Usuario o contraseña incorrectos')
+      alert('Usuario o contraseña incorrectos');
     }
   };
 
@@ -149,7 +130,7 @@ function SignIn() {
       });
     }
     gapi.load('client:auth2', start);
-    dispatch(cleanSuccess())
+    dispatch(cleanSuccess());
   }, []);
 
   return (
@@ -282,20 +263,20 @@ function SignIn() {
                 </FormLabel>
               </FormControl>
 
-              <span
+              <NavLink
+                to="/user/signinforgot"
                 style={{ cursor: 'pointer' }}
-                onClick={handleForgotPassword}
+                activeClassName="active"
               >
                 <Text
                   color={textColorBrand}
                   fontSize="sm"
                   w="124px"
                   fontWeight="500"
-                  onClick={handleForgotPassword}
                 >
                   Has olvidado tu contraseña?
                 </Text>
-              </span>
+              </NavLink>
             </Flex>
             <Button
               fontSize="sm"
