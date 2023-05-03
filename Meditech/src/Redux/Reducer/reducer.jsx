@@ -110,7 +110,8 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           doctorDetail: [],
-          appointmentOfPatientID: []
+          appointmentOfPatientID: [],
+          infoPatient: []
         };
         case RESET_SUCCESS:
           return {

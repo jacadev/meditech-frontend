@@ -78,7 +78,7 @@ function Doctor() {
                     colorScheme="blue"
                     variant="solid"
                     onClick={() =>
-                      history.push(`/user/edituser/${specialist.id}`)
+                      history.push(`/admin/putPatient/${specialist.id}`)
                     }
                   >
                   </Button>

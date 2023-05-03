@@ -60,7 +60,7 @@ function doctor() {
         leftIcon={<AddIcon />}
         colorScheme="blue"
         variant="solid"
-        onClick={() => history.push("/user/createdoctor")}
+        onClick={() => history.push("/admin/createdoctor")}
       >
         Crear
       </Button>
