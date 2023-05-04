@@ -43,6 +43,12 @@ export const getDoctor = (id) => {
   }
 };
 
+export const putDoctorAdmin = (id, data) => {
+  return async () => {
+    await axios.put(`http://localhost:3001/doctors/${id}`, data);
+  }
+}
+
 export const cleanDetail = () => {
   return { type: CLEAN_DATAIL_ID };
 };

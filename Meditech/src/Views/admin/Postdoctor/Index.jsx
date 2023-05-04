@@ -122,7 +122,7 @@ function doctor() {
                     <Tooltip hasArrow label="Editar" bg="blue.600">
                       <Button
                         onClick={() =>
-                          history.push(`/user/editdoctor/${specialist.id}`)
+                          history.push(`/admin/putDoctor/${specialist.id}`)
                         }
                         leftIcon={<EditIcon />}
                         colorScheme="blue"

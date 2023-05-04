@@ -34,6 +34,7 @@ import ForgotPassword from './Views/user/ForgotPassword';
 import InfoAppointment from './Components/infoAppointment/infoAppointment';
 import ModifyPatient from './Components/ModifyPatient/ModifyPatient'
 import Pays from './Components/Pays/index';
+import ModifyDoctor from './Components/ModifyDoctor/ModifyDoctor';
 // Auth Imports
 //import SignInCentered from "./views/auth/signIn";
 
@@ -214,6 +215,10 @@ const routes = [
   {
     layout: '/admin/putPatient/:id',
     component: ModifyPatient,
+  },
+  {
+    layout: '/admin/putDoctor/:id',
+    component: ModifyDoctor,
   },
   {
     layout: '/admin/reserve',
