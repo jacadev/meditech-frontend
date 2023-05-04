@@ -186,7 +186,7 @@ console.log(doctor)
           )}
         </Box>
       </Box>
-    // </Box>
+    </Box>
   );
 };
 

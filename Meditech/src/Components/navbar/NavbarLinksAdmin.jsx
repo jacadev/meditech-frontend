@@ -57,7 +57,7 @@ import { useDispatch, useSelector } from 'react-redux';
       w={{ sm: '100%', md: 'auto' }}
       alignItems="center"
       flexDirection="row"
-      bg={menuBg}
+      bg="white"
       flexWrap={secondary ? { base: 'wrap', md: 'nowrap' } : 'unset'}
       p="10px"
       borderRadius="30px"
