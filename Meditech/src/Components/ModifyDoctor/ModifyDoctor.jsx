@@ -14,11 +14,13 @@ import {
   CardFooter,
   Stack,
   Tooltip,
+  useToast
 } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     cleanDetail,
   getDoctor,
@@ -28,7 +30,8 @@ import {
 function ModifyDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const toast = useToast()
+  /* const history = useHistory(); */
 
   //   const especialidades = useSelector((state) => state.especialidades);
   const doctorDetail = useSelector((state) => state.doctorDetail);
@@ -112,17 +115,16 @@ useEffect(()=>{
   //         label: especialidad.specialty,
   //       }))
   //     : [];
-
-  const handleChangeEspecialidades = (selectedOptions) => {
+/*   const handleChangeEspecialidades = (selectedOptions) => {
     const options = selectedOptions.map((option) => option.value);
     setForm((prevState) => ({ ...prevState, specialties: options }));
   };
-
-  const handleClick = (event) => {
+ */
+/*   const handleClick = (event) => {
     // event.preventDefault();
-    // history.push("admin/indexdoctor");    
+     history.push("/admin/indexdoctor");    
 
-  };
+  }; */
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -130,7 +132,12 @@ useEffect(()=>{
     console.log("hola", form); //------------------------------------------
 
     dispatch(putDoctorAdmin(id, form));
-    // setForm({})
+    toast({
+      title: `se actulizo correctamente.`,
+      status:"success",
+      isClosable: true,
+    })
+   return
   };
 
   useEffect(() => {
@@ -217,8 +224,8 @@ useEffect(()=>{
               <Input
                 type="file"
                 placeholder="Inserte el URL de la imagen"
-                // value={form?.profile_image}
-                // onChange={handleImage}
+                 value={form?.profile_image}
+                 onChange={handleImage}
                 name="profile_image"
               />
             </FormControl>
@@ -318,7 +325,7 @@ useEffect(()=>{
                   <Button
                     colorScheme="blue"
                     type="submit"
-                    // onClick={handleClick}
+                   /*  onClick={handleClick} */
                   >
                     Enviar
                   </Button>
