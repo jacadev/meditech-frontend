@@ -1,4 +1,4 @@
-/* import {
+import {
   Box,
   Card,
   Select as Select1,
@@ -449,4 +449,3 @@ function Formulario() {
 }
 
 export default Formulario;
- */
