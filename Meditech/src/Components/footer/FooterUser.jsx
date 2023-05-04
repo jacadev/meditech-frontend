@@ -52,10 +52,10 @@ export default function Footer() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}>
-        <Text>© 2023 Meditech All rights reserved</Text>
+        <Text>© 2023 Meditech Todos los derechos Reservados.</Text>
 
         <Stack direction={'row'} spacing={6} alignItems={'center'}>
-          <Text> Our social networks.</Text>
+          <Text> Nuestras redes Sociales.</Text>
           <SocialButton label={'Twitter'} href={'#'}>
             <FaTwitter />
           </SocialButton>

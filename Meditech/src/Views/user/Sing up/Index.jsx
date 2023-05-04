@@ -24,7 +24,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import DefaultAuth from "./../../../layouts/user/Default";
-import illustration from "../../../assets/img/fondos/Meditech.png";
+import illustration from "../../../assets/img/fondos/Meditech.gif";
 
 const validate = (input) => {
   let error = {};
@@ -148,7 +148,7 @@ const SignUp = () => {
           <div>
             <Box me="auto">
               <Heading color={textColor} fontSize="36px" mb="10px">
-                Register
+                Registrarse
               </Heading>
             </Box>
             <form onSubmit={handleSubmit}>
@@ -166,7 +166,7 @@ const SignUp = () => {
                       color={textColor}
                       mb="8px"
                     >
-                      User Name:<Text color={brandStars}>*</Text>
+                      Nombre de Usuario:<Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Input
                       isRequired={true}
@@ -176,7 +176,7 @@ const SignUp = () => {
                       type="text"
                       value={input.user_name}
                       name="user_name"
-                      placeholder="write your UserName...."
+                      placeholder="Ingresa tu nombre de usuario...."
                       mb="24px"
                       fontWeight="500"
                       size="lg"
@@ -194,7 +194,7 @@ const SignUp = () => {
                       color={textColor}
                       mb="8px"
                     >
-                      Email<Text color={brandStars}>*</Text>
+                      Correo<Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Input
                       isRequired={true}
@@ -204,7 +204,7 @@ const SignUp = () => {
                       type="email"
                       value={input.email}
                       name="email"
-                      placeholder="mail@simmmple.com"
+                      placeholder="correo@ejemplo.com"
                       mb="24px"
                       fontWeight="500"
                       size="lg"
@@ -227,7 +227,7 @@ const SignUp = () => {
                       color={textColor}
                       mb="8px"
                     >
-                      First Name<Text color={brandStars}>*</Text>
+                      Nombre<Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Input
                       isRequired={true}
@@ -237,7 +237,7 @@ const SignUp = () => {
                       type="text"
                       value={input.first_name}
                       name="first_name"
-                      placeholder="write your FirstName...."
+                      placeholder="Ingresa tu nombre..."
                       mb="24px"
                       fontWeight="500"
                       size="lg"
@@ -254,7 +254,7 @@ const SignUp = () => {
                       color={textColor}
                       mb="8px"
                     >
-                      LastName:<Text color={brandStars}>*</Text>
+                      Apellido:<Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Input
                       isRequired={true}
@@ -264,7 +264,7 @@ const SignUp = () => {
                       type="text"
                       value={input.last_name}
                       name="last_name"
-                      placeholder="write your LastName...."
+                      placeholder="Ingresa tu apellido...."
                       mb="24px"
                       fontWeight="500"
                       size="lg"
@@ -286,7 +286,7 @@ const SignUp = () => {
                       color={textColor}
                       mb="8px"
                     >
-                      Phone:<Text color={brandStars}>*</Text>
+                      Telefono:<Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Input
                       isRequired={true}
@@ -313,7 +313,7 @@ const SignUp = () => {
                       color={textColor}
                       mb="8px"
                     >
-                      Age:<Text color={brandStars}>*</Text>
+                      Edad:<Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Input
                       isRequired={true}
@@ -343,7 +343,7 @@ const SignUp = () => {
                   color={textColor}
                   mb="8px"
                 >
-                  Password:<Text color={brandStars}>*</Text>
+                  Contraseña:<Text color={brandStars}>*</Text>
                 </FormLabel>
                 <InputGroup size="md">
                 <Input
@@ -354,7 +354,7 @@ const SignUp = () => {
                   type={show ? 'text' : 'password'}
                   value={input.password}
                   name="password"
-                  placeholder="write your Password...."
+                  placeholder="ingrese su contraseña...."
                   mb="24px"
                   fontWeight="500"
                   size="lg"
@@ -380,7 +380,7 @@ const SignUp = () => {
                   fontWeight="500"
                   color={textColor}
                 >
-                  Gender: <Text color={brandStars}>*</Text>
+                  Genero: <Text color={brandStars}>*</Text>
                 </FormLabel>
                 <div>
               
@@ -414,7 +414,7 @@ const SignUp = () => {
                   _active={{ boxShadow: "lg" }}
                   borderRadius="md"
                 >
-                  Register
+                  Registrarse
                 </Button>
               </div>
             </form>
