@@ -19,6 +19,7 @@ import {
   AlertIcon,
   Tooltip,
   useColorModeValue
+  useToast
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { useColorMode } from "@chakra-ui/react";
@@ -28,8 +29,8 @@ import {
   getEspecialidades,
   postDoctor,
 } from "./../../../Redux/Actions/actions";
-//import Select from "react-select";
-import { useHistory } from 'react-router-dom';
+import Select from "react-select";
+//import { useHistory } from 'react-router-dom';
 
 
 function Formulario() {
@@ -49,6 +50,7 @@ function Formulario() {
     specialties: [],
     rol_id: [1],
   });
+  const toast = useToast()
   const handleChangEspecialits = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions);
 
@@ -132,6 +134,11 @@ function Formulario() {
     setImage({
       image: "",
     });
+    toast({
+      title: `el doctor se agrego creo correctamente.`,
+      status:"success",
+      isClosable: true,
+    })
   };
 
   useEffect(() => {
@@ -142,9 +149,9 @@ function Formulario() {
     const options = selectedOptions.map((option) => option.value);
     setForm((prevState) => ({ ...prevState, specialties: options }));
   };
-  const history = useHistory();
+  //const history = useHistory();
 
-  const handleClick = (event) => {
+/*   const handleClick = (event) => {
     event.preventDefault();
     history.push("admin/indexdoctor");
   };
@@ -451,7 +458,7 @@ function Formulario() {
 
               <CardFooter>
                 <Tooltip hasArrow label="Enviar formulario" bg="blue.600">
-                  <Button colorScheme="blue" type="submit" onChange={handleClick}>
+                  <Button colorScheme="blue" type="submit" >
                     Enviar
                   </Button>
                 </Tooltip>
