@@ -12,6 +12,7 @@ import {
   Tooltip,
   Image,
   TableContainer,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
@@ -67,6 +68,9 @@ function doctor() {
     indexOfLastSpecialist
   );
   const history = useHistory();
+  
+  
+  const tableHeaderColor = useColorModeValue("#EDF2F7", "#2D3748");
   return (
     <>
       <Button
@@ -79,21 +83,19 @@ function doctor() {
         Crear
       </Button>
 
-      
-
       <Card p={5} mx="auto" mt={{ md: "2vh" }}>
-      <SearchBarDoctors/>
+        <SearchBarDoctors />
         <TableContainer>
           <Table size="sm">
             <Thead>
               <Tr>
-                <Th>Img</Th>
-                <Th>Nombres</Th>
-                <Th>Genero</Th>
-                <Th>Especialidad</Th>
-                <Th>Costo</Th>
-                <Th>Estado</Th>
-                <Th>Acciones</Th>
+                <Th bg={tableHeaderColor}>Img</Th>
+                <Th bg={tableHeaderColor}>Nombres</Th>
+                <Th bg={tableHeaderColor}>Genero</Th>
+                <Th bg={tableHeaderColor}>Especialidad</Th>
+                <Th bg={tableHeaderColor}>Costo</Th>
+                <Th bg={tableHeaderColor}>Estado</Th>
+                <Th bg={tableHeaderColor}>Acciones</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -107,9 +109,7 @@ function doctor() {
                       boxSize="40px"
                     />
                   </Td>
-                  <Td>
-                    {specialist.person.first_name} {specialist.person.last_name}
-                  </Td>
+                  <Td>{specialist.person.first_name} {specialist.person.last_name}</Td>
                   <Td>{specialist.person.gender}</Td>
                   <Td>
                     {specialist.specialties
@@ -119,7 +119,7 @@ function doctor() {
                   <Td>${specialist.consultation_cost}</Td>
                   <Td>{specialist.person.status ? 'Activo' : 'Inactivo'}</Td>
                   <Td>
-                    <Tooltip hasArrow label="Editar" bg="blue.600">
+                  <Tooltip hasArrow label="Editar" bg="blue.600">
                       <Button
                         onClick={() =>
                           history.push(`/user/editdoctor/${specialist.id}`)

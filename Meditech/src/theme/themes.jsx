@@ -34,7 +34,6 @@ const theme = extendTheme(
     }
   },
   { breakpoints }, // Breakpoints
-
 );
 
 

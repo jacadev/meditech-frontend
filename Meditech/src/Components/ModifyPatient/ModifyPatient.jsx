@@ -11,6 +11,7 @@ import {
     Button,
     FormControl,
     FormLabel,
+    useColorModeValue,
 } from "@chakra-ui/react";
 import { cleanDetail } from "../../Redux/Actions/actions";
 const ModifyPatient = () => {
@@ -82,6 +83,7 @@ const ModifyPatient = () => {
     }
 
     // console.log('info del paciente', infoPatient);
+    const btnColor = useColorModeValue("#125c75", "#1c9dc8")
 
     return (
         <Box borderRadius='10px' marginTop='80px' padding='20px'>
@@ -106,7 +108,7 @@ const ModifyPatient = () => {
                                 <Text fontSize='16px'>Inactivo</Text>
                             </Box>
                         </Box>
-                        <Button onClick={() => changeHandlerPatient()} marginTop='10px' bg='blue' color='white'>
+                        <Button onClick={() => changeHandlerPatient()} marginTop='10px' bg={btnColor} color='white'>
                             Cambiar estado
                         </Button>
                     </Box>
@@ -126,7 +128,7 @@ const ModifyPatient = () => {
                                 <Text fontSize='16px'>Administrador</Text>
                             </Box>
                         </Box>
-                        <Button type='submit' marginTop='20px' bg='blue' color='white' onClick={() => submitHandlerRol()}>
+                        <Button type='submit' marginTop='20px' bg={btnColor} color='white' onClick={() => submitHandlerRol()}>
                             Modificar rol
                         </Button>
                     </Box>
@@ -140,7 +142,7 @@ const ModifyPatient = () => {
                         <Text fontSize='16px'>Comentario: {review.comment}</Text>
                         <Text fontSize='16px' color={review.status ? 'green' : 'red'}>Estado: {review.status ? 'activo' : 'inactivo'}</Text>
 
-                        <Button onClick={() => changeHandlerReview(review.id, review.status)} marginTop='10px' bg='blue' color='white' focusOutline='none'>
+                        <Button onClick={() => changeHandlerReview(review.id, review.status)} marginTop='10px' bg={btnColor} color='white' focusOutline='none'>
                             Cambiar estado
                         </Button>
                     </Box>

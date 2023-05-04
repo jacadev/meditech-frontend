@@ -12,6 +12,7 @@ import {
   Tooltip,
   Image,
   TableContainer,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
@@ -23,42 +24,32 @@ import SearchBarUsers from "../../../Components/SearchBar/SearchBarUsers";
 import SearchBar from "../../../Components/SearchBar/SearchBar";
 
 function Doctor() {
-  // const [userlists, setUserlists] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [userlistsPerPage, setSpecialistsPerPage] = useState(0);
 
-  const patients = useSelector(state => state.patients)
-console.log('los pacientes',patients);
+  const patients = useSelector((state) => state.patients);
+  console.log('los pacientes', patients);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const result = await axios.get("http://localhost:3001/patients");
-  //     setUserlists(result.data);
-  //     setSpecialistsPerPage(result.data.length);
-  //   }
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
-    dispatch(getAllPatients())
-  },[])
+    dispatch(getAllPatients());
+  }, []);
 
   const indexOfLastSpecialist = currentPage * userlistsPerPage;
   const indexOfFirstSpecialist = indexOfLastSpecialist - userlistsPerPage;
-  // const currentSpecialists = userlists.slice(
-  //   indexOfFirstSpecialist,
-  //   indexOfLastSpecialist
-  // );
 
   const history = useHistory();
   console.log(patients);
+
+  const tableHeaderColor = useColorModeValue("#EDF2F7", "#2D3748");
+  const tableRowColor = useColorModeValue("white", "gray.700");
+
   return (
     <Card p={5} mx="auto" mt={{ md: "12vh" }}>
-    <SearchBarUsers/>
+      <SearchBarUsers />
       <TableContainer>
-        <Table size="sm">
-          <Thead>
+        <Table size="sm" variant="striped" colorScheme="gray">
+          <Thead bg={tableHeaderColor}>
             <Tr>
               <Th>Username</Th>
               <Th>Correo electrónico</Th>
@@ -71,7 +62,7 @@ console.log('los pacientes',patients);
           </Thead>
           <Tbody>
             {patients?.map((specialist) => (
-              <Tr key={specialist?.id}>
+              <Tr key={specialist?.id} bg={tableRowColor}>
                 <Td>{specialist.person.userName}</Td>
                 <Td>{specialist.person.email}</Td>
                 <Td>
@@ -80,23 +71,22 @@ console.log('los pacientes',patients);
                 <Td>{specialist.person.age}</Td>
                 <Td>
                   <ul>
-                    {specialist.person.phone?.map((phone) => (
-                      <li>{phone}</li>
+                    {specialist.person.phone?.map((phone, index) => (
+                      <li key={index}>{phone}</li>
                     ))}
                   </ul>
                 </Td>
                 <Td>{specialist.person.status ? 'Activo' : 'Inactivo'}</Td>
                 <Td>
-                <Tooltip hasArrow label="Editar" bg="blue.600">
-                  <Button
-                    leftIcon={<EditIcon />}
-                    colorScheme="blue"
-                    variant="solid"
-                    onClick={() =>
-                      history.push(`/admin/putPatient/${specialist.id}`)
-                    }
-                  >
-                  </Button>
+                  <Tooltip hasArrow label="Editar" bg="blue.600">
+                    <Button
+                      leftIcon={<EditIcon />}
+                      colorScheme="blue"
+                      variant="solid"
+                      onClick={() =>
+                        history.push(`/admin/putPatient/${specialist.id}`)
+                      }
+                    />
                   </Tooltip>
                 </Td>
               </Tr>

@@ -132,13 +132,14 @@ function SignIn() {
     gapi.load('client:auth2', start);
     dispatch(cleanSuccess());
   }, []);
-
+  const buttonBgColor = useColorModeValue("#4285F4", "#1F2937");
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
         maxW={{ base: '100%', md: 'max-content' }}
         w="100%"
         mx={{ base: 'auto', lg: '0px' }}
+        style={{bg: buttonBgColor}}
         me="auto"
         h="100%"
         alignItems="start"
@@ -173,14 +174,14 @@ function SignIn() {
           me="auto"
           mb={{ base: '20px', md: 'auto' }}
         >
-          <GoogleLogin
-            clientId="486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com"
-            buttonText="Inicio de sesion con Google"
-            onSuccess={responseGoogle}
-            onFailure={onFailure}
-            cookiePolicy={'single_host_origin'}
-            scope="profile"
-          ></GoogleLogin>
+  <GoogleLogin
+    clientId="486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com"
+    buttonText="Inicio de sesión con Google"
+    onSuccess={responseGoogle}
+    onFailure={onFailure}
+    cookiePolicy={'single_host_origin'}
+    scope="profile"
+  />
           <Flex align="center" mb="25px">
             <HSeparator />
             <Text color="gray.400" mx="14px">
@@ -269,7 +270,7 @@ function SignIn() {
                 activeClassName="active"
               >
                 <Text
-                  color={textColorBrand}
+                  color={useColorModeValue("brand.500", "#939090")}
                   fontSize="sm"
                   w="124px"
                   fontWeight="500"

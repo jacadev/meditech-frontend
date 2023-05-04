@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SpecialistCard from "../../../Components/Especialista/SpecialistCard.jsx";
 import baner from "../../../assets/img/Banner/banner-Plano de fundo.jpg";
-import { Box, Grid, Select, Button, Flex, Text, Icon } from "@chakra-ui/react";
+import { Box, Grid, Select, Button, Flex, Text, Icon, useColorModeValue } from "@chakra-ui/react";
 import { getDoctors, getSpecialties } from "../../../Redux/Actions/actions.jsx";
 import SearchBar from "../../../Components/SearchBar/SearchBar.jsx";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
@@ -72,7 +72,9 @@ function Specialists() {
     setCurrentPage(pageNumber);
   };
 
-  let filteredSpecialists = specialists.filter(doctor => doctor.person.status === true);
+  let filteredSpecialists = specialists.filter(
+    (doctor) => doctor.person.status === true
+  );
 
   if (specialtyFilter !== "") {
     filteredSpecialists = filteredSpecialists.filter((specialist) =>
@@ -111,7 +113,6 @@ function Specialists() {
     indexOfLastSpecialist
   );
 
-
   const pageNumbers = [];
   for (
     let i = 1;
@@ -120,9 +121,11 @@ function Specialists() {
   ) {
     pageNumbers.push(i);
   }
+  const textColor = useColorModeValue("gray.800", "white");
+  const bgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Box mt="5rem">
+    <Box marginTop="5rem">
       <Box
         textAlign="center"
         backgroundImage={baner}
@@ -132,11 +135,13 @@ function Specialists() {
         borderRadius="10px"
         px={20}
         py={20}
+        color={textColor}
+        bg={bgColor}
       >
-        <Text color="white" fontWeight="bold" fontSize="lg">
+        <Text fontWeight="bold" fontSize="lg">
           Estás listo para una consulta?
         </Text>
-        <Text color="white" fontSize="lg">
+        <Text fontSize="lg">
           Su tratamiento será realizado por médicos autorizados. ¡Agenda tu cita
           ahora!
         </Text>
@@ -148,8 +153,8 @@ function Specialists() {
               onChange={handleSpecialtyChange}
               mb={4}
               width="400px"
-              color="white"
-              borderColor="white"
+              color={textColor}
+              borderColor="lightgray"
               _focus={{ backgroundColor: "blue" }}
             >
               <option value="">Todas las Especialidades</option>
@@ -164,8 +169,8 @@ function Specialists() {
               onChange={handleGenderChange}
               mb={4}
               width="400px"
-              color="white"
-              borderColor="white"
+              color={textColor}
+              borderColor="lightgray"
               _focus={{ backgroundColor: "blue" }}
             >
               <option value="">Todos los Generos</option>
@@ -177,14 +182,14 @@ function Specialists() {
             <SearchBar frontPage={frontPage} />
           </Flex>
 
-          <Flex flexDirection="column" marginLeft="20px">
-            <Text color="white">Ordenar por Precio:</Text>
+          <Flex flexDirection="column" marginLeft="20px" >
+            <Text>Ordenar por Precio:</Text>
             <Button
               onClick={handleSortingChange}
               mb={4}
               colorScheme={sortOrder === "asc" ? "blue" : "gray"}
-              bgColor={sortOrder === "asc" ? "blue.500" : "white"}
-              color={sortOrder === "asc" ? "white" : "gray.800"}
+              bgColor={bgColor}
+              color={textColor}
               borderWidth={sortOrder === "asc" ? 0 : "1px"}
               borderColor={sortOrder === "asc" ? "transparent" : "gray.200"}
               _hover={{ bgColor: sortOrder === "asc" ? "blue.600" : "gray.50" }}
@@ -199,14 +204,13 @@ function Specialists() {
                 </>
               )}
             </Button>
-
-            <Text color="white">Ordenar por Calificación:</Text>
+            <Text>Ordenar por Calificación:</Text>
             <Button
               onClick={handleSortingRatingChange}
               mb={4}
               colorScheme={sortOrderRating === "asc" ? "blue" : "gray"}
-              bgColor={sortOrderRating === "asc" ? "blue.500" : "white"}
-              color={sortOrderRating === "asc" ? "white" : "gray.800"}
+              bgColor={bgColor}
+              color={textColor}
               borderWidth={sortOrderRating === "asc" ? 0 : "1px"}
               borderColor={
                 sortOrderRating === "asc" ? "transparent" : "gray.200"

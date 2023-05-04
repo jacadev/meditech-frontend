@@ -18,7 +18,10 @@ import {
   Alert,
   AlertIcon,
   Tooltip,
+  useColorModeValue
 } from "@chakra-ui/react";
+import { css } from "@emotion/react";
+import { useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -144,6 +147,17 @@ function Formulario() {
   const handleClick = (event) => {
     event.preventDefault();
     history.push("admin/indexdoctor");
+  };
+  const { colorMode } = useColorMode();
+  const customSelectStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? "white" : "black",
+      backgroundColor: state.isSelected ? "blue" : "transparent",
+      "&:hover": {
+        backgroundColor: "lightblue",
+      },
+    }),
   };
   return (
     <Card p={5} mx="auto" mt={{ md: "12vh" }}>
@@ -390,7 +404,7 @@ function Formulario() {
               name="diseases_treated"
             />
           </FormControl>
-          <FormControl id="country" mb={3} mr={3}>
+          <FormControl id="country"  mb={3} mr={3}>
             <FormLabel>
               Especialidades{" "}
               <Text as="span" color="red.500">
@@ -398,6 +412,7 @@ function Formulario() {
               </Text>
             </FormLabel>
             <Select
+              bg={useColorModeValue("white", "gray.800")}
               closeMenuOnSelect={false}
               defaultValue={form.specialties}
               isRequired={true}
@@ -408,6 +423,7 @@ function Formulario() {
                 value: option.value,
                 label: option.label,
               }))}
+              styles={customSelectStyles}
             />
           </FormControl>
         </Flex>

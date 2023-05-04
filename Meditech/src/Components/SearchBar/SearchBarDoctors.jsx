@@ -8,6 +8,7 @@ import {
   Button,
   Box,
   Icon,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { AiOutlineSearch } from "react-icons/ai";
 
@@ -32,22 +33,29 @@ const SearchBarDoctors = () => {
   const allDoctors = () => {
     dispatch(getDoctors())
   }
-
+  
+  const textColor = useColorModeValue("gray.800", "white");
+  const buttonColorScheme = useColorModeValue("blue", "teal");
   return (
     <Box display="inline-flex" width="400px">
       <InputGroup>
         <Input
           placeholder="Doctor o Especialidad"
           value={name}
+          color={textColor}
           onChange={changeHandler}
+          borderColor={useColorModeValue("lightgray", "white")}
           width="auto"
-          bg="white"
+          _placeholder={{
+            color: textColor,
+          }}
         />
+
 
         <Button
           onClick={() => searchName()}
           width="100px"
-          colorScheme="blue"
+          colorScheme={buttonColorScheme}
           leftIcon={
             <Icon
               as={AiOutlineSearch}

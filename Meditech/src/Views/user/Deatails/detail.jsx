@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { cleanDetail, getDoctor } from "../../../Redux/Actions/actions";
 import { BsStarFill, BsStar } from "react-icons/bs";
 import Review from "../../../Components/reviews/Review";
+import { useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -47,6 +48,10 @@ const Detail = () => {
     return stars;
   };
 
+  const cardBgColor = useColorModeValue("white", "rgb(41, 38, 38)");
+  const dividerColor = useColorModeValue("gray.200", "gray.600");
+  const buttonBgColor = useColorModeValue("blue.400", "blue.500");
+
   return (
     <Box marginTop="100px" marginLeft="250px" marginRight="250px">
       <HStack>
@@ -54,15 +59,15 @@ const Detail = () => {
           borderRadius="10px"
           src={doctor.profile_image}
           alt={doctor.person?.firstName}
-          maxW="30%" // Tamaño de la imagen
-          mr={4} // Margen a la derecha para separar la imagen del texto
+          maxW="30%"
+          mr={4}
         />
         <VStack align="stretch">
           <Box>
             <Heading>
               {doctor.person?.firstName} {doctor.person?.lastName}
             </Heading>
-            <Divider />
+            <Divider borderColor={dividerColor} />
           </Box>
 
           <Box>
@@ -98,6 +103,7 @@ const Detail = () => {
             </Text>
             <Text>{doctor?.tuition_code}</Text>
           </Box>
+
 
           <Box>
             <Text fontSize="lg" fontWeight="bold">
@@ -151,35 +157,54 @@ const Detail = () => {
       </HStack>
       <Box
         borderRadius="10px"
-        borderColor="#3a0ca3"
+        borderColor={useColorModeValue("#3a0ca3", "#ffffff")}
         borderWidth="1px"
-        bg="white"
+        bg={useColorModeValue("white", "gray.800")}
         maxWidth="100%"
       >
-        <Box marginLeft="20px" marginTop="10px" marginBottom="10px">
-          <Text fontSize="lg" fontWeight="bold">
-            Comentarios:
-          </Text>
-          <Divider borderColor="#3a0ca3" />
-          <VStack align="stretch" spacing={8}>
-            {doctor.reviews?.map((review, index) => (
-              <Box key={`${index}1`} w="30%">
-                <Text fontSize="sm" fontWeight="bold" color="#3a0ca3">
-                  {review.patient.person.first_name}{" "}
-                  {review.patient.person.last_name}
-                </Text>
-                <Text>{review.comment}</Text>
-                <Text>Calificacion: {review.rating}</Text>
-                <Divider borderColor="#3a0ca3" />
-              </Box>
-            ))}
-          </VStack>
-          {isAdmin ? null : (
-            <Review doctor_id={Number(id)} patient_id={patient.id} />
-          )}
-        </Box>
+       {/* <Box
+  borderRadius="10px"
+  borderColor={useColorModeValue("#3a0ca3", "#ffffff")} // Establecer color de borde según el modo de color
+  borderWidth="1px"
+  bg={useColorModeValue("white", "gray.800")} // Establecer color de fondo según el modo de color
+  maxWidth="100%"
+  marginLeft="20px"
+  marginTop="10px"
+  marginBottom="10px"
+  p={4} // Agregar un padding para separar los elementos internos
+> */}
+  <Text
+    fontSize="lg"
+    fontWeight="bold"
+    color={useColorModeValue("#3a0ca3", "white")} // Establecer color de texto según el modo de color
+  >
+    Comentarios:
+  </Text>
+  <Divider borderColor={useColorModeValue("#3a0ca3", "white")} /> 
+  <VStack align="stretch" spacing={8}>
+    {doctor.reviews?.map((review, index) => (
+      <Box key={`${index}1`} w="30%" bg={useColorModeValue("gray.50", "gray.700")}>
+        <Text
+          fontSize="sm"
+          fontWeight="bold"
+          color={useColorModeValue("#3a0ca3", "white")} // Establecer color de texto según el modo de color
+        >
+          {review.patient.person.first_name} {review.patient.person.last_name}
+        </Text>
+        <Text>{review.comment}</Text>
+        <Text>
+          Calificación: {review.rating}
+        </Text>
+        <Divider borderColor={useColorModeValue("#3a0ca3", "white")} /> 
       </Box>
-    </Box>
+    ))}
+  </VStack>
+  {!isAdmin && (
+    <Review doctor_id={Number(id)} patient_id={patient.id} />
+  )}
+</Box>
+      </Box>
+    // </Box>
   );
 };
 

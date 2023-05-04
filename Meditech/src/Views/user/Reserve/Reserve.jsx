@@ -6,20 +6,22 @@ import {
   Box,
   Heading,
   Text,
+  Flex,
 } from '@chakra-ui/react';
 
 
 const Reserve = () => {
   const location = useLocation();
 
-  const { photo, name, specialty, address, consultationFee,disponibilties} = location.state;
+  const { photo, name, specialty, address, consultationFee, disponibilties } = location.state;
 
   return (
     <FormularioReserva
-      specialist={{ photo, name, specialty, address, consultationFee, disponibilties}}
+      specialist={{ photo, name, specialty, address, consultationFee, disponibilties }}
     />
   );
 };
+
 const Reservar = () => {
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
@@ -29,22 +31,25 @@ const Reservar = () => {
 
   return (
     <Box>
-      {
-        mostrarConfirmacion ? (
-          <ConfirmacionReserva />
-        ) : (
-          <Box>
-           
-            <div style={{ height: "10vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Text marginTop="100px" fontSize="1.5rem" fontWeight="bold">Choose an available date and time for your consultation.</Text>
-            </div>
-            <FormularioReserva onSubmit={handleFormularioSubmit} />
-          </Box>
-        )
-      }
+      {mostrarConfirmacion ? (
+        <ConfirmacionReserva />
+      ) : (
+        <Box>
+          <Flex
+            height="10vh"
+            alignItems="center"
+            justifyContent="center"
+            marginTop="100px"
+            fontSize="1.5rem"
+            fontWeight="bold"
+          >
+            <Text>Choose an available date and time for your consultation.</Text>
+          </Flex>
+          <FormularioReserva onSubmit={handleFormularioSubmit} />
+        </Box>
+      )}
     </Box>
   );
 };
-
 
 export default Reservar;
