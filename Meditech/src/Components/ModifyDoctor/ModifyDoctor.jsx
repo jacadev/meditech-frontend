@@ -1,7 +1,6 @@
 import {
-  Box,
   Card,
-  Select as Select1,
+  Select,
   Textarea,
   FormControl,
   FormLabel,
@@ -10,38 +9,29 @@ import {
   Flex,
   Heading,
   CardBody,
-  CardHeader,
   Image,
   Text,
   CardFooter,
   Stack,
-  Alert,
-  AlertIcon,
   Tooltip,
 } from "@chakra-ui/react";
-
-import Select from "react-select";
 
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  cleanDetail,
+    cleanDetail,
   getDoctor,
-  getDoctors,
-  getEspecialidades,
   putDoctorAdmin,
 } from "../../Redux/Actions/actions";
 
 function ModifyDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
-  const especialidades = useSelector((state) => state.especialidades);
+  //   const especialidades = useSelector((state) => state.especialidades);
   const doctorDetail = useSelector((state) => state.doctorDetail);
-
-  const [image, setImage] = useState({});
 
   const [form, setForm] = useState({
     email: doctorDetail.person?.email,
@@ -57,9 +47,10 @@ function ModifyDoctor() {
       address: doctorDetail.location?.address,
     },
     diseases_treated: doctorDetail?.diseases_treated,
-    specialties: doctorDetail?.specialties,
-    disponibilties_id: doctorDetail?.disponibilties,
+    // specialties: doctorDetail?.specialties,
+    // disponibilties_id: doctorDetail?.disponibilties,
     status: doctorDetail.person?.status,
+    profile_image: doctorDetail?.profile_image,
   });
 
   const handleChangEspecialits = (event) => {
@@ -102,16 +93,19 @@ function ModifyDoctor() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImage(reader.result);
+      setForm({
+        ...form,
+        profile_image: reader.result,
+      });
     };
   };
 
-  const optionsEspecialidades = Array.isArray(especialidades)
-    ? especialidades.map((especialidad) => ({
-        value: parseInt(especialidad.id),
-        label: especialidad.specialty,
-      }))
-    : [];
+  //   const optionsEspecialidades = Array.isArray(especialidades)
+  //     ? especialidades.map((especialidad) => ({
+  //         value: parseInt(especialidad.id),
+  //         label: especialidad.specialty,
+  //       }))
+  //     : [];
 
   const handleChangeEspecialidades = (selectedOptions) => {
     const options = selectedOptions.map((option) => option.value);
@@ -119,51 +113,31 @@ function ModifyDoctor() {
   };
 
   const handleClick = (event) => {
-    event.preventDefault();
-    // history.push("admin/indexdoctor");
+    // event.preventDefault();
+    // history.push("admin/indexdoctor");    
+
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let formToSend = form;
-    formToSend.profile_image = image.image;
-    // formToSend.preload = false;
-    console.log("hola", formToSend);
+    console.log("hola", form); //------------------------------------------
 
-    dispatch(putDoctorAdmin(id, formToSend));
-
-    setForm({
-      email: "",
-      phone: [],
-      age: "",
-      first_name: "",
-      last_name: "",
-      about_me: "",
-      consultation_cost: "",
-      location: { city: "", country: "", address: "" },
-      diseases_treated: [],
-      specialties: [],
-      disponibilties_id: [],
-      status: "",
-    });
-
-    setImage({
-      image: "",
-    });
+    dispatch(putDoctorAdmin(id, form));
+    // setForm({})
   };
 
   useEffect(() => {
-    dispatch(getEspecialidades());
+    // dispatch(getEspecialidades());
+    
     dispatch(getDoctor(id));
-    return () => {
-      cleanDetail();
-      getDoctors();
-    };
-  }, []);
+    console.log("cargando el componente");
 
-  console.log("detalle doctor", doctorDetail);
-  console.log("detalle put", form);
+    return () => {
+      console.log("me estoy limpiando ");
+      cleanDetail();
+    };
+  }, [id]);
 
   return (
     <Card p={5} mx="auto" mt={{ md: "12vh" }}>
@@ -177,7 +151,7 @@ function ModifyDoctor() {
               <FormLabel>Email </FormLabel>
               <Input
                 type="email"
-                value={form.email}
+                value={form?.email}
                 onChange={handleChange}
                 name="email"
               />
@@ -186,7 +160,7 @@ function ModifyDoctor() {
               <FormLabel>Edad </FormLabel>
               <Input
                 type="number"
-                value={form.age}
+                value={form?.age}
                 onChange={handleChange}
                 name="age"
               />
@@ -197,7 +171,7 @@ function ModifyDoctor() {
               <FormLabel>Nombre </FormLabel>
               <Input
                 type="text"
-                value={form.first_name}
+                value={form?.first_name}
                 onChange={handleChange}
                 name="first_name"
               />
@@ -206,7 +180,7 @@ function ModifyDoctor() {
               <FormLabel>Apellido </FormLabel>
               <Input
                 type="text"
-                value={form.last_name}
+                value={form?.last_name}
                 onChange={handleChange}
                 name="last_name"
               />
@@ -215,7 +189,7 @@ function ModifyDoctor() {
               <FormLabel>Telefono </FormLabel>
               <Input
                 type="text"
-                value={form.phone}
+                value={form?.phone}
                 onChange={handleChange}
                 name="phone"
               />
@@ -225,7 +199,7 @@ function ModifyDoctor() {
             <FormControl id="about_me" mb={3} mr={3}>
               <FormLabel>Un poco acerca de mi </FormLabel>
               <Textarea
-                value={form.about_me}
+                value={form?.about_me}
                 onChange={handleChange}
                 name="about_me"
               />
@@ -237,8 +211,8 @@ function ModifyDoctor() {
               <Input
                 type="file"
                 placeholder="Inserte el URL de la imagen"
-                value={form.profile_image}
-                onChange={handleImage}
+                // value={form?.profile_image}
+                // onChange={handleImage}
                 name="profile_image"
               />
             </FormControl>
@@ -247,7 +221,7 @@ function ModifyDoctor() {
               <FormLabel>Costo de consulta </FormLabel>
               <Input
                 type="number"
-                value={form.consultation_cost}
+                value={form?.consultation_cost}
                 onChange={handleChange}
                 name="consultation_cost"
               />
@@ -258,7 +232,7 @@ function ModifyDoctor() {
               <FormLabel>Ciudad </FormLabel>
               <Input
                 type="text"
-                value={form.location.city}
+                value={form.location?.city}
                 onChange={handleChange}
                 name="city"
               />
@@ -267,7 +241,7 @@ function ModifyDoctor() {
               <FormLabel>País </FormLabel>
               <Input
                 type="text"
-                value={form.location.country}
+                value={form.location?.country}
                 onChange={handleChange}
                 name="country"
               />
@@ -276,7 +250,7 @@ function ModifyDoctor() {
               <FormLabel>Dirección </FormLabel>
               <Input
                 type="text"
-                value={form.location.address}
+                value={form.location?.address}
                 onChange={handleChange}
                 name="address"
               />
@@ -288,12 +262,12 @@ function ModifyDoctor() {
             <FormLabel>Enfermedades que trata </FormLabel>
             <Input
               type="text"
-              value={form.diseases_treated}
+              value={form?.diseases_treated}
               onChange={handleChange}
               name="diseases_treated"
             />
           </FormControl>
-          <FormControl id="especialidades" mb={3} mr={3}>
+          {/* <FormControl id="especialidades" mb={3} mr={3}>
             <FormLabel>Especialidades </FormLabel>
             <Select
               closeMenuOnSelect={false}
@@ -306,7 +280,7 @@ function ModifyDoctor() {
                 label: option.label,
               }))}
             />
-          </FormControl>
+          </FormControl> */}
         </Flex>
 
         <Flex flexGrow={2}>
@@ -316,7 +290,10 @@ function ModifyDoctor() {
             overflow="hidden"
             variant="outline"
           >
-            <Image maxW={{ base: "100%", sm: "200px" }} src={image} />
+            <Image
+              maxW={{ base: "100%", sm: "200px" }}
+              src={form?.profile_image}
+            />
             <Stack>
               <CardBody>
                 <Heading size="md">¿Termiaste el formulario?</Heading>
@@ -335,7 +312,7 @@ function ModifyDoctor() {
                   <Button
                     colorScheme="blue"
                     type="submit"
-                    onClick={handleClick}
+                    // onClick={handleClick}
                   >
                     Enviar
                   </Button>
