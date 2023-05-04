@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AiFillWallet } from 'react-icons/ai';
+
 
 export const SIGNIN_USER = 'SIGNIN_USER';
 export const SIGNUP_USER = 'SIGNUP_USER';
@@ -21,7 +21,7 @@ export const userInfo = (input) => async (dispatch) => {
     );
     return dispatch({ type: SIGNIN_USER, payload: dataUser.data });
   } catch (error) {
-    throw new Error(error);
+    throw new Error('Correo Electronio o contraseña invalidos')
   }
 };
 
@@ -48,7 +48,7 @@ export const userProfileSettings = (id, input) => async (dispatch) => {
 };
 
 export const forgotPassword = (email) => async (dispatch) => {
-  dispatch(forgotPasswordRequest());
+  
 
   try {
     const response = await axios.post(
@@ -59,12 +59,10 @@ export const forgotPassword = (email) => async (dispatch) => {
    
     if (data) {
       dispatch(forgotPasswordSuccess(data.message));
-    } else {
-      dispatch(forgotPasswordFailure(error.message));
-    }
+    } 
   } catch (error) {
     
-    dispatch(forgotPasswordFailure(data.message));
+    dispatch(forgotPasswordFailure(error));
   }
 };
 
@@ -83,7 +81,7 @@ export const resetPassword = (input) => async (dispatch) => {
       await dispatch(resetPasswordFailure(data.message));
     }
   } catch (error) {
-    console.log(error)
+    throw new Error ('solicite un nuevo codigo')
   }
 };
 
@@ -115,16 +113,26 @@ export const forgotPasswordRequest = () => ({
 });
 
 export const forgotPasswordSuccess = (data) => {
-  alert(data);
-  return {
-    type: FORGOT_PASSWORD_SUCCESS,
+  return (dispatch) => {
+    dispatch({
+      type: FORGOT_PASSWORD_SUCCESS,
+      payload: data
+    });
+
+ 
+  };
+};
+
+const showAlert = (message) => {
+  return () => {
+    alert(message);
   };
 };
 
 export const forgotPasswordFailure = (error) => {
-  alert(
-    `Ocurrió un error al enviar la solicitud de restablecimiento de contraseña. Por favor intenta de nuevo más tarde. Error: ${error}`
-  );
+ /*  alert(
+    'Ocurrió un error al enviar la solicitud de restablecimiento de contraseña. Por favor intenta de nuevo más tarde. Error'
+  ); */
   return {
     type: FORGOT_PASSWORD_FAILURE,
     payload: error,
@@ -132,14 +140,14 @@ export const forgotPasswordFailure = (error) => {
 };
 
 export const resetPasswordSuccess = (data) => {
+
   return {
     type: PASSWORD_RESET_SUCCESS,
+    payload:data
   };
 };
 
 export const resetPasswordFailure = (error) => {
-  alert(`Ha ocurrido un error:${error} . Solicite un nuevo codigo .`);
-
   return {
     type: PASSWORD_RESET_FAILURE,
     payload: error,

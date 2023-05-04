@@ -28,10 +28,11 @@ const Detail = () => {
 
   const patient = useSelector((state) => state.userInfo);
   const doctor = useSelector((state) => state.doctorDetail);
-
+console.log(doctor)
   const isAdmin = patient?.rol === 3; // si rol es igual a 3, es admin. sino, es user
 
   useEffect(() => {
+    console.log("aca")
     dispatch(getDoctor(id));
     return () => dispatch(cleanDetail());
   }, []);
@@ -57,15 +58,15 @@ const Detail = () => {
       <HStack>
         <Image
           borderRadius="10px"
-          src={doctor.profile_image}
-          alt={doctor.person?.firstName}
-          maxW="30%"
-          mr={4}
+          src={doctor?.profile_image}
+          alt={doctor?.person?.firstName}
+          maxW="30%" // Tamaño de la imagen
+          mr={4} // Margen a la derecha para separar la imagen del texto
         />
         <VStack align="stretch">
           <Box>
             <Heading>
-              {doctor.person?.firstName} {doctor.person?.lastName}
+              {doctor?.person?.firstName} {doctor?.person?.lastName}
             </Heading>
             <Divider borderColor={dividerColor} />
           </Box>
@@ -74,13 +75,13 @@ const Detail = () => {
             <Text>{doctor?.about_me}</Text>
           </Box>
           <span style={{ display: "inline-flex", flexWrap: "nowrap" }}>
-            {renderStars(doctor.rating)}
+            {renderStars(doctor?.rating)}
           </span>
           <Box>
             <Text fontSize="lg" fontWeight="bold">
               Precio de la consulta:
             </Text>
-            <Text>{doctor?.consultation_cost}</Text>
+            <Text>${doctor?.consultation_cost}</Text>
           </Box>
 
           <Box>
@@ -111,7 +112,7 @@ const Detail = () => {
             </Text>
             <Flex alignItems="center" justifyContent="space-between">
               <Wrap>
-                {doctor.specialties?.map((specialty, index) => (
+                {doctor?.specialties?.map((specialty, index) => (
                   <WrapItem key={`${index}2`}>
                     <Badge>{specialty.specialty}</Badge>
                   </WrapItem>
@@ -122,12 +123,12 @@ const Detail = () => {
                   to={{
                     pathname: patient.id ? "/user/reserve" : "/user/signin",
                     state: {
-                      id: doctor.id,
-                      name: `${doctor.person?.firstName} ${doctor.person?.lastName}`,
-                      specialties: doctor.specialties?.map((s) => s.specialty),
-                      consultationCost: doctor.consultation_cost,
-                      profileImage: doctor.profile_image,
-                      disponibilties: doctor.disponibilties,
+                      id: doctor?.id,
+                      name: `${doctor?.person?.firstName} ${doctor?.person?.lastName}`,
+                      specialties: doctor?.specialties?.map((s) => s.specialty),
+                      consultationCost: doctor?.consultation_cost,
+                      profileImage: doctor?.profile_image,
+                      disponibilties: doctor?.disponibilties,
                     },
                   }}
                 >
@@ -162,47 +163,28 @@ const Detail = () => {
         bg={useColorModeValue("white", "gray.800")}
         maxWidth="100%"
       >
-       {/* <Box
-  borderRadius="10px"
-  borderColor={useColorModeValue("#3a0ca3", "#ffffff")} // Establecer color de borde según el modo de color
-  borderWidth="1px"
-  bg={useColorModeValue("white", "gray.800")} // Establecer color de fondo según el modo de color
-  maxWidth="100%"
-  marginLeft="20px"
-  marginTop="10px"
-  marginBottom="10px"
-  p={4} // Agregar un padding para separar los elementos internos
-> */}
-  <Text
-    fontSize="lg"
-    fontWeight="bold"
-    color={useColorModeValue("#3a0ca3", "white")} // Establecer color de texto según el modo de color
-  >
-    Comentarios:
-  </Text>
-  <Divider borderColor={useColorModeValue("#3a0ca3", "white")} /> 
-  <VStack align="stretch" spacing={8}>
-    {doctor.reviews?.map((review, index) => (
-      <Box key={`${index}1`} w="30%" bg={useColorModeValue("gray.50", "gray.700")}>
-        <Text
-          fontSize="sm"
-          fontWeight="bold"
-          color={useColorModeValue("#3a0ca3", "white")} // Establecer color de texto según el modo de color
-        >
-          {review.patient.person.first_name} {review.patient.person.last_name}
-        </Text>
-        <Text>{review.comment}</Text>
-        <Text>
-          Calificación: {review.rating}
-        </Text>
-        <Divider borderColor={useColorModeValue("#3a0ca3", "white")} /> 
-      </Box>
-    ))}
-  </VStack>
-  {!isAdmin && (
-    <Review doctor_id={Number(id)} patient_id={patient.id} />
-  )}
-</Box>
+        <Box marginLeft="20px" marginTop="10px" marginBottom="10px">
+          <Text fontSize="lg" fontWeight="bold">
+            Comentarios:
+          </Text>
+          <Divider borderColor="#3a0ca3" />
+          <VStack align="stretch" spacing={8}>
+            {doctor?.reviews?.map((review, index) => (
+              <Box key={`${index}1`} w="30%">
+                <Text fontSize="sm" fontWeight="bold" color="#3a0ca3">
+                  {review.patient.person.first_name}{" "}
+                  {review.patient.person.last_name}
+                </Text>
+                <Text>{review.comment}</Text>
+                <Text>Calificacion: {review.rating}</Text>
+                <Divider borderColor="#3a0ca3" />
+              </Box>
+            ))}
+          </VStack>
+          {isAdmin ? null : (
+            <Review doctor_id={Number(id)} patient_id={patient.id} />
+          )}
+        </Box>
       </Box>
     // </Box>
   );

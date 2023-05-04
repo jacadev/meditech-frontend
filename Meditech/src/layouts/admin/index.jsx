@@ -62,6 +62,7 @@ function Admin(props) {
         case "/admin/appointment":
         case "/admin/putPatient/:id":
         case "/admin/createdoctor":
+        case "/admin/putDoctor/:id":
           return <Route path={layout} component={component} key={key} />;
         default:
           return null;

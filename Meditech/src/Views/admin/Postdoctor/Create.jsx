@@ -28,7 +28,7 @@ import {
   getEspecialidades,
   postDoctor,
 } from "./../../../Redux/Actions/actions";
-import Select from "react-select";
+//import Select from "react-select";
 import { useHistory } from 'react-router-dom';
 
 

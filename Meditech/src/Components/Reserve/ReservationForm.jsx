@@ -46,8 +46,9 @@ const FormularioReserva = () => {
 
   const [fecha, setFecha] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const [hora, setHora] = useState([]);
-  const [formData, setFormdata] = useState({
+  const [hora, setHora] = useState([])
+  const [horaSeleccionada, setHoraSeleccionada] = useState(null);
+  const [formData, setFormdata] = useState({ 
     patient_id: userInfo,
     date: "",
     disponibilty_id: "",
@@ -98,9 +99,9 @@ const FormularioReserva = () => {
   };
 }
 
-  function changeHandler(date, disponibilty_id) {
-    //console.log('Hora seleccionada:', date, disponibilty_id);
-    setFormdata({ ...formData, date, disponibilty_id });
+  function changeHandler (date, disponibilty_id) {
+    setFormdata({...formData, date, disponibilty_id })
+    console.log('Hora seleccionada:', date, disponibilty_id);
     // Aquí puedes guardar la hora seleccionada en el estado o enviarla al servidor como parte de la reserva
   }
 
@@ -229,14 +230,14 @@ const FormularioReserva = () => {
                   Agradecemos su comprensión y cooperación en este asunto.
                 </Checkbox>
 
-                <Checkbox
-                  isChecked={receiveCommunication}
-                  onChange={() =>
-                    setRecibirComunicaciones(!receiveCommunication)
-                  }
-                >
-                  Sí, me gustaría recibir comunicaciones de Meditech.
-                </Checkbox>
+
+           {/*    <Checkbox
+                isChecked={receiveCommunication}
+                onChange={() => setRecibirComunicaciones(!receiveCommunication)}>
+
+                Sí, me gustaría recibir comunicaciones de Meditech.
+              </Checkbox> */}
+
               </Box>
 
               <div style={{ marginTop: "50px" }}>

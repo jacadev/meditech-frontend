@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@chakra-ui/react"
 import {
   cleanSuccess,
   resetPassword,
@@ -18,9 +19,10 @@ import {
   InputRightElement,
   Icon,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import DefaultAuth from './../../../layouts/user/Default';
-import illustration from '../../../assets/img/fondos/Meditech.png';
+import illustration from '../../../assets/img/fondos/Meditech.gif'
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 import Loading from '../../../Components/Loading/Loading'
@@ -35,11 +37,13 @@ const ForgotPassword = () => {
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
   const brandStars = useColorModeValue('brand.500', 'brand.400');
-  const [loading, setLoading] = useState(false);
-  const [showError, setShowError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const toast = useToast()
 
   const [input, setInput] = useState({
-    email: '',
+    email:'',
     newPassword: '',
     recoveryCode: '',
     confirmPassword: '',
@@ -50,24 +54,28 @@ const ForgotPassword = () => {
     const property = e.target.name;
 
     setInput({ ...input, [property]: value });
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (input.newPassword !== input.confirmPassword) {
-      alert(
-        'Las contraseñas no coinciden. Por favor, verifica que las contraseñas ingresadas sean iguales.'
-      );
+
+      toast({
+        title: `Las contraseñas no coinciden. Por favor, verifica que las contraseñas ingresadas sean iguales.`,
+        status:"error",
+        isClosable: true,
+      })
       return;
     }
   
     dispatch(cleanSuccess());
-    setLoading(true);
+  
     try {
       await dispatch(resetPassword(input));
-      setLoading(false);
-      setShowError(false);
+     
+ 
       if (success) {
         setInput({
           email: '',
@@ -75,15 +83,26 @@ const ForgotPassword = () => {
           recoveryCode: '',
           confirmPassword: '',
         });
-        history.push('/user/signin');
-      } else {
-        history.push('user/forgotpassword');
+        setIsModalOpen2(true)
+       
       }
+        
+      
     } catch (error) {
-      setLoading(false);
-    /*   setShowError(true);
-      console.error(error); */
+      setErrorMessage(error.message);
+      setIsModalOpen(true);
+
     }
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setErrorMessage('');
+    history.push('/user/signin');
+  };
+  const handleModalClose2 = () => {
+    setIsModalOpen2(false);
+    
+    history.push('/user/signin');
   };
 
 
@@ -92,7 +111,7 @@ const ForgotPassword = () => {
 
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
-      {loading && <Loading />}
+     
     
       <Flex
         maxW={{ base: '100%', md: 'max-content' }}
@@ -108,8 +127,8 @@ const ForgotPassword = () => {
         flexDirection="column"
       >
         <div>
-          {success ? (
-            <div>
+         
+            <Box boxShadow='lg' w="500px" h="450px" borderRadius='10px'>
               <Box me="auto">
                 <Heading color={textColor} fontSize="36px" mb="10px">
                   Recuperación de cuenta
@@ -258,29 +277,59 @@ const ForgotPassword = () => {
                   <br />
                 </div>
 
-                <div>
+                <Box display="flex" justifyContent="center">
                   <Button
                     fontSize="sm"
                     type="submit"
                     variant="solid"
                     colorScheme="blue"
                     fontWeight="500"
-                    w="100%"
+                    w="auto"
                     h="50"
                     mb="24px"
-                    _hover={{ boxShadow: 'xl' }}
+                  
                     _active={{ boxShadow: 'lg' }}
                     borderRadius="md"
+                    bg='blue'
+                    color='white'
+                    _hover={{
+                      bg: "blue.400",
+                    }}
+                    _focus={{
+                      bg: "blue.500",
+                    }}
                   >
                     Restablecer contraseña
                   </Button>
-                </div>
+                </Box>
               </form>
-            </div>
-          ) : error ? (
-            <div>{error.message}</div>
-          ) : null}
+            </Box>
+    
         </div>
+        <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Datos incorrectos</ModalHeader>
+          <ModalBody>{errorMessage}</ModalBody>  
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleModalClose}>
+              Cerrar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isModalOpen2} onClose={handleModalClose2}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Contraseña actualizada correctamente</ModalHeader>
+          <ModalBody>inicie sesion nuevamente</ModalBody>   
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleModalClose2}>
+              Cerrar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       </Flex>
     </DefaultAuth>
   );

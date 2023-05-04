@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+// Chakra imports
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Divider } from "@chakra-ui/react"
 import {
   Box,
   Button,
@@ -10,16 +12,25 @@ import {
   Text,
   useColorMode,
 } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+// Custom components
+import DefaultAuth from './../../../layouts/user/Default';
+// Assets
+import illustration from '../../../assets/img/fondos/Meditech.gif';
+import { useDispatch,useSelector } from 'react-redux';
 import { forgotPassword } from './../../../Redux/Actions/Actionslogin';
+import { useState} from 'react';
 
-function SignInForgot() {
+function SignInForgot({ isOpen, onClose }) {
   const history = useHistory();
   const { colorMode } = useColorMode(); // Obtener el modo de color actual
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const success = useSelector((state) => state.success);
   const [input, setInput] = React.useState({
     email: '',
   });
+ 
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -28,16 +39,31 @@ function SignInForgot() {
     setInput({ ...input, [property]: value });
   };
 
-  const submitHandler = (e) => {
+
+  const submitHandler =  (e) => {
     e.preventDefault();
-    dispatch(forgotPassword(input.email));
-    setInput({ email: '' });
 
-    setTimeout(() => {
-      history.push('/user/forgotpassword');
-    }, 1000);
+    
+      dispatch(forgotPassword(input.email));
+      setInput({ email: '' });
+  
+    setShowModal(true);
+    }/* else{
+      setIsModalOpen2(true)
+    }
+       */ 
+  
+  const handleModalClose = () => {
+    setShowModal(false);
+    history.push('/user/forgotpassword');
   };
-
+  /* const handleModalClose2 = () => {
+    setIsModalOpen2(false);
+    /* setInput({ email: '' }); 
+  
+    history.push('/user/signin');
+  }; */
+  
   return (
     <Flex
       maxW={{ base: '100%', md: 'max-content' }}
