@@ -41,6 +41,7 @@ const initialState = {
   infoPatient: [],
   specialties: [],
   patients: [],
+  data:null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -148,6 +149,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           loading: false,
           success: true,
+          data:action.payload
         };
       case PASSWORD_RESET_FAILURE:
         return {

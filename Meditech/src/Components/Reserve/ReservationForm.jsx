@@ -36,6 +36,7 @@ const FormularioReserva = () => {
   const [fecha, setFecha] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [hora, setHora] = useState([])
+  const [horaSeleccionada, setHoraSeleccionada] = useState(null);
   const [formData, setFormdata] = useState({ 
     patient_id: userInfo,
     date: "",
@@ -70,8 +71,8 @@ const FormularioReserva = () => {
   }
 
   function changeHandler (date, disponibilty_id) {
-    //console.log('Hora seleccionada:', date, disponibilty_id);
     setFormdata({...formData, date, disponibilty_id })
+    console.log('Hora seleccionada:', date, disponibilty_id);
     // Aquí puedes guardar la hora seleccionada en el estado o enviarla al servidor como parte de la reserva
   }
 
@@ -146,24 +147,30 @@ const FormularioReserva = () => {
           Usted está reservando para el: {fecha && format(fechaLocal, 'EEEE, dd \'de\' MMMM \'de\' y', { locale: es })}
         </Text>
       )}
-      {fecha && hora.filter((disponibility) => disponibility.date === fecha)
-        .sort((a, b) => a.timetable.startTime.localeCompare(b.timetable.startTime))
-        .map((disponibility, index) => {
-          return (
-            <Button 
-              key={index}
-              onClick={() => changeHandler(disponibility.date,disponibility.id )}
-              colorScheme="blue"
-              variant="solid" 
-              mt={2}
-            >
-              {disponibility.timetable.startTime} - {disponibility.timetable.endTime}
-            </Button>
-          )
-        })
-      }
+     {fecha && hora.filter((disponibility) => disponibility.date === fecha)
+  .sort((a, b) => a.timetable.startTime.localeCompare(b.timetable.startTime))
+  .map((disponibility, index) => {
+    const isActive = disponibility.timetable.startTime === horaSeleccionada;
+
+    return (
+      <Button 
+        key={index}
+        onClick={() => {
+          changeHandler(disponibility.date,disponibility.id);
+          setHoraSeleccionada(disponibility.timetable.startTime);
+        }}
+        colorScheme="blue"
+        variant={isActive ? "solid" : "outline"}
+        mt={2}
+      >
+        {disponibility.timetable.startTime}
+      </Button>
+    )
+  })
+}
+
              </Box> 
-             <Box>
+             <Box  marginTop='30px'>
              <Checkbox
             isChecked={dataTreatment}
             onChange={() => setConsentimiento(!dataTreatment)}
@@ -174,12 +181,12 @@ const FormularioReserva = () => {
           </Checkbox>
 
 
-              <Checkbox
+           {/*    <Checkbox
                 isChecked={receiveCommunication}
                 onChange={() => setRecibirComunicaciones(!receiveCommunication)}>
 
                 Sí, me gustaría recibir comunicaciones de Meditech.
-              </Checkbox>
+              </Checkbox> */}
 
               </Box>
               <div style={{ marginTop: "50px" }}>

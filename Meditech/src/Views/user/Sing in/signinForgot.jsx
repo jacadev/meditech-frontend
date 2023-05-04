@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 // Chakra imports
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, Divider } from "@chakra-ui/react"
 import {
   Box,
   Button,
@@ -14,20 +15,25 @@ import {
 // Custom components
 import DefaultAuth from './../../../layouts/user/Default';
 // Assets
-//import illustration from '../../../assets/img/fondos/Meditech.png';
-import { useDispatch } from 'react-redux';
+import illustration from '../../../assets/img/fondos/Meditech.gif';
+import { useDispatch,useSelector } from 'react-redux';
 import { forgotPassword } from './../../../Redux/Actions/Actionslogin';
+import { useState} from 'react';
 
-function SignInForgot() {
+function SignInForgot({ isOpen, onClose }) {
   const history = useHistory();
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
   const brandStars = useColorModeValue('brand.500', 'brand.400');
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const success = useSelector((state) => state.success);
   const [input, setInput] = React.useState({
     email: '',
   });
+ 
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -35,40 +41,51 @@ function SignInForgot() {
 
     setInput({ ...input, [property]: value });
   };
- 
-  const submitHandler = (e) => {
+
+
+  const submitHandler =  (e) => {
     e.preventDefault();
-    dispatch(forgotPassword(input.email));
-    setInput({ email: '' });
 
-    setTimeout(() =>{
-
-      history.push('/user/forgotpassword')
-
-    },1000)
+    
+      dispatch(forgotPassword(input.email));
+      setInput({ email: '' });
+  
+    setShowModal(true);
+    }/* else{
+      setIsModalOpen2(true)
+    }
+       */ 
+  
+  const handleModalClose = () => {
+    setShowModal(false);
+    history.push('/user/forgotpassword');
   };
-
+  /* const handleModalClose2 = () => {
+    setIsModalOpen2(false);
+    /* setInput({ email: '' }); 
+  
+    history.push('/user/signin');
+  }; */
+  
   return (
-  //  <DefaultAuth illustrationBackground={illustration} image={illustration}>
+    <DefaultAuth illustrationBackground={illustration} image={illustration}>
+     <Box borderRadius='10px' marginTop='200px'marginRight='auto' boxShadow="lg">
       <Flex
-        maxW={{ base: '100%', md: 'max-content' }}
-        w="100%"
-        mx={{ base: 'auto', lg: '0px' }}
-        me="auto"
-        h="100%"
+       
+      
         alignItems="start"
         justifyContent="center"
-        mb={{ base: '30px', md: '60px' }}
-        px={{ base: '25px', md: '0px' }}
-        mt={{ base: '40px', md: '14vh' }}
+       
         flexDirection="column"
       >
         <Box me="auto">
-          <Heading color={textColor} fontSize="26px" mb="10px">
+          <Heading color={textColor} fontSize="26px" mb="30px">
             Solicitud Recuperacion Contraseña
           </Heading>
+       
         </Box>
         <Flex
+          mb="30px"
           zIndex="2"
           direction="column"
           w={{ base: '100%', md: '420px' }}
@@ -77,7 +94,7 @@ function SignInForgot() {
           borderRadius="15px"
           mx={{ base: 'auto', lg: 'unset' }}
           me="auto"
-          mb={{ base: '20px', md: 'auto' }}
+          
         >
           <form onSubmit={submitHandler}>
             <FormLabel
@@ -104,22 +121,57 @@ function SignInForgot() {
               size="lg"
               onChange={(e) => handleChange(e)}
             />
-
+           <Box display="flex" justifyContent="center">
             <Button
-              fontSize="sm"
+              fontSize="20px"
               type="submit"
               variant="brand"
               fontWeight="500"
-              w="100%"
+              w="auto"
               h="50"
               mb="24px"
+              bg='blue'
+              color='white'
+              _hover={{
+                bg: "blue.400",
+              }}
+              _focus={{
+                bg: "blue.500",
+              }}
             >
               Enviar Solicitud
             </Button>
+            </Box>
           </form>
         </Flex>
+        <Modal isOpen={showModal} onClose={handleModalClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Le Enviamos una clave de recuperacion de contraseña a su correo</ModalHeader>
+          {/*  <ModalBody>{errorMessage}</ModalBody>  */}
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleModalClose}>
+              Cerrar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      {/* <Modal isOpen={isModalOpen2} onClose={handleModalClose2}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>correo invalido</ModalHeader>
+          <ModalBody>por favor intentelo de nuevo</ModalBody>   
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleModalClose2}>
+              Cerrar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal> */}
       </Flex>
-    //</DefaultAuth>
+      </Box>
+      
+      </DefaultAuth>
   );
 }
 

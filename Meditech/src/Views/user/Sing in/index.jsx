@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { GoogleLogin } from '@leecheuk/react-google-login';
 import { useHistory } from 'react-router-dom';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@chakra-ui/react"
 // Chakra imports
 import {
   Box,
@@ -27,7 +28,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 import { gapi } from 'gapi-script';
-import { useEffect } from 'react';
+import { useEffect,useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   userInfo,
@@ -62,6 +63,9 @@ function SignIn() {
     email: '',
     password: '',
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   function handleClick1() {
     history.push('/user/signup');
   }
@@ -110,15 +114,23 @@ function SignIn() {
     // Aquí puedes manejar el error del inicio de sesión de Google
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    if (input.email && input.password && userInfo1) {
-      dispatch(userInfo(input));
-      setInput({ email: '', password: '' });
-      history.push('/admin/default');
-    } else {
-      alert('Usuario o contraseña incorrectos');
+    try { 
+      if (input.email && input.password ){
+     await dispatch(userInfo(input));
+     setInput({ email: '', password: '' });
+     history.push('/user/home');
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+      setIsModalOpen(true);
     }
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setErrorMessage('');
+    history.push('/user/home');
   };
 
   useEffect(() => {
@@ -278,17 +290,26 @@ function SignIn() {
                 </Text>
               </NavLink>
             </Flex>
+            <Box  display="flex" justifyContent="center" alignItems="center">
             <Button
-              fontSize="sm"
+              fontSize="15px"
               type="submit"
               variant="brand"
               fontWeight="500"
-              w="100%"
+              w="auto"
               h="50"
-              mb="24px"
+              bg='blue'
+              color='white'
+              _hover={{
+                bg: "blue.400",
+              }}
+              _focus={{
+                bg: "blue.500",
+              }}
             >
               Iniciar sesion
             </Button>
+            </Box>
           </form>
 
           <Flex
@@ -314,6 +335,18 @@ function SignIn() {
           </Flex>
         </Flex>
       </Flex>
+          <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Error de inicio de sesión</ModalHeader>
+           <ModalBody>{errorMessage}</ModalBody> 
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleModalClose}>
+              Cerrar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </DefaultAuth>
   );
 }
