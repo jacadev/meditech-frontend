@@ -26,7 +26,7 @@ import signup from './Views/user/Sing up/Index';
 import paymentProcess from './Components/PaymentProcess/paymentProcess';
 import Details from './Views/user/Deatails/detail';
 import Homeadmin from "./Views/admin/Home/Index"
-/* import createdoctor from "./Views/admin/Postdoctor/Create" */
+import createdoctor from "./Views/admin/Postdoctor/Create"
 import indexdoctor from "./Views/admin/Postdoctor/Index"
 import indexuser from "./Views/admin/listuser/index"
 import ProfileSettings from './Views/user/ProfileSettings/index';
@@ -207,10 +207,10 @@ const routes = [
     ),
     component: Pays,
   },
-/*   {
+  {
     layout: '/admin/createdoctor',
     component: createdoctor,
-  }, */
+  },
 
   {
     layout: '/admin/putPatient/:id',

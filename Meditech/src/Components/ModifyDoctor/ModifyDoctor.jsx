@@ -14,11 +14,13 @@ import {
   CardFooter,
   Stack,
   Tooltip,
+  useToast
 } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     cleanDetail,
   getDoctor,
@@ -28,29 +30,14 @@ import {
 function ModifyDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const toast = useToast()
+  /* const history = useHistory(); */
 
   //   const especialidades = useSelector((state) => state.especialidades);
   const doctorDetail = useSelector((state) => state.doctorDetail);
 
   const [form, setForm] = useState({
-    email: doctorDetail.person?.email,
-    phone: doctorDetail.person?.phone,
-    age: doctorDetail.person?.age,
-    first_name: doctorDetail.person?.firstName,
-    last_name: doctorDetail.person?.lastName,
-    about_me: doctorDetail?.about_me,
-    consultation_cost: doctorDetail?.consultation_cost,
-    location: {
-      city: doctorDetail.location?.city,
-      country: doctorDetail.location?.country,
-      address: doctorDetail.location?.address,
-    },
-    diseases_treated: doctorDetail?.diseases_treated,
-    // specialties: doctorDetail?.specialties,
-    // disponibilties_id: doctorDetail?.disponibilties,
-    status: doctorDetail.person?.status,
-    profile_image: doctorDetail?.profile_image,
+    
   });
 
   const handleChangEspecialits = (event) => {
@@ -65,7 +52,29 @@ function ModifyDoctor() {
       specialties: selectedValues,
     });
   };
+useEffect(()=>{
 
+  if(!doctorDetail.length){
+    setForm({email: doctorDetail.person?.email,
+      phone: doctorDetail.person?.phone,
+      age: doctorDetail.person?.age,
+      first_name: doctorDetail.person?.firstName,
+      last_name: doctorDetail.person?.lastName,
+      about_me: doctorDetail?.about_me,
+      consultation_cost: doctorDetail?.consultation_cost,
+      location: {
+        city: doctorDetail.location?.city,
+        country: doctorDetail.location?.country,
+        address: doctorDetail.location?.address,
+      },
+      diseases_treated: doctorDetail?.diseases_treated,
+      // specialties: doctorDetail?.specialties,
+      // disponibilties_id: doctorDetail?.disponibilties,
+      status: doctorDetail.person?.status,
+      profile_image: doctorDetail?.profile_image,})
+  }
+
+},[doctorDetail])
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -106,17 +115,16 @@ function ModifyDoctor() {
   //         label: especialidad.specialty,
   //       }))
   //     : [];
-
-  const handleChangeEspecialidades = (selectedOptions) => {
+/*   const handleChangeEspecialidades = (selectedOptions) => {
     const options = selectedOptions.map((option) => option.value);
     setForm((prevState) => ({ ...prevState, specialties: options }));
   };
-
-  const handleClick = (event) => {
+ */
+/*   const handleClick = (event) => {
     // event.preventDefault();
-    // history.push("admin/indexdoctor");    
+     history.push("/admin/indexdoctor");    
 
-  };
+  }; */
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -124,7 +132,12 @@ function ModifyDoctor() {
     console.log("hola", form); //------------------------------------------
 
     dispatch(putDoctorAdmin(id, form));
-    // setForm({})
+    toast({
+      title: `se actulizo correctamente.`,
+      status:"success",
+      isClosable: true,
+    })
+   return
   };
 
   useEffect(() => {
@@ -135,7 +148,7 @@ function ModifyDoctor() {
 
     return () => {
       console.log("me estoy limpiando ");
-      cleanDetail();
+      dispatch(cleanDetail())
     };
   }, [id]);
 
@@ -211,8 +224,8 @@ function ModifyDoctor() {
               <Input
                 type="file"
                 placeholder="Inserte el URL de la imagen"
-                // value={form?.profile_image}
-                // onChange={handleImage}
+                 value={form?.profile_image}
+                 onChange={handleImage}
                 name="profile_image"
               />
             </FormControl>
@@ -312,7 +325,7 @@ function ModifyDoctor() {
                   <Button
                     colorScheme="blue"
                     type="submit"
-                    // onClick={handleClick}
+                   /*  onClick={handleClick} */
                   >
                     Enviar
                   </Button>

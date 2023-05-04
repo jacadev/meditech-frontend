@@ -118,7 +118,7 @@ function doctor() {
                   </Td>
                   <Td>${specialist.consultation_cost}</Td>
                   <Td>{specialist.person.status ? 'Activo' : 'Inactivo'}</Td>
-                 {/*  <Td>
+                   <Td>
                     <Tooltip hasArrow label="Editar" bg="blue.600">
                       <Button
                         onClick={() =>
@@ -129,7 +129,7 @@ function doctor() {
                         variant="solid"
                       ></Button>
                     </Tooltip>
-                  </Td> */}
+                  </Td> 
                 </Tr>
               ))}
             </Tbody>
