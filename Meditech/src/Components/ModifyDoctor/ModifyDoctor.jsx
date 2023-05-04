@@ -224,7 +224,7 @@ useEffect(()=>{
               <Input
                 type="file"
                 placeholder="Inserte el URL de la imagen"
-                 value={form?.profile_image}
+                /*  value={form?.profile_image} */
                  onChange={handleImage}
                 name="profile_image"
               />
