@@ -86,6 +86,7 @@ const rootReducer = (state = initialState, action) => {
         objeto: action.payload,
       };
     case GET_DOCTOR:
+      console.log('modificando el doctor', action.payload);
       return {
         ...state,
         doctorDetail: action.payload,
@@ -111,6 +112,7 @@ const rootReducer = (state = initialState, action) => {
         doctors: action.payload,
       };
       case CLEAN_DATAIL_ID:
+        console.log('si se esta limpiando');
         return {
           ...state,
           doctorDetail: [],
