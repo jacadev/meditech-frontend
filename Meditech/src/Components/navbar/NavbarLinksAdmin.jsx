@@ -103,7 +103,7 @@ import { useDispatch, useSelector } from 'react-redux';
               </Text>
             </Flex>
             <Flex flexDirection="column" p="10px">
-              {userInfo1.id && userInfo1.rol && (
+              {userInfo1.id && userInfo1.rol !== 3 && (
                 <MenuItem
                   _hover={{ bg: 'none' }}
                   _focus={{ bg: 'none' }}
@@ -114,6 +114,7 @@ import { useDispatch, useSelector } from 'react-redux';
                   <Text fontSize="sm">Configuracion de Perfil</Text>
                 </MenuItem>
               )}
+              {userInfo1.id && userInfo1.rol !== 3 && (
               <MenuItem
                 _hover={{ bg: 'none' }}
                 _focus={{ bg: 'none' }}
@@ -123,7 +124,7 @@ import { useDispatch, useSelector } from 'react-redux';
               >
                 <Text fontSize="sm">Ver citas</Text>
               </MenuItem>
-
+              )}
               <MenuItem
                 _hover={{ bg: 'none' }}
                 _focus={{ bg: 'none' }}

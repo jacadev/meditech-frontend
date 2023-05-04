@@ -75,7 +75,7 @@ const Detail = () => {
             <Text fontSize="lg" fontWeight="bold">
               Precio de la consulta:
             </Text>
-            <Text>{doctor?.consultation_cost}</Text>
+            <Text>${doctor?.consultation_cost}</Text>
           </Box>
 
           <Box>

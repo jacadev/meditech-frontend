@@ -37,7 +37,7 @@ const SearchBarUsers = () => {
     <Box display="inline-flex" width="400px">
       <InputGroup>
         <Input
-          placeholder="Doctor o Especialidad"
+          placeholder="Usuario"
           value={name}
           onChange={changeHandler}
           width="auto"

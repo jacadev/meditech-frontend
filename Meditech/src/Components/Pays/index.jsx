@@ -221,7 +221,7 @@ function Pays() {
         <canvas id="myChart" width="400" height="200"></canvas>
       </div>
       <div>
-        <Button
+       {/*  <Button
           onClick={handleClick}
           rounded={'full'}
           bg="#5C43FF"
@@ -233,7 +233,7 @@ function Pays() {
           {showChart
             ? 'Ocultar gráfico'
             : 'Generar gráfico Porcentaje de Pagos'}
-        </Button>
+        </Button> */}
 
         {/* {showChart && <Bar data={chartData} />} */}
       </div>

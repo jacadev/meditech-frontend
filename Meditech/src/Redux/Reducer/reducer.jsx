@@ -41,6 +41,7 @@ const initialState = {
   infoPatient: [],
   specialties: [],
   patients: [],
+  data:null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -85,6 +86,7 @@ const rootReducer = (state = initialState, action) => {
         objeto: action.payload,
       };
     case GET_DOCTOR:
+      console.log('modificando el doctor', action.payload);
       return {
         ...state,
         doctorDetail: action.payload,
@@ -110,6 +112,7 @@ const rootReducer = (state = initialState, action) => {
         doctors: action.payload,
       };
       case CLEAN_DATAIL_ID:
+        console.log('si se esta limpiando');
         return {
           ...state,
           doctorDetail: [],
@@ -148,6 +151,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           loading: false,
           success: true,
+          data:action.payload
         };
       case PASSWORD_RESET_FAILURE:
         return {
