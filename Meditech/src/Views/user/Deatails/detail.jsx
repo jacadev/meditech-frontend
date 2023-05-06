@@ -27,11 +27,11 @@ const Detail = () => {
 
   const patient = useSelector((state) => state.userInfo);
   const doctor = useSelector((state) => state.doctorDetail);
-console.log(doctor)
+  console.log(doctor);
   const isAdmin = patient?.rol === 3; // si rol es igual a 3, es admin. sino, es user
 
   useEffect(() => {
-    console.log("aca")
+    console.log("aca");
     dispatch(getDoctor(id));
     return () => dispatch(cleanDetail());
   }, []);

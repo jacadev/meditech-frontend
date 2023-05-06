@@ -72,7 +72,9 @@ function Specialists() {
     setCurrentPage(pageNumber);
   };
 
-  let filteredSpecialists = specialists.filter(doctor => doctor.person.status === true);
+  let filteredSpecialists = specialists.filter(
+    (doctor) => doctor.person.status === true
+  );
 
   if (specialtyFilter !== "") {
     filteredSpecialists = filteredSpecialists.filter((specialist) =>
@@ -110,7 +112,6 @@ function Specialists() {
     indexOfFirstSpecialist,
     indexOfLastSpecialist
   );
-
 
   const pageNumbers = [];
   for (

@@ -48,39 +48,41 @@ export default function Banner(props) {
         {icon}
       </MenuButton>
       <MenuList
-        w='150px'
-        minW='unset'
-        maxW='150px !important'
-        border='transparent'
-        backdropFilter='blur(63px)'
+        w="150px"
+        minW="unset"
+        maxW="150px !important"
+        border="transparent"
+        backdropFilter="blur(63px)"
         bg={bgList}
         boxShadow={bgShadow}
-        borderRadius='20px'
-        p='15px'>
+        borderRadius="20px"
+        p="15px"
+      >
         <MenuItem
-          transition='0.2s linear'
+          transition="0.2s linear"
           color={textColor}
           _hover={textHover}
-          p='0px'
-          borderRadius='8px'
+          p="0px"
+          borderRadius="8px"
           _active={{
             bg: "transparent",
           }}
           _focus={{
             bg: "transparent",
           }}
-          mb='10px'>
-          <Flex align='center'>
-            <Icon as={MdOutlinePerson} h='16px' w='16px' me='8px' />
-            <Text fontSize='sm' fontWeight='400'>
+          mb="10px"
+        >
+          <Flex align="center">
+            <Icon as={MdOutlinePerson} h="16px" w="16px" me="8px" />
+            <Text fontSize="sm" fontWeight="400">
               Panel 1
             </Text>
           </Flex>
         </MenuItem>
         <MenuItem
-          transition='0.2s linear'
-          p='0px'
-          borderRadius='8px'
+          transition="0.2s linear"
+          p="0px"
+          borderRadius="8px"
           color={textColor}
           _hover={textHover}
           _active={{
@@ -89,18 +91,19 @@ export default function Banner(props) {
           _focus={{
             bg: "transparent",
           }}
-          mb='10px'>
-          <Flex align='center'>
-            <Icon as={MdOutlineCardTravel} h='16px' w='16px' me='8px' />
-            <Text fontSize='sm' fontWeight='400'>
+          mb="10px"
+        >
+          <Flex align="center">
+            <Icon as={MdOutlineCardTravel} h="16px" w="16px" me="8px" />
+            <Text fontSize="sm" fontWeight="400">
               Panel 2
             </Text>
           </Flex>
         </MenuItem>
         <MenuItem
-          transition='0.2s linear'
-          p='0px'
-          borderRadius='8px'
+          transition="0.2s linear"
+          p="0px"
+          borderRadius="8px"
           color={textColor}
           _hover={textHover}
           _active={{
@@ -109,29 +112,31 @@ export default function Banner(props) {
           _focus={{
             bg: "transparent",
           }}
-          mb='10px'>
-          <Flex align='center'>
-            <Icon as={MdOutlineLightbulb} h='16px' w='16px' me='8px' />
-            <Text fontSize='sm' fontWeight='400'>
+          mb="10px"
+        >
+          <Flex align="center">
+            <Icon as={MdOutlineLightbulb} h="16px" w="16px" me="8px" />
+            <Text fontSize="sm" fontWeight="400">
               Panel 3
             </Text>
           </Flex>
         </MenuItem>
         <MenuItem
-          transition='0.2s linear'
+          transition="0.2s linear"
           color={textColor}
           _hover={textHover}
-          p='0px'
-          borderRadius='8px'
+          p="0px"
+          borderRadius="8px"
           _active={{
             bg: "transparent",
           }}
           _focus={{
             bg: "transparent",
-          }}>
-          <Flex align='center'>
-            <Icon as={MdOutlineSettings} h='16px' w='16px' me='8px' />
-            <Text fontSize='sm' fontWeight='400'>
+          }}
+        >
+          <Flex align="center">
+            <Icon as={MdOutlineSettings} h="16px" w="16px" me="8px" />
+            <Text fontSize="sm" fontWeight="400">
               Panel 4
             </Text>
           </Flex>

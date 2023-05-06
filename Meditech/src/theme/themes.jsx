@@ -1,4 +1,3 @@
-
 /* import { CardComponent } from "./additions/card/card";
 import { buttonStyles } from "./components/button";
 import { badgeStyles } from "./components/badge";
@@ -32,6 +31,5 @@ const theme = extendTheme(
   { breakpoints }, // Breakpoints
   globalStyles
 );
-
 
 export default theme;

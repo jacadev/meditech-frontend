@@ -1,8 +1,15 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { GoogleLogin } from '@leecheuk/react-google-login';
-import { useHistory } from 'react-router-dom';
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@chakra-ui/react"
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { GoogleLogin } from "@leecheuk/react-google-login";
+import { useHistory } from "react-router-dom";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@chakra-ui/react";
 // Chakra imports
 import {
   Box,
@@ -18,56 +25,56 @@ import {
   InputRightElement,
   Text,
   useColorModeValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 // Custom components
-import { HSeparator } from './../../../Components/separator/Separator';
-import DefaultAuth from './../../../layouts/user/Default';
+import { HSeparator } from "./../../../Components/separator/Separator";
+import DefaultAuth from "./../../../layouts/user/Default";
 // Assets
-import illustration from '../../../assets/img/fondos/Meditech.gif';
-import { FcGoogle } from 'react-icons/fc';
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
-import { RiEyeCloseLine } from 'react-icons/ri';
-import { gapi } from 'gapi-script';
-import { useEffect,useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import illustration from "../../../assets/img/fondos/Meditech.gif";
+import { FcGoogle } from "react-icons/fc";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
+import { gapi } from "gapi-script";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   userInfo,
   forgotPassword,
   cleanSuccess,
-} from './../../../Redux/Actions/Actionslogin';
-import { userSigninGoogle } from './../../../Redux/Actions/Actionslogin';
+} from "./../../../Redux/Actions/Actionslogin";
+import { userSigninGoogle } from "./../../../Redux/Actions/Actionslogin";
 
 function SignIn() {
   const history = useHistory();
   const userInfo1 = useSelector((state) => state.userInfo);
   const success = useSelector((state) => state.success);
   // Chakra color mode
-  const textColor = useColorModeValue('navy.700', 'white');
-  const textColorSecondary = 'gray.400';
-  const textColorDetails = useColorModeValue('navy.700', 'secondaryGray.600');
-  const textColorBrand = useColorModeValue('brand.500', 'white');
-  const brandStars = useColorModeValue('brand.500', 'brand.400');
-  const googleBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.200');
-  const googleText = useColorModeValue('navy.700', 'white');
+  const textColor = useColorModeValue("navy.700", "white");
+  const textColorSecondary = "gray.400";
+  const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
+  const textColorBrand = useColorModeValue("brand.500", "white");
+  const brandStars = useColorModeValue("brand.500", "brand.400");
+  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
+  const googleText = useColorModeValue("navy.700", "white");
   const googleHover = useColorModeValue(
-    { bg: 'gray.200' },
-    { bg: 'whiteAlpha.300' }
+    { bg: "gray.200" },
+    { bg: "whiteAlpha.300" }
   );
   const googleActive = useColorModeValue(
-    { bg: 'secondaryGray.300' },
-    { bg: 'whiteAlpha.200' }
+    { bg: "secondaryGray.300" },
+    { bg: "whiteAlpha.200" }
   );
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
   const [input, setInput] = React.useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleClick1() {
-    history.push('/user/signup');
+    history.push("/user/signup");
   }
 
   const handleChange = (e) => {
@@ -82,14 +89,14 @@ function SignIn() {
     const user_name = response.profileObj.name;
     const userImage = response.profileObj.imageUrl;
     const email = response.profileObj.email;
-    localStorage.setItem('userInfo', userInfo);
-    localStorage.setItem('user_name', user_name);
-    localStorage.setItem('userImage', userImage);
-    localStorage.setItem('email', email);
+    localStorage.setItem("userInfo", userInfo);
+    localStorage.setItem("user_name", user_name);
+    localStorage.setItem("userImage", userImage);
+    localStorage.setItem("email", email);
 
     const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user_name,
         email,
@@ -98,15 +105,15 @@ function SignIn() {
       }),
     };
 
-    fetch('http://localhost:3001/patients/signinGoogle', requestOptions)
+    fetch("http://localhost:3001/patients/signinGoogle", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         dispatch(userSigninGoogle(data));
         console.log(data);
-        history.push('/admin/default');
+        history.push("/admin/default");
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
   const onFailure = (error) => {
@@ -116,11 +123,11 @@ function SignIn() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try { 
-      if (input.email && input.password ){
-     await dispatch(userInfo(input));
-     setInput({ email: '', password: '' });
-     history.push('/user/home');
+    try {
+      if (input.email && input.password) {
+        await dispatch(userInfo(input));
+        setInput({ email: "", password: "" });
+        history.push("/user/home");
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -129,35 +136,35 @@ function SignIn() {
   };
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setErrorMessage('');
-    history.push('/user/home');
+    setErrorMessage("");
+    history.push("/user/home");
   };
 
   useEffect(() => {
     function start() {
       gapi.client.init({
         clientId:
-          '486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/userinfo.profile',
+          "486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com",
+        scope: "https://www.googleapis.com/auth/userinfo.profile",
       });
     }
-    gapi.load('client:auth2', start);
+    gapi.load("client:auth2", start);
     dispatch(cleanSuccess());
   }, []);
 
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
-        maxW={{ base: '100%', md: 'max-content' }}
+        maxW={{ base: "100%", md: "max-content" }}
         w="100%"
-        mx={{ base: 'auto', lg: '0px' }}
+        mx={{ base: "auto", lg: "0px" }}
         me="auto"
         h="100%"
         alignItems="start"
         justifyContent="center"
-        mb={{ base: '30px', md: '60px' }}
-        px={{ base: '25px', md: '0px' }}
-        mt={{ base: '40px', md: '14vh' }}
+        mb={{ base: "30px", md: "60px" }}
+        px={{ base: "25px", md: "0px" }}
+        mt={{ base: "40px", md: "14vh" }}
         flexDirection="column"
       >
         <Box me="auto">
@@ -177,20 +184,20 @@ function SignIn() {
         <Flex
           zIndex="2"
           direction="column"
-          w={{ base: '100%', md: '420px' }}
+          w={{ base: "100%", md: "420px" }}
           maxW="100%"
           background="transparent"
           borderRadius="15px"
-          mx={{ base: 'auto', lg: 'unset' }}
+          mx={{ base: "auto", lg: "unset" }}
           me="auto"
-          mb={{ base: '20px', md: 'auto' }}
+          mb={{ base: "20px", md: "auto" }}
         >
           <GoogleLogin
             clientId="486483669928-rdvcde4ja0g9diu12md4bpf6ts4bj2d6.apps.googleusercontent.com"
             buttonText="Inicio de sesion con Google"
             onSuccess={responseGoogle}
             onFailure={onFailure}
-            cookiePolicy={'single_host_origin'}
+            cookiePolicy={"single_host_origin"}
             scope="profile"
           ></GoogleLogin>
           <Flex align="center" mb="25px">
@@ -216,7 +223,7 @@ function SignIn() {
               isRequired={true}
               variant="auth"
               fontSize="sm"
-              ms={{ base: '0px', md: '0px' }}
+              ms={{ base: "0px", md: "0px" }}
               type="email"
               value={input.email}
               name="email"
@@ -242,7 +249,7 @@ function SignIn() {
                 placeholder="Min. 8 caracteres"
                 mb="24px"
                 size="lg"
-                type={show ? 'text' : 'password'}
+                type={show ? "text" : "password"}
                 value={input.password}
                 name="password"
                 variant="auth"
@@ -251,7 +258,7 @@ function SignIn() {
               <InputRightElement display="flex" alignItems="center" mt="4px">
                 <Icon
                   color={textColorSecondary}
-                  _hover={{ cursor: 'pointer' }}
+                  _hover={{ cursor: "pointer" }}
                   as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
                   onClick={handleClick}
                 />
@@ -277,7 +284,7 @@ function SignIn() {
 
               <NavLink
                 to="/user/signinforgot"
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
                 activeClassName="active"
               >
                 <Text
@@ -290,25 +297,25 @@ function SignIn() {
                 </Text>
               </NavLink>
             </Flex>
-            <Box  display="flex" justifyContent="center" alignItems="center">
-            <Button
-              fontSize="15px"
-              type="submit"
-              variant="brand"
-              fontWeight="500"
-              w="auto"
-              h="50"
-              bg='blue'
-              color='white'
-              _hover={{
-                bg: "blue.400",
-              }}
-              _focus={{
-                bg: "blue.500",
-              }}
-            >
-              Iniciar sesion
-            </Button>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Button
+                fontSize="15px"
+                type="submit"
+                variant="brand"
+                fontWeight="500"
+                w="auto"
+                h="50"
+                bg="blue"
+                color="white"
+                _hover={{
+                  bg: "blue.400",
+                }}
+                _focus={{
+                  bg: "blue.500",
+                }}
+              >
+                Iniciar sesion
+              </Button>
             </Box>
           </form>
 
@@ -335,11 +342,11 @@ function SignIn() {
           </Flex>
         </Flex>
       </Flex>
-          <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Error de inicio de sesión</ModalHeader>
-           <ModalBody>{errorMessage}</ModalBody> 
+          <ModalBody>{errorMessage}</ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={handleModalClose}>
               Cerrar

@@ -18,7 +18,7 @@ import {
   Alert,
   AlertIcon,
   Tooltip,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,7 +28,6 @@ import {
 } from "./../../../Redux/Actions/actions";
 import Select from "react-select";
 //import { useHistory } from 'react-router-dom';
-
 
 function Formulario() {
   const [image, setImage] = useState([]);
@@ -47,7 +46,7 @@ function Formulario() {
     specialties: [],
     rol_id: [1],
   });
-  const toast = useToast()
+  const toast = useToast();
   const handleChangEspecialits = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions);
 
@@ -133,9 +132,9 @@ function Formulario() {
     });
     toast({
       title: `el doctor se agrego creo correctamente.`,
-      status:"success",
+      status: "success",
       isClosable: true,
-    })
+    });
   };
 
   useEffect(() => {
@@ -148,7 +147,7 @@ function Formulario() {
   };
   //const history = useHistory();
 
-/*   const handleClick = (event) => {
+  /*   const handleClick = (event) => {
     event.preventDefault();
     history.push("admin/indexdoctor");
   }; */
@@ -442,7 +441,7 @@ function Formulario() {
 
               <CardFooter>
                 <Tooltip hasArrow label="Enviar formulario" bg="blue.600">
-                  <Button colorScheme="blue" type="submit" >
+                  <Button colorScheme="blue" type="submit">
                     Enviar
                   </Button>
                 </Tooltip>

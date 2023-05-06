@@ -6,14 +6,14 @@ import AdminLayout from "./layouts/admin";
 import UserLayout from "./layouts/user";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "./theme/themes";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 function App() {
   const userInfo = useSelector((state) => state.userInfo);
 
   const isAdmin = userInfo?.rol === 3; // si rol es igual a 3, es admin. sino, es user
 
-  console.log('info del login', userInfo);
+  console.log("info del login", userInfo);
 
   return (
     <ChakraProvider theme={theme}>
@@ -27,14 +27,14 @@ function App() {
               <Route path={`/user`} component={UserLayout} />
             )}
             {isAdmin ? (
-              <Redirect from='/' to='/admin/dashboard' />
-            ): (
-              <Redirect from='/' to='/user/home' />
+              <Redirect from="/" to="/admin/dashboard" />
+            ) : (
+              <Redirect from="/" to="/user/home" />
             )}
           </Switch>
         </HashRouter>
       </React.StrictMode>
     </ChakraProvider>
-  )
+  );
 }
 export default App;

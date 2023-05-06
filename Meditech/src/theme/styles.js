@@ -82,7 +82,7 @@ export const globalStyles = {
     global: () => ({
       body: {
         overflowX: "hidden",
-        bg:"#FAFCFE",
+        bg: "#FAFCFE",
         fontFamily: "DM Sans",
         letterSpacing: "-0.5px",
       },

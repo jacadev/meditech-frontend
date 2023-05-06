@@ -2,8 +2,8 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
-import { RiEyeCloseLine } from 'react-icons/ri';
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
 import { userSignUp } from "./../../../Redux/Actions/Actionslogin";
 import {
   Box,
@@ -69,7 +69,7 @@ const SignUp = () => {
     age: "",
     gender: "",
     rol: [2],
-    preload:false
+    preload: false,
   });
 
   const [error, setError] = useState({
@@ -87,9 +87,11 @@ const SignUp = () => {
     const property = e.target.name;
 
     if (property === "phone") {
-      const phoneArr = value.split(',').map((num) => {
+      const phoneArr = value.split(",").map((num) => {
         const trimmedNum = num.trim();
-        return !isNaN(trimmedNum) && trimmedNum !== '' ? parseInt(trimmedNum, 10) : '';
+        return !isNaN(trimmedNum) && trimmedNum !== ""
+          ? parseInt(trimmedNum, 10)
+          : "";
       });
       setError(validate({ ...input, [property]: phoneArr }));
       setInput({ ...input, [property]: phoneArr });
@@ -121,9 +123,9 @@ const SignUp = () => {
         age: "",
         gender: "",
         rol: [2],
-        preload:false
+        preload: false,
       });
-      history.push('/admin/default');
+      history.push("/admin/default");
     } else {
       alert("!!Required Data");
     }
@@ -132,16 +134,16 @@ const SignUp = () => {
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
-        maxW={{ base: '100%', md: 'max-content' }}
+        maxW={{ base: "100%", md: "max-content" }}
         w="100%"
-        mx={{ base: 'auto', lg: '0px' }}
+        mx={{ base: "auto", lg: "0px" }}
         me="auto"
         h="100%"
         alignItems="start"
         justifyContent="center"
-        mb={{ base: '30px', md: '60px' }}
-        px={{ base: '25px', md: '0px' }}
-        mt={{ base: '40px', md: '14vh' }}
+        mb={{ base: "30px", md: "60px" }}
+        px={{ base: "25px", md: "0px" }}
+        mt={{ base: "40px", md: "14vh" }}
         flexDirection="column"
       >
         <div>
@@ -346,29 +348,33 @@ const SignUp = () => {
                   Contraseña:<Text color={brandStars}>*</Text>
                 </FormLabel>
                 <InputGroup size="md">
-                <Input
-                  isRequired={true}
-                  variant="auth"
-                  fontSize="sm"
-                  ms={{ base: "0px", md: "0px" }}
-                  type={show ? 'text' : 'password'}
-                  value={input.password}
-                  name="password"
-                  placeholder="ingrese su contraseña...."
-                  mb="24px"
-                  fontWeight="500"
-                  size="lg"
-                  onChange={(e) => handleChange(e)}
-                />
-                {error.password && <span>{error.password}</span>}
-                <InputRightElement display="flex" alignItems="center" mt="4px">
-                <Icon
-                  color={textColorSecondary}
-                  _hover={{ cursor: 'pointer' }}
-                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                  onClick={handleClick}
-                />
-              </InputRightElement>
+                  <Input
+                    isRequired={true}
+                    variant="auth"
+                    fontSize="sm"
+                    ms={{ base: "0px", md: "0px" }}
+                    type={show ? "text" : "password"}
+                    value={input.password}
+                    name="password"
+                    placeholder="ingrese su contraseña...."
+                    mb="24px"
+                    fontWeight="500"
+                    size="lg"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  {error.password && <span>{error.password}</span>}
+                  <InputRightElement
+                    display="flex"
+                    alignItems="center"
+                    mt="4px"
+                  >
+                    <Icon
+                      color={textColorSecondary}
+                      _hover={{ cursor: "pointer" }}
+                      as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
+                      onClick={handleClick}
+                    />
+                  </InputRightElement>
                 </InputGroup>
                 <br />
               </div>
@@ -383,22 +389,21 @@ const SignUp = () => {
                   Genero: <Text color={brandStars}>*</Text>
                 </FormLabel>
                 <div>
-              
-              <input
-                type="radio"
-                name="gender"
-                value="Masculino"
-                onChange={(e) => handleChange(e)}
-              />
-              <label htmlFor="Masculino">Masculino</label>
-              <input
-                type="radio"
-                name="gender"
-                value="Femenino"
-                onChange={(e) => handleChange(e)}
-              />
-              <label htmlFor="Femenino">Femenino</label>
-            </div>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Masculino"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <label htmlFor="Masculino">Masculino</label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="Femenino"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <label htmlFor="Femenino">Femenino</label>
+                </div>
               </Box>
               <div>
                 <Button

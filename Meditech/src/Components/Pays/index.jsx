@@ -8,14 +8,14 @@ import {
   Td,
   TableContainer,
   Button,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 /* import { Bar } from 'react-chartjs-2'; */
 // import { Bar } from 'chart.js';
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 
 function Pays() {
   const [chartData, setChartData] = useState({});
@@ -24,7 +24,7 @@ function Pays() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get('http://localhost:3001/pays');
+      const result = await axios.get("http://localhost:3001/pays");
       setPayments(result.data);
     }
     fetchData();
@@ -32,29 +32,29 @@ function Pays() {
 
   useEffect(() => {
     const generateChartData = () => {
-      if (typeof payments === 'object' && payments.length > 0) {
+      if (typeof payments === "object" && payments.length > 0) {
         const data = {
           labels: [],
           datasets: [
             {
-              label: 'Monto total de pagos Citas Meditech',
+              label: "Monto total de pagos Citas Meditech",
               data: [],
-              backgroundColor: 'rgba(75,192,192,0.4)',
-              borderColor: 'rgba(75,192,192,1)',
+              backgroundColor: "rgba(75,192,192,0.4)",
+              borderColor: "rgba(75,192,192,1)",
               borderWidth: 1,
             },
             {
-              label: 'Porcentaje por fecha',
+              label: "Porcentaje por fecha",
               data: [],
-              backgroundColor: 'rgba(255,99,132,0.4)',
-              borderColor: 'rgba(255,99,132,1)',
+              backgroundColor: "rgba(255,99,132,0.4)",
+              borderColor: "rgba(255,99,132,1)",
               borderWidth: 1,
             },
           ],
         };
 
         const groupedData = payments.reduce((acc, curr) => {
-          const date = curr.createTime.split('T')[0];
+          const date = curr.createTime.split("T")[0];
 
           if (acc[date]) {
             acc[date].count += 1;
@@ -96,24 +96,24 @@ function Pays() {
   }, [payments]);
 
   useEffect(() => {
-    const canvas = document.getElementById('myChart');
+    const canvas = document.getElementById("myChart");
 
     if (canvas) {
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       const data1 = payments.map((payment) => ({
         y: payment.amount,
         x: payment.createTime,
       }));
       const config = {
-        type: 'line',
+        type: "line",
         data: {
           datasets: [
             {
-              label: 'Pagos Citas Meditech',
+              label: "Pagos Citas Meditech",
               data: data1,
               fill: false,
-              borderColor: 'rgba(75,192,192,1)',
-              backgroundColor: 'rgba(75,192,192,0.4)',
+              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,192,192,0.4)",
             },
           ],
         },
@@ -121,16 +121,16 @@ function Pays() {
           scales: {
             xAxes: [
               {
-                type: 'time',
+                type: "time",
                 time: {
                   displayFormats: {
-                    day: 'MMM D',
+                    day: "MMM D",
                   },
                   sort: true, // Ordena las fechas en orden ascendente
                 },
                 scaleLabel: {
                   display: true,
-                  labelString: 'Fecha',
+                  labelString: "Fecha",
                 },
               },
             ],
@@ -138,7 +138,7 @@ function Pays() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'Monto',
+                  labelString: "Monto",
                 },
               },
             ],
@@ -152,12 +152,12 @@ function Pays() {
                 }
                 return null;
               },
-              align: 'end',
-              anchor: 'end',
+              align: "end",
+              anchor: "end",
               offset: 10,
               font: {
                 size: 14,
-                weight: 'bold',
+                weight: "bold",
               },
             },
           },
@@ -176,7 +176,7 @@ function Pays() {
   };
 
   return (
-    <Card p={5} mx="auto" mt={{ md: '12vh' }}>
+    <Card p={5} mx="auto" mt={{ md: "12vh" }}>
       <TableContainer>
         <Table size="sm">
           <Thead>
@@ -221,7 +221,7 @@ function Pays() {
         <canvas id="myChart" width="400" height="200"></canvas>
       </div>
       <div>
-       {/*  <Button
+        {/*  <Button
           onClick={handleClick}
           rounded={'full'}
           bg="#5C43FF"

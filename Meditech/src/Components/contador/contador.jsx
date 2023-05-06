@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { useState, useEffect, useRef } from "react";
+import { Box, Text } from "@chakra-ui/react";
 
 function Contador({ limite }) {
   const [contador, setContador] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const contadorStyles = {
-    fontSize: '30px',
-    fontWeight: 'bold',
-    color: 'white'
+    fontSize: "30px",
+    fontWeight: "bold",
+    color: "white",
   };
 
   // Usa un useRef para guardar la referencia del componente
@@ -43,7 +43,7 @@ function Contador({ limite }) {
 
   return (
     <Box ref={contadorRef}>
-      <Text textAlign='center' style={contadorStyles}>
+      <Text textAlign="center" style={contadorStyles}>
         {contador}
       </Text>
     </Box>

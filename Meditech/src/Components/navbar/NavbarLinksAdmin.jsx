@@ -8,57 +8,57 @@ import {
   MenuList,
   Text,
   useColorModeValue,
-} from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
 // Custom Component
-import { SidebarResponsive } from './../sidebar/Sidebar';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { SidebarResponsive } from "./../sidebar/Sidebar";
+import PropTypes from "prop-types";
+import React from "react";
 // Assets
-import routes from './../../routes';
-import { cleanDetail } from '../../Redux/Actions/Actionslogin';
-import { useDispatch, useSelector } from 'react-redux';
+import routes from "./../../routes";
+import { cleanDetail } from "../../Redux/Actions/Actionslogin";
+import { useDispatch, useSelector } from "react-redux";
 
- function HeaderLinks(props) {
+function HeaderLinks(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
   function handleClick() {
-    history.push('/user/profilesettings');
+    history.push("/user/profilesettings");
   }
 
   function handleClickAppointment() {
-    history.push('/user/appointment');
+    history.push("/user/appointment");
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userImage');
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userImage");
     dispatch(cleanDetail());
-    history.push('/');
+    history.push("/");
   };
 
-  const userImage = localStorage.getItem('userImage');
+  const userImage = localStorage.getItem("userImage");
   const { secondary } = props;
   // Chakra Color Mode
   const userInfo1 = useSelector((state) => state.userInfo);
-  localStorage.setItem('userInfo', JSON.stringify(userInfo1));
-  let menuBg = useColorModeValue('white', 'navy.800');
-  const textColor = useColorModeValue('secondaryGray.900', 'white');
-  const borderColor = useColorModeValue('#E6ECFA', 'rgba(135, 140, 189, 0.3)');
+  localStorage.setItem("userInfo", JSON.stringify(userInfo1));
+  let menuBg = useColorModeValue("white", "navy.800");
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+  const borderColor = useColorModeValue("#E6ECFA", "rgba(135, 140, 189, 0.3)");
   const shadow = useColorModeValue(
-    '14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
-    '14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.18)",
+    "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
 
   return (
     <Flex
-      w={{ sm: '100%', md: 'auto' }}
+      w={{ sm: "100%", md: "auto" }}
       alignItems="center"
       flexDirection="row"
       bg={menuBg}
-      flexWrap={secondary ? { base: 'wrap', md: 'nowrap' } : 'unset'}
+      flexWrap={secondary ? { base: "wrap", md: "nowrap" } : "unset"}
       p="10px"
       borderRadius="30px"
       boxShadow={shadow}
@@ -69,14 +69,14 @@ import { useDispatch, useSelector } from 'react-redux';
         <Menu>
           <MenuButton p="0px">
             <Avatar
-              _hover={{ cursor: 'pointer' }}
+              _hover={{ cursor: "pointer" }}
               name={userInfo1.user_name}
               src={userImage}
               bg="blue"
               size="sm"
               w="40px"
               h="40px"
-              color='white'
+              color="white"
             />
           </MenuButton>
           <MenuList
@@ -105,8 +105,8 @@ import { useDispatch, useSelector } from 'react-redux';
             <Flex flexDirection="column" p="10px">
               {userInfo1.id && userInfo1.rol !== 3 && (
                 <MenuItem
-                  _hover={{ bg: 'none' }}
-                  _focus={{ bg: 'none' }}
+                  _hover={{ bg: "none" }}
+                  _focus={{ bg: "none" }}
                   borderRadius="8px"
                   px="14px"
                   onClick={handleClick}
@@ -115,19 +115,19 @@ import { useDispatch, useSelector } from 'react-redux';
                 </MenuItem>
               )}
               {userInfo1.id && userInfo1.rol !== 3 && (
-              <MenuItem
-                _hover={{ bg: 'none' }}
-                _focus={{ bg: 'none' }}
-                borderRadius="8px"
-                px="14px"
-                onClick={handleClickAppointment}
-              >
-                <Text fontSize="sm">Ver citas</Text>
-              </MenuItem>
+                <MenuItem
+                  _hover={{ bg: "none" }}
+                  _focus={{ bg: "none" }}
+                  borderRadius="8px"
+                  px="14px"
+                  onClick={handleClickAppointment}
+                >
+                  <Text fontSize="sm">Ver citas</Text>
+                </MenuItem>
               )}
               <MenuItem
-                _hover={{ bg: 'none' }}
-                _focus={{ bg: 'none' }}
+                _hover={{ bg: "none" }}
+                _focus={{ bg: "none" }}
                 color="red.400"
                 borderRadius="8px"
                 px="14px"

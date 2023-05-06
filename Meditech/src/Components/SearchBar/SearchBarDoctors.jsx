@@ -30,8 +30,8 @@ const SearchBarDoctors = () => {
   };
 
   const allDoctors = () => {
-    dispatch(getDoctors())
-  }
+    dispatch(getDoctors());
+  };
 
   return (
     <Box display="inline-flex" width="400px">

@@ -14,7 +14,7 @@ import {
   CardFooter,
   Stack,
   Tooltip,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
@@ -22,7 +22,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-    cleanDetail,
+  cleanDetail,
   getDoctor,
   putDoctorAdmin,
 } from "../../Redux/Actions/actions";
@@ -30,15 +30,13 @@ import {
 function ModifyDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const toast = useToast()
+  const toast = useToast();
   /* const history = useHistory(); */
 
   //   const especialidades = useSelector((state) => state.especialidades);
   const doctorDetail = useSelector((state) => state.doctorDetail);
 
-  const [form, setForm] = useState({
-    
-  });
+  const [form, setForm] = useState({});
 
   const handleChangEspecialits = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions);
@@ -52,29 +50,29 @@ function ModifyDoctor() {
       specialties: selectedValues,
     });
   };
-useEffect(()=>{
-
-  if(!doctorDetail.length){
-    setForm({email: doctorDetail.person?.email,
-      phone: doctorDetail.person?.phone,
-      age: doctorDetail.person?.age,
-      first_name: doctorDetail.person?.firstName,
-      last_name: doctorDetail.person?.lastName,
-      about_me: doctorDetail?.about_me,
-      consultation_cost: doctorDetail?.consultation_cost,
-      location: {
-        city: doctorDetail.location?.city,
-        country: doctorDetail.location?.country,
-        address: doctorDetail.location?.address,
-      },
-      diseases_treated: doctorDetail?.diseases_treated,
-      // specialties: doctorDetail?.specialties,
-      // disponibilties_id: doctorDetail?.disponibilties,
-      status: doctorDetail.person?.status,
-      profile_image: doctorDetail?.profile_image,})
-  }
-
-},[doctorDetail])
+  useEffect(() => {
+    if (!doctorDetail.length) {
+      setForm({
+        email: doctorDetail.person?.email,
+        phone: doctorDetail.person?.phone,
+        age: doctorDetail.person?.age,
+        first_name: doctorDetail.person?.firstName,
+        last_name: doctorDetail.person?.lastName,
+        about_me: doctorDetail?.about_me,
+        consultation_cost: doctorDetail?.consultation_cost,
+        location: {
+          city: doctorDetail.location?.city,
+          country: doctorDetail.location?.country,
+          address: doctorDetail.location?.address,
+        },
+        diseases_treated: doctorDetail?.diseases_treated,
+        // specialties: doctorDetail?.specialties,
+        // disponibilties_id: doctorDetail?.disponibilties,
+        status: doctorDetail.person?.status,
+        profile_image: doctorDetail?.profile_image,
+      });
+    }
+  }, [doctorDetail]);
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -115,12 +113,12 @@ useEffect(()=>{
   //         label: especialidad.specialty,
   //       }))
   //     : [];
-/*   const handleChangeEspecialidades = (selectedOptions) => {
+  /*   const handleChangeEspecialidades = (selectedOptions) => {
     const options = selectedOptions.map((option) => option.value);
     setForm((prevState) => ({ ...prevState, specialties: options }));
   };
  */
-/*   const handleClick = (event) => {
+  /*   const handleClick = (event) => {
     // event.preventDefault();
      history.push("/admin/indexdoctor");    
 
@@ -134,21 +132,21 @@ useEffect(()=>{
     dispatch(putDoctorAdmin(id, form));
     toast({
       title: `se actulizo correctamente.`,
-      status:"success",
+      status: "success",
       isClosable: true,
-    })
-   return
+    });
+    return;
   };
 
   useEffect(() => {
     // dispatch(getEspecialidades());
-    
+
     dispatch(getDoctor(id));
     console.log("cargando el componente");
 
     return () => {
       console.log("me estoy limpiando ");
-      dispatch(cleanDetail())
+      dispatch(cleanDetail());
     };
   }, [id]);
 
@@ -225,7 +223,7 @@ useEffect(()=>{
                 type="file"
                 placeholder="Inserte el URL de la imagen"
                 /*  value={form?.profile_image} */
-                 onChange={handleImage}
+                onChange={handleImage}
                 name="profile_image"
               />
             </FormControl>
@@ -325,7 +323,7 @@ useEffect(()=>{
                   <Button
                     colorScheme="blue"
                     type="submit"
-                   /*  onClick={handleClick} */
+                    /*  onClick={handleClick} */
                   >
                     Enviar
                   </Button>

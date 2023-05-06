@@ -27,8 +27,8 @@ function Doctor() {
   const [currentPage, setCurrentPage] = useState(1);
   const [userlistsPerPage, setSpecialistsPerPage] = useState(0);
 
-  const patients = useSelector(state => state.patients)
-console.log('los pacientes',patients);
+  const patients = useSelector((state) => state.patients);
+  console.log("los pacientes", patients);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -41,8 +41,8 @@ console.log('los pacientes',patients);
   // }, []);
 
   useEffect(() => {
-    dispatch(getAllPatients())
-  },[])
+    dispatch(getAllPatients());
+  }, []);
 
   const indexOfLastSpecialist = currentPage * userlistsPerPage;
   const indexOfFirstSpecialist = indexOfLastSpecialist - userlistsPerPage;
@@ -55,7 +55,7 @@ console.log('los pacientes',patients);
   console.log(patients);
   return (
     <Card p={5} mx="auto" mt={{ md: "12vh" }}>
-    <SearchBarUsers/>
+      <SearchBarUsers />
       <TableContainer>
         <Table size="sm">
           <Thead>
@@ -85,18 +85,17 @@ console.log('los pacientes',patients);
                     ))}
                   </ul>
                 </Td>
-                <Td>{specialist.person.status ? 'Activo' : 'Inactivo'}</Td>
+                <Td>{specialist.person.status ? "Activo" : "Inactivo"}</Td>
                 <Td>
-                <Tooltip hasArrow label="Editar" bg="blue.600">
-                  <Button
-                    leftIcon={<EditIcon />}
-                    colorScheme="blue"
-                    variant="solid"
-                    onClick={() =>
-                      history.push(`/admin/putPatient/${specialist.id}`)
-                    }
-                  >
-                  </Button>
+                  <Tooltip hasArrow label="Editar" bg="blue.600">
+                    <Button
+                      leftIcon={<EditIcon />}
+                      colorScheme="blue"
+                      variant="solid"
+                      onClick={() =>
+                        history.push(`/admin/putPatient/${specialist.id}`)
+                      }
+                    ></Button>
                   </Tooltip>
                 </Td>
               </Tr>

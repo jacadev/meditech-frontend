@@ -9,8 +9,7 @@ import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "../../routes.jsx";
 
-
-// const cambioLayout = routes.map(ruta => { 
+// const cambioLayout = routes.map(ruta => {
 //   if (ruta.layout === '/user') {
 //     return { ...ruta, layout: '/admin' };
 //   } else {
@@ -18,7 +17,7 @@ import routes from "../../routes.jsx";
 //   }
 // })
 
-console.log('soy el cambio', routes);
+console.log("soy el cambio", routes);
 
 // Custom Chakra theme
 function Admin(props) {
@@ -27,13 +26,12 @@ function Admin(props) {
 
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
-  
+
   const getRoute = () => {
     return window.location.pathname !== "/admin/homeadmin";
   };
 
   const getActiveRoute = (routes) => {
-
     window.scrollTo(0, 0);
 
     for (let i = 0; i < routes.length; i++) {
@@ -78,7 +76,7 @@ function Admin(props) {
           setToggleSidebar,
         }}
       >
-        <Sidebar routes={routes} display='none' {...rest} />
+        <Sidebar routes={routes} display="none" {...rest} />
         <Box
           float="right"
           minHeight="100vh"

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getAllPatientByName, getAllPatients } from "../../Redux/Actions/actions";
+import {
+  getAllPatientByName,
+  getAllPatients,
+} from "../../Redux/Actions/actions";
 import {
   InputGroup,
   Input,
@@ -30,8 +33,8 @@ const SearchBarUsers = () => {
   };
 
   const allUser = () => {
-    dispatch(getAllPatients())
-  }
+    dispatch(getAllPatients());
+  };
 
   return (
     <Box display="inline-flex" width="400px">

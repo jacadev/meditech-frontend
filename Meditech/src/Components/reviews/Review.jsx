@@ -9,12 +9,12 @@ import {
   FormLabel,
   Input,
   Textarea,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 
 const Review = ({ doctor_id, patient_id }) => {
   const dispatch = useDispatch();
-  const toast = useToast()
+  const toast = useToast();
   const [form, setForm] = useState({
     comment: "",
     rating: null,
@@ -39,11 +39,10 @@ const Review = ({ doctor_id, patient_id }) => {
       return;
     }
     toast({
-      title: 'Por favor inicie sesion para poder comentar',
-      status:"error",
+      title: "Por favor inicie sesion para poder comentar",
+      status: "error",
       isClosable: true,
-    })
-    
+    });
   };
 
   const renderStars = (rating) => {
