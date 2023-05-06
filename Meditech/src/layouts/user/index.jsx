@@ -7,7 +7,7 @@ import Sidebar from "../../Components/sidebar/Sidebar.jsx";
 import { SidebarContext } from "../../contexts/SidebarContext.js";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "../../routes.jsx";
+import routes from "../../routes.js";
 
 // Custom Chakra theme
 function User(props) {
